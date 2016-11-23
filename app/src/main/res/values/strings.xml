@@ -23,9 +23,9 @@
     <string name="title_activity_question">ActivityQuestion</string>
 
     <!-- Bottom navigation titles-->
-    <string name="title_hints">Ajudas</string>
+    <string name="title_action_hint">Ajuda</string>
     <string name="title_level">Nivel</string>
-    <string name="title_question_number">Numerp</string>
+    <string name="title_action_reset">Reset</string>
 
 
 

@@ -1,10 +1,13 @@
 package pt.ipp.estg.cmu.ui;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,11 +21,12 @@ import java.util.Random;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.interfaces.ClickQuestionListener;
+import pt.ipp.estg.cmu.util.UtilUI;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ActivityQuestionFragment extends Fragment {
+public class ActivityQuestionFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private ClickQuestionListener mListener;
     private int index;
@@ -32,6 +36,8 @@ public class ActivityQuestionFragment extends Fragment {
     private LinearLayout mAnswerLayout;
     private TableLayout mTableLayout;
     private ImageView mImageView;
+    private BottomNavigationView mBottomNavigation;
+
 
     //strings
     private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -94,8 +100,10 @@ public class ActivityQuestionFragment extends Fragment {
                 break;
         }
 
-        buildLayoutAnswer();
-        buildLayoutGame();
+        mBottomNavigation = (BottomNavigationView) view.findViewById(R.id.bottom_navigation);
+        mBottomNavigation.setOnNavigationItemSelectedListener(this);
+
+        createLayout();
 
         return view;
     }
@@ -106,7 +114,30 @@ public class ActivityQuestionFragment extends Fragment {
         mListener = (ActivityQuestion) context;
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_help:
+                break;
+            case R.id.action_reset:
+                createLayout();
+                break;
+            case R.id.action_level:
+                break;
+        }
+        return false;
+    }
+
+    private void createLayout() {
+        buildLayoutGame();
+        buildLayoutAnswer();
+        mUserCorrectAnswer = "";
+        mAtualCorrectIndex = 0;
+    }
+
+
     private void buildLayoutAnswer() {
+        mAnswerLayout.removeAllViews();
         int index = 0;
         for (int i = 0; i < mCorrectAnswer.length(); ++i) {
             if (mCorrectAnswer.charAt(i) == ' ') {
@@ -120,6 +151,8 @@ public class ActivityQuestionFragment extends Fragment {
     }
 
     private void buildLayoutGame() {
+        mTableLayout.removeAllViews();
+
         TableRow row = new TableRow(getActivity());
         TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 1.0f);
 

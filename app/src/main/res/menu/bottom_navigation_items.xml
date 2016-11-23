@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/ic_statistics"
-        android:title="@string/title_hints" />
+        android:id="@+id/action_help"
+        android:icon="@drawable/ic_help"
+        android:title="@string/title_action_hint" />
     <item
-        android:id="@+id/action_settings"
-        android:icon="@drawable/ic_games"
+        android:id="@+id/action_reset"
+        android:icon="@drawable/ic_reset"
+        android:title="@string/title_action_reset" />
+    <item
+        android:id="@+id/action_level"
+        android:icon="@drawable/ic_game"
         android:title="@string/title_level" />
-    <item
-        android:id="@+id/action_navigation"
-        android:icon="@drawable/ic_admin"
-        android:title="@string/title_question_number" />
+
 </menu>
