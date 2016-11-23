@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="pt.ipp.estg.cmu">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.ActivityBase"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.ActivityMain"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.ActivityAdmin"
+            android:label="@string/title_activity_admin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.ActivityLevel"
+            android:label="@string/title_activity_level"
+            android:parentActivityName=".ui.ActivityMain"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pt.ipp.estg.cmu.ui.ActivityMain" />
+        </activity>
+        <activity
+            android:name=".ui.ActivityQuestion"
+            android:label="@string/title_activity_question"
+            android:parentActivityName=".ui.ActivityLevel"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pt.ipp.estg.cmu.ui.ActivityLevel" />
+        </activity>
+    </application>
+
+</manifest>

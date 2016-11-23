@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">CMU</string>
+    <string name="title_activity_base">ActivityBase</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Activity Tiles Titles-->
+    <string name="title_activity_main">CMU Quiz</string>
+    <string name="title_statistics_main">Estatisticas</string>
+    <string name="title_activity_admin">Admin Area</string>
+
+    <!-- Nav Drawer Titles-->
+    <string name="title_game">CMU Quiz</string>
+    <string name="title_statistics">Estatisticas</string>
+    <string name="title_admin">Admin Area</string>
+    <string name="title_activity_level">ActivityLevel</string>
+
+    <!-- Activity Main-->
+    <string name="bt_start_game">CMU Quiz</string>
+    <string name="title_activity_question">ActivityQuestion</string>
+
+    <!-- Bottom navigation titles-->
+    <string name="title_hints">Ajudas</string>
+    <string name="title_level">Nivel</string>
+    <string name="title_question_number">Numerp</string>
+
+
+
+</resources>

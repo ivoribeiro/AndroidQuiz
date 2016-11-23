@@ -1,0 +1,21 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+
+    <!-- AdapterLevelList -->
+    <dimen name="adapter_level_row_margin">4dp</dimen>
+    <dimen name="adapter_level_row_height">40dp</dimen>
+
+    <!-- FragmentQuestion -->
+    <dimen name="question_image_width">225dp</dimen>
+    <dimen name="question_image_height">150dp</dimen>
+    <dimen name="arrow_size">40dp</dimen>
+
+
+</resources>
