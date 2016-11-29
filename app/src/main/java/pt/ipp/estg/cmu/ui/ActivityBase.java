@@ -24,7 +24,6 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
     //layout
     private Toolbar mMainToolbar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
