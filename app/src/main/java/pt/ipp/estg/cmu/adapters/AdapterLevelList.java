@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.models.Level;
+import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.ui.ActivityQuestion;
 
 /**
@@ -22,10 +22,10 @@ import pt.ipp.estg.cmu.ui.ActivityQuestion;
 
 public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.ViewHolder> {
 
-    private List<Level> mDataSet = new ArrayList<>();
+    private List<Nivel> mDataSet = new ArrayList<>();
     private Context mContext;
 
-    public AdapterLevelList(Context context, List<Level> data) {
+    public AdapterLevelList(Context context, List<Nivel> data) {
         this.mContext = context;
         this.mDataSet = data;
     }
