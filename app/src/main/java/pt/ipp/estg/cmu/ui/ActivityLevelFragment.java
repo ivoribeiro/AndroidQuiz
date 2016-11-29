@@ -1,8 +1,8 @@
 package pt.ipp.estg.cmu.ui;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +23,7 @@ import pt.ipp.estg.cmu.models.Nivel;
 public class ActivityLevelFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     //layout
+    private int NUM_COLUMNS = 1;
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipe;
     //data
@@ -43,10 +44,14 @@ public class ActivityLevelFragment extends Fragment implements SwipeRefreshLayou
         super.onCreate(savedInstanceState);
 
         List<Nivel> list = new ArrayList<>();
-        list.add(new Nivel("Nivel 1"));
-        list.add(new Nivel("Nivel 2"));
-        list.add(new Nivel("Nivel 3"));
-        list.add(new Nivel("Nivel 4"));
+        list.add(new Nivel("1", 1, 1, 1));
+        list.add(new Nivel("2", 0, 1, 1));
+        list.add(new Nivel("3", 1, 1, 1));
+        list.add(new Nivel("4", 0, 1, 1));
+        list.add(new Nivel("5", 1, 1, 1));
+        list.add(new Nivel("6", 0, 1, 1));
+        list.add(new Nivel("7", 0, 1, 1));
+        list.add(new Nivel("8", 0, 1, 1));
 
         mAdapter = new AdapterLevelList(getActivity(), list);
     }
@@ -59,7 +64,7 @@ public class ActivityLevelFragment extends Fragment implements SwipeRefreshLayou
         mSwipe.setOnRefreshListener(this);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMNS));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
 

@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">CMU</string>
     <string name="title_activity_base">ActivityBase</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
 
     <!-- Activity Tiles Titles-->
@@ -16,17 +14,22 @@
     <string name="title_game">CMU Quiz</string>
     <string name="title_statistics">Estatisticas</string>
     <string name="title_admin">Admin Area</string>
-    <string name="title_activity_level">ActivityLevel</string>
+    <string name="title_topscore">Top Score</string>
+    <string name="title_activity_level">Nivel</string>
 
     <!-- Activity Main-->
-    <string name="bt_start_game">CMU Quiz</string>
-    <string name="title_activity_question">ActivityQuestion</string>
+    <string name="hello_text">Olá</string>
+    <string name="welcome_text">Bem-Vindo</string>
+    <string name="bt_start_game">Começar Jogo</string>
+    <string name="title_activity_question">CMU Quiz</string>
+    <string name="txt_level">Nível</string>
+    <string name="txt_score">Pontos</string>
+
 
     <!-- Bottom navigation titles-->
     <string name="title_action_hint">Ajuda</string>
     <string name="title_level">Nivel</string>
     <string name="title_action_reset">Reset</string>
-
-
+    <string name="title_activity_categoria">Categoria</string>
 
 </resources>

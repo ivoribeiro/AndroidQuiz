@@ -22,10 +22,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ActivityAdmin"
-            android:label="@string/title_activity_admin"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.ActivityLevel"
             android:label="@string/title_activity_level"
             android:parentActivityName=".ui.ActivityMain"
@@ -42,6 +38,19 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pt.ipp.estg.cmu.ui.ActivityLevel" />
+        </activity>
+        <activity
+            android:name=".ui.ActivityAdmin"
+            android:label="@string/title_activity_admin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.ActivityCategoria"
+            android:label="@string/title_activity_categoria"
+            android:parentActivityName=".ui.ActivityMain"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pt.ipp.estg.cmu.ui.ActivityMain" />
         </activity>
     </application>
 

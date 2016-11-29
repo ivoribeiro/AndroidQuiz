@@ -15,7 +15,7 @@
         android:id="@+id/question_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gameQuestionColor"
+        android:background="@color/primary_light"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -46,21 +46,25 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_below="@id/question_layout"
-        android:background="@color/colorAccent"
         android:gravity="center"
         android:orientation="horizontal">
 
-
     </LinearLayout>
+
+    <View
+        android:id="@+id/view_divider"
+        android:layout_width="wrap_content"
+        android:layout_height="4dp"
+        android:layout_below="@+id/answer_layout"
+        android:background="@color/divider"
+        android:padding="@dimen/view_divider_margin" />
 
 
     <TableLayout
         android:id="@+id/game_table_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/answer_layout"
-        android:background="@color/colorPrimary">
-
+        android:layout_below="@id/view_divider">
 
     </TableLayout>
 
@@ -68,7 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@+id/game_table_layout"
-        android:background="@color/gameQuestionColor"
+        android:background="@color/primary_light"
         android:gravity="center"
         android:orientation="horizontal">
 

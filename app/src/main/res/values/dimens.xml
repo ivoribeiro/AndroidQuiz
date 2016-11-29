@@ -8,14 +8,46 @@
     <dimen name="fab_margin">16dp</dimen>
 
 
+    <!-- styles dimens -->
+    <dimen name="primary_title_size">40dp</dimen>
+    <dimen name="primary_title_small_size">25dp</dimen>
+    <dimen name="secondary_title_size">25dp</dimen>
+    <dimen name="secondary_title_small_size">15dp</dimen>
+    <dimen name="third_title_size">12dp</dimen>
+    <dimen name="primary_button_width">150dp</dimen>
+    <dimen name="primary_button_height">50dp</dimen>
+
+    <!-- ActivityMain -->
+    <dimen name="text_padding">8dp</dimen>
+    <dimen name="button_padding">16dp</dimen>
+    <dimen name="layout_padding">24dp</dimen>
+
+
+    <!-- ActivityLevel -->
+    <dimen name="first_image_size">120dp</dimen>
+
+
     <!-- AdapterLevelList -->
-    <dimen name="adapter_level_row_margin">4dp</dimen>
+    <dimen name="adapter_level_row_margin">8dp</dimen>
+    <dimen name="adapter_level_row_padding">16dp</dimen>
     <dimen name="adapter_level_row_height">40dp</dimen>
+    <dimen name="level_text_size">20dp</dimen>
+    <dimen name="score_text_size">14dp</dimen>
+    <dimen name="icon_size">30dp</dimen>
+    <dimen name="adapter_level_layout_padding">12dp</dimen>
+
+
+    <!-- Adapter Categoria Grid -->
+    <dimen name="categoria_image_size">100dp</dimen>
+    <dimen name="categoria_layout_padding">16dp</dimen>
+    <dimen name="categoria_card_margin">8dp</dimen>
+
 
     <!-- FragmentQuestion -->
-    <dimen name="question_image_width">225dp</dimen>
-    <dimen name="question_image_height">150dp</dimen>
+    <dimen name="question_image_width">250dp</dimen>
+    <dimen name="question_image_height">175dp</dimen>
     <dimen name="arrow_size">40dp</dimen>
+    <dimen name="view_divider_margin">10dp</dimen>
 
 
 </resources>

@@ -40,7 +40,6 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
         mMainToolbar = (Toolbar) mDrawer.findViewById(R.id.main_toolbar);
         setSupportActionBar(mMainToolbar);
 
-
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, mMainToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
