@@ -4,12 +4,12 @@ package pt.ipp.estg.cmu.db.migrations;
 public class PerguntaMigration extends Migration {
     public PerguntaMigration() {
         super("pergunta");
-        this.addField(new Field(true, "id", "NUMERIC"));
-        this.addField(new Field(false, "categoria", "VARCHAR(25)"));
-        this.addField(new Field(false, "imagem", "TEXT"));
-        this.addField(new Field(false, "respostaCerta", "VARCHAR(15)"));
-        this.addField(new Field(true, "nRespostasErradas", "NUMERIC"));
-        this.addField(new Field(true, "acertou", "BOOLEAN"));
+        this.addField(new Field(true, true, "id", "NUMERIC"));
+        this.addField(new Field(false, false, "categoria", "VARCHAR(25)"));
+        this.addField(new Field(false, false, "imagem", "TEXT"));
+        this.addField(new Field(false, false, "respostaCerta", "VARCHAR(15)"));
+        this.addField(new Field(true, false, "nRespostasErradas", "NUMERIC"));
+        this.addField(new Field(true, false, "acertou", "BOOLEAN"));
         this.setCreate(this.generateCreate());
         this.setUpgrade(this.generateUpgrade());
     }
