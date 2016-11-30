@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.DB.DbHandler;
+import pt.ipp.estg.cmu.db.DbHandler;
 
 
 public class ActivityMain extends ActivityBase implements View.OnClickListener {
