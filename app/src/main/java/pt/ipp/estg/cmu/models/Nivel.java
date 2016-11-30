@@ -3,7 +3,7 @@ package pt.ipp.estg.cmu.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Nivel implements Parcelable  {
+public class Nivel {
     private int id;
     private String numero;
     private String categoria;
@@ -15,7 +15,7 @@ public class Nivel implements Parcelable  {
     private int nPerguntasResp;
 
 
-    public Nivel(String numero, String categoria, int nPerguntas, int pontuacaoBase, int pontuacaoBaseErrada, int pontuacaoHint, boolean bloqueado) {
+    public Nivel(String numero, int nPerguntas, int pontuacaoBase, int pontuacaoBaseErrada, int pontuacaoHint, boolean bloqueado) {
         this.numero = numero;
         this.categoria = categoria;
         this.nPerguntas = nPerguntas;
@@ -24,6 +24,7 @@ public class Nivel implements Parcelable  {
         this.pontuacaoHint = pontuacaoHint;
         this.bloqueado = bloqueado;
         this.nPerguntas = 0;
+    }
     }
 
     public String getNumber() {

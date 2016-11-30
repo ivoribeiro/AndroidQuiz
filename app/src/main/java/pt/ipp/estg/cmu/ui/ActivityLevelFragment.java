@@ -20,21 +20,27 @@ import pt.ipp.estg.cmu.models.Nivel;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ActivityLevelFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class ActivityLevelFragment extends Fragment {
+
+    //KEY
+    private static final String KEY_LEVEL = "KEY_LEVEL";
 
     //layout
     private int NUM_COLUMNS = 1;
     private RecyclerView mRecyclerView;
-    private SwipeRefreshLayout mSwipe;
+
     //data
     private AdapterLevelList mAdapter;
+    private ArrayList<Nivel> mNiveis;
+
 
     public ActivityLevelFragment() {
     }
 
-    public static ActivityLevelFragment newInstance() {
+    public static ActivityLevelFragment newInstance(ArrayList<Nivel> list) {
         Bundle args = new Bundle();
         ActivityLevelFragment fragment = new ActivityLevelFragment();
+        args.putParcelableArrayList(KEY_LEVEL, list);
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,26 +48,13 @@ public class ActivityLevelFragment extends Fragment implements SwipeRefreshLayou
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        List<Nivel> list = new ArrayList<>();
-        list.add(new Nivel("1", 10, 1, 1, 1, false));
-        list.add(new Nivel("2", 10, 0, 1, 1, true));
-        list.add(new Nivel("3", 10, 1, 1, 1, true));
-        list.add(new Nivel("4", 10, 0, 1, 1, true));
-        list.add(new Nivel("5", 10, 1, 1, 1, true));
-        list.add(new Nivel("6", 10, 0, 1, 1, true));
-        list.add(new Nivel("7", 10, 0, 1, 1, true));
-        list.add(new Nivel("8", 10, 0, 1, 1, true));
-
-        mAdapter = new AdapterLevelList(getActivity(), list);
+        mNiveis = getArguments().getParcelableArrayList(KEY_LEVEL);
+        mAdapter = new AdapterLevelList(getActivity(), mNiveis);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity_level, container, false);
-
-        mSwipe = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh);
-        mSwipe.setOnRefreshListener(this);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMNS));
@@ -71,8 +64,5 @@ public class ActivityLevelFragment extends Fragment implements SwipeRefreshLayou
         return view;
     }
 
-    @Override
-    public void onRefresh() {
-        mSwipe.setRefreshing(false);
-    }
+
 }
