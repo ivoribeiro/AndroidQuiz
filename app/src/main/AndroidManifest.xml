@@ -24,7 +24,7 @@
         <activity
             android:name=".ui.ActivityLevel"
             android:label="@string/title_activity_level"
-            android:parentActivityName=".ui.ActivityMain"
+            android:parentActivityName=".ui.ActivityCategoria"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

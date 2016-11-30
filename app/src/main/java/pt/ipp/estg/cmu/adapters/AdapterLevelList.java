@@ -45,12 +45,12 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
     public void onBindViewHolder(ViewHolder holder, final int position) {
         String level = mContext.getResources().getString(R.string.txt_level);
         String score = mContext.getResources().getString(R.string.txt_score);
-        boolean state = mDataSet.get(position).getPontuacaoBase() == 1 ? false : true;//TODO mudar o getPontuacaoBase para o getApropriado
+        boolean state = mDataSet.get(position).isBloqueado();
 
         holder.mTitle.setText(level + " " + mDataSet.get(position).getNumber());
         holder.mScore.setText(mDataSet.get(position).getNumber() + " " + score);
 
-        if (state) {
+        if (!state) {
             holder.mImageState.setBackground(mContext.getDrawable(R.drawable.ic_check));
         } else {
             holder.mImageState.setBackground(mContext.getDrawable(R.drawable.ic_lock));
