@@ -44,14 +44,14 @@ public class ActivityLevelFragment extends Fragment implements SwipeRefreshLayou
         super.onCreate(savedInstanceState);
 
         List<Nivel> list = new ArrayList<>();
-        list.add(new Nivel("1", 1, 1, 1));
-        list.add(new Nivel("2", 0, 1, 1));
-        list.add(new Nivel("3", 1, 1, 1));
-        list.add(new Nivel("4", 0, 1, 1));
-        list.add(new Nivel("5", 1, 1, 1));
-        list.add(new Nivel("6", 0, 1, 1));
-        list.add(new Nivel("7", 0, 1, 1));
-        list.add(new Nivel("8", 0, 1, 1));
+        list.add(new Nivel("1", 10, 1, 1, 1, false));
+        list.add(new Nivel("2", 10, 0, 1, 1, true));
+        list.add(new Nivel("3", 10, 1, 1, 1, true));
+        list.add(new Nivel("4", 10, 0, 1, 1, true));
+        list.add(new Nivel("5", 10, 1, 1, 1, true));
+        list.add(new Nivel("6", 10, 0, 1, 1, true));
+        list.add(new Nivel("7", 10, 0, 1, 1, true));
+        list.add(new Nivel("8", 10, 0, 1, 1, true));
 
         mAdapter = new AdapterLevelList(getActivity(), list);
     }

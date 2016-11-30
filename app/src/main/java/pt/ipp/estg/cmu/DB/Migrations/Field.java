@@ -1,8 +1,5 @@
-package pt.ipp.estg.cmu.DB;
+package pt.ipp.estg.cmu.DB.Migrations;
 
-/**
- * Created by ivoribeiro on 30-11-2016.
- */
 
 public class Field {
     private String name;

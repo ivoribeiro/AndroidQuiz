@@ -1,12 +1,6 @@
-package pt.ipp.estg.cmu.DB;
+package pt.ipp.estg.cmu.DB.Migrations;
 
 import java.util.ArrayList;
-
-import pt.ipp.estg.cmu.DB.Migrations.*;
-
-/**
- * Created by ivoribeiro on 29-11-2016.
- */
 
 public class MigrationsHandler {
 

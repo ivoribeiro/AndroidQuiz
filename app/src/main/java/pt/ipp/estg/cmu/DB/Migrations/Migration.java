@@ -1,4 +1,4 @@
-package pt.ipp.estg.cmu.DB;
+package pt.ipp.estg.cmu.DB.Migrations;
 
 import java.util.ArrayList;
 

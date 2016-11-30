@@ -6,6 +6,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+import pt.ipp.estg.cmu.DB.Migrations.Migration;
+import pt.ipp.estg.cmu.DB.Migrations.MigrationsHandler;
+
 
 public class DbHandler extends SQLiteOpenHelper {
 
@@ -14,11 +17,10 @@ public class DbHandler extends SQLiteOpenHelper {
      */
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "androidQuiz.db";
     private ArrayList<Migration> migrations;
 
-    public DbHandler(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    public DbHandler(Context context,String db) {
+        super(context, db, null, DATABASE_VERSION);
         MigrationsHandler mh = new MigrationsHandler();
         this.migrations = mh.getMigrationsList();
     }
