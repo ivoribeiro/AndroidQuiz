@@ -5,9 +5,14 @@ public class Nivel {
     private int pontuacaoBase;
     private int pontuacaoBaseErrada;
     private int pontuacaoHint;
+    private boolean bloqueado;
+    private int nPerguntas;
+    private int nPerguntasResp;
 
-    public Nivel(String numero, int pontuacaoBase, int pontuacaoBaseErrada, int pontuacaoHint) {
+
+    public Nivel(String numero, int nPerguntas, int pontuacaoBase, int pontuacaoBaseErrada, int pontuacaoHint, boolean bloqueado) {
         this.numero = numero;
+        this.nPerguntas = nPerguntas;
         this.pontuacaoBase = pontuacaoBase;
         this.pontuacaoBaseErrada = pontuacaoBaseErrada;
         this.pontuacaoHint = pontuacaoHint;
@@ -29,4 +34,19 @@ public class Nivel {
         return pontuacaoHint;
     }
 
+    public boolean isBloqueado() {
+        return bloqueado;
+    }
+
+    public int getnPerguntas() {
+        return nPerguntas;
+    }
+
+    public int getnPerguntasResp() {
+        return nPerguntasResp;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
 }

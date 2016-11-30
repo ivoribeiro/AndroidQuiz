@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.DB.DbHandler;
+
 
 public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
@@ -24,6 +26,8 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        new DbHandler(this, "androidQuiz.db");
         setContentView(R.layout.activity_main);
 
         //dummy data
