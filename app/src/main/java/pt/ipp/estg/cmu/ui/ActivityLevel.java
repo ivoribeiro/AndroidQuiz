@@ -21,9 +21,11 @@ public class ActivityLevel extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.frame_layout,ActivityLevelFragment.newInstance(getAllNiveis())).commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.frame_layout,ActivityLevelFragment.newInstance(getAllNiveis()))
+                .commit();
     }
-
 
     private ArrayList<Nivel>  getAllNiveis(){
         ArrayList<Nivel> mNiveis = new ArrayList<>();
@@ -37,5 +39,4 @@ public class ActivityLevel extends AppCompatActivity {
         mNiveis.add(new Nivel("8", 10, 0, 1, 1, true));
         return mNiveis;
     }
-
 }

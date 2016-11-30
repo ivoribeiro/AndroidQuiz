@@ -47,7 +47,7 @@
     <dimen name="question_image_width">250dp</dimen>
     <dimen name="question_image_height">175dp</dimen>
     <dimen name="arrow_size">40dp</dimen>
-    <dimen name="view_divider_margin">10dp</dimen>
+    <dimen name="divider_margin">10dp</dimen>
 
 
 </resources>

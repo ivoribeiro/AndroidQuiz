@@ -14,6 +14,8 @@ import java.util.List;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterCategoriaGrid;
+import pt.ipp.estg.cmu.models.Categoria;
+import pt.ipp.estg.cmu.models.Nivel;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -21,9 +23,19 @@ import pt.ipp.estg.cmu.adapters.AdapterCategoriaGrid;
 public class ActivityCategoriaFragment extends Fragment {
 
     private static final int NUM_GRID = 2;
+    private static final String KEY_CAT = "KEY_CAT";
 
     private RecyclerView mRecycler;
     private AdapterCategoriaGrid mAdapter;
+    private ArrayList<Categoria> mCategorias;
+
+    public static ActivityCategoriaFragment newInstance(ArrayList<Categoria> list) {
+        Bundle args = new Bundle();
+        ActivityCategoriaFragment fragment = new ActivityCategoriaFragment();
+        args.putParcelableArrayList(KEY_CAT, list);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     public ActivityCategoriaFragment() {
     }
@@ -31,21 +43,13 @@ public class ActivityCategoriaFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        List<String> categorias = new ArrayList<>();
-        categorias.add("Tech");
-        categorias.add("History");
-        categorias.add("Food");
-        categorias.add("Travel");
-        categorias.add("Cars");
-        categorias.add("Music");
-
-        mAdapter = new AdapterCategoriaGrid(getContext(), categorias);
+        mCategorias = getArguments().getParcelableArrayList(KEY_CAT);
+        mAdapter = new AdapterCategoriaGrid(getContext(), mCategorias);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity_categoria, container, false);
-
         mRecycler = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecycler.setLayoutManager(new GridLayoutManager(getContext(), NUM_GRID));
         mRecycler.setAdapter(mAdapter);

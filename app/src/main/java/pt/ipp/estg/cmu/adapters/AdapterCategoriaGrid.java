@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.ui.ActivityLevel;
 
 /**
@@ -22,10 +23,10 @@ import pt.ipp.estg.cmu.ui.ActivityLevel;
 
 public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaGrid.ViewHolder> {
 
-    private List<String> mDataSet = new ArrayList<>();
+    private List<Categoria> mDataSet = new ArrayList<>();
     private Context mContext;
 
-    public AdapterCategoriaGrid(Context context, List<String> data) {
+    public AdapterCategoriaGrid(Context context, List<Categoria> data) {
         this.mContext = context;
         this.mDataSet = data;
     }
@@ -40,7 +41,7 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
     @Override
     public void onBindViewHolder(AdapterCategoriaGrid.ViewHolder holder, final int position) {
 
-        holder.mTitle.setText(mDataSet.get(position));
+        holder.mTitle.setText(mDataSet.get(position).getName());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
