@@ -17,6 +17,7 @@ public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
     private void setFields() {
         this.addField("ID", "id");
         this.addField("NUMERO", "numero");
+        this.addField("CATEGORIA", "categoria");
         this.addField("N_PERGUNTAS", "nPerguntas");
         this.addField("PONTUACAO_CERTA", "pontuacaoBase");
         this.addField("PONTUACAO_ERRADA", "pontuacaoBaseErrada");

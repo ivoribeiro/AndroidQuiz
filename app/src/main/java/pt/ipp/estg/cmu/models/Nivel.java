@@ -15,7 +15,7 @@ public class Nivel implements Parcelable{
     private int nPerguntasResp;
 
 
-    public Nivel(String numero, int nPerguntas, int pontuacaoBase, int pontuacaoBaseErrada, int pontuacaoHint, boolean bloqueado) {
+    public Nivel(String numero, int nPerguntas, int pontuacaoBase, int pontuacaoBaseErrada, int pontuacaoHint, boolean bloqueado,String categoria) {
         this.numero = numero;
         this.categoria = categoria;
         this.nPerguntas = nPerguntas;
@@ -76,6 +76,7 @@ public class Nivel implements Parcelable{
         parcel.writeInt(pontuacaoBaseErrada);
         parcel.writeInt(pontuacaoHint);
         parcel.writeValue(bloqueado);
+        parcel.writeString(categoria);
         parcel.writeInt(nPerguntas);
         parcel.writeInt(nPerguntasResp);
 
@@ -101,6 +102,7 @@ public class Nivel implements Parcelable{
         bloqueado = (Boolean) in.readValue(null);
         nPerguntas = in.readInt();
         nPerguntasResp = in.readInt();
+        categoria = in.readString();
 
     }
 }

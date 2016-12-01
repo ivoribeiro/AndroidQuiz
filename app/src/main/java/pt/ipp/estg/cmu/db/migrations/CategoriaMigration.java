@@ -10,7 +10,7 @@ public class CategoriaMigration extends Migration {
 
     public CategoriaMigration() {
         super("categoria");
-        this.addField(new Field(true,true,"id","NUMERIC"));
+        this.addField(new Field(true,true,"id","INTEGER"));
         this.addField(new Field(false,false,"nome","VARCHAR(25)"));
         this.setCreate(this.generateCreate());
         this.setUpgrade(this.generateUpgrade());

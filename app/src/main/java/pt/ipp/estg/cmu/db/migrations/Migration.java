@@ -38,7 +38,7 @@ public class Migration {
     }
 
     public String generateCreate() {
-        String str = "CREATE TABLE " + this.table + " (";
+        String str = "CREATE TABLE " + this.table + "(";
         for (int i = 0; i < this.fields.size(); i++) {
             str = str + fields.get(i).toString();
         }

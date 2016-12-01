@@ -21,7 +21,7 @@ public class Field {
     @Override
     public String toString() {
         String primary = this.primary ? "PRIMARY KEY" : "";
-        String increment = this.autoincrement ? "autoincrement" : "";
+        String increment = this.autoincrement ? "AUTOINCREMENT" : "";
         return " "+ this.name + " " + this.type + " " + primary + " " + increment+",";
     }
 
