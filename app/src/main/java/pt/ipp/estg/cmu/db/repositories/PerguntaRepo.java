@@ -1,9 +1,15 @@
 package pt.ipp.estg.cmu.db.repositories;
 
 
-public class PerguntaRepo extends Repo {
-    public PerguntaRepo() {
-        super("pergunta");
+import android.content.Context;
+
+import java.util.ArrayList;
+
+import pt.ipp.estg.cmu.models.Pergunta;
+
+public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> {
+    public PerguntaRepo(Context context) {
+        super(context, "pergunta");
         this.setFields();
     }
 
@@ -14,5 +20,15 @@ public class PerguntaRepo extends Repo {
         this.addField("RESPOSTA", "respostaCerta");
         this.addField("RESPOSTAS_ERRADAS", "nRespostasErradas");
         this.addField("ACERTOU", "acertou");
+    }
+
+    @Override
+    public ArrayList<Pergunta> getAll() {
+        return null;
+    }
+
+    @Override
+    public Pergunta getById(int id) {
+        return null;
     }
 }

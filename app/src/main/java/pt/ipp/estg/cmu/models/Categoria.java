@@ -11,7 +11,8 @@ public class Categoria implements Parcelable {
     private int id;
     private String nome;
 
-    public Categoria(String nome) {
+    public Categoria(int id, String nome) {
+        this.id = id;
         this.nome = nome;
     }
 
@@ -23,11 +24,11 @@ public class Categoria implements Parcelable {
         this.id = id;
     }
 
-    public String getnome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setnome(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -47,6 +48,7 @@ public class Categoria implements Parcelable {
         public Categoria createFromParcel(Parcel in) {
             return new Categoria(in);
         }
+
         public Categoria[] newArray(int size) {
             return new Categoria[size];
         }

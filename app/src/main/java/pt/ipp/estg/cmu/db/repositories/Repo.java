@@ -1,15 +1,20 @@
 package pt.ipp.estg.cmu.db.repositories;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
+
 import java.util.HashMap;
 
+import pt.ipp.estg.cmu.db.DbHandler;
 import pt.ipp.estg.cmu.db.Field;
 
-public class Repo {
+public class Repo<T> extends DbHandler {
 
     private String table;
     private HashMap<String, Field> fields;
 
-    public Repo(String table) {
+    public Repo(Context context, String table) {
+        super(context, "androidQuiz.db");
         this.table = table;
     }
 
@@ -23,5 +28,13 @@ public class Repo {
 
     public String getField(String key) {
         return this.fields.get(key).getName();
+    }
+
+    public String getAllQueryString() {
+        return "SELECT * FROM " + this.table + " ;";
+    }
+
+    public String getByIdQueryString(int id) {
+        return "SELECT * FROM " + this.table + " WHERE id=" + id + ";";
     }
 }

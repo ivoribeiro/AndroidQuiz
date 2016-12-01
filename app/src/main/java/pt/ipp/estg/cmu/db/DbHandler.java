@@ -22,6 +22,7 @@ public class DbHandler extends SQLiteOpenHelper {
         super(context, db, null, DATABASE_VERSION);
         MigrationsHandler mh = new MigrationsHandler();
         this.migrations = mh.getMigrationsList();
+
     }
 
     @Override

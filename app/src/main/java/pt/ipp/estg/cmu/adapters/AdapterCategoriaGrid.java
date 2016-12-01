@@ -41,7 +41,7 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
     @Override
     public void onBindViewHolder(AdapterCategoriaGrid.ViewHolder holder, final int position) {
 
-        holder.mTitle.setText(mDataSet.get(position).getName());
+        holder.mTitle.setText(mDataSet.get(position).getNome());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

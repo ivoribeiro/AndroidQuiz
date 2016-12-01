@@ -10,11 +10,18 @@ import android.view.View;
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
 import pt.ipp.estg.cmu.models.Categoria;
 
 public class ActivityCategoria extends AppCompatActivity {
 
     private ArrayList<Categoria> mCategorias;
+    private CategoriaRepo repo;
+
+    public ActivityCategoria() {
+        //TODO onde anda o contexto
+        this.repo = new CategoriaRepo(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +40,7 @@ public class ActivityCategoria extends AppCompatActivity {
     }
 
     private ArrayList<Categoria> getAllCategorias() {
-        ArrayList<Categoria> categorias = new ArrayList<>();
-        categorias.add(new Categoria("Tech"));
-        categorias.add(new Categoria("History"));
-        categorias.add(new Categoria("Food"));
-        categorias.add(new Categoria("Travel"));
-        categorias.add(new Categoria("Cars"));
-        categorias.add(new Categoria("Music"));
-        return categorias;
+        return this.repo.getAll();
     }
 
 }
