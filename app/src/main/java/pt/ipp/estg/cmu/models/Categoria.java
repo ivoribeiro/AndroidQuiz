@@ -9,10 +9,10 @@ import android.os.Parcelable;
 
 public class Categoria implements Parcelable {
     private int id;
-    private String name;
+    private String nome;
 
-    public Categoria(String name) {
-        this.name = name;
+    public Categoria(String nome) {
+        this.nome = nome;
     }
 
     public int getId() {
@@ -23,12 +23,12 @@ public class Categoria implements Parcelable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getnome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setnome(String nome) {
+        this.nome = nome;
     }
 
 
@@ -40,7 +40,7 @@ public class Categoria implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
-        parcel.writeString(name);
+        parcel.writeString(nome);
     }
 
     public static final Parcelable.Creator<Categoria> CREATOR = new Parcelable.Creator<Categoria>() {
@@ -54,6 +54,6 @@ public class Categoria implements Parcelable {
 
     private Categoria(Parcel in) {
         id = in.readInt();
-        name = in.readString();
+        nome = in.readString();
     }
 }

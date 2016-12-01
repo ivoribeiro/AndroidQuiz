@@ -12,6 +12,7 @@ public class MigrationsHandler {
         this.migrationsList.add(new NivelMigration());
         this.migrationsList.add(new PerguntaMigration());
         this.migrationsList.add(new JogadorMigration());
+        this.migrationsList.add(new CategoriaMigration());
     }
 
     public ArrayList<Migration> getMigrationsList() {

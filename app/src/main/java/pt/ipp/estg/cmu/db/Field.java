@@ -1,4 +1,4 @@
-package pt.ipp.estg.cmu.db.migrations;
+package pt.ipp.estg.cmu.db;
 
 
 public class Field {
@@ -14,10 +14,18 @@ public class Field {
         this.type = type;
     }
 
+    public Field(String name){
+        this.name=name;
+    }
+
     @Override
     public String toString() {
         String primary = this.primary ? "PRIMARY KEY" : "";
         String increment = this.autoincrement ? "autoincrement" : "";
         return " "+ this.name + " " + this.type + " " + primary + " " + increment+",";
+    }
+
+    public String getName() {
+        return name;
     }
 }

@@ -1,7 +1,10 @@
 package pt.ipp.estg.cmu.db.migrations;
 
 
+import pt.ipp.estg.cmu.db.Field;
+
 public class PerguntaMigration extends Migration {
+
     public PerguntaMigration() {
         super("pergunta");
         this.addField(new Field(true, true, "id", "NUMERIC"));

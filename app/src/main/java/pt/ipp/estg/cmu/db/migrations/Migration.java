@@ -2,6 +2,8 @@ package pt.ipp.estg.cmu.db.migrations;
 
 import java.util.ArrayList;
 
+import pt.ipp.estg.cmu.db.Field;
+
 public class Migration {
 
     private String table;

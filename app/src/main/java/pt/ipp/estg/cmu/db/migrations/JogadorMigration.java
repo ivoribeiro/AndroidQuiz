@@ -1,5 +1,7 @@
 package pt.ipp.estg.cmu.db.migrations;
 
+import pt.ipp.estg.cmu.db.Field;
+
 public class JogadorMigration extends Migration {
 
     public JogadorMigration() {
