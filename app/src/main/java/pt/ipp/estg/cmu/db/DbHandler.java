@@ -29,6 +29,12 @@ public class DbHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         for (int i = 0; i < this.migrations.size(); i++) {
             db.execSQL(this.migrations.get(i).getCreate());
+            ArrayList<String> seeder = this.migrations.get(i).getSeeder();
+            if (seeder != null) {
+                for (int f = 0; f < seeder.size(); f++) {
+                    db.execSQL(seeder.get(f));
+                }
+            }
         }
     }
 

@@ -11,6 +11,7 @@ public class Migration {
 
     private String create;
     private String upgrade;
+    private ArrayList<String> seeder;
 
     public Migration(String tableName) {
         this.table = tableName;
@@ -31,6 +32,14 @@ public class Migration {
 
     public String getUpgrade() {
         return upgrade;
+    }
+
+    public ArrayList<String> getSeeder() {
+        return seeder;
+    }
+
+    public void setSeeders(ArrayList<String> seeder) {
+        this.seeder = seeder;
     }
 
     public void addField(Field value) {
