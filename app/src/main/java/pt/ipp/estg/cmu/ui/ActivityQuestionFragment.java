@@ -89,7 +89,6 @@ public class ActivityQuestionFragment extends Fragment implements View.OnClickLi
 
         mAnswerLayout = (LinearLayout) view.findViewById(R.id.answer_layout);
         mTableLayout = (TableLayout) view.findViewById(R.id.game_table_layout);
-
         mResetButton = (ImageButton) view.findViewById(R.id.reset);
         mHintButton = (ImageButton) view.findViewById(R.id.hint);
 

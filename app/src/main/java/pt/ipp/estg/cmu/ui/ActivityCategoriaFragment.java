@@ -10,12 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterCategoriaGrid;
 import pt.ipp.estg.cmu.models.Categoria;
-import pt.ipp.estg.cmu.models.Nivel;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -23,7 +21,7 @@ import pt.ipp.estg.cmu.models.Nivel;
 public class ActivityCategoriaFragment extends Fragment {
 
     private static final int NUM_GRID = 2;
-    private static final String KEY_CAT = "KEY_CAT";
+    private static final String KEY_ARRAY_CATEGORIE = "KEY_ARRAY_CATEGORIE";
 
     private RecyclerView mRecycler;
     private AdapterCategoriaGrid mAdapter;
@@ -32,7 +30,7 @@ public class ActivityCategoriaFragment extends Fragment {
     public static ActivityCategoriaFragment newInstance(ArrayList<Categoria> list) {
         Bundle args = new Bundle();
         ActivityCategoriaFragment fragment = new ActivityCategoriaFragment();
-        args.putParcelableArrayList(KEY_CAT, list);
+        args.putParcelableArrayList(KEY_ARRAY_CATEGORIE, list);
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,7 +41,7 @@ public class ActivityCategoriaFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCategorias = getArguments().getParcelableArrayList(KEY_CAT);
+        mCategorias = getArguments().getParcelableArrayList(KEY_ARRAY_CATEGORIE);
         mAdapter = new AdapterCategoriaGrid(getContext(), mCategorias);
     }
 
@@ -53,7 +51,6 @@ public class ActivityCategoriaFragment extends Fragment {
         mRecycler = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecycler.setLayoutManager(new GridLayoutManager(getContext(), NUM_GRID));
         mRecycler.setAdapter(mAdapter);
-
         return view;
     }
 }

@@ -12,43 +12,39 @@ import android.widget.TextView;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterViewPager;
 import pt.ipp.estg.cmu.interfaces.ClickQuestionListener;
+import pt.ipp.estg.cmu.models.Categoria;
+import pt.ipp.estg.cmu.models.Nivel;
+import pt.ipp.estg.cmu.util.Util;
 
-public class ActivityQuestion extends AppCompatActivity implements ClickQuestionListener {
+public class ActivityQuestion extends AppCompatActivity implements ClickQuestionListener, ViewPager.OnPageChangeListener {
 
     private static final int WAIT_MSECS = 2000;
+    private int NUM_SWIPE_PAGES = 2;
 
     //layout
     private ViewPager mViewPager;
-    private TextView mHintInfoText;
-    private TextView mScoreInfoText;
+    private TextView mLevelInfoText;
     private TextView mQuestionInfoText;
 
     //data
-    private String mHintInfo;
-    private String mScoreInfo;
-    private String mQuestionInfo;
-    private String mLevelInfo;
-    private String mCategoriaInfo;
+    private Nivel mLevelInfo;
+    private Categoria mCategoriaInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
-        getDummyData();
+        mLevelInfo = getIntent().getParcelableExtra(Util.ARG_LEVEL);
+        mCategoriaInfo = getIntent().getParcelableExtra(Util.ARG_CATEGORIE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(mCategoriaInfo);
-        toolbar.setSubtitle(getResources().getString(R.string.txt_level) + " " + mLevelInfo);
+        toolbar.setTitle(mCategoriaInfo.getNome());
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mHintInfoText = (TextView) findViewById(R.id.hint_info_text);
-        mScoreInfoText = (TextView) findViewById(R.id.score_info_text);
         mQuestionInfoText = (TextView) findViewById(R.id.question_info_text);
-
-        mHintInfoText.setText(mHintInfo + " " + getResources().getString(R.string.ajudas_restantes));
-        mScoreInfoText.setText(mScoreInfo + " " + getResources().getString(R.string.txt_score));
-        mQuestionInfoText.setText(mQuestionInfo);
+        mLevelInfoText = (TextView) findViewById(R.id.level_info_text);
+        mLevelInfoText.setText(getResources().getString(R.string.txt_level) + " " + mLevelInfo.getNumber());
 
         AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager());
         adapter.addFragment(ActivityQuestionFragment.newInstance(0, "NEW YORK", "NEWYORK"));
@@ -56,6 +52,7 @@ public class ActivityQuestion extends AppCompatActivity implements ClickQuestion
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mViewPager.setAdapter(adapter);
+        mViewPager.setOnPageChangeListener(this);
     }
 
     @Override
@@ -78,12 +75,19 @@ public class ActivityQuestion extends AppCompatActivity implements ClickQuestion
         }, WAIT_MSECS);
     }
 
-    public void getDummyData() {
-        mHintInfo = "3";
-        mScoreInfo = "30";
-        mQuestionInfo = "3/10";
-        mLevelInfo = "3";
-        mCategoriaInfo = "Tech";
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        mQuestionInfoText.setText(position + 1 + "/" + NUM_SWIPE_PAGES);
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
 
     }
 }

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.ui.ActivityQuestion;
 import pt.ipp.estg.cmu.util.Util;
@@ -27,11 +28,12 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
 
     private List<Nivel> mDataSet = new ArrayList<>();
     private Context mContext;
+    private Categoria mCategoria;
 
-
-    public AdapterLevelList(Context context, List<Nivel> data) {
+    public AdapterLevelList(Context context, List<Nivel> data, Categoria categoria) {
         this.mContext = context;
         this.mDataSet = data;
+        this.mCategoria = categoria;
     }
 
     @Override
@@ -56,13 +58,16 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
             holder.mImageState.setBackground(mContext.getDrawable(R.drawable.ic_lock));
         }
 
-        holder.mProgressBar.setMax(10);
-        holder.mProgressBar.setProgress(5);
+        holder.mProgressBar.setMax(mDataSet.get(position).getnPerguntas());
+        holder.mProgressBar.setProgress(mDataSet.get(position).getnPerguntasResp());
 
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mContext.startActivity(new Intent(mContext, ActivityQuestion.class).putExtra(Util.ARG_LEVEL, mDataSet.get(position).getNumber()));
+                mContext.startActivity(new Intent(mContext, ActivityQuestion.class)
+                        .putExtra(Util.ARG_LEVEL, mDataSet.get(position))
+                        .putExtra(Util.ARG_CATEGORIE, mCategoria)
+                );
             }
         });
     }
