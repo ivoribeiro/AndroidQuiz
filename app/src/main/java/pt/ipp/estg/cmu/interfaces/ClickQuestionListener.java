@@ -5,5 +5,6 @@ package pt.ipp.estg.cmu.interfaces;
  */
 
 public interface ClickQuestionListener {
-    void setCorrectAnswer();
+    void setAnswered(boolean hit);
+
 }

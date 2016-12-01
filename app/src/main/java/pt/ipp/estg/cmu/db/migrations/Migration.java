@@ -40,7 +40,6 @@ public class Migration {
         for (int i = 0; i < this.fields.size(); i++) {
             str = str + fields.get(i).toString();
         }
-        str = str.substring(0, str.length() - 1);
         return str + ")";
     }
 

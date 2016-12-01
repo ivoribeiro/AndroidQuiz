@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
-import pt.ipp.estg.cmu.db.migrations.Migration;
 import pt.ipp.estg.cmu.db.migrations.MigrationsHandler;
 
 
@@ -17,9 +16,9 @@ public class DbHandler extends SQLiteOpenHelper {
      */
 
     private static final int DATABASE_VERSION = 1;
-    private ArrayList<Migration> migrations;
+    private ArrayList<pt.ipp.estg.cmu.db.migrations.Migration> migrations;
 
-    public DbHandler(Context context,String db) {
+    public DbHandler(Context context, String db) {
         super(context, db, null, DATABASE_VERSION);
         MigrationsHandler mh = new MigrationsHandler();
         this.migrations = mh.getMigrationsList();

@@ -25,6 +25,8 @@
     <string name="txt_level">Nível</string>
     <string name="txt_score">Pontos</string>
 
+    <!--ActivityQuestion -->
+    <string name="ajudas_restantes">Ajudas Restantes</string>
 
     <!-- Bottom navigation titles-->
     <string name="title_action_hint">Ajuda</string>

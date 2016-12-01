@@ -1,16 +1,14 @@
 package pt.ipp.estg.cmu.ui;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -26,7 +24,11 @@ import pt.ipp.estg.cmu.util.UtilUI;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ActivityQuestionFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class ActivityQuestionFragment extends Fragment implements View.OnClickListener {
+
+    private static final int ROW_1 = 4;
+    private static final int ROW_2 = 9;
+    private static final int ROW_3 = 14;
 
     private ClickQuestionListener mListener;
     private int index;
@@ -36,20 +38,18 @@ public class ActivityQuestionFragment extends Fragment implements BottomNavigati
     private LinearLayout mAnswerLayout;
     private TableLayout mTableLayout;
     private ImageView mImageView;
-    private BottomNavigationView mBottomNavigation;
-
+    private ImageButton mResetButton;
+    private ImageButton mHintButton;
 
     //strings
     private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private String mCorrectAnswer;
     private String mCorrectAnswerConcat;
     private String mRandomGameString;
-
     private String mUserCorrectAnswer;
 
     private int mCorrectAnswerSize;
     private int mAtualCorrectIndex;
-
 
     public ActivityQuestionFragment() {
     }
@@ -90,6 +90,12 @@ public class ActivityQuestionFragment extends Fragment implements BottomNavigati
         mAnswerLayout = (LinearLayout) view.findViewById(R.id.answer_layout);
         mTableLayout = (TableLayout) view.findViewById(R.id.game_table_layout);
 
+        mResetButton = (ImageButton) view.findViewById(R.id.reset);
+        mHintButton = (ImageButton) view.findViewById(R.id.hint);
+
+        mHintButton.setOnClickListener(this);
+        mResetButton.setOnClickListener(this);
+
         mImageView = (ImageView) view.findViewById(R.id.question_image);
         switch (index) {
             case 0:
@@ -100,11 +106,7 @@ public class ActivityQuestionFragment extends Fragment implements BottomNavigati
                 break;
         }
 
-        mBottomNavigation = (BottomNavigationView) view.findViewById(R.id.bottom_navigation);
-        mBottomNavigation.setOnNavigationItemSelectedListener(this);
-
         createLayout();
-
         return view;
     }
 
@@ -115,17 +117,14 @@ public class ActivityQuestionFragment extends Fragment implements BottomNavigati
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_help:
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.hint:
                 break;
-            case R.id.action_reset:
+            case R.id.reset:
                 createLayout();
                 break;
-            case R.id.action_level:
-                break;
         }
-        return false;
     }
 
     private void createLayout() {
@@ -134,7 +133,6 @@ public class ActivityQuestionFragment extends Fragment implements BottomNavigati
         mUserCorrectAnswer = "";
         mAtualCorrectIndex = 0;
     }
-
 
     private void buildLayoutAnswer() {
         mAnswerLayout.removeAllViews();
@@ -152,17 +150,13 @@ public class ActivityQuestionFragment extends Fragment implements BottomNavigati
 
     private void buildLayoutGame() {
         mTableLayout.removeAllViews();
-
         TableRow row = new TableRow(getActivity());
         TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 1.0f);
-
         for (int i = 0; i < mRandomGameString.length(); ++i) {
-
             final Button b = UtilUI.newButton(getActivity(), mRandomGameString.charAt(i));
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     //int indexChar = mCorrectAnswerConcat.indexOf(b.getText().toString());
                     Button b2 = (Button) mAnswerLayout.findViewById(mAtualCorrectIndex);
                     if (b2 != null) {
@@ -171,13 +165,11 @@ public class ActivityQuestionFragment extends Fragment implements BottomNavigati
                         ++mAtualCorrectIndex;
                         mUserCorrectAnswer = mUserCorrectAnswer + b.getText();
                         checkIfIsFinished();
-
                     }
                 }
             });
-
             row.addView(b, params);
-            if (i == 4 || i == 9 || i == 14) {
+            if (i == ROW_1 || i == ROW_2 || i == ROW_3) {
                 mTableLayout.addView(row);
                 row = new TableRow(getActivity());
             }
@@ -185,8 +177,12 @@ public class ActivityQuestionFragment extends Fragment implements BottomNavigati
     }
 
     private void checkIfIsFinished() {
-        if (mUserCorrectAnswer.equals(mCorrectAnswerConcat)) {
-            mListener.setCorrectAnswer();
+        if (mUserCorrectAnswer.length() == mCorrectAnswerConcat.length()) {
+            if (mUserCorrectAnswer.equals(mCorrectAnswerConcat)) {
+                mListener.setAnswered(true);
+            } else {
+                mListener.setAnswered(false);
+            }
         }
     }
 
@@ -194,7 +190,6 @@ public class ActivityQuestionFragment extends Fragment implements BottomNavigati
     //////////////////////////////////////////////////////////////////////////////////////////////// STRINGS MANIPULATION
     private static String generateString(String characters, int length) {
         Random rng = new Random();
-
         ArrayList<Character> result = new ArrayList<>();
         while (result.size() < length) {
             char ch = characters.charAt(rng.nextInt(characters.length()));
@@ -202,7 +197,6 @@ public class ActivityQuestionFragment extends Fragment implements BottomNavigati
                 result.add(ch);
             }
         }
-
         String text = "";
         for (int i = 0; i < result.size(); ++i) {
             text = text + result.get(i);
@@ -222,5 +216,4 @@ public class ActivityQuestionFragment extends Fragment implements BottomNavigati
     private static String deleteCharAt(String strValue, int index) {
         return strValue.substring(0, index) + strValue.substring(index + 1);
     }
-
 }
