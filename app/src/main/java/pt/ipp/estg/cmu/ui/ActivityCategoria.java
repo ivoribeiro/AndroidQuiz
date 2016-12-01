@@ -18,14 +18,11 @@ public class ActivityCategoria extends AppCompatActivity {
     private ArrayList<Categoria> mCategorias;
     private CategoriaRepo repo;
 
-    public ActivityCategoria() {
-        //TODO onde anda o contexto
-        this.repo = new CategoriaRepo(this);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.repo = new CategoriaRepo(this);
         setContentView(R.layout.activity_categoria);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

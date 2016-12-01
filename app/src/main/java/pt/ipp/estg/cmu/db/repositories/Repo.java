@@ -16,6 +16,7 @@ public class Repo<T> extends DbHandler {
     public Repo(Context context, String table) {
         super(context, "androidQuiz.db");
         this.table = table;
+        this.fields = new HashMap<>();
     }
 
     public String getTable() {
