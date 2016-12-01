@@ -35,4 +35,9 @@ public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
     public Nivel getById(int id) {
         return null;
     }
+
+    @Override
+    public Nivel insertInto(Nivel nivel) {
+        return null;
+    }
 }

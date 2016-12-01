@@ -31,4 +31,9 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
     public Pergunta getById(int id) {
         return null;
     }
+
+    @Override
+    public Pergunta insertInto(Pergunta pergunta) {
+        return null;
+    }
 }

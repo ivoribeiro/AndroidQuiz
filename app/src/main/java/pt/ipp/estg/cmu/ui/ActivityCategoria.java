@@ -29,6 +29,7 @@ public class ActivityCategoria extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mCategorias = getAllCategorias();
+        //this.repo.insertInto(new Categoria("Tech"));
 
         getSupportFragmentManager()
                 .beginTransaction()

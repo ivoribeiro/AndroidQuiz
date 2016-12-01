@@ -1,5 +1,6 @@
 package pt.ipp.estg.cmu.db.repositories;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -30,21 +31,32 @@ public class CategoriaRepo extends Repo implements RepositoryInterface<Categoria
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
             do {
-                Categoria categoria = new Categoria(cursor.getInt(0), cursor.getString(1));
+                Categoria categoria = new Categoria(cursor.getString(1));
+                categoria.setId(cursor.getInt(0));
                 categorias.add(categoria);
             } while (cursor.moveToNext());
             cursor.close();
             db.close();
             return categorias;
+        } else {
+            cursor.close();
+            db.close();
+            return null;
         }
-        cursor.close();
-        db.close();
-        return null;
     }
 
     @Override
     public Categoria getById(int id) {
         String query = this.getByIdQueryString(id);
         return null;
+    }
+
+    public Categoria insertInto(Categoria categoria) {
+        SQLiteDatabase db = super.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(this.getField("NOME"), categoria.getNome());
+        db.insert(this.getTable(), null, values);
+        db.close();
+        return categoria;
     }
 }

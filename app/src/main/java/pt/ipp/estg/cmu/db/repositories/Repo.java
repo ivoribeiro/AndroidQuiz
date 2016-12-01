@@ -19,6 +19,10 @@ public class Repo<T> extends DbHandler {
         this.fields = new HashMap<>();
     }
 
+    public HashMap<String, Field> getFields() {
+        return fields;
+    }
+
     public String getTable() {
         return this.table;
     }
@@ -38,4 +42,6 @@ public class Repo<T> extends DbHandler {
     public String getByIdQueryString(int id) {
         return "SELECT * FROM " + this.table + " WHERE id=" + id + ";";
     }
+
+
 }

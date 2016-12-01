@@ -32,4 +32,9 @@ public class JogadorRepo extends Repo implements RepositoryInterface<Jogador> {
     public Jogador getById(int id) {
         return null;
     }
+
+    @Override
+    public Jogador insertInto(Jogador jogador) {
+        return null;
+    }
 }
