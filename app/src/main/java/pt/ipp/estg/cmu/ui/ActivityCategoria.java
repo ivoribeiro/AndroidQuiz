@@ -26,7 +26,6 @@ public class ActivityCategoria extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mCategorias = getAllCategorias();
-        //this.repo.insertInto(new Categoria("Tech"));
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -35,10 +34,7 @@ public class ActivityCategoria extends AppCompatActivity {
     }
 
     private ArrayList<Categoria> getAllCategorias() {
-        ArrayList<Categoria> categorias = new ArrayList<>();
-        categorias.add(new Categoria("Tech"));
-        return categorias;
-        //return this.repo.getAll();
+        return this.repo.getAll();
     }
 
 }

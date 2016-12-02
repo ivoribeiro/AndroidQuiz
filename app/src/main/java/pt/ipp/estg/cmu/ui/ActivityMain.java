@@ -8,6 +8,10 @@ import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.DbHandler;
+import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
+import pt.ipp.estg.cmu.db.repositories.JogadorRepo;
+import pt.ipp.estg.cmu.db.repositories.Repo;
+import pt.ipp.estg.cmu.models.Jogador;
 
 
 public class ActivityMain extends ActivityBase implements View.OnClickListener {
@@ -22,18 +26,22 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
     private String mUserName;
     private int mPontos;
     private int mNivel;
+    private Jogador jogador;
+    private JogadorRepo repo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.repo = new JogadorRepo(this);
 
         new DbHandler(this, "androidQuiz.db");
         setContentView(R.layout.activity_main);
 
+        this.jogador = this.repo.getById(1);
         //dummy data
-        mPontos = 33;
+        mPontos = jogador.getPontuacao();
         mNivel = 2;
-        mUserName = "Joao Carlos Teixeira";
+        mUserName = jogador.getUsername();
 
 
         mBtStart = (Button) findViewById(R.id.bt_start_game);
