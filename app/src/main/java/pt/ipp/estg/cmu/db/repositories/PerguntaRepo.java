@@ -28,6 +28,11 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
     }
 
     @Override
+    public ArrayList<Pergunta> getAllByField(String field, String value) {
+        return null;
+    }
+
+    @Override
     public Pergunta getById(int id) {
         return null;
     }

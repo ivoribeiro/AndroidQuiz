@@ -46,6 +46,11 @@ public class CategoriaRepo extends Repo implements RepositoryInterface<Categoria
     }
 
     @Override
+    public ArrayList<Categoria> getAllByField(String field, String value) {
+        return null;
+    }
+
+    @Override
     public Categoria getById(int id) {
         String query = this.getByIdQueryString(id);
         return null;

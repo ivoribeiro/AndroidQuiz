@@ -44,7 +44,7 @@ public class ActivityQuestion extends AppCompatActivity implements ClickQuestion
 
         mQuestionInfoText = (TextView) findViewById(R.id.question_info_text);
         mLevelInfoText = (TextView) findViewById(R.id.level_info_text);
-        mLevelInfoText.setText(getResources().getString(R.string.txt_level) + " " + mLevelInfo.getNumber());
+        mLevelInfoText.setText(getResources().getString(R.string.txt_level) + " " + mLevelInfo.getNumero());
 
         AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager());
         adapter.addFragment(ActivityQuestionFragment.newInstance(0, "NEW YORK", "NEWYORK"));

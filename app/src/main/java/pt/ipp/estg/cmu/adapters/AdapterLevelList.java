@@ -49,8 +49,8 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
         String score = mContext.getResources().getString(R.string.txt_score);
         boolean state = mDataSet.get(position).isBloqueado();
 
-        holder.mTitle.setText(level + " " + mDataSet.get(position).getNumber());
-        holder.mScore.setText(mDataSet.get(position).getNumber() + " " + score);
+        holder.mTitle.setText(level + " " + mDataSet.get(position).getNumero());
+        holder.mScore.setText(mDataSet.get(position).getNumero() + " " + score);
 
         if (!state) {
             holder.mImageState.setBackground(mContext.getDrawable(R.drawable.ic_check));

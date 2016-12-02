@@ -16,7 +16,8 @@ public class Nivel implements Parcelable {
     private int nPerguntasResp;
 
 
-    public Nivel(String numero, int nPerguntas, int pontuacaoBase, int pontuacaoBaseErrada, int pontuacaoHint, boolean bloqueado, String categoria) {
+    public Nivel(int id, String numero, int nPerguntas, int pontuacaoBase, int pontuacaoBaseErrada, int pontuacaoHint, boolean bloqueado, String categoria) {
+        this.id = id;
         this.numero = numero;
         this.categoria = categoria;
         this.nPerguntas = nPerguntas;
@@ -27,42 +28,96 @@ public class Nivel implements Parcelable {
         this.nPerguntas = 0;
     }
 
+    public Nivel() {
+    }
 
-    public String getNumber() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNumero() {
         return numero;
+    }
+
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public int getPontuacaoBase() {
         return pontuacaoBase;
     }
 
+
+    public void setPontuacaoBase(int pontuacaoBase) {
+        this.pontuacaoBase = pontuacaoBase;
+    }
+
     public int getPontuacaoBaseErrada() {
         return pontuacaoBaseErrada;
+    }
+
+
+    public void setPontuacaoBaseErrada(int pontuacaoBaseErrada) {
+        this.pontuacaoBaseErrada = pontuacaoBaseErrada;
     }
 
     public int getPontuacaoHint() {
         return pontuacaoHint;
     }
 
+
+    public void setPontuacaoHint(int pontuacaoHint) {
+        this.pontuacaoHint = pontuacaoHint;
+    }
+
     public boolean isBloqueado() {
         return bloqueado;
+    }
+
+
+    public void setBloqueado(int bloqueado) {
+
+        this.bloqueado = bloqueado == 1 ? true : false;
     }
 
     public int getnPerguntas() {
         return nPerguntas;
     }
 
+
+    public void setnPerguntas(int nPerguntas) {
+        this.nPerguntas = nPerguntas;
+    }
+
     public int getnPerguntasResp() {
         return nPerguntasResp;
+    }
+
+    public void setnPerguntasResp(int nPerguntasResp) {
+        this.nPerguntasResp = nPerguntasResp;
+    }
+
+    public void addnPerguntas() {
+        ++this.nPerguntas;
     }
 
     public void addnPerguntasResp() {
         ++this.nPerguntasResp;
     }
 
-    public String getNumero() {
-        return numero;
-    }
 
     ////////////////////// PARCEABLE
     @Override
@@ -106,4 +161,5 @@ public class Nivel implements Parcelable {
         categoria = in.readString();
 
     }
+
 }

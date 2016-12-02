@@ -31,6 +31,11 @@ public class JogadorRepo extends Repo implements RepositoryInterface<Jogador> {
     }
 
     @Override
+    public ArrayList<Jogador> getAllByField(String field, String value) {
+        return null;
+    }
+
+    @Override
     public Jogador getById(int id) {
         SQLiteDatabase db = super.getReadableDatabase();
         String query = this.getByIdQueryString(1);

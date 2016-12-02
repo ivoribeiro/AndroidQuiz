@@ -6,7 +6,10 @@ interface RepositoryInterface<T> {
 
     public ArrayList<T> getAll();
 
+    public ArrayList<T> getAllByField(String field, String value);
+
     public T getById(int id);
+
 
     public T insertInto(T t);
 
