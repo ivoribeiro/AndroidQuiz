@@ -13,13 +13,14 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterLevelList;
+import pt.ipp.estg.cmu.db.repositories.NivelRepo;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ActivityLevelFragment extends Fragment {
+public class LevelFragment extends Fragment {
 
     //KEY
     private static final String KEY_LEVEL = "KEY_LEVEL";
@@ -31,40 +32,40 @@ public class ActivityLevelFragment extends Fragment {
 
     //data
     private AdapterLevelList mAdapter;
-    private ArrayList<Nivel> mNiveis;
     private Categoria mCategoria;
+    private NivelRepo repo;
 
-    public ActivityLevelFragment() {
+    public LevelFragment() {
     }
 
-    public static ActivityLevelFragment newInstance(ArrayList<Nivel> list, Categoria categoria) {
+    public static LevelFragment newInstance(Categoria categoria) {
         Bundle args = new Bundle();
-        ActivityLevelFragment fragment = new ActivityLevelFragment();
-        args.putParcelableArrayList(KEY_LEVEL, list);
+        LevelFragment fragment = new LevelFragment();
         args.putParcelable(KEY_CATEGORIA, categoria);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mNiveis = getArguments().getParcelableArrayList(KEY_LEVEL);
-        mCategoria = getArguments().getParcelable(KEY_CATEGORIA);
-        mAdapter = new AdapterLevelList(getActivity(), mNiveis, mCategoria);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity_level, container, false);
-
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMNS));
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setAdapter(mAdapter);
-
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.repo = new NivelRepo(getContext());
+        mCategoria = getArguments().getParcelable(KEY_CATEGORIA);
+        mAdapter = new AdapterLevelList(getActivity(), getAllNiveis(), mCategoria);
+        mRecyclerView.setAdapter(mAdapter);
+    }
 
+
+    private ArrayList<Nivel> getAllNiveis() {
+        return this.repo.getAllByCategoria(this.mCategoria.getNome());
+    }
 }

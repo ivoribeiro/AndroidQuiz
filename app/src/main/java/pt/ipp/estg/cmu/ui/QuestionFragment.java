@@ -24,7 +24,7 @@ import pt.ipp.estg.cmu.util.UtilUI;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ActivityQuestionFragment extends Fragment implements View.OnClickListener {
+public class QuestionFragment extends Fragment implements View.OnClickListener {
 
     private static final int ROW_1 = 4;
     private static final int ROW_2 = 9;
@@ -51,15 +51,15 @@ public class ActivityQuestionFragment extends Fragment implements View.OnClickLi
     private int mCorrectAnswerSize;
     private int mAtualCorrectIndex;
 
-    public ActivityQuestionFragment() {
+    public QuestionFragment() {
     }
 
-    public static ActivityQuestionFragment newInstance(int index, String correctAnswer, String concat) {
+    public static QuestionFragment newInstance(int index, String correctAnswer, String concat) {
         Bundle args = new Bundle();
         args.putString("CORRECT", correctAnswer);
         args.putString("CONCAT", concat);
         args.putInt("INDEX", index);
-        ActivityQuestionFragment fragment = new ActivityQuestionFragment();
+        QuestionFragment fragment = new QuestionFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -112,7 +112,7 @@ public class ActivityQuestionFragment extends Fragment implements View.OnClickLi
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mListener = (ActivityQuestion) context;
+        mListener = (QuestionActivity) context;
     }
 
     @Override

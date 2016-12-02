@@ -11,9 +11,9 @@ import pt.ipp.estg.cmu.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ActivityAdminFragment extends Fragment {
+public class AdminFragment extends Fragment {
 
-    public ActivityAdminFragment() {
+    public AdminFragment() {
     }
 
     @Override

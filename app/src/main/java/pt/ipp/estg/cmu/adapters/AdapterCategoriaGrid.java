@@ -15,7 +15,7 @@ import java.util.List;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.Categoria;
-import pt.ipp.estg.cmu.ui.ActivityLevel;
+import pt.ipp.estg.cmu.ui.LevelActivity;
 import pt.ipp.estg.cmu.util.Util;
 
 /**
@@ -46,7 +46,7 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mContext.startActivity(new Intent(mContext, ActivityLevel.class)
+                mContext.startActivity(new Intent(mContext, LevelActivity.class)
                         .putExtra(Util.ARG_CATEGORIE, mDataSet.get(position))
                 );
             }

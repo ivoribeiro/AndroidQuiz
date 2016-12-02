@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pt.ipp.estg.cmu">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,29 +26,29 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ActivityLevel"
+            android:name=".ui.LevelActivity"
             android:label="@string/title_activity_level"
-            android:parentActivityName=".ui.ActivityCategoria"
+            android:parentActivityName=".ui.CategoriaActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pt.ipp.estg.cmu.ui.ActivityMain" />
         </activity>
         <activity
-            android:name=".ui.ActivityQuestion"
+            android:name=".ui.QuestionActivity"
             android:label="@string/title_activity_question"
-            android:parentActivityName=".ui.ActivityLevel"
+            android:parentActivityName=".ui.LevelActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="pt.ipp.estg.cmu.ui.ActivityLevel" />
+                android:value="pt.ipp.estg.cmu.ui.LevelActivity" />
         </activity>
         <activity
-            android:name=".ui.ActivityAdmin"
+            android:name=".ui.AdminActivity"
             android:label="@string/title_activity_admin"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.ActivityCategoria"
+            android:name=".ui.CategoriaActivity"
             android:label="@string/title_activity_categoria"
             android:parentActivityName=".ui.ActivityMain"
             android:theme="@style/AppTheme.NoActionBar">

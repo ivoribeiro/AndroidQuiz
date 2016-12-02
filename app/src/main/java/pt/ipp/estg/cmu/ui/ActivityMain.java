@@ -8,10 +8,9 @@ import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.DbHandler;
-import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
 import pt.ipp.estg.cmu.db.repositories.JogadorRepo;
-import pt.ipp.estg.cmu.db.repositories.Repo;
 import pt.ipp.estg.cmu.models.Jogador;
+import pt.ipp.estg.cmu.tasks.DownloadImage;
 
 
 public class ActivityMain extends ActivityBase implements View.OnClickListener {
@@ -56,13 +55,15 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
         mLevelTxt.setText(getResources().getString(R.string.txt_level) + " : " + mNivel);
 
         mBtStart.setOnClickListener(this);
+
+        new DownloadImage(this, "tech", "nivel1", "1").execute("http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/SanFrancisco_0.jpg");
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_start_game:
-                this.startActivity(new Intent(this, ActivityCategoria.class));
+                this.startActivity(new Intent(this, CategoriaActivity.class));
                 break;
         }
     }

@@ -16,7 +16,7 @@ import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.util.Util;
 
-public class ActivityQuestion extends AppCompatActivity implements ClickQuestionListener, ViewPager.OnPageChangeListener {
+public class QuestionActivity extends AppCompatActivity implements ClickQuestionListener, ViewPager.OnPageChangeListener {
 
     private static final int WAIT_MSECS = 2000;
     private int NUM_SWIPE_PAGES = 2;
@@ -44,11 +44,11 @@ public class ActivityQuestion extends AppCompatActivity implements ClickQuestion
 
         mQuestionInfoText = (TextView) findViewById(R.id.question_info_text);
         mLevelInfoText = (TextView) findViewById(R.id.level_info_text);
-        mLevelInfoText.setText(getResources().getString(R.string.txt_level) + " " + mLevelInfo.getNumero());
+        mLevelInfoText.setText(mLevelInfo.getNumero());
 
         AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager());
-        adapter.addFragment(ActivityQuestionFragment.newInstance(0, "NEW YORK", "NEWYORK"));
-        adapter.addFragment(ActivityQuestionFragment.newInstance(1, "EVORA", "EVORA"));
+        adapter.addFragment(QuestionFragment.newInstance(0, "NEW YORK", "NEWYORK"));
+        adapter.addFragment(QuestionFragment.newInstance(1, "EVORA", "EVORA"));
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mViewPager.setAdapter(adapter);

@@ -17,7 +17,7 @@ import java.util.List;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
-import pt.ipp.estg.cmu.ui.ActivityQuestion;
+import pt.ipp.estg.cmu.ui.QuestionActivity;
 import pt.ipp.estg.cmu.util.Util;
 
 /**
@@ -45,12 +45,11 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        String level = mContext.getResources().getString(R.string.txt_level);
         String score = mContext.getResources().getString(R.string.txt_score);
         boolean state = mDataSet.get(position).isBloqueado();
 
-        holder.mTitle.setText(level + " " + mDataSet.get(position).getNumero());
-        holder.mScore.setText(mDataSet.get(position).getNumero() + " " + score);
+        holder.mTitle.setText(mDataSet.get(position).getNumero());
+        holder.mScore.setText(mDataSet.get(position).getPontuacaoBase() + " " + score);//TODO atualizar o campo certo para os pontos obtidos neste nivel
 
         if (!state) {
             holder.mImageState.setBackground(mContext.getDrawable(R.drawable.ic_check));
@@ -64,7 +63,7 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mContext.startActivity(new Intent(mContext, ActivityQuestion.class)
+                mContext.startActivity(new Intent(mContext, QuestionActivity.class)
                         .putExtra(Util.ARG_LEVEL, mDataSet.get(position))
                         .putExtra(Util.ARG_CATEGORIE, mCategoria)
                 );

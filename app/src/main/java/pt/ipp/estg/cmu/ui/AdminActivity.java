@@ -9,7 +9,7 @@ import android.view.View;
 
 import pt.ipp.estg.cmu.R;
 
-public class ActivityAdmin extends AppCompatActivity {
+public class AdminActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
