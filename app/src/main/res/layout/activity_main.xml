@@ -60,29 +60,6 @@
 
             </LinearLayout>
 
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/layout_padding">
-
-                <ImageView
-                    android:layout_width="@dimen/first_image_size"
-                    android:layout_height="@dimen/first_image_size"
-                    android:background="@drawable/ic_rank" />
-
-                <TextView
-                    android:id="@+id/txt_level"
-                    style="@style/SecondaryTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="@dimen/text_padding"
-                    android:text="@string/txt_level" />
-
-            </LinearLayout>
-
         </LinearLayout>
 
         <Button

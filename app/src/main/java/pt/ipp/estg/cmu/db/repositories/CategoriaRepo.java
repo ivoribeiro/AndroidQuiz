@@ -31,18 +31,15 @@ public class CategoriaRepo extends Repo implements RepositoryInterface<Categoria
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
             do {
-                Categoria categoria = new Categoria(cursor.getString(1));
+                Categoria categoria = new Categoria();
                 categoria.setId(cursor.getInt(0));
+                categoria.setNome(cursor.getString(1));
                 categorias.add(categoria);
             } while (cursor.moveToNext());
-            cursor.close();
-            db.close();
-            return categorias;
-        } else {
-            cursor.close();
-            db.close();
-            return null;
         }
+        cursor.close();
+        db.close();
+        return categorias;
     }
 
     @Override

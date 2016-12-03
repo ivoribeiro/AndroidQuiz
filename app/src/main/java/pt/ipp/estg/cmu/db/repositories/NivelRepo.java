@@ -55,7 +55,6 @@ public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
                 nivel.setnPerguntasResp(cursor.getInt(8));
                 niveis.add(nivel);
             } while (cursor.moveToNext());
-
         }
         cursor.close();
         db.close();

@@ -40,19 +40,14 @@ public class JogadorRepo extends Repo implements RepositoryInterface<Jogador> {
         SQLiteDatabase db = super.getReadableDatabase();
         String query = this.getByIdQueryString(1);
         Cursor cursor = db.rawQuery(query, null);
+        Jogador jogador = null;
         if (cursor != null) {
             cursor.moveToFirst();
-            Jogador jogador = new Jogador(cursor.getString(1), cursor.getInt(2), cursor.getInt(3));
-            cursor.close();
-            db.close();
-            return jogador;
-
-        } else {
-            cursor.close();
-            db.close();
-            return null;
+            jogador = new Jogador(cursor.getString(1), cursor.getInt(2), cursor.getInt(3));
         }
-
+        cursor.close();
+        db.close();
+        return jogador;
     }
 
 

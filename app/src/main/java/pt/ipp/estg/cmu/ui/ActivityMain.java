@@ -24,7 +24,6 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
     private String mUserName;
     private int mPontos;
-    private int mNivel;
     private Jogador jogador;
     private JogadorRepo repo;
 
@@ -38,7 +37,6 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
         this.jogador = this.repo.getById(1);
         //dummy data
         mPontos = jogador.getPontuacao();
-        mNivel = 2;
         mUserName = jogador.getUsername();
 
 
@@ -46,12 +44,10 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
         mUserNameTxt = (TextView) findViewById(R.id.user_text);
         mWelcomeTxt = (TextView) findViewById(R.id.welcome_user);
         mScoreTxt = (TextView) findViewById(R.id.txt_score);
-        mLevelTxt = (TextView) findViewById(R.id.txt_level);
 
         mUserNameTxt.setText(getResources().getString(R.string.hello_text) + " " + mUserName);
         mWelcomeTxt.setText(getResources().getString(R.string.welcome_text));
         mScoreTxt.setText(getResources().getString(R.string.txt_score) + " : " + mPontos);
-        mLevelTxt.setText(getResources().getString(R.string.txt_level) + " : " + mNivel);
 
         mBtStart.setOnClickListener(this);
 
