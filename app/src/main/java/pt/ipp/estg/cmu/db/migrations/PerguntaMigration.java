@@ -8,7 +8,7 @@ public class PerguntaMigration extends Migration {
     public PerguntaMigration() {
         super("pergunta");
         this.addField(new Field(true, true, "id", "INTEGER"));
-        this.addField(new Field(false, false, "categoria", "VARCHAR(25)"));
+        this.addField(new Field(false, false, "nivel", "VARCHAR(3)"));
         this.addField(new Field(false, false, "imagem", "TEXT"));
         this.addField(new Field(false, false, "respostaCerta", "VARCHAR(15)"));
         this.addField(new Field(false, false, "nRespostasErradas", "NUMERIC"));
