@@ -7,10 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by navega on 11/19/16.
- */
-
 public class AdapterViewPager extends FragmentPagerAdapter {
     private List<Fragment> mFragmentList;
     private List<String> mTitlesList;

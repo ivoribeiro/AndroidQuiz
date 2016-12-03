@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
 
 public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {

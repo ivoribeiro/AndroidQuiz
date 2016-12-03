@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.db.Field;
 
-/**
- * Created by ivoribeiro on 01-12-2016.
- */
 
 public class CategoriaMigration extends Migration {
 

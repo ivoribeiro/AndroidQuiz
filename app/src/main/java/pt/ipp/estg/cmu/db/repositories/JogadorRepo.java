@@ -9,10 +9,6 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.models.Jogador;
 
-/**
- * Created by ivoribeiro on 01-12-2016.
- */
-
 public class JogadorRepo extends Repo implements RepositoryInterface<Jogador> {
 
     public JogadorRepo(Context context) {

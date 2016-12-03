@@ -3,10 +3,6 @@ package pt.ipp.estg.cmu.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by navega on 11/30/16.
- */
-
 public class Categoria implements Parcelable {
     private int id;
     private String nome;

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 interface RepositoryInterface<T> {
 
-    public ArrayList<T> getAll();
+    ArrayList<T> getAll();
 
-    public ArrayList<T> getAllByField(String field, String value);
+    ArrayList<T> getAllByField(String field, String value);
 
-    public T getById(int id);
+    T getById(int id);
 
 
-    public T insertInto(T t);
+    T insertInto(T t);
 
 
 }

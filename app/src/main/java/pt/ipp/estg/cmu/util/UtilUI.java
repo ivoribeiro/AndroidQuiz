@@ -8,10 +8,6 @@ import android.widget.LinearLayout;
 
 import pt.ipp.estg.cmu.R;
 
-/**
- * Created by navega on 11/20/16.
- */
-
 public class UtilUI {
 
 

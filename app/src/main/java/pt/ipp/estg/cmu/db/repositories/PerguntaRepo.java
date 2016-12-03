@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
 
 public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> {

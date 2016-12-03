@@ -4,13 +4,7 @@ import android.database.Observable;
 
 import java.util.List;
 
-import pt.ipp.estg.cmu.models.Jogador;
 import pt.ipp.estg.cmu.models.Nivel;
-import pt.ipp.estg.cmu.models.Pergunta;
-
-/**
- * Created by ivoribeiro on 29-11-2016.
- */
 
 public interface NivelRepository {
 

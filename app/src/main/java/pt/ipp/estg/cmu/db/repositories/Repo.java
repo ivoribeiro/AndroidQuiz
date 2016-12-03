@@ -1,7 +1,6 @@
 package pt.ipp.estg.cmu.db.repositories;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.HashMap;
 

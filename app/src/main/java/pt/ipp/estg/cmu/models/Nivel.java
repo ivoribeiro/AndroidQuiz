@@ -90,7 +90,7 @@ public class Nivel implements Parcelable {
 
     public void setBloqueado(int bloqueado) {
 
-        this.bloqueado = bloqueado == 1 ? true : false;
+        this.bloqueado = bloqueado == 1;
     }
 
     public int getnPerguntas() {

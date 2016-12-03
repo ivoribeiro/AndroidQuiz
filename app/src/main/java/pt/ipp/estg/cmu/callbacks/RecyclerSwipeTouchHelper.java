@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import pt.ipp.estg.cmu.adapters.AdapterCategoriaGrid;
 import pt.ipp.estg.cmu.models.Categoria;
 
-/**
- * Created by Navega on 12/3/2016.
- */
-
 public class RecyclerSwipeTouchHelper extends ItemTouchHelper.SimpleCallback {
 
     private ArrayList<Categoria> mCategorias;

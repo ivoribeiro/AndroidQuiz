@@ -1,16 +1,11 @@
 package pt.ipp.estg.cmu.tasks;
 
-/**
- * Created by Navega on 12/2/2016.
- */
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
-import android.media.MediaScannerConnection;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.widget.Toast;

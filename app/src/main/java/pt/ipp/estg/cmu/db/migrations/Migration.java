@@ -15,7 +15,7 @@ public class Migration {
 
     public Migration(String tableName) {
         this.table = tableName;
-        fields = new ArrayList<Field>();
+        fields = new ArrayList<>();
     }
 
     public String getCreate() {
