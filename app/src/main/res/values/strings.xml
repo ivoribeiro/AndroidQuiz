@@ -34,4 +34,13 @@
     <string name="title_action_reset">Reset</string>
     <string name="title_activity_categoria">Categoria</string>
 
+    <!-- ActivityAdmin-->
+    <string name="tab_title_pergunta">Perguntas</string>
+    <string name="tab_title_nivel">Niveis</string>
+    <string name="tab_title_categoria">Categorias</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>

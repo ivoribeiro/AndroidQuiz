@@ -16,7 +16,7 @@ import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.util.Util;
 
-public class QuestionActivity extends AppCompatActivity implements ClickQuestionListener, ViewPager.OnPageChangeListener {
+public class GameActivity extends AppCompatActivity implements ClickQuestionListener, ViewPager.OnPageChangeListener {
 
     private static final int WAIT_MSECS = 2000;
     private int NUM_SWIPE_PAGES = 2;
@@ -33,7 +33,7 @@ public class QuestionActivity extends AppCompatActivity implements ClickQuestion
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question);
+        setContentView(R.layout.activity_game);
         mLevelInfo = getIntent().getParcelableExtra(Util.ARG_LEVEL);
         mCategoriaInfo = getIntent().getParcelableExtra(Util.ARG_CATEGORIE);
 
@@ -47,8 +47,8 @@ public class QuestionActivity extends AppCompatActivity implements ClickQuestion
         mLevelInfoText.setText(mLevelInfo.getNumero());
 
         AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager());
-        adapter.addFragment(QuestionFragment.newInstance(0, "NEW YORK", "NEWYORK"));
-        adapter.addFragment(QuestionFragment.newInstance(1, "EVORA", "EVORA"));
+        adapter.addFragment(GameFragment.newInstance(0, "NEW YORK", "NEWYORK"));
+        adapter.addFragment(GameFragment.newInstance(1, "EVORA", "EVORA"));
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mViewPager.setAdapter(adapter);

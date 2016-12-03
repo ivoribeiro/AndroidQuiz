@@ -17,13 +17,13 @@ import java.util.List;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
-import pt.ipp.estg.cmu.ui.QuestionActivity;
+import pt.ipp.estg.cmu.ui.GameActivity;
 import pt.ipp.estg.cmu.util.Util;
 
 /**
- * Created by navega on 11/19/16.
+ * Adapter contendo um cardview com uma textview e uma imageview, responsavel por listar os niveis, mostrar o score obtido em cada nivel, e se esta bloqueado
+ * Click listener para abrir {@GameActivity}
  */
-
 public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.ViewHolder> {
 
     private List<Nivel> mDataSet = new ArrayList<>();
@@ -63,7 +63,7 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mContext.startActivity(new Intent(mContext, QuestionActivity.class)
+                mContext.startActivity(new Intent(mContext, GameActivity.class)
                         .putExtra(Util.ARG_LEVEL, mDataSet.get(position))
                         .putExtra(Util.ARG_CATEGORIE, mCategoria)
                 );

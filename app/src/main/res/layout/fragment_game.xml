@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    tools:context="pt.ipp.estg.cmu.ui.QuestionFragment"
-    tools:showIn="@layout/activity_question">
+    tools:context="pt.ipp.estg.cmu.ui.GameFragment"
+    tools:showIn="@layout/activity_game">
 
     <LinearLayout
         android:id="@+id/hint_score_layout"

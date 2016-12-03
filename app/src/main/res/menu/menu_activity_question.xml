@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="pt.ipp.estg.cmu.ui.QuestionActivity">
+    tools:context="pt.ipp.estg.cmu.ui.GameActivity">
     <item
         android:id="@+id/action_level"
         android:orderInCategory="100"

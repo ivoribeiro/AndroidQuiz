@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/primary_light"
     android:fitsSystemWindows="true"
-    tools:context="pt.ipp.estg.cmu.ui.QuestionActivity">
+    tools:context="pt.ipp.estg.cmu.ui.GameActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

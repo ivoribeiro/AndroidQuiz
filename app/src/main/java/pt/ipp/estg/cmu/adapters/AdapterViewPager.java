@@ -12,10 +12,13 @@ import java.util.List;
  */
 
 public class AdapterViewPager extends FragmentPagerAdapter {
-    private final List<Fragment> mFragmentList = new ArrayList<>();
+    private List<Fragment> mFragmentList;
+    private List<String> mTitlesList;
 
     public AdapterViewPager(FragmentManager manager) {
         super(manager);
+        mFragmentList = new ArrayList<>();
+        mTitlesList = null;
     }
 
     @Override

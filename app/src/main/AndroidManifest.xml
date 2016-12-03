@@ -35,7 +35,7 @@
                 android:value="pt.ipp.estg.cmu.ui.ActivityMain" />
         </activity>
         <activity
-            android:name=".ui.QuestionActivity"
+            android:name=".ui.GameActivity"
             android:label="@string/title_activity_question"
             android:parentActivityName=".ui.LevelActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -43,10 +43,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pt.ipp.estg.cmu.ui.LevelActivity" />
         </activity>
-        <activity
-            android:name=".ui.AdminActivity"
-            android:label="@string/title_activity_admin"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.CategoriaActivity"
             android:label="@string/title_activity_categoria"

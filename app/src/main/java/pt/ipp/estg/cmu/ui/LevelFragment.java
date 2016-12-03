@@ -16,6 +16,7 @@ import pt.ipp.estg.cmu.adapters.AdapterLevelList;
 import pt.ipp.estg.cmu.db.repositories.NivelRepo;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
+import pt.ipp.estg.cmu.util.Util;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -29,43 +30,59 @@ public class LevelFragment extends Fragment {
     //layout
     private int NUM_COLUMNS = 1;
     private RecyclerView mRecyclerView;
+    private boolean isAdmin;
 
     //data
     private AdapterLevelList mAdapter;
     private Categoria mCategoria;
-    private NivelRepo repo;
+    private ArrayList<Nivel> mNiveis;
+    private NivelRepo mRepository;
 
     public LevelFragment() {
     }
 
-    public static LevelFragment newInstance(Categoria categoria) {
+    public static LevelFragment newInstance(Categoria categoria, boolean isAdmin) {
         Bundle args = new Bundle();
         LevelFragment fragment = new LevelFragment();
         args.putParcelable(KEY_CATEGORIA, categoria);
+        args.putBoolean(Util.ARG_ADMIN, isAdmin);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mCategoria = getArguments().getParcelable(KEY_CATEGORIA);
+            isAdmin = getArguments().getBoolean(Util.ARG_ADMIN);
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_activity_level, container, false);
+        View view = inflater.inflate(R.layout.fragment_level, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMNS));
-        mRecyclerView.setHasFixedSize(true);
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.repo = new NivelRepo(getContext());
-        mCategoria = getArguments().getParcelable(KEY_CATEGORIA);
-        mAdapter = new AdapterLevelList(getActivity(), getAllNiveis(), mCategoria);
+        this.mRepository = new NivelRepo(getContext());
+        mNiveis = getAllNiveis();
+        mAdapter = new AdapterLevelList(getActivity(), mNiveis, mCategoria);
         mRecyclerView.setAdapter(mAdapter);
+
+        if (isAdmin) {
+            //RecyclerTouchHelper swipeTouch = new RecyclerTouchHelper(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, mNiveis, mCategoria);
+            //ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeTouch);
+            //itemTouchHelper.attachToRecyclerView(mRecyclerView);
+        }
     }
 
-
     private ArrayList<Nivel> getAllNiveis() {
-        return this.repo.getAllByCategoria(this.mCategoria.getNome());
+        return this.mRepository.getAllByCategoria(this.mCategoria.getNome());
     }
 }

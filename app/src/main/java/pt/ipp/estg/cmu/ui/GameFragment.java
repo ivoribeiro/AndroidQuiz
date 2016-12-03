@@ -24,7 +24,7 @@ import pt.ipp.estg.cmu.util.UtilUI;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class QuestionFragment extends Fragment implements View.OnClickListener {
+public class GameFragment extends Fragment implements View.OnClickListener {
 
     private static final int ROW_1 = 4;
     private static final int ROW_2 = 9;
@@ -51,15 +51,15 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     private int mCorrectAnswerSize;
     private int mAtualCorrectIndex;
 
-    public QuestionFragment() {
+    public GameFragment() {
     }
 
-    public static QuestionFragment newInstance(int index, String correctAnswer, String concat) {
+    public static GameFragment newInstance(int index, String correctAnswer, String concat) {
         Bundle args = new Bundle();
         args.putString("CORRECT", correctAnswer);
         args.putString("CONCAT", concat);
         args.putInt("INDEX", index);
-        QuestionFragment fragment = new QuestionFragment();
+        GameFragment fragment = new GameFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -85,7 +85,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_activity_question, container, false);
+        View view = inflater.inflate(R.layout.fragment_game, container, false);
 
         mAnswerLayout = (LinearLayout) view.findViewById(R.id.answer_layout);
         mTableLayout = (TableLayout) view.findViewById(R.id.game_table_layout);
@@ -112,7 +112,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mListener = (QuestionActivity) context;
+        mListener = (GameActivity) context;
     }
 
     @Override

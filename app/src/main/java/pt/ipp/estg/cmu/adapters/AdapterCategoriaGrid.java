@@ -19,17 +19,21 @@ import pt.ipp.estg.cmu.ui.LevelActivity;
 import pt.ipp.estg.cmu.util.Util;
 
 /**
- * Created by Navega on 11/29/2016.
+ * Adapter contendo um cardview com uma textview e uma imageview, responsavel por listar as categorias recebidas
+ * Click listener para abrir {@LevelActivity}
  */
-
 public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaGrid.ViewHolder> {
 
     private List<Categoria> mDataSet = new ArrayList<>();
     private Context mContext;
+    private boolean isAdmin;
 
-    public AdapterCategoriaGrid(Context context, List<Categoria> data) {
+    public AdapterCategoriaGrid(Context context, List<Categoria> data, boolean isAdmin) {
+
         this.mContext = context;
         this.mDataSet = data;
+        this.isAdmin = isAdmin;
+
     }
 
     @Override
@@ -41,13 +45,13 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
 
     @Override
     public void onBindViewHolder(AdapterCategoriaGrid.ViewHolder holder, final int position) {
-
         holder.mTitle.setText(mDataSet.get(position).getNome());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mContext.startActivity(new Intent(mContext, LevelActivity.class)
                         .putExtra(Util.ARG_CATEGORIE, mDataSet.get(position))
+                        .putExtra(Util.ARG_ADMIN, isAdmin)
                 );
             }
         });

@@ -10,7 +10,7 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.DbHandler;
 import pt.ipp.estg.cmu.db.repositories.JogadorRepo;
 import pt.ipp.estg.cmu.models.Jogador;
-import pt.ipp.estg.cmu.tasks.DownloadImage;
+import pt.ipp.estg.cmu.util.Util;
 
 
 public class ActivityMain extends ActivityBase implements View.OnClickListener {
@@ -32,7 +32,6 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.repo = new JogadorRepo(this);
-
         new DbHandler(this, "androidQuiz.db");
         setContentView(R.layout.activity_main);
 
@@ -56,14 +55,15 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
         mBtStart.setOnClickListener(this);
 
-        new DownloadImage(this, "tech", "nivel1", "1").execute("http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/SanFrancisco_0.jpg");
+        //new DownloadImage(this, "tech", "nivel1", "1").execute("http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/SanFrancisco_0.jpg");
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_start_game:
-                this.startActivity(new Intent(this, CategoriaActivity.class));
+                this.startActivity(new Intent(this, CategoriaActivity.class)
+                        .putExtra(Util.ARG_ADMIN, false));
                 break;
         }
     }

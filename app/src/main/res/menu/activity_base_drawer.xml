@@ -12,11 +12,6 @@
             android:title="@string/title_statistics" />
 
         <item
-            android:id="@+id/nav_topsore"
-            android:icon="@drawable/ic_admin"
-            android:title="@string/title_admin" />
-
-        <item
             android:id="@+id/nav_admin"
             android:icon="@drawable/ic_admin"
             android:title="@string/title_admin" />
