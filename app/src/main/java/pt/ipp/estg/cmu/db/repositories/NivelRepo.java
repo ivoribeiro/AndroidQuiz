@@ -1,6 +1,7 @@
 package pt.ipp.estg.cmu.db.repositories;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -69,7 +70,19 @@ public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
 
     @Override
     public Nivel insertInto(Nivel nivel) {
-        return null;
+        SQLiteDatabase db = super.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(this.getField("NUMERO"), nivel.getNumero());
+        values.put(this.getField("CATEGORIA"), nivel.getCategoria());
+        values.put(this.getField("BLOQUEADO"), nivel.isBloqueado() ? 1 : 0);
+        values.put(this.getField("N_PERGUNTAS"), nivel.getnPerguntas());
+        values.put(this.getField("PONTUACAO_CERTA"), nivel.getPontuacaoBase());
+        values.put(this.getField("PONTUACAO_ERRADA"), nivel.getPontuacaoBaseErrada());
+        values.put(this.getField("PONTUACAO_DICA"), nivel.getPontuacaoHint());
+        values.put(this.getField("N_RESPOSTAS_CERTAS"), 0);
+        db.insert(this.getTable(), null, values);
+        db.close();
+        return nivel;
     }
 
     public ArrayList<Nivel> getAllByCategoria(String categoria) {

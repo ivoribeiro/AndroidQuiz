@@ -1,6 +1,7 @@
 package pt.ipp.estg.cmu.db.repositories;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,8 +19,8 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
 
     private void setFields() {
         this.addField("ID", "id");
-        this.addField("CATEGORIA", "categoria");
         this.addField("IMAGEM", "imagem");
+        this.addField("NIVEL", "nivel");
         this.addField("RESPOSTA", "respostaCerta");
         this.addField("RESPOSTAS_ERRADAS", "nRespostasErradas");
         this.addField("ACERTOU", "acertou");
@@ -56,7 +57,16 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
 
     @Override
     public Pergunta insertInto(Pergunta pergunta) {
-        return null;
+        SQLiteDatabase db = super.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(this.getField("IMAGEM"), pergunta.getImagem());
+        values.put(this.getField("IMAGEM"), pergunta.getNivel());
+        values.put(this.getField("RESPOSTA"), pergunta.getRespostaCerta());
+        values.put(this.getField("RESPOSTAS_ERRADAS"), 0);
+        values.put(this.getField("ACERTOU"), 0);
+        db.insert(this.getTable(), null, values);
+        db.close();
+        return pergunta;
     }
 
     public ArrayList<Pergunta> getAllByNivel(int idNivel) {

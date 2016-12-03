@@ -1,5 +1,6 @@
 package pt.ipp.estg.cmu.db.repositories;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -53,6 +54,13 @@ public class JogadorRepo extends Repo implements RepositoryInterface<Jogador> {
 
     @Override
     public Jogador insertInto(Jogador jogador) {
-        return null;
+        SQLiteDatabase db = super.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(this.getField("USER"), jogador.getUsername());
+        values.put(this.getField("PONTUACAO"), 0);
+        values.put(this.getField("DICAS"), 10);
+        db.insert(this.getTable(), null, values);
+        db.close();
+        return jogador;
     }
 }
