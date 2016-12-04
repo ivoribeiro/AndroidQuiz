@@ -59,4 +59,11 @@ public class JogadorRepo extends Repo implements RepositoryInterface<Jogador> {
         db.close();
         return jogador;
     }
+
+    @Override
+    public void deleteById(int id) {
+        String query = this.deleteByFieldQueryString("id", "" + id);
+        SQLiteDatabase db = super.getWritableDatabase();
+        db.rawQuery(query, null);
+    }
 }

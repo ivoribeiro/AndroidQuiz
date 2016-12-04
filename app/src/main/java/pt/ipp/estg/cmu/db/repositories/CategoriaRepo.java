@@ -53,6 +53,8 @@ public class CategoriaRepo extends Repo implements RepositoryInterface<Categoria
         return null;
     }
 
+
+    @Override
     public Categoria insertInto(Categoria categoria) {
         SQLiteDatabase db = super.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -60,5 +62,12 @@ public class CategoriaRepo extends Repo implements RepositoryInterface<Categoria
         db.insert(this.getTable(), null, values);
         db.close();
         return categoria;
+    }
+
+    @Override
+    public void deleteById(int id) {
+        String query = this.deleteByFieldQueryString("id", "" + id);
+        SQLiteDatabase db = super.getWritableDatabase();
+        db.rawQuery(query, null);
     }
 }

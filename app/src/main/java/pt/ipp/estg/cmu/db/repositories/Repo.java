@@ -41,7 +41,12 @@ public class Repo<T> extends DbHandler {
     public String getByIdQueryString(int id) {
         return "SELECT * FROM " + this.table + " WHERE id=" + id + ";";
     }
+
     public String getAllByFieldQueryString(String field, String value) {
         return "SELECT * FROM " + this.table + " WHERE " + field + "=" + value + ";";
+    }
+
+    public String deleteByFieldQueryString(String field, String value) {
+        return "DELETE FROM " + this.table + " WHERE " + field + "=" + value + ";";
     }
 }

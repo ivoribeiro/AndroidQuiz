@@ -13,5 +13,7 @@ interface RepositoryInterface<T> {
 
     T insertInto(T t);
 
+    void deleteById(int id);
+
 
 }
