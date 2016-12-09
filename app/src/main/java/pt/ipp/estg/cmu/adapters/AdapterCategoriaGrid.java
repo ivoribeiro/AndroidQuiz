@@ -23,12 +23,11 @@ import pt.ipp.estg.cmu.util.Util;
  * Adapter contendo um cardview com uma textview e uma imageview, responsavel por listar as categorias recebidas
  * Click listener para abrir {@LevelActivity}
  */
-public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaGrid.ViewHolder> implements View.OnClickListener {
+public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaGrid.ViewHolder> {
 
     private List<Categoria> mDataSet = new ArrayList<>();
     private Context mContext;
     private boolean isAdmin;
-    private int mPosition = 0;
     private RecyclerView mRecycler;
 
     public AdapterCategoriaGrid(Context context, RecyclerView recyclerView, List<Categoria> data, boolean isAdmin) {
@@ -47,14 +46,26 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
 
     @Override
     public void onBindViewHolder(final AdapterCategoriaGrid.ViewHolder holder, final int position) {
-        mPosition = position;
         holder.mTitle.setText(mDataSet.get(position).getNome());
 
         if (isAdmin) {//MODO ADMIN
             if (!mDataSet.get(position).isAtiva()) {
                 holder.mCardView.setAlpha(0.5f);
             }
-            holder.mCardView.setOnClickListener(this);
+
+            holder.mCardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mDataSet.get(position).isAtiva()) {
+                        mContext.startActivity(new Intent(mContext, LevelActivity.class)
+                                .putExtra(Util.ARG_CATEGORIE, mDataSet.get(position))
+                                .putExtra(Util.ARG_ADMIN, isAdmin));
+                    } else {
+                        Snackbar.make(mRecycler, mContext.getString(R.string.snack_bar_categorie_info), Snackbar.LENGTH_LONG).show();
+                    }
+                }
+            });
+
             holder.mCardView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
@@ -62,6 +73,7 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
                         mDataSet.get(position).setAtiva(false);
                         holder.mCardView.setAlpha(0.5f);
                         Snackbar.make(mRecycler, mContext.getString(R.string.snack_bar_categorie_false), Snackbar.LENGTH_LONG).show();
+
                     } else {//ATIVAR CATEGORIA
                         mDataSet.get(position).setAtiva(true);
                         holder.mCardView.setAlpha(1f);
@@ -75,7 +87,16 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
             if (!mDataSet.get(position).isAtiva()) {
                 holder.mCardView.setVisibility(View.GONE);
             } else {
-                holder.mCardView.setOnClickListener(this);
+                holder.mCardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (mDataSet.get(position).isAtiva()) {
+                            mContext.startActivity(new Intent(mContext, LevelActivity.class)
+                                    .putExtra(Util.ARG_CATEGORIE, mDataSet.get(position))
+                                    .putExtra(Util.ARG_ADMIN, isAdmin));
+                        }
+                    }
+                });
             }
         }
     }
@@ -83,17 +104,6 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
     @Override
     public int getItemCount() {
         return mDataSet == null ? 0 : mDataSet.size();
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (mDataSet.get(mPosition).isAtiva()) {
-            mContext.startActivity(new Intent(mContext, LevelActivity.class)
-                    .putExtra(Util.ARG_CATEGORIE, mDataSet.get(mPosition))
-                    .putExtra(Util.ARG_ADMIN, isAdmin));
-        } else {
-            Snackbar.make(mRecycler, mContext.getString(R.string.snack_bar_categorie_info), Snackbar.LENGTH_LONG).show();
-        }
     }
 
 

@@ -2,7 +2,6 @@ package pt.ipp.estg.cmu.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -23,7 +22,6 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_level);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -34,12 +32,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
         mFab = (FloatingActionButton) findViewById(R.id.fab);
         if (isAdmin) {
-            mFab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                }
-            });
+            mFab.setOnClickListener(this);
         } else {
             mFab.setVisibility(View.GONE);
         }
@@ -52,6 +45,11 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-
+        if (view.getId() == R.id.fab) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout, AdminNovoNivelFragment.newInstance(mCategoria))
+                    .commit();
+        }
     }
 }
