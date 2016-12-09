@@ -9,35 +9,27 @@ import android.widget.TextView;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.DbHandler;
 import pt.ipp.estg.cmu.db.repositories.JogadorRepo;
-import pt.ipp.estg.cmu.models.Jogador;
 import pt.ipp.estg.cmu.util.Util;
 
 
 public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
+    //layout
     private Button mBtStart;
     private TextView mWelcomeTxt;
     private TextView mUserNameTxt;
     private TextView mScoreTxt;
-    private TextView mLevelTxt;
-
 
     private String mUserName;
     private int mPontos;
-    private Jogador jogador;
-    private JogadorRepo repo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.repo = new JogadorRepo(this);
-        new DbHandler(this, "androidQuiz.db");
         setContentView(R.layout.activity_main);
 
-        this.jogador = this.repo.getById(1);
-        //dummy data
-        mPontos = jogador.getPontuacao();
-        mUserName = jogador.getUsername();
+        mPontos = mJogador.getPontuacao();
+        mUserName = mJogador.getUsername();
 
 
         mBtStart = (Button) findViewById(R.id.bt_start_game);

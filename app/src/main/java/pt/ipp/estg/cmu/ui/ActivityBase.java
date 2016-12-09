@@ -11,9 +11,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.db.DbHandler;
+import pt.ipp.estg.cmu.db.repositories.JogadorRepo;
+import pt.ipp.estg.cmu.models.Jogador;
 import pt.ipp.estg.cmu.util.Util;
 
 public class ActivityBase extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,6 +32,13 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
 
     //layout
     private Toolbar mMainToolbar;
+    private TextView mUserText;
+    private ImageView mUserAvatar;
+    private LinearLayout mHeaderLayout;
+
+    //data
+    protected Jogador mJogador;
+    protected JogadorRepo mRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +62,17 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
         mDrawer.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
         mNavigationView.setNavigationItemSelectedListener(this);
+
+        //header
+        View header = mNavigationView.getHeaderView(0);
+        mUserText = (TextView) header.findViewById(R.id.username);
+        mUserAvatar = (ImageView) header.findViewById(R.id.avatar);
+        mHeaderLayout = (LinearLayout) header.findViewById(R.id.header_layout);
+
+        mRepository = new JogadorRepo(this);
+        new DbHandler(this, "androidQuiz.db");
+        mJogador = this.mRepository.getById(1);
+        mUserText.setText(mJogador.getUsername());
 
     }
 
@@ -80,17 +105,21 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_game) {
-            this.startActivity(new Intent(this, ActivityMain.class));
 
-        } else if (id == R.id.nav_statistics) {
+        switch (id) {
+            case R.id.nav_game:
+                this.startActivity(new Intent(this, ActivityMain.class));
+                break;
 
-        } else if (id == R.id.nav_admin) {
-            this.startActivity(new Intent(this, CategoriaActivity.class)
-                    .putExtra(Util.ARG_ADMIN, true));
+            case R.id.nav_statistics:
+                break;
 
-        } else if (id == R.id.nav_settings) {
+            case R.id.nav_admin:
+                this.startActivity(new Intent(this, CategoriaActivity.class).putExtra(Util.ARG_ADMIN, true));
+                break;
 
+            case R.id.nav_settings:
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

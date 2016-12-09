@@ -109,6 +109,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

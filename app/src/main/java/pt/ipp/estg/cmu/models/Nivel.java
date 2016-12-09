@@ -8,12 +8,15 @@ public class Nivel implements Parcelable {
     private int id;
     private String numero;
     private String categoria;
-    private int pontuacaoBase;
-    private int pontuacaoBaseErrada;
-    private int pontuacaoHint;
-    private boolean bloqueado;
-    private int nPerguntas;
-    private int nPerguntasResp;
+    private int pontuacaoBase;// pontuação de cada pergunta deste nivel
+    private int pontuacaoBaseErrada;// pontuacao retirada por cada pergunta errada neste nivel
+    private int pontuacaoHint;//pontuacao retirada por cada ajuda usada neste nivel
+    private boolean bloqueado;//estado do nivel, se o user ja desbloqueou o anterior ou nao
+    private int nPerguntas;//numero de perguntas do nivel
+    private int nPerguntasResp;////numero de perguntas que o user ja respondeu neste nivel
+    //TODO unlockNextLevelAt  numero minimo de questos respondidas para desbloquer o proximo nivel
+    //TODO nAjudasTotal  numero de ajudas total para este nivel
+    //TODO nPontuacaoTotal numero de pontos ganhos neste nivel
 
 
     public Nivel(int id, String numero, int nPerguntas, int pontuacaoBase, int pontuacaoBaseErrada, int pontuacaoHint, boolean bloqueado, String categoria) {

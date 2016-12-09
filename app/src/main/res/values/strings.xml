@@ -39,10 +39,17 @@
     <string name="tab_title_nivel">Niveis</string>
     <string name="tab_title_categoria">Categorias</string>
 
-
+    <!--AdapterCategoriaGrid -->
     <string name="snack_bar_categorie_false">Categoria desativada</string>
     <string name="snack_bar_categorie_true">Categoria ativada</string>
     <string name="snack_bar_categorie_info">Deve ativar a categoria</string>
 
+    <!--AdminNovoNivel-->
+    <string name="admin_novo_nivel_novo">Novo Nível</string>
+    <string name="admin_novo_nivel_nome">Nome </string>
+    <string name="admin_novo_nivel_pontuacoes">Pontuação</string>
+    <string name="admin_novo_nivel_base">Pergunta</string>
+    <string name="admin_novo_nivel_errada">Retirada por cada pergunta errada</string>
+    <string name="admin_novo_nivel_ajuda">Retirada por cada ajuda usada</string>
 
 </resources>

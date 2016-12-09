@@ -46,10 +46,26 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.fab) {
+            mFab.setImageResource(R.drawable.ic_check);
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.frame_layout, AdminNovoNivelFragment.newInstance(mCategoria))
+                    .addToBackStack(null)
                     .commit();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (isAdmin) {
+            mFab.setImageResource(R.drawable.ic_add);
         }
     }
 }
