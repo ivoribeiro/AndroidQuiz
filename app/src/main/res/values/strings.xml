@@ -51,5 +51,6 @@
     <string name="admin_novo_nivel_base">Pergunta</string>
     <string name="admin_novo_nivel_errada">Retirada por cada pergunta errada</string>
     <string name="admin_novo_nivel_ajuda">Retirada por cada ajuda usada</string>
+    <string name="admin_novo_nivel_ajuda_num">Numero máximo de ajudas</string>
 
 </resources>

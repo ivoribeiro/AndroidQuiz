@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coodinator_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:layout_height="match_parent">
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/linear_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
                 style="@style/SecondaryTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/novo_nivel_layout_margin"
                 android:text="@string/admin_novo_nivel_novo" />
 
             <android.support.v7.widget.CardView
@@ -39,6 +42,7 @@
                 style="@style/SecondaryTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/novo_nivel_layout_margin"
                 android:text="@string/admin_novo_nivel_pontuacoes" />
 
 
@@ -49,7 +53,7 @@
                 android:padding="@dimen/novo_nivel_layout_margin">
 
                 <EditText
-                    android:id="@+id/level_base_text"
+                    android:id="@+id/level_pontuacao_base_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/novo_nivel_layout_margin"
@@ -90,6 +94,32 @@
 
             </android.support.v7.widget.CardView>
 
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/novo_nivel_layout_margin"
+                android:padding="@dimen/novo_nivel_layout_margin">
+
+                <EditText
+                    android:id="@+id/level_ajuda_num_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/novo_nivel_layout_margin"
+                    android:hint="@string/admin_novo_nivel_ajuda_num"
+                    android:inputType="number" />
+
+            </android.support.v7.widget.CardView>
+
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/scroll_view"
+        app:layout_anchorGravity="bottom|right|end"
+        app:srcCompat="@drawable/ic_check" />
+</android.support.design.widget.CoordinatorLayout>

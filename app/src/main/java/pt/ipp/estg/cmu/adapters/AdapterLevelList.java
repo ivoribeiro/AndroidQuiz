@@ -2,6 +2,7 @@ package pt.ipp.estg.cmu.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import java.util.List;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
+import pt.ipp.estg.cmu.ui.AdminListaPerguntasFragment;
 import pt.ipp.estg.cmu.ui.GameActivity;
 import pt.ipp.estg.cmu.util.Util;
 
@@ -29,11 +31,13 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
     private List<Nivel> mDataSet = new ArrayList<>();
     private Context mContext;
     private Categoria mCategoria;
+    private boolean isAdmin;
 
-    public AdapterLevelList(Context context, List<Nivel> data, Categoria categoria) {
+    public AdapterLevelList(Context context, List<Nivel> data, Categoria categoria, boolean isAdmin) {
         this.mContext = context;
         this.mDataSet = data;
         this.mCategoria = categoria;
+        this.isAdmin = isAdmin;
     }
 
     @Override
@@ -63,10 +67,20 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mContext.startActivity(new Intent(mContext, GameActivity.class)
-                        .putExtra(Util.ARG_LEVEL, mDataSet.get(position))
-                        .putExtra(Util.ARG_CATEGORIE, mCategoria)
-                );
+                if (isAdmin) {//MODO ADMIN
+                    ((AppCompatActivity) mContext)
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frame_layout, AdminListaPerguntasFragment.newInstance(mDataSet.get(position)))
+                            .addToBackStack(null)
+                            .commit();
+
+                } else {//MODO GAME
+                    mContext.startActivity(new Intent(mContext, GameActivity.class)
+                            .putExtra(Util.ARG_LEVEL, mDataSet.get(position))
+                            .putExtra(Util.ARG_CATEGORIE, mCategoria)
+                    );
+                }
             }
         });
     }

@@ -17,7 +17,7 @@ public class Nivel implements Parcelable {
     //TODO unlockNextLevelAt  numero minimo de questos respondidas para desbloquer o proximo nivel
     //TODO nAjudasTotal  numero de ajudas total para este nivel
     //TODO nPontuacaoTotal numero de pontos ganhos neste nivel
-
+    //TODO nPerguntasCertas // numero de perguntas que o user acertou neste nivel
 
     public Nivel(int id, String numero, int nPerguntas, int pontuacaoBase, int pontuacaoBaseErrada, int pontuacaoHint, boolean bloqueado, String categoria) {
         this.id = id;

@@ -72,7 +72,7 @@ public class LevelFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         this.mRepository = new NivelRepo(getContext());
         mNiveis = getAllNiveis();
-        mAdapter = new AdapterLevelList(getActivity(), mNiveis, mCategoria);
+        mAdapter = new AdapterLevelList(getActivity(), mNiveis, mCategoria,isAdmin);
         mRecyclerView.setAdapter(mAdapter);
 
         if (isAdmin) {
