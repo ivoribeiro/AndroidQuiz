@@ -2,6 +2,7 @@ package pt.ipp.estg.cmu.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,10 +29,12 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
     private Context mContext;
     private boolean isAdmin;
     private int mPosition = 0;
+    private RecyclerView mRecycler;
 
-    public AdapterCategoriaGrid(Context context, List<Categoria> data, boolean isAdmin) {
+    public AdapterCategoriaGrid(Context context, RecyclerView recyclerView, List<Categoria> data, boolean isAdmin) {
         this.mContext = context;
         this.mDataSet = data;
+        this.mRecycler = recyclerView;
         this.isAdmin = isAdmin;
     }
 
@@ -55,8 +58,15 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
             holder.mCardView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    mDataSet.get(position).setAtiva(true);
-                    holder.mCardView.setAlpha(1f);
+                    if (mDataSet.get(position).isAtiva()) {//DESATIVAR CATEGORIA
+                        mDataSet.get(position).setAtiva(false);
+                        holder.mCardView.setAlpha(0.5f);
+                        Snackbar.make(mRecycler, mContext.getString(R.string.snack_bar_categorie_false), Snackbar.LENGTH_LONG).show();
+                    } else {//ATIVAR CATEGORIA
+                        mDataSet.get(position).setAtiva(true);
+                        holder.mCardView.setAlpha(1f);
+                        Snackbar.make(mRecycler, mContext.getString(R.string.snack_bar_categorie_true), Snackbar.LENGTH_LONG).show();
+                    }
                     return true;
                 }
             });
@@ -77,9 +87,13 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
 
     @Override
     public void onClick(View view) {
-        mContext.startActivity(new Intent(mContext, LevelActivity.class)
-                .putExtra(Util.ARG_CATEGORIE, mDataSet.get(mPosition))
-                .putExtra(Util.ARG_ADMIN, isAdmin));
+        if (mDataSet.get(mPosition).isAtiva()) {
+            mContext.startActivity(new Intent(mContext, LevelActivity.class)
+                    .putExtra(Util.ARG_CATEGORIE, mDataSet.get(mPosition))
+                    .putExtra(Util.ARG_ADMIN, isAdmin));
+        } else {
+            Snackbar.make(mRecycler, mContext.getString(R.string.snack_bar_categorie_info), Snackbar.LENGTH_LONG).show();
+        }
     }
 
 

@@ -11,7 +11,7 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.util.Util;
 
-public class LevelActivity extends AppCompatActivity {
+public class LevelActivity extends AppCompatActivity implements View.OnClickListener {
 
     //data
     private Categoria mCategoria;
@@ -48,5 +48,10 @@ public class LevelActivity extends AppCompatActivity {
                 .beginTransaction()
                 .add(R.id.frame_layout, LevelFragment.newInstance(mCategoria, isAdmin))
                 .commit();
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

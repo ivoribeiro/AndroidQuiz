@@ -39,8 +39,10 @@
     <string name="tab_title_nivel">Niveis</string>
     <string name="tab_title_categoria">Categorias</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="snack_bar_categorie_false">Categoria desativada</string>
+    <string name="snack_bar_categorie_true">Categoria ativada</string>
+    <string name="snack_bar_categorie_info">Deve ativar a categoria</string>
 
 
 </resources>

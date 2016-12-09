@@ -67,9 +67,8 @@ public class CategoriaFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         this.mRepository = new CategoriaRepo(getContext());
         mCategorias = this.mRepository.getAll();
-        mAdapter = new AdapterCategoriaGrid(getContext(), mCategorias, isAdmin);
+        mAdapter = new AdapterCategoriaGrid(getContext(), mRecyclerView, mCategorias, isAdmin);
         mRecyclerView.setAdapter(mAdapter);
-
 
         if (isAdmin) {
             RecyclerSwipeTouchHelper swipeTouch = new RecyclerSwipeTouchHelper(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, getContext(), mRecyclerView, mCategorias, mAdapter);
