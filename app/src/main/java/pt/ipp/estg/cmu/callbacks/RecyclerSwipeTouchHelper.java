@@ -9,6 +9,8 @@ import android.view.View;
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.adapters.AdapterCategoriaGrid;
+import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
+import pt.ipp.estg.cmu.db.repositories.RepositoryInterface;
 import pt.ipp.estg.cmu.models.Categoria;
 
 public class RecyclerSwipeTouchHelper extends ItemTouchHelper.SimpleCallback {
@@ -16,6 +18,7 @@ public class RecyclerSwipeTouchHelper extends ItemTouchHelper.SimpleCallback {
     private ArrayList<Categoria> mCategorias;
     private RecyclerView mRecycler;
     private Context mContext;
+    private RepositoryInterface<?> repo;
 
     private AdapterCategoriaGrid mAdapter;
 
@@ -25,6 +28,7 @@ public class RecyclerSwipeTouchHelper extends ItemTouchHelper.SimpleCallback {
         this.mRecycler = recyclerView;
         this.mCategorias = categorias;
         this.mAdapter = adapter;
+        this.repo=new CategoriaRepo(context);
     }
 
     @Override
@@ -57,6 +61,7 @@ public class RecyclerSwipeTouchHelper extends ItemTouchHelper.SimpleCallback {
 
                     }
                 }).show();
+        this.repo.deleteById(categoria.getId());
         mCategorias.remove(position);
         mRecycler.removeViewAt(position);
         mAdapter.notifyItemRemoved(position);

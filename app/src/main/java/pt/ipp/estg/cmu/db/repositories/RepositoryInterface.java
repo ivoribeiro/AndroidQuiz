@@ -2,7 +2,7 @@ package pt.ipp.estg.cmu.db.repositories;
 
 import java.util.ArrayList;
 
-interface RepositoryInterface<T> {
+public interface RepositoryInterface<T> {
 
     ArrayList<T> getAll();
 
