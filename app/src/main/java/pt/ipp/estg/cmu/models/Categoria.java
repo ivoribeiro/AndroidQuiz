@@ -6,6 +6,7 @@ import android.os.Parcelable;
 public class Categoria implements Parcelable {
     private int id;
     private String nome;
+    private boolean ativa;
 
     public Categoria() {
     }
@@ -30,6 +31,13 @@ public class Categoria implements Parcelable {
         this.nome = nome;
     }
 
+    public boolean isAtiva() {
+        return ativa;
+    }
+
+    public void setAtiva(boolean ativa) {
+        this.ativa = ativa;
+    }
 
     @Override
     public int describeContents() {
@@ -40,6 +48,7 @@ public class Categoria implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
         parcel.writeString(nome);
+        parcel.writeByte((byte) (ativa ? 1 : 0));
     }
 
     public static final Parcelable.Creator<Categoria> CREATOR = new Parcelable.Creator<Categoria>() {
@@ -55,5 +64,6 @@ public class Categoria implements Parcelable {
     private Categoria(Parcel in) {
         id = in.readInt();
         nome = in.readString();
+        ativa = in.readByte() != 0;
     }
 }

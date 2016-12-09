@@ -15,7 +15,7 @@ public class DbHandler extends SQLiteOpenHelper {
      * Class responsavel por criar a base de dados
      */
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private ArrayList<pt.ipp.estg.cmu.db.migrations.Migration> migrations;
 
     public DbHandler(Context context, String db) {

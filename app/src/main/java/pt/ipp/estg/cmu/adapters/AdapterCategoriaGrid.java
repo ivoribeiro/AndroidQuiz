@@ -22,18 +22,17 @@ import pt.ipp.estg.cmu.util.Util;
  * Adapter contendo um cardview com uma textview e uma imageview, responsavel por listar as categorias recebidas
  * Click listener para abrir {@LevelActivity}
  */
-public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaGrid.ViewHolder> {
+public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaGrid.ViewHolder> implements View.OnClickListener {
 
     private List<Categoria> mDataSet = new ArrayList<>();
     private Context mContext;
     private boolean isAdmin;
+    private int mPosition = 0;
 
     public AdapterCategoriaGrid(Context context, List<Categoria> data, boolean isAdmin) {
-
         this.mContext = context;
         this.mDataSet = data;
         this.isAdmin = isAdmin;
-
     }
 
     @Override
@@ -44,22 +43,43 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
     }
 
     @Override
-    public void onBindViewHolder(AdapterCategoriaGrid.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final AdapterCategoriaGrid.ViewHolder holder, final int position) {
+        mPosition = position;
         holder.mTitle.setText(mDataSet.get(position).getNome());
-        holder.mCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mContext.startActivity(new Intent(mContext, LevelActivity.class)
-                        .putExtra(Util.ARG_CATEGORIE, mDataSet.get(position))
-                        .putExtra(Util.ARG_ADMIN, isAdmin)
-                );
+
+        if (isAdmin) {//MODO ADMIN
+            if (!mDataSet.get(position).isAtiva()) {
+                holder.mCardView.setAlpha(0.5f);
             }
-        });
+            holder.mCardView.setOnClickListener(this);
+            holder.mCardView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    mDataSet.get(position).setAtiva(true);
+                    holder.mCardView.setAlpha(1f);
+                    return true;
+                }
+            });
+
+        } else {//MODO JOGO
+            if (!mDataSet.get(position).isAtiva()) {
+                holder.mCardView.setVisibility(View.GONE);
+            } else {
+                holder.mCardView.setOnClickListener(this);
+            }
+        }
     }
 
     @Override
     public int getItemCount() {
         return mDataSet == null ? 0 : mDataSet.size();
+    }
+
+    @Override
+    public void onClick(View view) {
+        mContext.startActivity(new Intent(mContext, LevelActivity.class)
+                .putExtra(Util.ARG_CATEGORIE, mDataSet.get(mPosition))
+                .putExtra(Util.ARG_ADMIN, isAdmin));
     }
 
 
