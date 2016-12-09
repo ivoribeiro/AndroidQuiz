@@ -69,6 +69,6 @@ public class CategoriaRepo extends Repo implements RepositoryInterface<Categoria
     public void deleteById(int id) {
         String query = this.deleteByFieldQueryString("id", "" + id);
         SQLiteDatabase db = super.getWritableDatabase();
-        db.rawQuery(query, null);
+        db.execSQL(query);
     }
 }
