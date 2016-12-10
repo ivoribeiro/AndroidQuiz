@@ -26,7 +26,9 @@ public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
         this.addField("PONTUACAO_CERTA", "pontuacaoBase");
         this.addField("PONTUACAO_ERRADA", "pontuacaoBaseErrada");
         this.addField("PONTUACAO_DICA", "pontuacaoHint");
-        this.addField("N_RESPOSTAS_CERTAS", "nRespostasCertas");
+        //this.addField("N_RESPOSTAS_CERTAS", "nRespostasCertas");
+        this.addField("N_AJUDAS", "nAjudas");
+        this.addField("PONTUACAO", "pontuacao");
 
     }
 
@@ -52,7 +54,10 @@ public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
                 nivel.setPontuacaoBase(cursor.getInt(5));
                 nivel.setPontuacaoBaseErrada(cursor.getInt(6));
                 nivel.setPontuacaoHint(cursor.getInt(7));
-                nivel.setnPerguntasResp(cursor.getInt(8));
+                // nivel.setnPerguntasResp(cursor.getInt(8));
+                nivel.setnAjudas(cursor.getInt(8));
+                nivel.setPontuacao(cursor.getInt(9));
+
                 niveis.add(nivel);
             } while (cursor.moveToNext());
         }
@@ -74,7 +79,7 @@ public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
         values.put(this.getField("NUMERO"), nivel.getNumero());
         values.put(this.getField("CATEGORIA"), nivel.getCategoria());
         values.put(this.getField("BLOQUEADO"), nivel.isBloqueado() ? 1 : 0);
-        values.put(this.getField("N_PERGUNTAS"), nivel.getnPerguntas());
+        //values.put(this.getField("N_PERGUNTAS"), nivel.getnPerguntas());
         values.put(this.getField("PONTUACAO_CERTA"), nivel.getPontuacaoBase());
         values.put(this.getField("PONTUACAO_ERRADA"), nivel.getPontuacaoBaseErrada());
         values.put(this.getField("PONTUACAO_DICA"), nivel.getPontuacaoHint());

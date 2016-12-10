@@ -47,8 +47,8 @@ public class GameActivity extends AppCompatActivity implements ClickQuestionList
         mLevelInfoText.setText(mLevelInfo.getNumero());
 
         AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager());
-        adapter.addFragment(GameFragment.newInstance(0, "NEW YORK", "NEWYORK"));
-        adapter.addFragment(GameFragment.newInstance(1, "EVORA", "EVORA"));
+        adapter.addFragment(GameFragment.newInstance(0, "NEW YORK", "NEWYORK",mLevelInfo));
+        adapter.addFragment(GameFragment.newInstance(1, "EVORA", "EVORA",mLevelInfo));
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mViewPager.setAdapter(adapter);

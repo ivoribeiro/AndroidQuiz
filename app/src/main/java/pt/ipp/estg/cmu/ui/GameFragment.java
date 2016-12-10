@@ -13,12 +13,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.interfaces.ClickQuestionListener;
+import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.util.UtilUI;
 
 /**
@@ -32,6 +34,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     private ClickQuestionListener mListener;
     private int index;
+    private Nivel nivel;
 
     //layout
     private static int NUMBER_GAME_BUTTONS = 15;
@@ -40,6 +43,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private ImageView mImageView;
     private ImageButton mResetButton;
     private ImageButton mHintButton;
+    private TextView mHintInfo;
+    private TextView mScoreInfo;
+
 
     //strings
     private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -54,11 +60,12 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public GameFragment() {
     }
 
-    public static GameFragment newInstance(int index, String correctAnswer, String concat) {
+    public static GameFragment newInstance(int index, String correctAnswer, String concat, Nivel nivel) {
         Bundle args = new Bundle();
         args.putString("CORRECT", correctAnswer);
         args.putString("CONCAT", concat);
         args.putInt("INDEX", index);
+        args.putParcelable("NIVEL", nivel);
         GameFragment fragment = new GameFragment();
         fragment.setArguments(args);
         return fragment;
@@ -70,6 +77,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         mCorrectAnswer = getArguments().getString("CORRECT");
         mCorrectAnswerConcat = getArguments().getString("CONCAT");
         index = getArguments().getInt("INDEX");
+        nivel = getArguments().getParcelable("NIVEL");
 
         mUserCorrectAnswer = "";
         mAtualCorrectIndex = 0;
@@ -91,6 +99,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         mTableLayout = (TableLayout) view.findViewById(R.id.game_table_layout);
         mResetButton = (ImageButton) view.findViewById(R.id.reset);
         mHintButton = (ImageButton) view.findViewById(R.id.hint);
+        mHintInfo = (TextView) view.findViewById(R.id.hint_info);
+        mHintInfo.setText(nivel.getnAjudas()+" | Ajudas");
+        mScoreInfo = (TextView) view.findViewById(R.id.score_info);
+        mScoreInfo.setText(nivel.getPontuacao()+" | Pontuação");
 
         mHintButton.setOnClickListener(this);
         mResetButton.setOnClickListener(this);
@@ -110,7 +122,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -121,6 +132,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.hint:
+                this.decrementarAjuda();
                 break;
             case R.id.reset:
                 createLayout();
@@ -217,4 +229,29 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private static String deleteCharAt(String strValue, int index) {
         return strValue.substring(0, index) + strValue.substring(index + 1);
     }
+
+    /**
+     * Decrementa do nivel uma ajuda gasta
+     * Actualiza o layout
+     */
+    private void decrementarAjuda() {
+        if (this.nivel.getnAjudas() > 0) {
+            this.nivel.decrementnAjudas();
+            this.mHintInfo.setText(""+this.nivel.getnAjudas()+" | Ajudas");
+        }
+        else{
+            //TODO mostrar mensagem
+        }
+    }
+
+    /**
+     * Incrementa ao nivel a pontuacão de uma resposta certa
+     * Actualiza o layout
+     */
+    private void incrementarPontosNivel() {
+        this.nivel.addPontuacao(this.nivel.getPontuacaoBase());
+        this.mScoreInfo.setText(this.nivel.getPontuacao());
+
+    }
+
 }

@@ -17,7 +17,11 @@ public class NivelMigration extends Migration {
         this.addField(new Field(false, false, "pontuacaoBase", "NUMERIC"));
         this.addField(new Field(false, false, "pontuacaoBaseErrada", "NUMERIC"));
         this.addField(new Field(false, false, "pontuacaoHint", "NUMERIC"));
-        this.addField(new Field(false, false, "nRespostasCertas", "NUMERIC"));
+        //this.addField(new Field(false, false, "nRespostasCertas", "NUMERIC"));
+
+        this.addField(new Field(false, false, "nAjudas", "NUMERIC"));
+        this.addField(new Field(false, false, "pontuacao", "NUMERIC"));
+
         this.setCreate(this.generateCreate());
         this.setUpgrade(this.generateUpgrade());
 
@@ -29,8 +33,10 @@ public class NivelMigration extends Migration {
                 "'pontuacaoBase'," +
                 "'pontuacaoBaseErrada'," +
                 "'pontuacaoHint'," +
-                "'nRespostasCertas'" +
-                ") VALUES('Nivel 1','Tech',0,10,10,2,2,0);");
+                //"'nRespostasCertas'" +
+                "'nAjudas'," +
+                "'pontuacao'" +
+                ") VALUES('Nivel 1','Tech',0,1,100,15,5,10,0);");
         this.setSeeders(seeder);
 
     }

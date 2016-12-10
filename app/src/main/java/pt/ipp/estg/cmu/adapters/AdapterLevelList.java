@@ -61,8 +61,8 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
             holder.mImageState.setBackground(mContext.getDrawable(R.drawable.ic_lock));
         }
 
-        holder.mProgressBar.setMax(mDataSet.get(position).getnPerguntas());
-        holder.mProgressBar.setProgress(mDataSet.get(position).getnPerguntasResp());
+        //holder.mProgressBar.setMax(mDataSet.get(position).getnPerguntas());
+        //holder.mProgressBar.setProgress(mDataSet.get(position).getnPerguntasResp());
 
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
