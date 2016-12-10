@@ -18,8 +18,8 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
 
     private void setFields() {
         this.addField("ID", "id");
-        this.addField("IMAGEM", "imagem");
         this.addField("NIVEL", "nivel");
+        this.addField("IMAGEM", "imagem");
         this.addField("RESPOSTA", "respostaCerta");
         this.addField("RESPOSTAS_ERRADAS", "nRespostasErradas");
         this.addField("ACERTOU", "acertou");
@@ -40,7 +40,12 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
             do {
                 Pergunta pergunta = new Pergunta();
                 pergunta.setId(cursor.getInt(0));
-
+                pergunta.setNivel(cursor.getInt(1));
+                pergunta.setImagem(cursor.getString(2));
+                pergunta.setRespostaCerta(cursor.getString(3));
+                pergunta.setnRespostasErradas(cursor.getInt(4));
+                pergunta.setAcertou(cursor.getInt(5) == 1 ? true : false);
+                perguntas.add(pergunta);
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -58,8 +63,8 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
     public Pergunta insertInto(Pergunta pergunta) {
         SQLiteDatabase db = super.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(this.getField("NIVEL"), pergunta.getNivel());
         values.put(this.getField("IMAGEM"), pergunta.getImagem());
-        values.put(this.getField("IMAGEM"), pergunta.getNivel());
         values.put(this.getField("RESPOSTA"), pergunta.getRespostaCerta());
         values.put(this.getField("RESPOSTAS_ERRADAS"), 0);
         values.put(this.getField("ACERTOU"), 0);

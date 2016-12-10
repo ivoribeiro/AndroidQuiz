@@ -3,14 +3,14 @@ package pt.ipp.estg.cmu.models;
 public class Pergunta {
 
     private int id;
-    private String nivel;
+    private int nivel;
     private String imagem;
     private String respostaCerta;
     private int nRespostasErradas;
     private boolean acertou;
 
 
-    public Pergunta(String nivel, String imagem, String respostaCerta) {
+    public Pergunta(int nivel, String imagem, String respostaCerta) {
         this.nivel = nivel;
         this.imagem = imagem;
         this.respostaCerta = respostaCerta;
@@ -27,7 +27,7 @@ public class Pergunta {
         this.id = id;
     }
 
-    public void setNivel(String nivel) {
+    public void setNivel(int nivel) {
         this.nivel = nivel;
     }
 
@@ -48,7 +48,7 @@ public class Pergunta {
         return acertou;
     }
 
-    public String getNivel() {
+    public int getNivel() {
         return nivel;
     }
 
