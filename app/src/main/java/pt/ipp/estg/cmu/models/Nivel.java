@@ -26,7 +26,7 @@ public class Nivel implements Parcelable {
     private int nAjudas;
     private int pontuacao;
 
-    public Nivel(int id, String numero, int nPerguntas, int pontuacaoBase, int pontuacaoBaseErrada, int pontuacaoHint, boolean bloqueado, String categoria,int nAjudas,int pontuacao) {
+    public Nivel(int id, String numero, int nPerguntas, int pontuacaoBase, int pontuacaoBaseErrada, int pontuacaoHint, boolean bloqueado, String categoria, int nAjudas, int pontuacao) {
         this.id = id;
         this.numero = numero;
         this.categoria = categoria;
@@ -163,6 +163,7 @@ public class Nivel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
         parcel.writeString(numero);
         parcel.writeInt(pontuacaoBase);
         parcel.writeInt(pontuacaoBaseErrada);
@@ -190,6 +191,7 @@ public class Nivel implements Parcelable {
     };
 
     private Nivel(Parcel in) {
+        id = in.readInt();
         numero = in.readString();
         pontuacaoBase = in.readInt();
         pontuacaoBaseErrada = in.readInt();

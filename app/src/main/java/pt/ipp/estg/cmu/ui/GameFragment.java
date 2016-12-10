@@ -21,6 +21,7 @@ import java.util.Random;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.interfaces.ClickQuestionListener;
 import pt.ipp.estg.cmu.models.Nivel;
+import pt.ipp.estg.cmu.models.Pergunta;
 import pt.ipp.estg.cmu.util.UtilUI;
 
 /**
@@ -60,12 +61,12 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public GameFragment() {
     }
 
-    public static GameFragment newInstance(int index, String correctAnswer, String concat, Nivel nivel) {
+    public static GameFragment newInstance(int index, Nivel nivel, Pergunta pergunta) {
         Bundle args = new Bundle();
-        args.putString("CORRECT", correctAnswer);
-        args.putString("CONCAT", concat);
         args.putInt("INDEX", index);
         args.putParcelable("NIVEL", nivel);
+        args.putString("CORRECT", pergunta.getRespostaCerta());
+        args.putString("CONCAT", pergunta.getRespostaCerta().replaceAll("\\s", ""));
         GameFragment fragment = new GameFragment();
         fragment.setArguments(args);
         return fragment;
@@ -100,9 +101,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         mResetButton = (ImageButton) view.findViewById(R.id.reset);
         mHintButton = (ImageButton) view.findViewById(R.id.hint);
         mHintInfo = (TextView) view.findViewById(R.id.hint_info);
-        mHintInfo.setText(nivel.getnAjudas()+" | Ajudas");
+        mHintInfo.setText(nivel.getnAjudas() + " | Ajudas");
         mScoreInfo = (TextView) view.findViewById(R.id.score_info);
-        mScoreInfo.setText(nivel.getPontuacao()+" | Pontuação");
+        mScoreInfo.setText(nivel.getPontuacao() + " | Pontuação");
 
         mHintButton.setOnClickListener(this);
         mResetButton.setOnClickListener(this);
@@ -237,9 +238,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private void decrementarAjuda() {
         if (this.nivel.getnAjudas() > 0) {
             this.nivel.decrementnAjudas();
-            this.mHintInfo.setText(""+this.nivel.getnAjudas()+" | Ajudas");
-        }
-        else{
+            this.mHintInfo.setText("" + this.nivel.getnAjudas() + " | Ajudas");
+        } else {
             //TODO mostrar mensagem
         }
     }

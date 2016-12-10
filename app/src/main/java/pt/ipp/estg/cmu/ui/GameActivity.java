@@ -9,11 +9,15 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterViewPager;
+import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.interfaces.ClickQuestionListener;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
+import pt.ipp.estg.cmu.models.Pergunta;
 import pt.ipp.estg.cmu.util.Util;
 
 public class GameActivity extends AppCompatActivity implements ClickQuestionListener, ViewPager.OnPageChangeListener {
@@ -29,6 +33,8 @@ public class GameActivity extends AppCompatActivity implements ClickQuestionList
     //data
     private Nivel mLevelInfo;
     private Categoria mCategoriaInfo;
+
+    private PerguntaRepo repo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +53,13 @@ public class GameActivity extends AppCompatActivity implements ClickQuestionList
         mLevelInfoText.setText(mLevelInfo.getNumero());
 
         AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager());
-        adapter.addFragment(GameFragment.newInstance(0, "NEW YORK", "NEWYORK",mLevelInfo));
-        adapter.addFragment(GameFragment.newInstance(1, "EVORA", "EVORA",mLevelInfo));
+        this.repo = new PerguntaRepo(this.getApplicationContext());
+        ArrayList<Pergunta> perguntas = this.repo.getAllByNivel(mLevelInfo.getId());
+        int i = 0;
+        for (Pergunta pergunta : perguntas) {
+            adapter.addFragment(GameFragment.newInstance(i, mLevelInfo, pergunta));
+            i++;
+        }
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mViewPager.setAdapter(adapter);
