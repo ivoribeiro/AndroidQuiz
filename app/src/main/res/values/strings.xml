@@ -16,6 +16,7 @@
     <string name="title_admin">Admin Area</string>
     <string name="title_topscore">Top Score</string>
     <string name="title_activity_level">Nivel</string>
+    <string name="title_activity_settings">Definições</string>
 
     <!-- Activity Main-->
     <string name="hello_text">Olá</string>

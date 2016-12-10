@@ -65,6 +65,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     public void onBackPressed() {
         super.onBackPressed();
         if (isAdmin) {
+            mFab.setVisibility(View.VISIBLE);
             mFab.setImageResource(R.drawable.ic_add);
         }
     }
