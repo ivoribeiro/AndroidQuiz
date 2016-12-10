@@ -53,7 +53,7 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
         boolean state = mDataSet.get(position).isBloqueado();
 
         holder.mTitle.setText(mDataSet.get(position).getNumero());
-        holder.mScore.setText(mDataSet.get(position).getPontuacaoBase() + " " + score);//TODO atualizar o campo certo para os pontos obtidos neste nivel
+        holder.mScore.setText(mDataSet.get(position).getPontuacao() + " " + score);
 
         if (!state) {
             holder.mImageState.setBackground(mContext.getDrawable(R.drawable.ic_check));
@@ -61,8 +61,8 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
             holder.mImageState.setBackground(mContext.getDrawable(R.drawable.ic_lock));
         }
 
-        //holder.mProgressBar.setMax(mDataSet.get(position).getnPerguntas());
-        //holder.mProgressBar.setProgress(mDataSet.get(position).getnPerguntasResp());
+        holder.mProgressBar.setMax(mDataSet.get(position).getnPerguntas());
+        holder.mProgressBar.setProgress(mDataSet.get(position).getnRespostasCertas());
 
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override

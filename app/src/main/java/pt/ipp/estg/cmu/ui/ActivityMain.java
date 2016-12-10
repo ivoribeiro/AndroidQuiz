@@ -39,6 +39,7 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
         mUserNameTxt.setText(getResources().getString(R.string.hello_text) + " " + mUserName);
         mWelcomeTxt.setText(getResources().getString(R.string.welcome_text));
+        //TODO fazer query para somar todas as pontuacoes de todos os niveis ativos ou ir actualizando pontuacao do jogo
         mScoreTxt.setText(getResources().getString(R.string.txt_score) + " : " + mPontos);
 
         mBtStart.setOnClickListener(this);

@@ -35,6 +35,7 @@ public class GameActivity extends AppCompatActivity implements ClickQuestionList
     private Categoria mCategoriaInfo;
 
     private PerguntaRepo repo;
+    private int nPerguntas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class GameActivity extends AppCompatActivity implements ClickQuestionList
         AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager());
         this.repo = new PerguntaRepo(this.getApplicationContext());
         ArrayList<Pergunta> perguntas = this.repo.getAllByNivel(mLevelInfo.getId());
+        this.nPerguntas=perguntas.size();
         int i = 0;
         for (Pergunta pergunta : perguntas) {
             adapter.addFragment(GameFragment.newInstance(i, mLevelInfo, pergunta));
@@ -89,7 +91,7 @@ public class GameActivity extends AppCompatActivity implements ClickQuestionList
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        mQuestionInfoText.setText(position + 1 + "/" + NUM_SWIPE_PAGES);
+        mQuestionInfoText.setText(position + 1 + "/" + this.nPerguntas);
     }
 
     @Override
