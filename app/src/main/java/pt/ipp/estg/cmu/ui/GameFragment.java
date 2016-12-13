@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.db.repositories.NivelRepo;
+import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.interfaces.ClickQuestionListener;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
@@ -37,6 +39,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private int index;
     private Nivel nivel;
     private Pergunta pergunta;
+    private NivelRepo mNivelRepo;
+    private PerguntaRepo mPerguntaRepo;
 
     //layout
     private static int NUMBER_GAME_BUTTONS = 15;
@@ -77,6 +81,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPerguntaRepo=new PerguntaRepo(this.getContext());
+        mNivelRepo=new NivelRepo(this.getContext());
         mCorrectAnswer = getArguments().getString("CORRECT");
         mCorrectAnswerConcat = getArguments().getString("CONCAT");
         index = getArguments().getInt("INDEX");
@@ -219,14 +225,20 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 //adiciona resposta certa ao nivel
                 this.nivel.addnRespostasCertas();
                 //hint e reset buttons gone
-                //TODO Fernando nao funciona assim porque ?
                 mHintButton.setVisibility(View.GONE);
                 mResetButton.setVisibility(View.GONE);
+                //save on bd
+                this.mNivelRepo.updateNivel(this.nivel);
+                this.mPerguntaRepo.updatePergunta(this.pergunta);
             } else {
                 mListener.setAnswered(false);
                 this.decrementPontosNivel();
                 this.pergunta.addRespostasErradas();
                 createLayout();
+                this.mNivelRepo.updateNivel(this.nivel);
+                this.mPerguntaRepo.updatePergunta(this.pergunta);
+
+
 
             }
         }
@@ -271,6 +283,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         if (this.nivel.getnAjudas() > 0) {
             this.nivel.decrementnAjudas();
             this.mHintInfo.setText("" + this.nivel.getnAjudas() + " | Ajudas");
+            this.mNivelRepo.updateNivel(this.nivel);
         } else {
             //TODO mostrar mensagem
         }
@@ -300,6 +313,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             this.updatePontuacao();
         }
     }
+
+
 
 
 }

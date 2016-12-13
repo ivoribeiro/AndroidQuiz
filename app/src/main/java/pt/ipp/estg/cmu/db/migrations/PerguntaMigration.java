@@ -24,7 +24,7 @@ public class PerguntaMigration extends Migration {
                 "'respostaCerta'," +
                 "'nRespostasErradas'," +
                 "'acertou'" +
-                ") VALUES(1,'caminho/imagem','New York',0,0);");
+                ") VALUES(1,'caminho/imagem','NEW YORK',0,0);");
         this.setSeeders(seeder);
     }
 }
