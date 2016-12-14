@@ -15,6 +15,7 @@ public class PerguntaMigration extends Migration {
         this.addField(new Field(false, false, "respostaCerta", "VARCHAR(15)"));
         this.addField(new Field(false, false, "nRespostasErradas", "NUMERIC"));
         this.addField(new Field(false, false, "acertou", "NUMERIC"));
+        this.addField(new Field(false, false, "stringAleatoria", "VARCHAR(15)"));
         this.setCreate(this.generateCreate());
         this.setUpgrade(this.generateUpgrade());
 
@@ -23,8 +24,9 @@ public class PerguntaMigration extends Migration {
                 "'imagem'," +
                 "'respostaCerta'," +
                 "'nRespostasErradas'," +
-                "'acertou'" +
-                ") VALUES(1,'caminho/imagem','NEW YORK',0,0);");
+                "'acertou'," +
+                "'stringAleatoria'" +
+                ") VALUES(1,'caminho/imagem','NEW YORK',0,0,'NAEBWCYDOERFKG');");
         this.setSeeders(seeder);
     }
 }

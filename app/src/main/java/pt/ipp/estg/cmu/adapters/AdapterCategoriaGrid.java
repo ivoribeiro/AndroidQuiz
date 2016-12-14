@@ -85,8 +85,7 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
                         holder.mCardView.setAlpha(1f);
                         Snackbar.make(mRecycler, mContext.getString(R.string.snack_bar_categorie_true), Snackbar.LENGTH_LONG).show();
                     }
-                    //TODO @Fernando como obtenho o mCategoriaRepoAqui?
-                    // this.mCategoriaRepo.updateCategoria(mDataSet.get(position));
+                    mCategoriaRepo.updateCategoria(mDataSet.get(position));
                     return true;
                 }
             });
