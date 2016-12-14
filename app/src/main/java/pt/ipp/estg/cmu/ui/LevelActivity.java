@@ -69,4 +69,5 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             mFab.setImageResource(R.drawable.ic_add);
         }
     }
+
 }

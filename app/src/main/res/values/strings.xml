@@ -9,6 +9,7 @@
     <string name="title_activity_main">CMU Quiz</string>
     <string name="title_statistics_main">Estatisticas</string>
     <string name="title_activity_admin">Admin Area</string>
+    <string name="title_activity_admin_pergunta">Perguntas</string>
 
     <!-- Nav Drawer Titles-->
     <string name="title_game">CMU Quiz</string>
@@ -25,6 +26,7 @@
     <string name="title_activity_question">CMU Quiz</string>
     <string name="txt_level">Nível</string>
     <string name="txt_score">Pontos</string>
+
 
     <!--ActivityQuestion -->
     <string name="ajudas_restantes">Ajudas Restantes</string>
@@ -53,5 +55,13 @@
     <string name="admin_novo_nivel_errada">Retirada por cada pergunta errada</string>
     <string name="admin_novo_nivel_ajuda">Retirada por cada ajuda usada</string>
     <string name="admin_novo_nivel_ajuda_num">Numero máximo de ajudas</string>
+
+
+    <string name="admin_nova_pergunta_resposta">Resposta</string>
+    <string name="admin_nova_pergunta_resposta_correta">Resposta correta</string>
+    <string name="admin_nova_pergunta_imagem">Imagem</string>
+    <string name="admin_nova_pergunta_imagem_opcao">Escolha uma opção</string>
+    <string name="admin_nova_pergunta_imagem_opcao_url">Cole aqui o url da imagem</string>
+
 
 </resources>

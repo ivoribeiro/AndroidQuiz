@@ -2,7 +2,6 @@ package pt.ipp.estg.cmu.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,7 +17,7 @@ import java.util.List;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
-import pt.ipp.estg.cmu.ui.AdminListaPerguntasFragment;
+import pt.ipp.estg.cmu.ui.AdminPerguntaActivity;
 import pt.ipp.estg.cmu.ui.GameActivity;
 import pt.ipp.estg.cmu.util.Util;
 
@@ -68,12 +67,9 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
             @Override
             public void onClick(View view) {
                 if (isAdmin) {//MODO ADMIN
-                    ((AppCompatActivity) mContext)
-                            .getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.frame_layout, AdminListaPerguntasFragment.newInstance(mDataSet.get(position)))
-                            .addToBackStack(null)
-                            .commit();
+                    mContext.startActivity(new Intent(mContext, AdminPerguntaActivity.class)
+                            .putExtra(Util.ARG_LEVEL, mDataSet.get(position)));
+
 
                 } else {//MODO GAME
                     mContext.startActivity(new Intent(mContext, GameActivity.class)

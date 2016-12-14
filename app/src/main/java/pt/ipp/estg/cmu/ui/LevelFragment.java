@@ -1,5 +1,6 @@
 package pt.ipp.estg.cmu.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -31,6 +32,7 @@ public class LevelFragment extends Fragment {
     private int NUM_COLUMNS = 1;
     private RecyclerView mRecyclerView;
     private boolean isAdmin;
+
 
     //data
     private AdapterLevelList mAdapter;
@@ -72,7 +74,7 @@ public class LevelFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         this.mRepository = new NivelRepo(getContext());
         mNiveis = getAllNiveis();
-        mAdapter = new AdapterLevelList(getActivity(), mNiveis, mCategoria,isAdmin);
+        mAdapter = new AdapterLevelList(getActivity(), mNiveis, mCategoria, isAdmin);
         mRecyclerView.setAdapter(mAdapter);
 
         if (isAdmin) {

@@ -35,7 +35,6 @@ public class Pergunta {
         this.imagem = imagem;
     }
 
-
     public void setRespostaCerta(String respostaCerta) {
         this.respostaCerta = respostaCerta;
     }

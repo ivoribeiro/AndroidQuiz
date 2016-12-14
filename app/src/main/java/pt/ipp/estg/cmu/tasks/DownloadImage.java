@@ -100,10 +100,7 @@ public class DownloadImage extends AsyncTask<String, String, String> {
         // TODO Auto-generated method stub
 
         if (bmImg == null) {
-
-            Toast.makeText(context, "Image still loading...",
-                    Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(context, "Image still loading...", Toast.LENGTH_SHORT).show();
             pDialog.dismiss();
 
         } else {
@@ -114,8 +111,7 @@ public class DownloadImage extends AsyncTask<String, String, String> {
                 }
             }
 
-            Toast.makeText(context, "Wallpaper Successfully Saved",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Wallpaper Successfully Saved", Toast.LENGTH_SHORT).show();
 
         }
     }

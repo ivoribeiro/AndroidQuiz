@@ -1,13 +1,123 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="pt.ipp.estg.cmu.ui.AdminNovaPerguntaFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="asdasd" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <TextView
+            style="@style/SecondaryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="@dimen/novo_nivel_layout_margin"
+            android:text="@string/admin_nova_pergunta_imagem" />
+
+        <TextView
+            style="@style/SecondarySmallTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/novo_nivel_layout_margin"
+            android:text="@string/admin_nova_pergunta_imagem_opcao" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/novo_nivel_layout_margin">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/url_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/fab_download"
+                android:padding="@dimen/novo_nivel_layout_margin">
+
+                <EditText
+                    android:id="@+id/admin_nova_pergunta_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/novo_nivel_layout_margin"
+                    android:hint="@string/admin_nova_pergunta_imagem_opcao_url"
+                    android:inputType="textUri" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/fab_margin"
+                app:srcCompat="@drawable/ic_download" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_galeria"
+                style="@style/PrimaryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/novo_nivel_layout_button_margin"
+                android:text="Galeria" />
+
+            <Button
+                android:id="@+id/bt_camera"
+                style="@style/PrimaryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/novo_nivel_layout_button_margin"
+                android:text="Camera" />
+
+        </LinearLayout>
+
+
+        <TextView
+            style="@style/SecondaryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="@dimen/novo_nivel_layout_margin"
+            android:text="@string/admin_nova_pergunta_resposta" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/novo_nivel_layout_margin"
+            android:padding="@dimen/novo_nivel_layout_margin">
+
+            <EditText
+                android:id="@+id/admin_nova_pergunta_resposta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/novo_nivel_layout_margin"
+                android:hint="@string/admin_nova_pergunta_resposta_correta"
+                android:inputType="text" />
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/frame_layout"
+        app:layout_anchorGravity="bottom|right|end"
+        app:srcCompat="@drawable/ic_check" />
 </FrameLayout>

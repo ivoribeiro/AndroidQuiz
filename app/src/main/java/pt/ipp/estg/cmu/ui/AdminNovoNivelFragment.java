@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.interfaces.AdminFragmentsListener;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
 
@@ -21,7 +20,6 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
     private static final String ARG_CATEGORIE = "CATEGORIA";
 
     private Categoria mCategoria;
-    private AdminFragmentsListener mListener;
 
     private EditText mNome;
     private EditText mPontuacaoPergunta;
