@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 
 /**
@@ -25,34 +27,54 @@ public class FileOperations {
 
 
         File file_source = new File(sourcePath);
-        copyFile(file_source, file_dest);
+        //copyFile(file_source, file_dest);
 
     }
 
 
-    private static void copyFile(File sourceFile, File destFile) throws IOException {
-        if (!sourceFile.exists()) {
-            return;
-        }
-        FileChannel source = null;
-        FileChannel destination = null;
-        source = new FileInputStream(sourceFile).getChannel();
-        destination = new FileOutputStream(destFile).getChannel();
-        if (destination != null && source != null) {
-            destination.transferFrom(source, 0, source.size());
-        }
-        if (source != null) {
-            source.close();
-        }
-        if (destination != null) {
-            destination.close();
-        }
+    /**
+     * public static void copyFile(File sourceFile, File destFile) throws IOException {
+     * if (!sourceFile.exists()) {
+     * return;
+     * }
+     * FileChannel source = null;
+     * FileChannel destination = null;
+     * source = new FileInputStream(sourceFile).getChannel();
+     * destination = new FileOutputStream(destFile).getChannel();
+     * if (destination != null && source != null) {
+     * destination.transferFrom(source, 0, source.size());
+     * }
+     * if (source != null) {
+     * source.close();
+     * }
+     * if (destination != null) {
+     * destination.close();
+     * }
+     * }
+     **/
 
+    public static void copy(File src, String dstString) throws IOException {
 
+        File dest = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + "/CMU/" + dstString);
+        dest.createNewFile();
+
+        File compressedFile = compressImageFile(dest);
+
+        InputStream in = new FileInputStream(src);
+        OutputStream out = new FileOutputStream(compressedFile);
+
+        // Transfer bytes from in to out
+        byte[] buf = new byte[1024];
+        int len;
+        while ((len = in.read(buf)) > 0) {
+            out.write(buf, 0, len);
+        }
+        in.close();
+        out.close();
     }
 
 
-    private static File compressImageFile(File file) {
+    public static File compressImageFile(File file) {
         try {
             // BitmapFactory options to downsize the image
             BitmapFactory.Options o = new BitmapFactory.Options();

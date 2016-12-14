@@ -8,6 +8,7 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.File;
@@ -23,15 +24,13 @@ public class DownloadImage extends AsyncTask<String, String, String> {
     private URL ImageUrl;
     private Bitmap bmImg = null;
 
-    private String mCategoriaName;
-    private String mNivelName;
-    private String mIndexName;
+    private EditText mUrlEditText;
 
-    public DownloadImage(Context context, String categoria, String nivel, String index) {
+    private String mFileName;
+    public DownloadImage(Context context, String name,EditText urlEditText) {
         this.context = context;
-        this.mCategoriaName = categoria;
-        this.mNivelName = nivel;
-        mIndexName = index;
+        this.mFileName = name;
+        this.mUrlEditText = urlEditText;
     }
 
     @Override
@@ -69,13 +68,13 @@ public class DownloadImage extends AsyncTask<String, String, String> {
         try {
             File dir = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + "/CMU/");
             dir.mkdirs();
-            String fileName = mCategoriaName + "_" + mNivelName + "_" + mIndexName + ".jpg";
-            File file = new File(dir, fileName);
+            File file = new File(dir, mFileName);
             FileOutputStream fos = new FileOutputStream(file);
             bmImg.compress(CompressFormat.JPEG, 75, fos);
             fos.flush();
             fos.close();
 
+            return file.getAbsolutePath();
 /*            File imageFile = file;
             MediaScannerConnection.scanFile(context,
                     new String[]{imageFile.getPath()},
@@ -111,6 +110,7 @@ public class DownloadImage extends AsyncTask<String, String, String> {
                 }
             }
 
+            mUrlEditText.setText(args);
             Toast.makeText(context, "Wallpaper Successfully Saved", Toast.LENGTH_SHORT).show();
 
         }
