@@ -228,7 +228,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private void decrementAjuda() {
         if (this.mNivel.getnAjudas() > 0) {
             this.mNivel.decrementnAjudas();
-            this.mHintInfo.setText("" + this.mNivel.getnAjudas() + " | Ajudas");
+            this.mHintInfo.setText("" + this.mNivel.getnAjudas() + " " + getContext().getResources().getString(R.string.ajudas_restantes));
             this.mNivelRepository.updateNivel(this.mNivel);
         } else {
             //TODO mostrar mensagem

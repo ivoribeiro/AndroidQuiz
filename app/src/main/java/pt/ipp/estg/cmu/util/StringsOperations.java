@@ -15,14 +15,13 @@ public class StringsOperations {
 
     public StringsOperations(String stringToGenerate) {
         this.mRandomString = stringToGenerate;
-        if (mRandomString.length() < NUMBER_GAME_BUTTONS) {
-            saltSize = NUMBER_GAME_BUTTONS - mRandomString.length();
-            generateLeftString();
-        }
     }
 
     public String generateString() {
         if (mRandomString.length() < NUMBER_GAME_BUTTONS) {
+            saltSize = NUMBER_GAME_BUTTONS - mRandomString.length();
+            generateLeftString();
+
             int indexRnd = 0;
             Random rng = new Random();
             String text = "";

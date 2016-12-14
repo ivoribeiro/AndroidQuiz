@@ -3,7 +3,7 @@ package pt.ipp.estg.cmu.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +18,8 @@ import java.util.List;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.Pergunta;
+import pt.ipp.estg.cmu.ui.AdminNovaPerguntaFragment;
+import pt.ipp.estg.cmu.util.Util;
 
 /**
  * Created by Navega on 12/10/2016.
@@ -44,11 +46,26 @@ public class AdapterPerguntasList extends RecyclerView.Adapter<AdapterPerguntasL
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         holder.mAnswerText.setText(mDataSet.get(position).getRespostaCerta());
-        File imgFile = new File(mDataSet.get(position).getImagem());
-        if (imgFile.exists()) {
-            Bitmap bmImg = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            holder.mImage.setImageBitmap(bmImg);
+        String imagePath = mDataSet.get(position).getImagem();
+        if (null != imagePath) {
+            File imgFile = new File(imagePath);
+            if (imgFile.exists()) {
+                Bitmap bmImg = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                holder.mImage.setImageBitmap(bmImg);
+            }
         }
+
+        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((AppCompatActivity) mContext)
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frame_layout, AdminNovaPerguntaFragment.newInstance(null, mDataSet.get(position)))
+                        .addToBackStack(Util.STACK_ADMIN)
+                        .commit();
+            }
+        });
     }
 
     @Override
@@ -69,6 +86,4 @@ public class AdapterPerguntasList extends RecyclerView.Adapter<AdapterPerguntasL
             mAnswerText = (TextView) itemView.findViewById(R.id.answer_title);
         }
     }
-
-
 }

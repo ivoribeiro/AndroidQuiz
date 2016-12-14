@@ -1,7 +1,6 @@
 package pt.ipp.estg.cmu.ui;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -12,7 +11,6 @@ import pt.ipp.estg.cmu.util.Util;
 public class AdminPerguntaActivity extends AppCompatActivity {
 
     private Nivel mNivel;
-    private FloatingActionButton mFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +24,7 @@ public class AdminPerguntaActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.frame_layout, AdminListaPerguntasFragment.newInstance(mNivel))
+                .add(R.id.frame_layout, AdminListaPerguntasFragment.newInstance(mNivel))
                 .commit();
-
     }
 }

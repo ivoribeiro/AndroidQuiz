@@ -1,11 +1,11 @@
 package pt.ipp.estg.cmu.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterLevelList;
+import pt.ipp.estg.cmu.callbacks.RecyclerSwipeNivelTouchHelper;
 import pt.ipp.estg.cmu.db.repositories.NivelRepo;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
@@ -77,10 +78,10 @@ public class LevelFragment extends Fragment {
         mAdapter = new AdapterLevelList(getActivity(), mNiveis, mCategoria, isAdmin);
         mRecyclerView.setAdapter(mAdapter);
 
-        if (isAdmin) {
-            //RecyclerTouchHelper swipeTouch = new RecyclerTouchHelper(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, mNiveis, mCategoria);
-            //ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeTouch);
-            //itemTouchHelper.attachToRecyclerView(mRecyclerView);
+        if (isAdmin) {    //swipe to remove
+            RecyclerSwipeNivelTouchHelper swipeTouch = new RecyclerSwipeNivelTouchHelper(0, ItemTouchHelper.RIGHT, getContext(), mRecyclerView, mNiveis, mAdapter);
+            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeTouch);
+            itemTouchHelper.attachToRecyclerView(mRecyclerView);
         }
     }
 

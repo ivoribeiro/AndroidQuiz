@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,24 +17,23 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterPerguntasList;
+import pt.ipp.estg.cmu.callbacks.RecyclerSwipeNivelTouchHelper;
+import pt.ipp.estg.cmu.callbacks.RecyclerSwipePerguntaTouchHelper;
 import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
+import pt.ipp.estg.cmu.util.Util;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AdminListaPerguntasFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class AdminListaPerguntasFragment extends Fragment implements View.OnClickListener {
-
-    private static final String ARG_NIVEL = "NIVEL";
 
     private Nivel mNivel;
     private RecyclerView mRecycler;
     private PerguntaRepo mRepository;
     private AdapterPerguntasList mAdapter;
     private FloatingActionButton mFab;
+
+    private ArrayList<Pergunta> mPerguntas;
 
     public AdminListaPerguntasFragment() {
         // Required empty public constructor
@@ -42,7 +42,7 @@ public class AdminListaPerguntasFragment extends Fragment implements View.OnClic
     public static AdminListaPerguntasFragment newInstance(Nivel nivel) {
         AdminListaPerguntasFragment fragment = new AdminListaPerguntasFragment();
         Bundle args = new Bundle();
-        args.putParcelable(ARG_NIVEL, nivel);
+        args.putParcelable(Util.ARG_LEVEL, nivel);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,7 +51,7 @@ public class AdminListaPerguntasFragment extends Fragment implements View.OnClic
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mNivel = getArguments().getParcelable(ARG_NIVEL);
+            mNivel = getArguments().getParcelable(Util.ARG_LEVEL);
         }
         mRepository = new PerguntaRepo(getContext());
     }
@@ -70,9 +70,14 @@ public class AdminListaPerguntasFragment extends Fragment implements View.OnClic
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        mAdapter = new AdapterPerguntasList(getContext(), mRepository.getAllByNivel(mNivel.getId()));
+        mPerguntas = mRepository.getAllByNivel(mNivel.getId());
+        mAdapter = new AdapterPerguntasList(getContext(), mPerguntas);
         mRecycler.setAdapter(mAdapter);
+
+        //swipe to remove
+        RecyclerSwipePerguntaTouchHelper swipeTouch = new RecyclerSwipePerguntaTouchHelper(0, ItemTouchHelper.RIGHT, getContext(), mRecycler, mPerguntas, mAdapter);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeTouch);
+        itemTouchHelper.attachToRecyclerView(mRecycler);
     }
 
     @Override
@@ -81,8 +86,8 @@ public class AdminListaPerguntasFragment extends Fragment implements View.OnClic
             ((AppCompatActivity) getContext())
                     .getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frame_layout, AdminNovaPerguntaFragment.newInstance(mNivel))
-                    .addToBackStack(null)
+                    .replace(R.id.frame_layout, AdminNovaPerguntaFragment.newInstance(mNivel, null))
+                    .addToBackStack(Util.STACK_ADMIN)
                     .commit();
         }
     }

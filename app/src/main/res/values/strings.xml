@@ -57,6 +57,10 @@
     <string name="admin_novo_nivel_ajuda">Retirada por cada ajuda usada</string>
     <string name="admin_novo_nivel_ajuda_num">Numero máximo de ajudas</string>
 
+    <!--AdminNovaPergunta -->
+    <string name="admin_bt_galeria">Galeria</string>
+    <string name="admin_bt_camera">Camera</string>
+    <string name="admin_bt_download">Download</string>
 
     <string name="admin_nova_pergunta_resposta">Resposta</string>
     <string name="admin_nova_pergunta_resposta_correta">Resposta correta</string>
@@ -64,5 +68,19 @@
     <string name="admin_nova_pergunta_imagem_opcao">Escolha uma opção</string>
     <string name="admin_nova_pergunta_imagem_opcao_url">Cole aqui o url da imagem</string>
 
+    <string name="admin_toast_download_wait">Aguarde por favor</string>
+    <string name="admin_toast_download_sucesso">Download com sucesso</string>
+    <string name="admin_toast_download_erro">Erro no download</string>
+    <string name="admin_toast_campos_erro">Deve preencher todos os campos</string>
+    <string name="admin_toast_campo_url_erro">Deve introduzir um url correto</string>
 
+    <string name="admin_download_dialog_title">Download Imagem</string>
+    <string name="admin_download_dialog_message">Introduza o url para fazer o download</string>
+    <string name="admin_download_dialog_ok">Download</string>
+    <string name="admin_download_dialog_cancel">Cancel</string>
+
+
+    <!--RecyclerSwipeTouchHelper -->
+    <string name="snack_deleted">Apagar</string>
+    <string name="snack_undo">Anular</string>
 </resources>

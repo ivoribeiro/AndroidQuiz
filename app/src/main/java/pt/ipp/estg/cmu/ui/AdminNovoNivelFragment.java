@@ -13,11 +13,11 @@ import android.widget.EditText;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
+import pt.ipp.estg.cmu.util.Util;
 
 
 public class AdminNovoNivelFragment extends Fragment implements View.OnClickListener {
 
-    private static final String ARG_CATEGORIE = "CATEGORIA";
 
     private Categoria mCategoria;
 
@@ -35,7 +35,7 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
     public static AdminNovoNivelFragment newInstance(Categoria categoria) {
         AdminNovoNivelFragment fragment = new AdminNovoNivelFragment();
         Bundle args = new Bundle();
-        args.putParcelable(ARG_CATEGORIE, categoria);
+        args.putParcelable(Util.ARG_CATEGORIE, categoria);
         fragment.setArguments(args);
         return fragment;
     }
@@ -44,7 +44,7 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mCategoria = getArguments().getParcelable(ARG_CATEGORIE);
+            mCategoria = getArguments().getParcelable(Util.ARG_CATEGORIE);
         }
     }
 

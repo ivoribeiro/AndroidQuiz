@@ -35,6 +35,7 @@
     <dimen name="score_text_size">14dp</dimen>
     <dimen name="icon_size">30dp</dimen>
     <dimen name="adapter_level_layout_padding">12dp</dimen>
+    <dimen name="adapter_level_image_size">130dp</dimen>
 
 
     <!-- Adapter Categoria Grid -->
@@ -67,5 +68,6 @@
 
     <!--AdminNovaPergunta-->
     <dimen name="novo_nivel_layout_button_margin">12dp</dimen>
+    <dimen name="nova_pergunta_not_found_size">120dp</dimen>
 
 </resources>

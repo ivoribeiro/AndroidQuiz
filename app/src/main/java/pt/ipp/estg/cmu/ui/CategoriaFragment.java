@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterCategoriaGrid;
-import pt.ipp.estg.cmu.callbacks.RecyclerSwipeTouchHelper;
 import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.util.Util;
@@ -69,12 +67,5 @@ public class CategoriaFragment extends Fragment {
         mCategorias = this.mRepository.getAll();
         mAdapter = new AdapterCategoriaGrid(getContext(), mRecyclerView, mCategorias, isAdmin);
         mRecyclerView.setAdapter(mAdapter);
-
-        if (isAdmin) {
-            RecyclerSwipeTouchHelper swipeTouch = new RecyclerSwipeTouchHelper(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, getContext(), mRecyclerView, mCategorias, mAdapter);
-            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeTouch);
-            itemTouchHelper.attachToRecyclerView(mRecyclerView);
-        }
     }
-
 }

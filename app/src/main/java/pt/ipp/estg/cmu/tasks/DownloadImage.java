@@ -7,78 +7,67 @@ import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.os.Environment;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.util.Util;
+
 public class DownloadImage extends AsyncTask<String, String, String> {
-    private Context context;
-    private ProgressDialog pDialog;
-    private URL ImageUrl;
-    private Bitmap bmImg = null;
 
-    private EditText mUrlEditText;
-
+    private Context mContext;
+    private URL mImageUrl;
     private String mFileName;
-    public DownloadImage(Context context, String name,EditText urlEditText) {
-        this.context = context;
+
+    //layout
+    private Bitmap mBitMapImg = null;
+    private ProgressDialog mDialog;
+    private ImageView mPreviewImage;
+
+    public DownloadImage(Context context, ImageView imageView, String name) {
+        this.mContext = context;
         this.mFileName = name;
-        this.mUrlEditText = urlEditText;
+        this.mPreviewImage = imageView;
     }
 
     @Override
     protected void onPreExecute() {
-        // TODO Auto-generated method stub
-
         super.onPreExecute();
-
-        pDialog = new ProgressDialog(context);
-        pDialog.setMessage("Please wait...");
-        pDialog.setIndeterminate(false);
-        pDialog.setCancelable(false);
-        pDialog.show();
-
+        mDialog = new ProgressDialog(mContext);
+        mDialog.setMessage(mContext.getResources().getString(R.string.admin_toast_download_wait));
+        mDialog.setIndeterminate(false);
+        mDialog.setCancelable(false);
+        mDialog.show();
     }
 
     @Override
     protected String doInBackground(String... args) {
         InputStream is = null;
         try {
-
-            ImageUrl = new URL(args[0]);
-            HttpURLConnection conn = (HttpURLConnection) ImageUrl.openConnection();
+            mImageUrl = new URL(args[0]);
+            HttpURLConnection conn = (HttpURLConnection) mImageUrl.openConnection();
             conn.setDoInput(true);
             conn.connect();
             is = conn.getInputStream();
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Config.RGB_565;
-            bmImg = BitmapFactory.decodeStream(is, null, options);
+            mBitMapImg = BitmapFactory.decodeStream(is, null, options);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            File dir = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + "/CMU/");
+            File dir = new File(Util.getAppFolderPath());
             dir.mkdirs();
             File file = new File(dir, mFileName);
             FileOutputStream fos = new FileOutputStream(file);
-            bmImg.compress(CompressFormat.JPEG, 75, fos);
+            mBitMapImg.compress(CompressFormat.JPEG, 75, fos);
             fos.flush();
             fos.close();
 
             return file.getAbsolutePath();
-/*            File imageFile = file;
-            MediaScannerConnection.scanFile(context,
-                    new String[]{imageFile.getPath()},
-                    new String[]{"image/jpeg"}, null);*/
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,29 +79,23 @@ public class DownloadImage extends AsyncTask<String, String, String> {
                 }
             }
         }
-
         return null;
     }
 
     @Override
     protected void onPostExecute(String args) {
-        // TODO Auto-generated method stub
-
-        if (bmImg == null) {
-            Toast.makeText(context, "Image still loading...", Toast.LENGTH_SHORT).show();
-            pDialog.dismiss();
+        if (null == mBitMapImg || null == args) {
+            Toast.makeText(mContext, mContext.getResources().getString(R.string.admin_toast_download_erro), Toast.LENGTH_SHORT).show();
+            mDialog.dismiss();
 
         } else {
-
-            if (pDialog != null) {
-                if (pDialog.isShowing()) {
-                    pDialog.dismiss();
+            if (null != mDialog) {
+                if (mDialog.isShowing()) {
+                    mDialog.dismiss();
                 }
             }
-
-            mUrlEditText.setText(args);
-            Toast.makeText(context, "Wallpaper Successfully Saved", Toast.LENGTH_SHORT).show();
-
+            mPreviewImage.setImageBitmap(mBitMapImg);
+            Toast.makeText(mContext, mContext.getResources().getString(R.string.admin_toast_download_sucesso), Toast.LENGTH_SHORT).show();
         }
     }
 

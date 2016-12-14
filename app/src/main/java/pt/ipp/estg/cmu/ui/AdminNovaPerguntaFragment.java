@@ -1,18 +1,26 @@
 package pt.ipp.estg.cmu.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.io.File;
 import java.sql.Timestamp;
@@ -34,27 +42,35 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     private static int CAPTURE_IMAGE_ACTIVITY = 2;
 
     private Nivel mNivel;
+    private Pergunta mPergunta;
     private PerguntaRepo mRepository;
     private String mImagemPathText;
 
+    private boolean editMode;
+    private boolean checkedPreviewImage;
+
     //layout
-    private EditText mUrlText;
+
     private EditText mRespostaText;
-    private FloatingActionButton mDownloadBt;
     private FloatingActionButton mFab;
+    private Button mDownloadBt;
     private Button mGaleriaBt;
     private Button mCameraBt;
-
+    private ImageView mImagePreview;
     private String mImageName;
 
     public AdminNovaPerguntaFragment() {
         // Required empty public constructor
     }
 
-    public static AdminNovaPerguntaFragment newInstance(Nivel nivel) {
+    public static AdminNovaPerguntaFragment newInstance(Nivel nivel, Pergunta pergunta) {
         AdminNovaPerguntaFragment fragment = new AdminNovaPerguntaFragment();
         Bundle args = new Bundle();
-        args.putParcelable(Util.ARG_LEVEL, nivel);
+        if (null != pergunta) {
+            args.putParcelable(Util.ARG_QUESTION, pergunta);
+        } else if (null != nivel) {
+            args.putParcelable(Util.ARG_LEVEL, nivel);
+        }
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,26 +78,30 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (null != getArguments().getParcelable(Util.ARG_LEVEL)) {
             mNivel = getArguments().getParcelable(Util.ARG_LEVEL);
+            editMode = false;
+        } else if (null != getArguments().getParcelable(Util.ARG_QUESTION)) {
+            mPergunta = getArguments().getParcelable(Util.ARG_QUESTION);
+            editMode = true;
         }
         mRepository = new PerguntaRepo(getContext());
 
         //image com o nome do timestamp
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        mImageName = timestamp.getTime() + "";
+        mImageName = timestamp.getTime() + ".jpg";
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_admin_nova_pergunta, container, false);
 
-        mUrlText = (EditText) view.findViewById(R.id.admin_nova_pergunta_url);
         mRespostaText = (EditText) view.findViewById(R.id.admin_nova_pergunta_resposta);
-        mDownloadBt = (FloatingActionButton) view.findViewById(R.id.fab_download);
+        mDownloadBt = (Button) view.findViewById(R.id.bt_download);
         mFab = (FloatingActionButton) view.findViewById(R.id.fab);
         mGaleriaBt = (Button) view.findViewById(R.id.bt_galeria);
         mCameraBt = (Button) view.findViewById(R.id.bt_camera);
+        mImagePreview = (ImageView) view.findViewById(R.id.question_image);
 
         mDownloadBt.setOnClickListener(this);
         mFab.setOnClickListener(this);
@@ -94,6 +114,10 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if (editMode) {
+            setPreviewImage();
+            mRespostaText.setText(mPergunta.getRespostaCerta());
+        }
     }
 
     @Override
@@ -130,14 +154,8 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.fab_download:
-
-                if (!mUrlText.getText().toString().equals(" ")) {
-                    new DownloadImage(getContext(), mImageName, mUrlText).execute(mUrlText.getText().toString());
-                    mImagemPathText = Util.getAppFolderPath() + mImageName;
-                } else {
-                    //TODO warning edittext vazia
-                }
+            case R.id.bt_download:
+                showDownloadDialog();
                 break;
 
             case R.id.bt_galeria:
@@ -147,30 +165,58 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
 
             case R.id.bt_camera:
                 File dest = new File(Util.getAppFolderPath() + mImageName);
-
                 Uri outputFileUri = Uri.fromFile(dest);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
                 startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY);
                 break;
+
             case R.id.fab:
                 savePergunta();
                 break;
-
         }
+    }
+
+    private void setPreviewImage() {
+        String imagePath = mPergunta.getImagem();
+        if (null != imagePath) {
+            File imgFile = new File(imagePath);
+            if (imgFile.exists()) {
+                Bitmap bmImg = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                mImagePreview.setImageBitmap(bmImg);
+            }
+        }
+    }
+
+    private void showDownloadDialog() {
+        final EditText input = new EditText(getContext());
+        input.setHint(R.string.admin_download_dialog_message);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(input);
+        builder.setTitle(R.string.admin_download_dialog_title)
+                .setPositiveButton(R.string.admin_download_dialog_ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        new DownloadImage(getContext(), mImagePreview, mImageName).execute(input.getText().toString());
+                        mImagemPathText = Util.getAppFolderPath() + mImageName;
+                    }
+                })
+                .setNegativeButton(R.string.admin_download_dialog_cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        builder.create();
+        builder.show();
     }
 
     private void savePergunta() {
         String respostaCerta = mRespostaText.getText().toString();
-        String urlImagem = "";
 
-        if (!mUrlText.getText().toString().equals(" ")) {// imagem de url
-            urlImagem = mUrlText.getText().toString();
-        } else {//imagem de galeria ou camera
-            urlImagem = mImagemPathText;
-        }
+        //imagem de galeria ou camera
 
-        if (respostaCerta.equals(" ") && urlImagem.equals(" ")) {
+        if (!respostaCerta.equals("")) {
             StringsOperations operations = new StringsOperations(respostaCerta.toUpperCase());
             String respostaRandom = operations.generateString();
             Pergunta p = new Pergunta();
@@ -178,12 +224,13 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             p.setNivel(mNivel.getId());
             p.setRespostaCerta(respostaCerta.toUpperCase());
             p.setStringAleatoria(respostaRandom);
+
+            //TODO call update/insert function
             mRepository.insertInto(p);
 
-
-            Intent intent = new Intent(getContext(), AdminPerguntaActivity.class);
-            intent.putExtra(Util.ARG_LEVEL, mNivel);
-            startActivity(intent);
+            getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        } else {
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_campos_erro), Toast.LENGTH_SHORT).show();
         }
     }
 }

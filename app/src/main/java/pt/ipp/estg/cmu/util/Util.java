@@ -10,6 +10,8 @@ public class Util {
     public static final String ARG_CATEGORIE = "CATEGORIE";
     public static final String ARG_ADMIN = "ADMIN";
 
+    //stack admin settings
+    public static final String STACK_ADMIN = "STACK_ADMIN";
 
     public static String getAppFolderPath() {
         return Environment.getExternalStorageDirectory().getAbsoluteFile().toString() + "/CMU/";
