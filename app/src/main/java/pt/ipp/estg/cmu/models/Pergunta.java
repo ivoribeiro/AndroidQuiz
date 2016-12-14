@@ -1,6 +1,9 @@
 package pt.ipp.estg.cmu.models;
 
-public class Pergunta {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Pergunta implements Parcelable {
 
     private int id;
     private int nivel;
@@ -18,6 +21,7 @@ public class Pergunta {
 
     public Pergunta() {
     }
+
 
     public int getId() {
         return id;
@@ -74,5 +78,39 @@ public class Pergunta {
 
     public void setAcertou(boolean acertou) {
         this.acertou = acertou;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeInt(nivel);
+        parcel.writeString(imagem);
+
+    }
+
+    public static final Creator<Pergunta> CREATOR = new Creator<Pergunta>() {
+        @Override
+        public Pergunta createFromParcel(Parcel in) {
+            return new Pergunta(in);
+        }
+
+        @Override
+        public Pergunta[] newArray(int size) {
+            return new Pergunta[size];
+        }
+    };
+
+    protected Pergunta(Parcel in) {
+        id = in.readInt();
+        nivel = in.readInt();
+        imagem = in.readString();
+        respostaCerta = in.readString();
+        nRespostasErradas = in.readInt();
+        acertou = in.readByte() != 0;
     }
 }

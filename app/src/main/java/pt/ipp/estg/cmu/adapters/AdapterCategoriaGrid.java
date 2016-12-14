@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.ui.LevelActivity;
 import pt.ipp.estg.cmu.util.Util;
@@ -29,12 +30,14 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
     private Context mContext;
     private boolean isAdmin;
     private RecyclerView mRecycler;
+    private CategoriaRepo mCategoriaRepo;
 
     public AdapterCategoriaGrid(Context context, RecyclerView recyclerView, List<Categoria> data, boolean isAdmin) {
         this.mContext = context;
         this.mDataSet = data;
         this.mRecycler = recyclerView;
         this.isAdmin = isAdmin;
+        this.mCategoriaRepo = new CategoriaRepo(this.mContext);
     }
 
     @Override
@@ -48,7 +51,8 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
     public void onBindViewHolder(final AdapterCategoriaGrid.ViewHolder holder, final int position) {
         holder.mTitle.setText(mDataSet.get(position).getNome());
 
-        if (isAdmin) {//MODO ADMIN
+        if (isAdmin) {
+            //MODO ADMIN
             if (!mDataSet.get(position).isAtiva()) {
                 holder.mCardView.setAlpha(0.5f);
             }
@@ -64,7 +68,9 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
                         Snackbar.make(mRecycler, mContext.getString(R.string.snack_bar_categorie_info), Snackbar.LENGTH_LONG).show();
                     }
                 }
-            });
+
+            }
+            );
 
             holder.mCardView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -79,6 +85,8 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
                         holder.mCardView.setAlpha(1f);
                         Snackbar.make(mRecycler, mContext.getString(R.string.snack_bar_categorie_true), Snackbar.LENGTH_LONG).show();
                     }
+                    //TODO @Fernando como obtenho o mCategoriaRepoAqui?
+                    // this.mCategoriaRepo.updateCategoria(mDataSet.get(position));
                     return true;
                 }
             });

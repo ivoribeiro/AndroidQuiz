@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.models.Categoria;
+import pt.ipp.estg.cmu.models.Nivel;
 
 public class CategoriaRepo extends Repo implements RepositoryInterface<Categoria> {
 
@@ -20,6 +21,7 @@ public class CategoriaRepo extends Repo implements RepositoryInterface<Categoria
     private void setFields() {
         this.addField("ID", "id");
         this.addField("NOME", "nome");
+        this.addField("ATIVA", "ativa");
     }
 
 
@@ -70,5 +72,23 @@ public class CategoriaRepo extends Repo implements RepositoryInterface<Categoria
         String query = this.deleteByFieldQueryString("id", "" + id);
         SQLiteDatabase db = super.getWritableDatabase();
         db.execSQL(query);
+    }
+
+    /**
+     * Faz update a uma pergunta por id
+     *
+     * @param categoria
+     * @return
+     */
+    public Categoria updateCategoria(Categoria categoria) {
+        SQLiteDatabase db = super.getWritableDatabase();
+        String where = "id=?";
+        String[] whereArgs = new String[]{String.valueOf(categoria.getId())};
+        ContentValues values = new ContentValues();
+        values.put(this.getField("NOME"), categoria.getNome());
+        values.put(this.getField("ATIVA"), categoria.isAtiva());
+        db.update(this.getTable(), values, where, whereArgs);
+        db.close();
+        return categoria;
     }
 }

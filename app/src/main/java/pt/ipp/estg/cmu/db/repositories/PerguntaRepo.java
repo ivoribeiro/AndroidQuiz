@@ -80,8 +80,34 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
         db.rawQuery(query, null);
     }
 
+    /**
+     * Retorta todas as perguntas de um determinado nivel
+     *
+     * @param idNivel
+     * @return
+     */
     public ArrayList<Pergunta> getAllByNivel(int idNivel) {
         return this.getAllByField("nivel", "" + idNivel + "");
     }
 
+    /**
+     * Faz update a uma pergunta por id
+     *
+     * @param pergunta
+     * @return
+     */
+    public Pergunta updatePergunta(Pergunta pergunta) {
+        SQLiteDatabase db = super.getWritableDatabase();
+        String where = "id=?";
+        String[] whereArgs = new String[]{String.valueOf(pergunta.getId())};
+        ContentValues values = new ContentValues();
+        values.put(this.getField("NIVEL"), pergunta.getNivel());
+        values.put(this.getField("IMAGEM"), pergunta.getImagem());
+        values.put(this.getField("RESPOSTA"), pergunta.getRespostaCerta());
+        values.put(this.getField("RESPOSTAS_ERRADAS"), pergunta.getnRespostasErradas());
+        values.put(this.getField("ACERTOU"), pergunta.acertou());
+        db.update(this.getTable(), values, where, whereArgs);
+        db.close();
+        return pergunta;
+    }
 }

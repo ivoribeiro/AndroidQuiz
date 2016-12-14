@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.models.Nivel;
+import pt.ipp.estg.cmu.models.Pergunta;
 
 public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
 
@@ -21,14 +22,16 @@ public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
         this.addField("ID", "id");
         this.addField("NUMERO", "numero");
         this.addField("CATEGORIA", "categoria");
-        this.addField("BLOQUEADO", "bloqueado");
         this.addField("N_PERGUNTAS", "nPerguntas");
         this.addField("PONTUACAO_CERTA", "pontuacaoBase");
         this.addField("PONTUACAO_ERRADA", "pontuacaoBaseErrada");
         this.addField("PONTUACAO_DICA", "pontuacaoHint");
-        //this.addField("N_RESPOSTAS_CERTAS", "nRespostasCertas");
+        this.addField("BLOQUEADO", "bloqueado");
+        this.addField("N_PERGUNTAS", "nPerguntas");
         this.addField("N_AJUDAS", "nAjudas");
         this.addField("PONTUACAO", "pontuacao");
+        this.addField("N_RESPOSTAS_CERTAS", "nRespostasCertas");
+        this.addField("N_MIN_RESPOSTAS_CERTAS", "nMinRespostasCertas");
 
     }
 
@@ -54,10 +57,10 @@ public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
                 nivel.setPontuacaoBase(cursor.getInt(5));
                 nivel.setPontuacaoBaseErrada(cursor.getInt(6));
                 nivel.setPontuacaoHint(cursor.getInt(7));
-                // nivel.setnPerguntasResp(cursor.getInt(8));
-                nivel.setnAjudas(cursor.getInt(8));
-                nivel.setPontuacao(cursor.getInt(9));
-
+                nivel.setnRespostasCertas(cursor.getInt(8));
+                nivel.setnAjudas(cursor.getInt(9));
+                nivel.setPontuacao(cursor.getInt(10));
+                nivel.setnMinRespostasCertas(cursor.getInt(11));
                 niveis.add(nivel);
             } while (cursor.moveToNext());
         }
@@ -78,12 +81,16 @@ public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
         ContentValues values = new ContentValues();
         values.put(this.getField("NUMERO"), nivel.getNumero());
         values.put(this.getField("CATEGORIA"), nivel.getCategoria());
-        values.put(this.getField("BLOQUEADO"), nivel.isBloqueado() ? 1 : 0);
-        //values.put(this.getField("N_PERGUNTAS"), nivel.getnPerguntas());
+        values.put(this.getField("N_PERGUNTAS"), nivel.getCategoria());
         values.put(this.getField("PONTUACAO_CERTA"), nivel.getPontuacaoBase());
         values.put(this.getField("PONTUACAO_ERRADA"), nivel.getPontuacaoBaseErrada());
         values.put(this.getField("PONTUACAO_DICA"), nivel.getPontuacaoHint());
+        values.put(this.getField("BLOQUEADO"), nivel.isBloqueado() ? 1 : 0);
+        values.put(this.getField("N_PERGUNTAS"), 0);
+        values.put(this.getField("N_AJUDAS"), nivel.getnAjudas());
+        values.put(this.getField("PONTUACAO"), 0);
         values.put(this.getField("N_RESPOSTAS_CERTAS"), 0);
+        values.put(this.getField("N_MIN_RESPOSTAS_CERTAS"), nivel.getnMinRespostasCertas());
         db.insert(this.getTable(), null, values);
         db.close();
         return nivel;
@@ -98,5 +105,33 @@ public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
 
     public ArrayList<Nivel> getAllByCategoria(String categoria) {
         return this.getAllByField("categoria", "\'" + categoria + "\'");
+    }
+
+    /**
+     * Faz update a uma pergunta por id
+     *
+     * @param nivel
+     * @return
+     */
+    public Nivel updateNivel(Nivel nivel) {
+        SQLiteDatabase db = super.getWritableDatabase();
+        String where = "id=?";
+        String[] whereArgs = new String[]{String.valueOf(nivel.getId())};
+        ContentValues values = new ContentValues();
+        values.put(this.getField("NUMERO"), nivel.getNumero());
+        values.put(this.getField("CATEGORIA"), nivel.getCategoria());
+        values.put(this.getField("N_PERGUNTAS"), nivel.getCategoria());
+        values.put(this.getField("PONTUACAO_CERTA"), nivel.getPontuacaoBase());
+        values.put(this.getField("PONTUACAO_ERRADA"), nivel.getPontuacaoBaseErrada());
+        values.put(this.getField("PONTUACAO_DICA"), nivel.getPontuacaoHint());
+        values.put(this.getField("BLOQUEADO"), nivel.isBloqueado() ? 1 : 0);
+        values.put(this.getField("N_PERGUNTAS"), nivel.getnPerguntas());
+        values.put(this.getField("N_AJUDAS"), nivel.getnAjudas());
+        values.put(this.getField("PONTUACAO"), nivel.getPontuacao());
+        values.put(this.getField("N_RESPOSTAS_CERTAS"), nivel.getnRespostasCertas());
+        values.put(this.getField("N_MIN_RESPOSTAS_CERTAS"), nivel.getnMinRespostasCertas());
+        db.update(this.getTable(), values, where, whereArgs);
+        db.close();
+        return nivel;
     }
 }

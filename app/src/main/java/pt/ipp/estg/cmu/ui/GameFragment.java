@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.db.repositories.NivelRepo;
+import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.interfaces.ClickQuestionListener;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
@@ -36,6 +38,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private ClickQuestionListener mListener;
     private int index;
     private Nivel nivel;
+    private Pergunta pergunta;
+    private NivelRepo mNivelRepo;
+    private PerguntaRepo mPerguntaRepo;
 
     //layout
     private static int NUMBER_GAME_BUTTONS = 15;
@@ -65,6 +70,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         Bundle args = new Bundle();
         args.putInt("INDEX", index);
         args.putParcelable("NIVEL", nivel);
+        args.putParcelable("PERGUNTA", pergunta);
         args.putString("CORRECT", pergunta.getRespostaCerta());
         args.putString("CONCAT", pergunta.getRespostaCerta().replaceAll("\\s", ""));
         GameFragment fragment = new GameFragment();
@@ -75,20 +81,27 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPerguntaRepo=new PerguntaRepo(this.getContext());
+        mNivelRepo=new NivelRepo(this.getContext());
         mCorrectAnswer = getArguments().getString("CORRECT");
         mCorrectAnswerConcat = getArguments().getString("CONCAT");
         index = getArguments().getInt("INDEX");
         nivel = getArguments().getParcelable("NIVEL");
+        pergunta = getArguments().getParcelable("PERGUNTA");
 
         mUserCorrectAnswer = "";
         mAtualCorrectIndex = 0;
+        //tamanho da resposta sem espaços
         mCorrectAnswerSize = mCorrectAnswerConcat.length();
+        //todas as letras do alfabeto menos as da resposta
         String abc = removeStringFromString(mCorrectAnswerConcat, alphabet);
-
+        //numero de catacteres que vao ser gerados aleatoriamente
         int saltSize = NUMBER_GAME_BUTTONS - mCorrectAnswerSize;
+        //letras aleatorias
         String saltString = generateString(abc, saltSize);
-
+        //letras aleatorias mais letras da resposta
         saltString = saltString + mCorrectAnswerConcat;
+        //baralhar letras
         mRandomGameString = generateString(saltString, NUMBER_GAME_BUTTONS);
     }
 
@@ -107,6 +120,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
         mHintButton.setOnClickListener(this);
         mResetButton.setOnClickListener(this);
+
+        if(this.pergunta.acertou()){
+            mHintButton.setVisibility(View.GONE);
+            mResetButton.setVisibility(View.GONE);
+        }
 
         mImageView = (ImageView) view.findViewById(R.id.question_image);
         switch (index) {
@@ -152,6 +170,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         mAnswerLayout.removeAllViews();
         int index = 0;
         for (int i = 0; i < mCorrectAnswer.length(); ++i) {
+            //invisible button to simulate empty space
             if (mCorrectAnswer.charAt(i) == ' ') {
                 mAnswerLayout.addView(UtilUI.newView(getActivity()));
             } else {
@@ -190,12 +209,37 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    /**
+     * Verifica se a resposta do jogador foi correta
+     * adiciona pontuacao ao nivel se respondeu corretamente
+     * retira pontuacao ao nivel se respondeu de forma errada
+     */
     private void checkIfIsFinished() {
         if (mUserCorrectAnswer.length() == mCorrectAnswerConcat.length()) {
             if (mUserCorrectAnswer.equals(mCorrectAnswerConcat)) {
                 mListener.setAnswered(true);
+                //incrementa os pontos ganhos ao nivel
+                this.incrementarPontosNivel();
+                //muda o estado da pergunta para acertou
+                this.pergunta.setAcertou(true);
+                //adiciona resposta certa ao nivel
+                this.nivel.addnRespostasCertas();
+                //hint e reset buttons gone
+                mHintButton.setVisibility(View.GONE);
+                mResetButton.setVisibility(View.GONE);
+                //save on bd
+                this.mNivelRepo.updateNivel(this.nivel);
+                this.mPerguntaRepo.updatePergunta(this.pergunta);
             } else {
                 mListener.setAnswered(false);
+                this.decrementPontosNivel();
+                this.pergunta.addRespostasErradas();
+                createLayout();
+                this.mNivelRepo.updateNivel(this.nivel);
+                this.mPerguntaRepo.updatePergunta(this.pergunta);
+
+
+
             }
         }
     }
@@ -239,19 +283,38 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         if (this.nivel.getnAjudas() > 0) {
             this.nivel.decrementnAjudas();
             this.mHintInfo.setText("" + this.nivel.getnAjudas() + " | Ajudas");
+            this.mNivelRepo.updateNivel(this.nivel);
         } else {
             //TODO mostrar mensagem
         }
     }
 
     /**
+     * Atualiza a pontuação do nivel na UI
+     */
+    private void updatePontuacao() {
+        this.mScoreInfo.setText(this.nivel.getPontuacao() + " | Pontuação");
+    }
+
+    /**
      * Incrementa ao nivel a pontuacão de uma resposta certa
-     * Actualiza o layout
      */
     private void incrementarPontosNivel() {
         this.nivel.addPontuacao(this.nivel.getPontuacaoBase());
-        this.mScoreInfo.setText(this.nivel.getPontuacao());
-
+        this.updatePontuacao();
     }
+
+    /**
+     * Decrementa ao nivel a pontuacão de uma resposta errada
+     */
+    private void decrementPontosNivel() {
+        if (this.nivel.getPontuacao() - this.nivel.getPontuacaoBaseErrada() >= 0) {
+            this.nivel.removePontuacao(this.nivel.getPontuacaoBaseErrada());
+            this.updatePontuacao();
+        }
+    }
+
+
+
 
 }
