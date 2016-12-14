@@ -70,11 +70,8 @@ public class AdminListaPerguntasFragment extends Fragment implements View.OnClic
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ArrayList<Pergunta> perguntas = mRepository.getAllByNivel(mNivel.getId());
-        perguntas.add(new Pergunta(1, "", "sf"));
-        perguntas.add(new Pergunta(1, "", "sf"));
-        perguntas.add(new Pergunta(1, "", "sf"));
-        mAdapter = new AdapterPerguntasList(getContext(), perguntas);
+
+        mAdapter = new AdapterPerguntasList(getContext(), mRepository.getAllByNivel(mNivel.getId()));
         mRecycler.setAdapter(mAdapter);
     }
 

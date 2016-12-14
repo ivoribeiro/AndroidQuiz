@@ -56,10 +56,11 @@ public class GameActivity extends AppCompatActivity implements ClickQuestionList
         AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager());
         this.repo = new PerguntaRepo(this.getApplicationContext());
         ArrayList<Pergunta> perguntas = this.repo.getAllByNivel(mLevelInfo.getId());
-        this.nPerguntas=perguntas.size();
+
+        this.nPerguntas = perguntas.size();
         int i = 0;
         for (Pergunta pergunta : perguntas) {
-            adapter.addFragment(GameFragment.newInstance(i, mLevelInfo, pergunta));
+            adapter.addFragment(GameFragment.newInstance(mLevelInfo, pergunta));
             i++;
         }
 
@@ -74,7 +75,7 @@ public class GameActivity extends AppCompatActivity implements ClickQuestionList
         dialog.setContentView(R.layout.window_pop_up);
         ImageView imageView = (ImageView) dialog.findViewById(R.id.image_view);
         if (hit) {
-            imageView.setBackground(getResources().getDrawable(R.drawable.ic_check));
+            imageView.setBackground(getResources().getDrawable(R.drawable.ic_correct));
         } else {
             imageView.setBackground(getResources().getDrawable(R.drawable.ic_lock));
         }

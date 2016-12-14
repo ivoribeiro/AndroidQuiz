@@ -44,15 +44,11 @@ public class AdapterPerguntasList extends RecyclerView.Adapter<AdapterPerguntasL
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         holder.mAnswerText.setText(mDataSet.get(position).getRespostaCerta());
-
-        String path = Environment.getExternalStorageDirectory() + "/CMU/ny.jpg";
-        File imgFile = new File(path);
+        File imgFile = new File(mDataSet.get(position).getImagem());
         if (imgFile.exists()) {
             Bitmap bmImg = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             holder.mImage.setImageBitmap(bmImg);
         }
-
-
     }
 
     @Override

@@ -47,7 +47,8 @@
             <ImageView
                 android:id="@+id/image_state"
                 android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size" />
+                android:layout_height="@dimen/icon_size"
+                android:backgroundTint="@color/accent" />
 
             <TextView
                 android:id="@+id/score_text"

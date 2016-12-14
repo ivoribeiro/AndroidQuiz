@@ -26,7 +26,7 @@ public class PerguntaMigration extends Migration {
                 "'nRespostasErradas'," +
                 "'acertou'," +
                 "'stringAleatoria'" +
-                ") VALUES(1,'caminho/imagem','NEW YORK',0,0,'NAEBWCYDOERFKG');");
-        this.setSeeders(seeder);
+                ") VALUES(1,'CMU/ny.jpg','NEW YORK',0,0,'NAEBWCYDOERFKG');");
+        //this.setSeeders(seeder);
     }
 }

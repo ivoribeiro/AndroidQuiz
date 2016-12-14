@@ -48,6 +48,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     private Button mCameraBt;
 
     //TODO implementar caminho e nome para as imagens
+    private String mImageName = "image.jpg";
 
     public AdminNovaPerguntaFragment() {
         // Required empty public constructor
@@ -116,7 +117,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
 
                     File sourceFile = new File(mImagemPathText);
                     //File f = FileOperations.compressImageFile(sourceFile);
-                    FileOperations.copy(sourceFile, "asd.jpg");
+                    FileOperations.copy(sourceFile, mImageName);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -130,7 +131,8 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             case R.id.fab_download:
 
                 if (mUrlText.getText().toString() != "") {
-                    new DownloadImage(getContext(), "filename.jpg", mUrlText).execute(mUrlText.getText().toString());
+                    new DownloadImage(getContext(), mImageName, mUrlText).execute(mUrlText.getText().toString());
+                    mImagemPathText = Util.getAppFolderPath() + mImageName;
                 } else {
                     //TODO warning edittext vazia
                 }
@@ -142,7 +144,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                 break;
 
             case R.id.bt_camera:
-                File dest = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + "/CMU/" + "camera.jpg");
+                File dest = new File(Util.getAppFolderPath() + mImageName);
 
                 Uri outputFileUri = Uri.fromFile(dest);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -169,9 +171,18 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             StringsOperations operations = new StringsOperations(respostaCerta.toUpperCase());
             String respostaRandom = operations.generateString();
             Pergunta p = new Pergunta();
+            p.setImagem(mImagemPathText);
             p.setNivel(mNivel.getId());
-            p.setRespostaCerta(respostaCerta);
+            p.setRespostaCerta(respostaCerta.toUpperCase());
+            p.setStringAleatoria(respostaRandom);
             mRepository.insertInto(p);
+
+
+            Intent intent = new Intent(getContext(), AdminPerguntaActivity.class);
+            intent.putExtra(Util.ARG_LEVEL, mNivel);
+            startActivity(intent);
+
+
         }
 
     }
