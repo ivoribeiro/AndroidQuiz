@@ -11,12 +11,10 @@ public class StringsOperations {
 
     private int saltSize;
     private ArrayList<Integer> usedIndex = new ArrayList<Integer>();
-
     private String mRandomString;
 
     public StringsOperations(String stringToGenerate) {
         this.mRandomString = stringToGenerate;
-
         if (mRandomString.length() < NUMBER_GAME_BUTTONS) {
             saltSize = NUMBER_GAME_BUTTONS - mRandomString.length();
             generateLeftString();
@@ -24,24 +22,26 @@ public class StringsOperations {
     }
 
     public String generateString() {
-        int indexRnd = 0;
-        Random rng = new Random();
-        String text = "";
+        if (mRandomString.length() < NUMBER_GAME_BUTTONS) {
+            int indexRnd = 0;
+            Random rng = new Random();
+            String text = "";
 
-        while (text.length() < NUMBER_GAME_BUTTONS) {
-            indexRnd = rng.nextInt(mRandomString.length());
-            if (!usedIndex.contains(indexRnd)) {
-                usedIndex.add(indexRnd);
-                char ch = mRandomString.charAt(indexRnd);
-                text = text + ch;
+            while (text.length() < NUMBER_GAME_BUTTONS) {
+                indexRnd = rng.nextInt(mRandomString.length());
+                if (!usedIndex.contains(indexRnd)) {
+                    usedIndex.add(indexRnd);
+                    char ch = mRandomString.charAt(indexRnd);
+                    text = text + ch;
+                }
             }
+            return text;
+        } else {
+            return null;
         }
-
-        return text;
     }
 
     private void generateLeftString() {
-
         Random rng = new Random();
         ArrayList<Character> result = new ArrayList<>();
         while (result.size() < saltSize) {
@@ -56,6 +56,5 @@ public class StringsOperations {
         }
         mRandomString = mRandomString + text;
     }
-
 }
 

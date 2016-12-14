@@ -28,8 +28,9 @@
     <string name="txt_score">Pontos</string>
 
 
-    <!--ActivityQuestion -->
-    <string name="ajudas_restantes">Ajudas Restantes</string>
+    <!--GameFragment -->
+    <string name="ajudas_restantes">Ajudas</string>
+    <string name="pontos_ganhos">Pontos</string>
 
     <!-- Bottom navigation titles-->
     <string name="title_action_hint">Ajuda</string>

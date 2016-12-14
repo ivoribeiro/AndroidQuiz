@@ -1,11 +1,9 @@
 package pt.ipp.estg.cmu.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -17,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import java.io.File;
-import java.io.IOException;
+import java.sql.Timestamp;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
@@ -47,8 +45,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     private Button mGaleriaBt;
     private Button mCameraBt;
 
-    //TODO implementar caminho e nome para as imagens
-    private String mImageName = "image.jpg";
+    private String mImageName;
 
     public AdminNovaPerguntaFragment() {
         // Required empty public constructor
@@ -69,6 +66,10 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             mNivel = getArguments().getParcelable(Util.ARG_LEVEL);
         }
         mRepository = new PerguntaRepo(getContext());
+
+        //image com o nome do timestamp
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        mImageName = timestamp.getTime() + "";
     }
 
     @Override
@@ -77,7 +78,6 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
 
         mUrlText = (EditText) view.findViewById(R.id.admin_nova_pergunta_url);
         mRespostaText = (EditText) view.findViewById(R.id.admin_nova_pergunta_resposta);
-
         mDownloadBt = (FloatingActionButton) view.findViewById(R.id.fab_download);
         mFab = (FloatingActionButton) view.findViewById(R.id.fab);
         mGaleriaBt = (Button) view.findViewById(R.id.bt_galeria);
@@ -100,24 +100,26 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == RESULT_LOAD_IMAGE || requestCode == RESULT_LOAD_IMAGE) {
+        if (requestCode == RESULT_LOAD_IMAGE || requestCode == CAPTURE_IMAGE_ACTIVITY) {
             if (resultCode == RESULT_OK && null != data) {
                 try {
                     Uri selectedImage = data.getData();
                     String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
                     Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                    cursor.moveToFirst();
+                    if (cursor != null) {
+                        cursor.moveToFirst();
+                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                        String picturePath = cursor.getString(columnIndex);
+                        cursor.close();
 
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    String picturePath = cursor.getString(columnIndex);
-                    cursor.close();
+                        mImagemPathText = picturePath;
 
-                    mImagemPathText = picturePath;
+                        File sourceFile = new File(mImagemPathText);
+                        //File f = FileOperations.compressImageFile(sourceFile);
+                        FileOperations.copy(sourceFile, mImageName);
+                    }
 
-                    File sourceFile = new File(mImagemPathText);
-                    //File f = FileOperations.compressImageFile(sourceFile);
-                    FileOperations.copy(sourceFile, mImageName);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -130,7 +132,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         switch (view.getId()) {
             case R.id.fab_download:
 
-                if (mUrlText.getText().toString() != "") {
+                if (!mUrlText.getText().toString().equals(" ")) {
                     new DownloadImage(getContext(), mImageName, mUrlText).execute(mUrlText.getText().toString());
                     mImagemPathText = Util.getAppFolderPath() + mImageName;
                 } else {
@@ -161,13 +163,14 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     private void savePergunta() {
         String respostaCerta = mRespostaText.getText().toString();
         String urlImagem = "";
-        if (mUrlText.getText().toString() != "") {
+
+        if (!mUrlText.getText().toString().equals(" ")) {// imagem de url
             urlImagem = mUrlText.getText().toString();
-        } else {
+        } else {//imagem de galeria ou camera
             urlImagem = mImagemPathText;
         }
 
-        if (respostaCerta != "" && urlImagem != "") {
+        if (respostaCerta.equals(" ") && urlImagem.equals(" ")) {
             StringsOperations operations = new StringsOperations(respostaCerta.toUpperCase());
             String respostaRandom = operations.generateString();
             Pergunta p = new Pergunta();
@@ -181,9 +184,6 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             Intent intent = new Intent(getContext(), AdminPerguntaActivity.class);
             intent.putExtra(Util.ARG_LEVEL, mNivel);
             startActivity(intent);
-
-
         }
-
     }
 }

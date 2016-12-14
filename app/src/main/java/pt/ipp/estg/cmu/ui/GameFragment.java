@@ -38,8 +38,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private ClickQuestionListener mListener;
     private Nivel mNivel;
     private Pergunta mPergunta;
-    private NivelRepo mNivelRepo;
-    private PerguntaRepo mPerguntaRepo;
+    private NivelRepo mNivelRepository;
+    private PerguntaRepo mPerguntaRepository;
 
     //layout
     private LinearLayout mAnswerLayout;
@@ -50,10 +50,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private TextView mHintInfo;
     private TextView mScoreInfo;
 
-    //strings
+    //resposta
     private String mCorrectAnswerConcat;
     private String mUserCorrectAnswer;
-
     private int mAtualCorrectIndex;
 
     public GameFragment() {
@@ -76,19 +75,21 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             mPergunta = getArguments().getParcelable(Util.ARG_QUESTION);
             mCorrectAnswerConcat = mPergunta.getRespostaCerta().replaceAll("\\s", "");
         }
-        mPerguntaRepo = new PerguntaRepo(this.getContext());
-        mNivelRepo = new NivelRepo(this.getContext());
+        mPerguntaRepository = new PerguntaRepo(this.getContext());
+        mNivelRepository = new NivelRepo(this.getContext());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
+
         mAnswerLayout = (LinearLayout) view.findViewById(R.id.answer_layout);
         mTableLayout = (TableLayout) view.findViewById(R.id.game_table_layout);
         mResetButton = (ImageButton) view.findViewById(R.id.reset);
         mHintButton = (ImageButton) view.findViewById(R.id.hint);
         mHintInfo = (TextView) view.findViewById(R.id.hint_info);
         mScoreInfo = (TextView) view.findViewById(R.id.score_info);
+        mImageView = (ImageView) view.findViewById(R.id.question_image);
 
         mHintButton.setOnClickListener(this);
         mResetButton.setOnClickListener(this);
@@ -97,8 +98,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             mHintButton.setVisibility(View.GONE);
             mResetButton.setVisibility(View.GONE);
         }
-
-        mImageView = (ImageView) view.findViewById(R.id.question_image);
         return view;
     }
 
@@ -106,11 +105,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mHintInfo.setText(mNivel.getnAjudas() + " | Ajudas");
-        mScoreInfo.setText(mNivel.getPontuacao() + " | Pontuação");
+        mHintInfo.setText(mNivel.getnAjudas() + " " + getContext().getResources().getString(R.string.ajudas_restantes));
+        mScoreInfo.setText(mNivel.getPontuacao() + " " + getContext().getResources().getString(R.string.pontos_ganhos));
 
-        Bitmap myBitmap = BitmapFactory.decodeFile(mPergunta.getImagem());
-        mImageView.setImageBitmap(myBitmap);
+        Bitmap bitmap = BitmapFactory.decodeFile(mPergunta.getImagem());
+        mImageView.setImageBitmap(bitmap);
 
         createLayout();
     }
@@ -125,7 +124,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.hint:
-                this.decrementarAjuda();
+                this.decrementAjuda();
                 break;
             case R.id.reset:
                 createLayout();
@@ -199,7 +198,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             if (mUserCorrectAnswer.equals(mCorrectAnswerConcat)) {
                 mListener.setAnswered(true);
                 //incrementa os pontos ganhos ao mNivel
-                this.incrementarPontosNivel();
+                this.incrementPontosNivel();
                 //muda o estado da mPergunta para acertou
                 this.mPergunta.setAcertou(true);
                 //adiciona resposta certa ao mNivel
@@ -208,15 +207,15 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 mHintButton.setVisibility(View.GONE);
                 mResetButton.setVisibility(View.GONE);
                 //save on bd
-                this.mNivelRepo.updateNivel(this.mNivel);
-                this.mPerguntaRepo.updatePergunta(this.mPergunta);
+                this.mNivelRepository.updateNivel(this.mNivel);
+                this.mPerguntaRepository.updatePergunta(this.mPergunta);
             } else {
                 mListener.setAnswered(false);
                 this.decrementPontosNivel();
                 this.mPergunta.addRespostasErradas();
                 createLayout();
-                this.mNivelRepo.updateNivel(this.mNivel);
-                this.mPerguntaRepo.updatePergunta(this.mPergunta);
+                this.mNivelRepository.updateNivel(this.mNivel);
+                this.mPerguntaRepository.updatePergunta(this.mPergunta);
             }
         }
     }
@@ -226,29 +225,22 @@ public class GameFragment extends Fragment implements View.OnClickListener {
      * Decrementa do mNivel uma ajuda gasta
      * Actualiza o layout
      */
-    private void decrementarAjuda() {
+    private void decrementAjuda() {
         if (this.mNivel.getnAjudas() > 0) {
             this.mNivel.decrementnAjudas();
             this.mHintInfo.setText("" + this.mNivel.getnAjudas() + " | Ajudas");
-            this.mNivelRepo.updateNivel(this.mNivel);
+            this.mNivelRepository.updateNivel(this.mNivel);
         } else {
             //TODO mostrar mensagem
         }
     }
 
     /**
-     * Atualiza a pontuação do mNivel na UI
-     */
-    private void updatePontuacao() {
-        this.mScoreInfo.setText(this.mNivel.getPontuacao() + " | Pontuação");
-    }
-
-    /**
      * Incrementa ao mNivel a pontuacão de uma resposta certa
      */
-    private void incrementarPontosNivel() {
+    private void incrementPontosNivel() {
         this.mNivel.addPontuacao(this.mNivel.getPontuacaoBase());
-        this.updatePontuacao();
+        this.mScoreInfo.setText(this.mNivel.getPontuacao() + " " + getContext().getResources().getString(R.string.pontos_ganhos));
     }
 
     /**
@@ -257,7 +249,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private void decrementPontosNivel() {
         if (this.mNivel.getPontuacao() - this.mNivel.getPontuacaoBaseErrada() >= 0) {
             this.mNivel.removePontuacao(this.mNivel.getPontuacaoBaseErrada());
-            this.updatePontuacao();
+            this.mScoreInfo.setText(this.mNivel.getPontuacao() + " " + getContext().getResources().getString(R.string.pontos_ganhos));
         }
     }
 
