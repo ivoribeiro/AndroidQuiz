@@ -11,7 +11,15 @@ public class Pergunta implements Parcelable {
     private String respostaCerta;
     private int nRespostasErradas;
     private boolean acertou;
+    private String stringAleatoria;
 
+    public String getStringAleatoria() {
+        return stringAleatoria;
+    }
+
+    public void setStringAleatoria(String stringAleatoria) {
+        this.stringAleatoria = stringAleatoria;
+    }
 
     public Pergunta(int nivel, String imagem, String respostaCerta) {
         this.nivel = nivel;
@@ -91,6 +99,12 @@ public class Pergunta implements Parcelable {
         parcel.writeInt(nivel);
         parcel.writeString(imagem);
 
+        parcel.writeString(respostaCerta);
+        parcel.writeInt(nRespostasErradas);
+        parcel.writeValue(acertou);
+        parcel.writeString(stringAleatoria);
+
+
     }
 
     public static final Creator<Pergunta> CREATOR = new Creator<Pergunta>() {
@@ -112,5 +126,6 @@ public class Pergunta implements Parcelable {
         respostaCerta = in.readString();
         nRespostasErradas = in.readInt();
         acertou = in.readByte() != 0;
+        stringAleatoria = in.readString();
     }
 }
