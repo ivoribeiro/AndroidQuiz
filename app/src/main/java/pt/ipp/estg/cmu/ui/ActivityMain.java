@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.DbHandler;
+import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
 import pt.ipp.estg.cmu.db.repositories.JogadorRepo;
 import pt.ipp.estg.cmu.util.Util;
 
@@ -22,13 +23,15 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
     private String mUserName;
     private int mPontos;
+    private CategoriaRepo mCategoriaRepo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mCategoriaRepo=new CategoriaRepo(this);
 
-        mPontos = mJogador.getPontuacao();
+        mPontos = mCategoriaRepo.getPontuacaoJogo();
         mUserName = mJogador.getUsername();
 
 

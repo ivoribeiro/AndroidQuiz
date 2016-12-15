@@ -6,16 +6,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
 
 public class CategoriaRepo extends Repo implements RepositoryInterface<Categoria> {
 
+    NivelRepo mNivelRepo;
 
     public CategoriaRepo(Context context) {
         super(context, "categoria");
         this.setFields();
+        this.mNivelRepo = new NivelRepo(context);
     }
 
     private void setFields() {
@@ -91,4 +94,34 @@ public class CategoriaRepo extends Repo implements RepositoryInterface<Categoria
         db.close();
         return categoria;
     }
+
+    /**
+     * Retorna a pontuacao total de uma categoria
+     *
+     * @param categoria
+     * @return
+     */
+    public int getPontuacaoCategoria(String categoria) {
+        int pontuacao = 0;
+        ArrayList<Nivel> niveis = this.mNivelRepo.getAllByCategoria(categoria);
+        for (Nivel nivel : niveis) {
+            pontuacao += nivel.getPontuacao();
+        }
+        return pontuacao;
+    }
+
+    /**
+     * Retorna a soma de todas as pontuacoes da categorias
+     *
+     * @return
+     */
+    public int getPontuacaoJogo() {
+        int pontuacao = 0;
+        ArrayList<Categoria> categorias = this.getAll();
+        for (Categoria categoria : categorias) {
+            pontuacao+=this.getPontuacaoCategoria(categoria.getNome());
+        }
+        return pontuacao;
+    }
+
 }
