@@ -112,6 +112,7 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_statistics:
+                this.startActivity(new Intent(this, EstatisticasActivity.class));
                 break;
 
             case R.id.nav_admin:

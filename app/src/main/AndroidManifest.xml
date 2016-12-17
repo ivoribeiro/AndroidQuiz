@@ -58,15 +58,18 @@
                 android:value="pt.ipp.estg.cmu.ui.LevelActivity" />
         </activity>
 
-        <receiver android:name="MyBroadcastReceiverWidget">
+        <receiver android:name=".MyBroadcastReceiverWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name=".MESSAGE"></action>
+                <action android:name=".MESSAGE" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
+
+        <activity android:name=".ui.EstatisticasActivity"></activity>
     </application>
 
 </manifest>
