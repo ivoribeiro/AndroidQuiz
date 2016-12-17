@@ -15,6 +15,10 @@ import pt.ipp.estg.cmu.util.Util;
 
 public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
+    //widget
+    public static final String INTENT_MESSAGE = "pt.ipp.estgf.cmu.widgetproject.MESSAGE";
+    public static final String INTENT_MESSAGE_EXTRA = "message_extra";
+
     //layout
     private Button mBtStart;
     private TextView mWelcomeTxt;
