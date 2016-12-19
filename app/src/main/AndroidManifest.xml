@@ -69,7 +69,10 @@
                 android:resource="@xml/widget_info" />
         </receiver>
 
-        <activity android:name=".ui.EstatisticasActivity"></activity>
+        <activity android:name=".ui.EstatisticasActivity"
+            android:label="@string/title_activity_estatisticas"
+            android:theme="@style/AppTheme.NoActionBar"
+            ></activity>
     </application>
 
 </manifest>
