@@ -16,6 +16,7 @@ public class PerguntaMigration extends Migration {
         this.addField(new Field(false, false, "nRespostasErradas", "NUMERIC"));
         this.addField(new Field(false, false, "acertou", "NUMERIC"));
         this.addField(new Field(false, false, "stringAleatoria", "VARCHAR(15)"));
+        this.addField(new Field(false, false, "respostaActual", "VARCHAR(15)"));
         this.setCreate(this.generateCreate());
         this.setUpgrade(this.generateUpgrade());
 
