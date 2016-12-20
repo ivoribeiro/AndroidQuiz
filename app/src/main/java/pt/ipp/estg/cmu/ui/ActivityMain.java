@@ -34,7 +34,6 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
         mPontos = mCategoriaRepo.getPontuacaoJogo();
         mUserName = mJogador.getUsername();
 
-
         mBtStart = (Button) findViewById(R.id.bt_start_game);
         mUserNameTxt = (TextView) findViewById(R.id.user_text);
         mWelcomeTxt = (TextView) findViewById(R.id.welcome_user);

@@ -70,7 +70,7 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
         mHeaderLayout = (LinearLayout) header.findViewById(R.id.header_layout);
 
         mRepository = new JogadorRepo(this);
-        new DbHandler(this, "androidQuiz.db");
+        new DbHandler(this, DbHandler.DATABASE_NAME);
         mJogador = this.mRepository.getById(1);
         mUserText.setText(mJogador.getUsername());
 

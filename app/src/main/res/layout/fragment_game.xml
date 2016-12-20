@@ -1,51 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_activity_question"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context="pt.ipp.estg.cmu.ui.GameFragment"
     tools:showIn="@layout/activity_game">
 
     <LinearLayout
-        android:id="@+id/hint_score_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/hint_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/shape"
-            android:padding="5dp"
-            android:text="5 ajudas"
-            android:textColor="@color/primary_light"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/score_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/shape"
-            android:padding="5dp"
-            android:text="100 pontos"
-            android:textColor="@color/primary_light"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
         android:id="@+id/question_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/hint_score_layout"
         android:background="@color/primary_light"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
@@ -78,7 +46,6 @@
         android:id="@+id/answer_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/question_layout"
         android:layout_margin="@dimen/divider_margin"
         android:gravity="center"
         android:orientation="horizontal">
@@ -89,22 +56,19 @@
         android:id="@+id/view_divider"
         android:layout_width="match_parent"
         android:layout_height="3dp"
-        android:layout_below="@+id/answer_layout"
         android:layout_margin="@dimen/view_divider_margin"
         android:background="@color/primary_dark" />
 
     <TableLayout
         android:id="@+id/game_table_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/view_divider">
+        android:layout_height="wrap_content">
 
     </TableLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -126,4 +90,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

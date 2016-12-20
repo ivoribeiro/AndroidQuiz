@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterViewPager;
 import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
-import pt.ipp.estg.cmu.interfaces.ClickQuestionListener;
+import pt.ipp.estg.cmu.interfaces.GameInterfaceListener;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
 import pt.ipp.estg.cmu.util.Util;
 
-public class GameActivity extends AppCompatActivity implements ClickQuestionListener, ViewPager.OnPageChangeListener {
+public class GameActivity extends AppCompatActivity implements GameInterfaceListener, ViewPager.OnPageChangeListener {
 
     private static final int WAIT_MSECS = 2000;
     private int NUM_SWIPE_PAGES = 2;
@@ -29,44 +29,67 @@ public class GameActivity extends AppCompatActivity implements ClickQuestionList
     private ViewPager mViewPager;
     private TextView mLevelInfoText;
     private TextView mQuestionInfoText;
+    private TextView mHintInfo;
+    private TextView mScoreInfo;
 
     //data
-    private Nivel mLevelInfo;
-    private Categoria mCategoriaInfo;
+    private Nivel mNivel;
+    private Categoria mCategoria;
 
-    private PerguntaRepo repo;
+    private PerguntaRepo mRepository;
     private int nPerguntas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        mLevelInfo = getIntent().getParcelableExtra(Util.ARG_LEVEL);
-        mCategoriaInfo = getIntent().getParcelableExtra(Util.ARG_CATEGORIE);
+
+        mNivel = getIntent().getParcelableExtra(Util.ARG_LEVEL);
+        mCategoria = getIntent().getParcelableExtra(Util.ARG_CATEGORIE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(mCategoriaInfo.getNome());
+        toolbar.setTitle(mCategoria.getNome());
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mQuestionInfoText = (TextView) findViewById(R.id.question_info_text);
         mLevelInfoText = (TextView) findViewById(R.id.level_info_text);
-        mLevelInfoText.setText(mLevelInfo.getNumero());
+        mHintInfo = (TextView) findViewById(R.id.hint_info);
+        mScoreInfo = (TextView) findViewById(R.id.score_info);
+
+        mLevelInfoText.setText(mNivel.getNumero());
+        mHintInfo.setText(mNivel.getnAjudas() + " " + getResources().getString(R.string.ajudas_restantes));
+        mScoreInfo.setText(mNivel.getPontuacao() + " " + getResources().getString(R.string.pontos_ganhos));
 
         AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager());
-        this.repo = new PerguntaRepo(this.getApplicationContext());
-        ArrayList<Pergunta> perguntas = this.repo.getAllByNivel(mLevelInfo.getId());
+        mRepository = new PerguntaRepo(this.getApplicationContext());
+        ArrayList<Pergunta> perguntas = mRepository.getAllByNivel(mNivel.getId());
 
-        this.nPerguntas = perguntas.size();
+        nPerguntas = perguntas.size();
         int i = 0;
         for (Pergunta pergunta : perguntas) {
-            adapter.addFragment(GameFragment.newInstance(mLevelInfo, pergunta));
+            adapter.addFragment(GameFragment.newInstance(mNivel, pergunta));
             i++;
         }
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mViewPager.setAdapter(adapter);
         mViewPager.setOnPageChangeListener(this);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        mQuestionInfoText.setText(position + 1 + "/" + nPerguntas);
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
     @Override
@@ -89,19 +112,13 @@ public class GameActivity extends AppCompatActivity implements ClickQuestionList
         }, WAIT_MSECS);
     }
 
-
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        mQuestionInfoText.setText(position + 1 + "/" + this.nPerguntas);
+    public void setHint(int hints) {
+        mHintInfo.setText(mNivel.getnAjudas() + " " + getResources().getString(R.string.ajudas_restantes));
     }
 
     @Override
-    public void onPageSelected(int position) {
-
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
+    public void setScore(int score) {
+        mScoreInfo.setText(mNivel.getPontuacao() + " " + getResources().getString(R.string.pontos_ganhos));
     }
 }

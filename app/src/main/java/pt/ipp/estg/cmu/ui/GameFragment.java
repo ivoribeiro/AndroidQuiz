@@ -15,12 +15,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.repositories.NivelRepo;
 import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
-import pt.ipp.estg.cmu.interfaces.ClickQuestionListener;
+import pt.ipp.estg.cmu.interfaces.GameInterfaceListener;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
 import pt.ipp.estg.cmu.util.Util;
@@ -35,7 +34,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private static final int ROW_2 = 9;
     private static final int ROW_3 = 14;
 
-    private ClickQuestionListener mListener;
+    private GameInterfaceListener mListener;
     private Nivel mNivel;
     private Pergunta mPergunta;
     private NivelRepo mNivelRepository;
@@ -47,8 +46,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private ImageView mImageView;
     private ImageButton mResetButton;
     private ImageButton mHintButton;
-    private TextView mHintInfo;
-    private TextView mScoreInfo;
+
+    //private TextView mHintInfo;
+    //private TextView mScoreInfo;
 
     //resposta
     private String mCorrectAnswerConcat;
@@ -87,8 +87,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         mTableLayout = (TableLayout) view.findViewById(R.id.game_table_layout);
         mResetButton = (ImageButton) view.findViewById(R.id.reset);
         mHintButton = (ImageButton) view.findViewById(R.id.hint);
-        mHintInfo = (TextView) view.findViewById(R.id.hint_info);
-        mScoreInfo = (TextView) view.findViewById(R.id.score_info);
         mImageView = (ImageView) view.findViewById(R.id.question_image);
 
         mHintButton.setOnClickListener(this);
@@ -105,8 +103,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mHintInfo.setText(mNivel.getnAjudas() + " " + getContext().getResources().getString(R.string.ajudas_restantes));
-        mScoreInfo.setText(mNivel.getPontuacao() + " " + getContext().getResources().getString(R.string.pontos_ganhos));
 
         Bitmap bitmap = BitmapFactory.decodeFile(mPergunta.getImagem());
         mImageView.setImageBitmap(bitmap);
@@ -226,10 +222,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
      * Actualiza o layout
      */
     private void decrementAjuda() {
-        if (this.mNivel.getnAjudas() > 0) {
-            this.mNivel.decrementnAjudas();
-            this.mHintInfo.setText("" + this.mNivel.getnAjudas() + " " + getContext().getResources().getString(R.string.ajudas_restantes));
-            this.mNivelRepository.updateNivel(this.mNivel);
+        if (mNivel.getnAjudas() > 0) {
+            mNivel.decrementnAjudas();
+            mNivelRepository.updateNivel(mNivel);
+            mListener.setHint(mNivel.getnAjudas());
         } else {
             //TODO mostrar mensagem
         }
@@ -239,17 +235,18 @@ public class GameFragment extends Fragment implements View.OnClickListener {
      * Incrementa ao mNivel a pontuacão de uma resposta certa
      */
     private void incrementPontosNivel() {
-        this.mNivel.addPontuacao(this.mNivel.getPontuacaoBase());
-        this.mScoreInfo.setText(this.mNivel.getPontuacao() + " " + getContext().getResources().getString(R.string.pontos_ganhos));
+        mNivel.addPontuacao(mNivel.getPontuacaoBase());
+        mListener.setScore(mNivel.getPontuacaoBase());
+
     }
 
     /**
      * Decrementa ao mNivel a pontuacão de uma resposta errada
      */
     private void decrementPontosNivel() {
-        if (this.mNivel.getPontuacao() - this.mNivel.getPontuacaoBaseErrada() >= 0) {
-            this.mNivel.removePontuacao(this.mNivel.getPontuacaoBaseErrada());
-            this.mScoreInfo.setText(this.mNivel.getPontuacao() + " " + getContext().getResources().getString(R.string.pontos_ganhos));
+        if (mNivel.getPontuacao() - mNivel.getPontuacaoBaseErrada() >= 0) {
+            mNivel.removePontuacao(mNivel.getPontuacaoBaseErrada());
+            mListener.setScore(mNivel.getPontuacaoBase());
         }
     }
 

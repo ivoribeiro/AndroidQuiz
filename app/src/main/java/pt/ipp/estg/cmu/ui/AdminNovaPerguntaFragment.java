@@ -26,6 +26,7 @@ import java.io.File;
 import java.sql.Timestamp;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.db.repositories.NivelRepo;
 import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
@@ -43,7 +44,8 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
 
     private Nivel mNivel;
     private Pergunta mPergunta;
-    private PerguntaRepo mRepository;
+    private PerguntaRepo mRepositoryPergunta;
+    private NivelRepo mRepositoryNivel;
     private String mImagemPathText;
 
     private boolean editMode;
@@ -85,7 +87,8 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             mPergunta = getArguments().getParcelable(Util.ARG_QUESTION);
             editMode = true;
         }
-        mRepository = new PerguntaRepo(getContext());
+        mRepositoryPergunta = new PerguntaRepo(getContext());
+        mRepositoryNivel = new NivelRepo(getContext());
 
         //image com o nome do timestamp
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -226,7 +229,10 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             p.setStringAleatoria(respostaRandom);
 
             //TODO call update/insert function
-            mRepository.insertInto(p);
+            mRepositoryPergunta.insertInto(p);
+            mNivel.addnPerguntas();
+            mRepositoryNivel.updateNivel(mNivel);
+
 
             getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         } else {

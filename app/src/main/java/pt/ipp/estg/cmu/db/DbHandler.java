@@ -16,6 +16,8 @@ public class DbHandler extends SQLiteOpenHelper {
      */
 
     private static final int DATABASE_VERSION = 2;
+    public static final String DATABASE_NAME = "androidQuiz.db";
+
     private ArrayList<pt.ipp.estg.cmu.db.migrations.Migration> migrations;
 
     public DbHandler(Context context, String db) {

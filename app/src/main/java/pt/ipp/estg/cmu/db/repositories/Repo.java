@@ -13,7 +13,7 @@ public class Repo<T> extends DbHandler {
     private HashMap<String, Field> fields;
 
     public Repo(Context context, String table) {
-        super(context, "androidQuiz.db");
+        super(context, DbHandler.DATABASE_NAME);
         this.table = table;
         this.fields = new HashMap<>();
     }
