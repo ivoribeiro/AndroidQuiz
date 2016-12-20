@@ -25,15 +25,10 @@ import pt.ipp.estg.cmu.util.Util;
  */
 public class LevelFragment extends Fragment {
 
-    //KEY
-    private static final String KEY_LEVEL = "KEY_LEVEL";
-    private static final String KEY_CATEGORIA = "KEY_CATEGORIA";
-
     //layout
     private int NUM_COLUMNS = 1;
     private RecyclerView mRecyclerView;
     private boolean isAdmin;
-
 
     //data
     private AdapterLevelList mAdapter;
@@ -47,7 +42,7 @@ public class LevelFragment extends Fragment {
     public static LevelFragment newInstance(Categoria categoria, boolean isAdmin) {
         Bundle args = new Bundle();
         LevelFragment fragment = new LevelFragment();
-        args.putParcelable(KEY_CATEGORIA, categoria);
+        args.putParcelable(Util.ARG_CATEGORIE, categoria);
         args.putBoolean(Util.ARG_ADMIN, isAdmin);
         fragment.setArguments(args);
         return fragment;
@@ -57,7 +52,7 @@ public class LevelFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mCategoria = getArguments().getParcelable(KEY_CATEGORIA);
+            mCategoria = getArguments().getParcelable(Util.ARG_CATEGORIE);
             isAdmin = getArguments().getBoolean(Util.ARG_ADMIN);
         }
     }
@@ -73,7 +68,7 @@ public class LevelFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.mRepository = new NivelRepo(getContext());
+        mRepository = new NivelRepo(getContext());
         mNiveis = getAllNiveis();
         mAdapter = new AdapterLevelList(getActivity(), mNiveis, mCategoria, isAdmin);
         mRecyclerView.setAdapter(mAdapter);
@@ -86,6 +81,6 @@ public class LevelFragment extends Fragment {
     }
 
     private ArrayList<Nivel> getAllNiveis() {
-        return this.mRepository.getAllByCategoria(this.mCategoria.getNome());
+        return mRepository.getAllByCategoria(mCategoria.getNome());
     }
 }

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ public class GameActivity extends AppCompatActivity implements GameInterfaceList
     private TextView mQuestionInfoText;
     private TextView mHintInfo;
     private TextView mScoreInfo;
+    private Toolbar mToolbar;
 
     //data
     private Nivel mNivel;
@@ -47,10 +49,18 @@ public class GameActivity extends AppCompatActivity implements GameInterfaceList
         mNivel = getIntent().getParcelableExtra(Util.ARG_LEVEL);
         mCategoria = getIntent().getParcelableExtra(Util.ARG_CATEGORIE);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(mCategoria.getNome());
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle(mCategoria.getNome());
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
 
         mQuestionInfoText = (TextView) findViewById(R.id.question_info_text);
         mLevelInfoText = (TextView) findViewById(R.id.level_info_text);
@@ -120,5 +130,10 @@ public class GameActivity extends AppCompatActivity implements GameInterfaceList
     @Override
     public void setScore(int score) {
         mScoreInfo.setText(mNivel.getPontuacao() + " " + getResources().getString(R.string.pontos_ganhos));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

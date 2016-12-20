@@ -17,15 +17,22 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     //layout
     private boolean isAdmin;
     private FloatingActionButton mFab;
-
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         mCategoria = getIntent().getParcelableExtra(Util.ARG_CATEGORIE);
         isAdmin = getIntent().getBooleanExtra(Util.ARG_ADMIN, false);
@@ -56,12 +63,6 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
     public void onBackPressed() {
         super.onBackPressed();
         if (isAdmin) {
@@ -69,5 +70,6 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             mFab.setImageResource(R.drawable.ic_add);
         }
     }
+
 
 }
