@@ -83,4 +83,11 @@
     <!--RecyclerSwipeTouchHelper -->
     <string name="snack_deleted">Apagar</string>
     <string name="snack_undo">Anular</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_estatisticas">Estatisticas</string>
+    <string name="nPerguntas">Número de perguntas do jogo</string>
+    <string name="n_perguntas_categoria_label">Número de perguntas por categoria</string>
+    <string name="n_perguntas_nivel_label">Número de perguntas por nivel</string>
 </resources>

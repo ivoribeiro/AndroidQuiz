@@ -57,6 +57,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pt.ipp.estg.cmu.ui.LevelActivity" />
         </activity>
+
+        <receiver android:name=".MyBroadcastReceiverWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name=".MESSAGE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+
+        <activity android:name=".ui.EstatisticasActivity"
+            android:label="@string/title_activity_estatisticas"
+            android:theme="@style/AppTheme.NoActionBar"
+            ></activity>
     </application>
 
 </manifest>
