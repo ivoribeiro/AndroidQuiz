@@ -52,7 +52,6 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     private boolean checkedPreviewImage;
 
     //layout
-
     private EditText mRespostaText;
     private FloatingActionButton mFab;
     private Button mDownloadBt;

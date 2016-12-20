@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
+import java.util.Random;
+
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.repositories.NivelRepo;
 import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
@@ -47,13 +49,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private ImageButton mResetButton;
     private ImageButton mHintButton;
 
-    //private TextView mHintInfo;
-    //private TextView mScoreInfo;
-
     //resposta
     private String mCorrectAnswerConcat;
-    private String mUserCorrectAnswer;
-    private int mAtualCorrectIndex;
+    private String[] mUserAnswerArray;
+    private int mUserAnswerIndex;
 
     public GameFragment() {
     }
@@ -77,6 +76,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         }
         mPerguntaRepository = new PerguntaRepo(this.getContext());
         mNivelRepository = new NivelRepo(this.getContext());
+
+        mUserAnswerArray = new String[mCorrectAnswerConcat.length()];
+
     }
 
     @Override
@@ -106,7 +108,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
         Bitmap bitmap = BitmapFactory.decodeFile(mPergunta.getImagem());
         mImageView.setImageBitmap(bitmap);
-
         createLayout();
     }
 
@@ -120,7 +121,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.hint:
-                this.decrementAjuda();
+                setHintLetter();
                 break;
             case R.id.reset:
                 createLayout();
@@ -131,8 +132,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private void createLayout() {
         buildLayoutGame();
         buildLayoutAnswer();
-        mUserCorrectAnswer = "";
-        mAtualCorrectIndex = 0;
+        mUserAnswerArray = new String[mCorrectAnswerConcat.length()];
+        mUserAnswerIndex = 0;
     }
 
     /**
@@ -146,9 +147,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             if (mPergunta.getRespostaCerta().charAt(i) == ' ') {
                 mAnswerLayout.addView(UtilUI.newView(getActivity()));
             } else {
-                Button b = UtilUI.newButton(getActivity(), ' ');
-                b.setId(index++);
-                mAnswerLayout.addView(b);
+                Button bt = UtilUI.newButton(getActivity(), ' ');
+                bt.setId(index++);
+                mAnswerLayout.addView(bt);
             }
         }
     }
@@ -161,22 +162,21 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         TableRow row = new TableRow(getActivity());
         TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 1.0f);
         for (int i = 0; i < mPergunta.getStringAleatoria().length(); ++i) {
-            final Button b = UtilUI.newButton(getActivity(), mPergunta.getStringAleatoria().charAt(i));
-            b.setOnClickListener(new View.OnClickListener() {
+            final Button bt_game = UtilUI.newButton(getActivity(), mPergunta.getStringAleatoria().charAt(i));
+            bt_game.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //int indexChar = mCorrectAnswerConcat.indexOf(b.getText().toString());
-                    Button b2 = (Button) mAnswerLayout.findViewById(mAtualCorrectIndex);
-                    if (b2 != null) {
-                        b2.setText(b.getText());
-                        b.setVisibility(View.INVISIBLE);
-                        ++mAtualCorrectIndex;
-                        mUserCorrectAnswer = mUserCorrectAnswer + b.getText();
+                    Button bt_answer = (Button) mAnswerLayout.findViewById(mUserAnswerIndex);
+                    if (bt_answer != null) {
+                        bt_answer.setText(bt_game.getText());
+                        bt_game.setVisibility(View.INVISIBLE);
+                        mUserAnswerArray[mUserAnswerIndex] = bt_game.getText().toString();//array com cada letra da resposta do user, preenchido a medida que vai respondendo
+                        ++mUserAnswerIndex;
                         checkIfIsFinished();
                     }
                 }
             });
-            row.addView(b, params);
+            row.addView(bt_game, params);
             if (i == ROW_1 || i == ROW_2 || i == ROW_3) {
                 mTableLayout.addView(row);
                 row = new TableRow(getActivity());
@@ -190,28 +190,24 @@ public class GameFragment extends Fragment implements View.OnClickListener {
      * retira pontuacao ao mNivel se respondeu de forma errada
      */
     private void checkIfIsFinished() {
-        if (mUserCorrectAnswer.length() == mCorrectAnswerConcat.length()) {
-            if (mUserCorrectAnswer.equals(mCorrectAnswerConcat)) {
+        if (mUserAnswerIndex == mCorrectAnswerConcat.length()) {
+            if (arrayToString().equals(mCorrectAnswerConcat)) {
+                incrementPontosNivel();
                 mListener.setAnswered(true);
-                //incrementa os pontos ganhos ao mNivel
-                this.incrementPontosNivel();
-                //muda o estado da mPergunta para acertou
-                this.mPergunta.setAcertou(true);
-                //adiciona resposta certa ao mNivel
-                this.mNivel.addnRespostasCertas();
-                //hint e reset buttons gone
+                mPergunta.setAcertou(true);
+                mNivel.addnRespostasCertas();
                 mHintButton.setVisibility(View.GONE);
                 mResetButton.setVisibility(View.GONE);
                 //save on bd
-                this.mNivelRepository.updateNivel(this.mNivel);
-                this.mPerguntaRepository.updatePergunta(this.mPergunta);
+                mNivelRepository.updateNivel(mNivel);
+                mPerguntaRepository.updatePergunta(mPergunta);
             } else {
+                decrementPontosNivel();
                 mListener.setAnswered(false);
-                this.decrementPontosNivel();
-                this.mPergunta.addRespostasErradas();
+                mPergunta.addRespostasErradas();
+                mNivelRepository.updateNivel(mNivel);
+                mPerguntaRepository.updatePergunta(mPergunta);
                 createLayout();
-                this.mNivelRepository.updateNivel(this.mNivel);
-                this.mPerguntaRepository.updatePergunta(this.mPergunta);
             }
         }
     }
@@ -237,7 +233,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private void incrementPontosNivel() {
         mNivel.addPontuacao(mNivel.getPontuacaoBase());
         mListener.setScore(mNivel.getPontuacaoBase());
-
     }
 
     /**
@@ -251,4 +246,32 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    private String arrayToString() {
+        String result = "";
+        for (int i = 0; i < mUserAnswerIndex; ++i) {
+            result += mUserAnswerArray[i];
+        }
+        return result;
+    }
+
+    private void setHintLetter() {
+        if (mNivel.getnAjudas() > 0) {
+            Random random = new Random();
+            int low = 0;
+            int high = mCorrectAnswerConcat.length();
+            int result;
+            do {
+                result = random.nextInt(high - low) + low;
+            } while (null != mUserAnswerArray[result]);
+            Button bt_answer = (Button) mAnswerLayout.findViewById(result);
+            if (null != bt_answer) {
+                char hint = mCorrectAnswerConcat.charAt(result);
+                bt_answer.setText(hint + "");
+                mUserAnswerArray[result] = hint + "";
+                ++mUserAnswerIndex;
+                checkIfIsFinished();
+                decrementAjuda();
+            }
+        }
+    }
 }
