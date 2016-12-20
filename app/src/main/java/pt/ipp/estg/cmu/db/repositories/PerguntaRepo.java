@@ -24,6 +24,7 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
         this.addField("RESPOSTAS_ERRADAS", "nRespostasErradas");
         this.addField("ACERTOU", "acertou");
         this.addField("STRING_ALEATORIA", "stringAleatoria");
+        this.addField("RESPOSTA_ACTUAL", "respostaActual");
     }
 
     @Override
@@ -47,6 +48,7 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
                 pergunta.setnRespostasErradas(cursor.getInt(4));
                 pergunta.setAcertou(cursor.getInt(5) == 1 ? true : false);
                 pergunta.setStringAleatoria(cursor.getString(6));
+                pergunta.setRespostaActual(cursor.getString(7));
                 perguntas.add(pergunta);
             } while (cursor.moveToNext());
         }
@@ -71,6 +73,7 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
         values.put(this.getField("RESPOSTAS_ERRADAS"), 0);
         values.put(this.getField("ACERTOU"), 0);
         values.put(this.getField("STRING_ALEATORIA"), pergunta.getStringAleatoria());
+        values.put(this.getField("RESPOSTA_ACTUAL"), pergunta.getRespostaActual());
         db.insert(this.getTable(), null, values);
         db.close();
         return pergunta;

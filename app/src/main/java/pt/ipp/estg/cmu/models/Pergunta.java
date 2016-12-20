@@ -12,6 +12,17 @@ public class Pergunta implements Parcelable {
     private int nRespostasErradas;
     private boolean acertou;
     private String stringAleatoria;
+    private String respostaActual;
+
+
+    public String getRespostaActual() {
+        return respostaActual;
+    }
+
+    public void setRespostaActual(String respostaActual) {
+        this.respostaActual = respostaActual;
+    }
+
 
     public String getStringAleatoria() {
         return stringAleatoria;
@@ -98,11 +109,11 @@ public class Pergunta implements Parcelable {
         parcel.writeInt(id);
         parcel.writeInt(nivel);
         parcel.writeString(imagem);
-
         parcel.writeString(respostaCerta);
         parcel.writeInt(nRespostasErradas);
         parcel.writeValue(acertou);
         parcel.writeString(stringAleatoria);
+        parcel.writeString(respostaActual);
 
 
     }
@@ -127,5 +138,6 @@ public class Pergunta implements Parcelable {
         nRespostasErradas = in.readInt();
         acertou = in.readByte() != 0;
         stringAleatoria = in.readString();
+        respostaActual = in.readString();
     }
 }
