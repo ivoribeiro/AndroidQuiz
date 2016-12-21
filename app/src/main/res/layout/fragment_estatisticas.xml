@@ -18,13 +18,58 @@
         android:orientation="vertical">
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estatisticas do Jogo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pontuacao_estatisticas_jogo_label" />
+
+        <TextView
+            android:id="@+id/pontuacao_estatisticas_jogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
             android:id="@+id/nPerguntasLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/nPerguntas" />
 
         <TextView
-            android:id="@+id/nPerguntas"
+            android:id="@+id/n_perguntas_estatisticas_jogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/n_respostas_certas_estatisticas_jogo_label" />
+
+        <TextView
+            android:id="@+id/n_respostas_certas_estatisticas_jogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/n_respostas_erradas_estatisticas_jogo_label" />
+
+        <TextView
+            android:id="@+id/n_respostas_erradas_estatisticas_jogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/n_ajudas_usadas_estatisticas_jogo_label" />
+
+        <TextView
+            android:id="@+id/n_ajudas_usadas_estatisticas_jogo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

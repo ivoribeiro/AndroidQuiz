@@ -20,7 +20,7 @@ public class EstatisticasActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.frame_layout, EstatisticasFragment.newInstance("teste","teste"))
+                .add(R.id.frame_layout, EstatisticasFragment.newInstance())
                 .commit();
     }
 }

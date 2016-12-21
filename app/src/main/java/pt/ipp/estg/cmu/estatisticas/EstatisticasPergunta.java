@@ -1,8 +1,10 @@
 package pt.ipp.estg.cmu.estatisticas;
 
-/**
- * Created by ivo on 19-12-2016.
- */
+import android.content.Context;
 
 public class EstatisticasPergunta {
+
+
+    public EstatisticasPergunta(Context context) {
+    }
 }

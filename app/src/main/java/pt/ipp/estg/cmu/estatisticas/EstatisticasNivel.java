@@ -1,13 +1,8 @@
 package pt.ipp.estg.cmu.estatisticas;
 
 import android.content.Context;
-
 import pt.ipp.estg.cmu.db.repositories.NivelRepo;
 import pt.ipp.estg.cmu.models.Nivel;
-
-/**
- * Created by ivo on 19-12-2016.
- */
 
 public class EstatisticasNivel {
 
@@ -61,4 +56,5 @@ public class EstatisticasNivel {
     public int getnAjudasUsadas() {
         return 0;
     }
+
 }

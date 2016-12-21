@@ -109,7 +109,7 @@ public class CategoriaRepo extends Repo implements RepositoryInterface<Categoria
         }
         return pontuacao;
     }
-
+//TODO retirar daqui e deixar so nas estatisticas do jogo
     /**
      * Retorna a soma de todas as pontuacoes da categorias
      *

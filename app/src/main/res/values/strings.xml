@@ -90,4 +90,8 @@
     <string name="nPerguntas">Número de perguntas do jogo</string>
     <string name="n_perguntas_categoria_label">Número de perguntas por categoria</string>
     <string name="n_perguntas_nivel_label">Número de perguntas por nivel</string>
+    <string name="pontuacao_estatisticas_jogo_label">Pontuação do Jogo</string>
+    <string name="n_respostas_certas_estatisticas_jogo_label">Número de respostas certas no jogo</string>
+    <string name="n_respostas_erradas_estatisticas_jogo_label">Número de respostas erradas no jogo</string>
+    <string name="n_ajudas_usadas_estatisticas_jogo_label">Número de ajudas usadas no jogo</string>
 </resources>

@@ -116,4 +116,33 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
         db.close();
         return pergunta;
     }
+
+    public int count(String query) {
+        int num = 0;
+        SQLiteDatabase db = super.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            num = cursor.getInt(0);
+        }
+        cursor.close();
+        db.close();
+        return num;
+    }
+
+    public int countAll() {
+        String query = "SELECT count(id) FROM pergunta;";
+        return count(query);
+    }
+
+    public int countCertas() {
+        String query = "SELECT count(id) FROM pergunta WHERE acertou = 1;";
+        return count(query);
+    }
+
+    public int sumErradas() {
+        String query = "SELECT sum(nRespostasErradas) FROM pergunta;";
+        return count(query);
+    }
+
+
 }
