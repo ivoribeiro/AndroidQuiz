@@ -55,9 +55,9 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
         holder.mScore.setText(mDataSet.get(position).getPontuacao() + " " + score);
 
         if (!state) {
-            holder.mImageState.setBackground(mContext.getDrawable(R.drawable.ic_correct));
+            holder.mImageState.setBackground(mContext.getDrawable(R.drawable.img_correct));
         } else {
-            holder.mImageState.setBackground(mContext.getDrawable(R.drawable.ic_lock));
+            holder.mImageState.setBackground(mContext.getDrawable(R.drawable.img_lock));
         }
 
         holder.mProgressBar.setMax(mDataSet.get(position).getnPerguntas());

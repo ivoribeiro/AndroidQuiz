@@ -51,7 +51,7 @@
                     android:layout_width="@dimen/first_image_size"
                     android:layout_height="@dimen/first_image_size"
                     android:layout_gravity="center"
-                    android:background="@drawable/ic_cup" />
+                    android:background="@drawable/img_cup" />
 
                 <TextView
                     android:id="@+id/txt_score"

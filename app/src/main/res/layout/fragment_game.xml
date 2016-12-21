@@ -23,7 +23,7 @@
             android:layout_width="@dimen/arrow_size"
             android:layout_height="@dimen/arrow_size"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/ic_arrow_left"
+            android:background="@drawable/vt_arrow_left"
             android:backgroundTint="@color/primary_dark" />
 
         <ImageView
@@ -36,7 +36,7 @@
             android:layout_width="@dimen/arrow_size"
             android:layout_height="@dimen/arrow_size"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/ic_arrow_right"
+            android:background="@drawable/vt_arrow_right"
             android:backgroundTint="@color/primary_dark" />
 
     </LinearLayout>

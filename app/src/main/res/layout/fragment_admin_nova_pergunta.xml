@@ -27,7 +27,7 @@
                 android:layout_width="@dimen/nova_pergunta_not_found_size"
                 android:layout_height="@dimen/nova_pergunta_not_found_size"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/ic_not_found" />
+                android:background="@drawable/img_not_found" />
 
 
             <TextView

@@ -1,8 +1,13 @@
 package pt.ipp.estg.cmu.util;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -28,5 +33,22 @@ public class UtilUI {
         view.setLayoutParams(params);
         return view;
     }
+
+
+    /**
+     * Animacoes para o setup
+     * @param context
+     * @param v
+     * @param animationId
+     * @param offset
+     */
+
+    public static void setViewAnimation(Context context, View v, int animationId, int offset) {
+        Animation animation = AnimationUtils.loadAnimation(context.getApplicationContext(), animationId);
+        if (offset > 0)
+            animation.setStartOffset(offset);
+        v.startAnimation(animation);
+    }
+
 
 }

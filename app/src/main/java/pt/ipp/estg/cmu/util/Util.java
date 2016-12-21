@@ -5,6 +5,7 @@ import android.os.Environment;
 public class Util {
 
     //argument strings
+    public static final String APP_TAG = "CMUQUIZ";
     public static final String ARG_LEVEL = "LEVEL";
     public static final String ARG_QUESTION = "QUESTION";
     public static final String ARG_CATEGORIE = "CATEGORIE";

@@ -87,7 +87,44 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_estatisticas">Estatisticas</string>
+    <string name="title_activity_setup">Setup</string>
+    <string name="title_activity_fingerprint">Fingerprint</string>
     <string name="nPerguntas">Número de perguntas do jogo</string>
     <string name="n_perguntas_categoria_label">Número de perguntas por categoria</string>
     <string name="n_perguntas_nivel_label">Número de perguntas por nivel</string>
+
+
+    <!-- Fingerprint -->
+
+
+    <!-- PageSetupActivity-->
+    <string name="setup_page0_title">Bem vindo ao CMUQuiz</string>
+    <string name="setup_page0_subtitle">Onde os teus conhecimentos são postos a prova nas mais diversas categorias</string>
+
+    <string name="setup_page1_title">"Joga Ofline</string>
+    <string name="setup_page1_subtitle">Podes jogar em qualquer lado, mesmo quando não tens internet</string>
+
+    <string name="setup_page2_title">Partilha os teus score com outros jogadores</string>
+    <string name="setup_page2_subtitle">Podes comparar as tuas pontuações e ver como é a tua prestção face a outros utilizadores, desafia-te</string>
+
+    <string name="setup_page3_title">Escolhe o teu avatar e nickname</string>
+    <string name="setup_page3_subtitle">Escolhe um destes avatares e um nickname para te identificares online</string>
+
+    <string name="setup_page4_title">Configura a tua conta Admin</string>
+    <string name="setup_page4_subtitle">Escolhe um pin, e se o teu telemovel permitir, configura a impressão digital</string>
+
+    <string name="setup_skip">Avançar</string>
+    <string name="setup_finish">Concluir</string>
+
+    <string name="setup_edit_nickname_hint">Nickname</string>
+    <string name="setup_edit_pin_hint">PIN</string>
+    <string name="setup_toast_warning">Tens de preencher o teu nickname e escolher um avatar</string>
+    <string name="setup_toast_warning_pin">Tens de escolher um PIN</string>
+    <string name="setup_toast_avatar_sucess">Avatar escolhido com sucesso</string>
+
+    <string name="setup_fingerprint_teste">Testa o teu sensor</string>
+    <string name="setup_fingerprint_error_lockscreen">Sensor desativado</string>
+    <string name="setup_fingerprint_error_permission">Sem permissões para usar o sensor</string>
+    <string name="setup_fingerprint_error_register">Sem impressões digitais</string>
+
 </resources>

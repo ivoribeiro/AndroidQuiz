@@ -8,7 +8,7 @@
             android:title="@string/title_game" />
         <item
             android:id="@+id/nav_statistics"
-            android:icon="@drawable/ic_statistics"
+            android:icon="@drawable/vt_statistics"
             android:title="@string/title_statistics" />
 
         <item
@@ -24,7 +24,7 @@
 
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_menu_settings"
+            android:icon="@drawable/vt_menu_settings"
             android:title="@string/title_activity_settings" />
     </group>
 

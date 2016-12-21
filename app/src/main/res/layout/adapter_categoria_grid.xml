@@ -16,7 +16,7 @@
             android:id="@+id/categoria_image"
             android:layout_width="@dimen/categoria_image_size"
             android:layout_height="@dimen/categoria_image_size"
-            android:background="@drawable/ic_lock" />
+            android:background="@drawable/img_lock" />
 
         <TextView
             android:id="@+id/categoria_text"

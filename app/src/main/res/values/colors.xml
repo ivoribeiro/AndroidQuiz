@@ -9,4 +9,15 @@
     <color name="icons">#eee8fa</color>
     <color name="divider">#BDBDBD</color>
 
+
+    <!-- PageSetupActivity-->
+    <color name="indicator_unselected">#4D000000</color>
+    <color name="black_trans80">#14000000</color>
+    <color name="setup_color_0">#FF5722</color>
+    <color name="setup_color_1">#2196F3</color>
+    <color name="setup_color_2">#8BC34A</color>
+    <color name="setup_color_3">#FF9800</color>
+    <color name="setup_color_4">#FFEB3B</color>
+
+
 </resources>
