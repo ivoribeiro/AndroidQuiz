@@ -129,20 +129,39 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
         return num;
     }
 
+    /**
+     * Retorna o numero de perguntas existentes
+     *
+     * @return
+     */
     public int countAll() {
         String query = "SELECT count(id) FROM pergunta;";
         return count(query);
     }
 
+    /**
+     * Retorna o numero de perguntas que forram respondidas corretamente
+     *
+     * @return
+     */
     public int countCertas() {
         String query = "SELECT count(id) FROM pergunta WHERE acertou = 1;";
         return count(query);
     }
 
+    /**
+     * Soma do numero de todas as respostas erradas
+     *
+     * @return
+     */
     public int sumErradas() {
         String query = "SELECT sum(nRespostasErradas) FROM pergunta;";
         return count(query);
     }
 
 
+    public int getSumNivelErradas(int nivel) {
+        String query = "SELECT sum(nRespostasErradas) FROM pergunta WHERE nivel =" + nivel + ";";
+        return count(query);
+    }
 }

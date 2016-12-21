@@ -36,6 +36,8 @@ public class EstatisticasFragment extends Fragment {
     private TextView nRespostasCertasText;
     private TextView nRespostasErradasText;
     private TextView nAjudasUsadasText;
+    private TextView nPontuacaoGanhaText;
+    private TextView nPontuacaoPerdidaText;
     //---------------------------------------------
 
     public EstatisticasFragment() {
@@ -85,6 +87,10 @@ public class EstatisticasFragment extends Fragment {
         nRespostasErradasText.setText(""+mEstatisticasJogo.getnRespostasErradas());
         nAjudasUsadasText = (TextView) view.findViewById(R.id.n_ajudas_usadas_estatisticas_jogo);
         nAjudasUsadasText.setText(""+mEstatisticasJogo.getnAjudasUsadas());
+        nPontuacaoGanhaText = (TextView) view.findViewById(R.id.pontuacao_ganha_estatisticas_jogo);
+        nPontuacaoGanhaText.setText(""+mEstatisticasJogo.getPontuacaoGanha());
+        nPontuacaoPerdidaText = (TextView) view.findViewById(R.id.pontuacao_perdida_estatisticas_jogo);
+        nPontuacaoGanhaText.setText(""+mEstatisticasJogo.getPontuacaoPerdida());
         //-----------------------------------------------------------------------------
 
 

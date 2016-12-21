@@ -94,4 +94,6 @@
     <string name="n_respostas_certas_estatisticas_jogo_label">Número de respostas certas no jogo</string>
     <string name="n_respostas_erradas_estatisticas_jogo_label">Número de respostas erradas no jogo</string>
     <string name="n_ajudas_usadas_estatisticas_jogo_label">Número de ajudas usadas no jogo</string>
+    <string name="pontuacao_perdida_estatisticas_jogo_label">Pontuação perdida no jogo</string>
+    <string name="pontuacao_ganha_estatisticas_jogo_label">Pontuação ganha no jogo</string>
 </resources>

@@ -1,9 +1,6 @@
 package pt.ipp.estg.cmu.estatisticas;
 
 import android.content.Context;
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
@@ -56,4 +53,12 @@ public class EstatisticasJogo {
         return 0;
     }
 
+    public int getPontuacaoGanha() {
+        //somar toda a pontuacao das perguntas respondidas corretamente
+        return 0;
+    }
+
+    public int getPontuacaoPerdida() {
+        return 0;
+    }
 }

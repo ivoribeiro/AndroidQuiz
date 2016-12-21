@@ -13,7 +13,35 @@ public class Pergunta implements Parcelable {
     private boolean acertou;
     private String stringAleatoria;
     private String respostaActual;
+    private int nAjudasUsadas;
 
+    public Pergunta(int nivel, String imagem, String respostaCerta) {
+        this.nivel = nivel;
+        this.imagem = imagem;
+        this.respostaCerta = respostaCerta;
+    }
+
+    public Pergunta() {
+    }
+
+
+    /**
+     * Retorna o numero e ajudas usadas para esta pergunta
+     *
+     * @return
+     */
+    public int getnAjudasUsadas() {
+        return nAjudasUsadas;
+    }
+
+    /**
+     * Define o numero de ajudas usadas para esta pergunta
+     *
+     * @param nAjudasUsadas
+     */
+    public void setnAjudasUsadas(int nAjudasUsadas) {
+        this.nAjudasUsadas = nAjudasUsadas;
+    }
 
     public String getRespostaActual() {
         return respostaActual;
@@ -31,16 +59,6 @@ public class Pergunta implements Parcelable {
     public void setStringAleatoria(String stringAleatoria) {
         this.stringAleatoria = stringAleatoria;
     }
-
-    public Pergunta(int nivel, String imagem, String respostaCerta) {
-        this.nivel = nivel;
-        this.imagem = imagem;
-        this.respostaCerta = respostaCerta;
-    }
-
-    public Pergunta() {
-    }
-
 
     public int getId() {
         return id;
@@ -98,6 +116,8 @@ public class Pergunta implements Parcelable {
     public void setAcertou(boolean acertou) {
         this.acertou = acertou;
     }
+
+    //Parceable implementation
 
     @Override
     public int describeContents() {
