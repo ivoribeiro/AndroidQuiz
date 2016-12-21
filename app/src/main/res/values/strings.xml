@@ -8,6 +8,8 @@
     <!-- Activity Tiles Titles-->
     <string name="title_activity_main">CMU Quiz</string>
     <string name="title_statistics_main">Estatisticas</string>
+    <string name="title_activity_estatisticas">Estatisticas</string>
+    <string name="title_activity_setup">Estatisticas</string>
     <string name="title_activity_admin">Admin Area</string>
     <string name="title_activity_admin_pergunta">Perguntas</string>
 
@@ -84,9 +86,6 @@
     <string name="snack_deleted">Apagar</string>
     <string name="snack_undo">Anular</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_estatisticas">Estatisticas</string>
     <string name="nPerguntas">Número de perguntas do jogo</string>
     <string name="n_perguntas_categoria_label">Número de perguntas por categoria</string>
     <string name="n_perguntas_nivel_label">Número de perguntas por nivel</string>
@@ -125,6 +124,7 @@
     <string name="setup_fingerprint_error_permission">Sem permissões para usar o sensor</string>
     <string name="setup_fingerprint_error_register">Sem impressões digitais</string>
 
+    <!-- Estatisticas -->
     <string name="pontuacao_estatisticas_jogo_label">Pontuação do Jogo</string>
     <string name="n_respostas_certas_estatisticas_jogo_label">Número de respostas certas no jogo</string>
     <string name="n_respostas_erradas_estatisticas_jogo_label">Número de respostas erradas no jogo</string>

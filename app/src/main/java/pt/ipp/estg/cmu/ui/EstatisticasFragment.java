@@ -62,7 +62,8 @@ public class EstatisticasFragment extends Fragment {
         super.onAttach(context);
         mEstatisticasPergunta = new EstatisticasPergunta(context);
         mEstatisticasNivel = new EstatisticasNivel(context, 1);
-        mEstatisticasCategoria = new EstatisticasCategoria(context);
+        //mEstatisticasCategoria = new EstatisticasCategoria(context);
+        //TODO FIX THIS SHIT MODAFOCA
         mEstatisticasJogo = new EstatisticasJogo(context);
     }
 
