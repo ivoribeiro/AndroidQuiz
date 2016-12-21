@@ -164,4 +164,9 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
         String query = "SELECT sum(nRespostasErradas) FROM pergunta WHERE nivel =" + nivel + ";";
         return count(query);
     }
+
+    public int getSumNivelAjudasUsadas(int nivel) {
+        String query = "SELECT sum(nAjudasUsadas) FROM pergunta WHERE nivel =" + nivel + ";";
+        return count(query);
+    }
 }
