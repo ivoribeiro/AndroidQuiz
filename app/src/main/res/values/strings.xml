@@ -21,6 +21,20 @@
     <string name="title_activity_level">Nivel</string>
     <string name="title_activity_settings">Definições</string>
 
+
+    <!-- Nomes Categorias-->
+    <string name="cat_0">Cinema</string>
+    <string name="cat_1">Arte</string>
+    <string name="cat_2">Animais</string>
+    <string name="cat_3">Monumentos</string>
+    <string name="cat_4">Viagens</string>
+    <string name="cat_5">Fotografia</string>
+    <string name="cat_6">Tecnologia</string>
+    <string name="cat_7">Desporto</string>
+    <string name="cat_8">Moda</string>
+    <string name="cat_9">Comida</string>
+
+
     <!-- Activity Main-->
     <string name="hello_text">Olá</string>
     <string name="welcome_text">Bem-Vindo</string>
@@ -126,7 +140,6 @@
 
     <string name="setup_fingerprint_sucesso">Autenticação com sucesso</string>
     <string name="setup_fingerprint_error">Autenticação falhada</string>
-
 
 
     <!-- Estatisticas -->

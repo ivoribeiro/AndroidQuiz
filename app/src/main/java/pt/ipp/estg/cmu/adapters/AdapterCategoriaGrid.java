@@ -50,6 +50,7 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
     @Override
     public void onBindViewHolder(final AdapterCategoriaGrid.ViewHolder holder, final int position) {
         holder.mTitle.setText(mDataSet.get(position).getNome());
+        setImageResource(holder, position);
 
         if (isAdmin) {
             //MODO ADMIN
@@ -58,18 +59,18 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
             }
 
             holder.mCardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (mDataSet.get(position).isAtiva()) {
-                        mContext.startActivity(new Intent(mContext, LevelActivity.class)
-                                .putExtra(Util.ARG_CATEGORIE, mDataSet.get(position))
-                                .putExtra(Util.ARG_ADMIN, isAdmin));
-                    } else {
-                        Snackbar.make(mRecycler, mContext.getString(R.string.snack_bar_categorie_info), Snackbar.LENGTH_LONG).show();
-                    }
-                }
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        if (mDataSet.get(position).isAtiva()) {
+                                                            mContext.startActivity(new Intent(mContext, LevelActivity.class)
+                                                                    .putExtra(Util.ARG_CATEGORIE, mDataSet.get(position))
+                                                                    .putExtra(Util.ARG_ADMIN, isAdmin));
+                                                        } else {
+                                                            Snackbar.make(mRecycler, mContext.getString(R.string.snack_bar_categorie_info), Snackbar.LENGTH_LONG).show();
+                                                        }
+                                                    }
 
-            }
+                                                }
             );
 
             holder.mCardView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -117,14 +118,50 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
     class ViewHolder extends RecyclerView.ViewHolder {
         CardView mCardView;
         TextView mTitle;
-        ImageView mImageState;
+        ImageView mImageCategoria;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mCardView = (CardView) itemView.findViewById(R.id.card_view);
             mTitle = (TextView) itemView.findViewById(R.id.categoria_text);
-            mImageState = (ImageView) itemView.findViewById(R.id.categoria_image);
+            mImageCategoria = (ImageView) itemView.findViewById(R.id.categoria_image);
         }
+    }
+
+    private void setImageResource(AdapterCategoriaGrid.ViewHolder holder, int pos) {
+        switch (pos) {
+            case 0:
+                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_0));
+                break;
+            case 1:
+                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_1));
+                break;
+            case 2:
+                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_2));
+                break;
+            case 3:
+                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_3));
+                break;
+            case 4:
+                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_4));
+                break;
+            case 5:
+                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_5));
+                break;
+            case 6:
+                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_6));
+                break;
+            case 7:
+                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_7));
+                break;
+            case 8:
+                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_8));
+                break;
+            case 9:
+                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_9));
+                break;
+        }
+
     }
 
 }

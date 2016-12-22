@@ -30,13 +30,13 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categoria);
-        mNavigationView.setCheckedItem(R.id.nav_admin);
-
         isAdmin = getIntent().getBooleanExtra(Util.ARG_ADMIN, false);
 
         if (isAdmin) {
+            mNavigationView.setCheckedItem(R.id.nav_admin);
             buildDialog();
         } else {
+            mNavigationView.setCheckedItem(R.id.nav_game);
             startFragmetCategoria();
         }
     }
