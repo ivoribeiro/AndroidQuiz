@@ -137,6 +137,10 @@
     <string name="dialog_title">Sign In</string>
     <string name="dialog_bt_ok">Ok</string>
     <string name="dialog_bt_cancel">Cancelar</string>
+    <string name="tab_title_estatisticas_jogo">Estatísticas Jogo</string>
+    <string name="tab_title_estatisticas_categoria">Estatísticas Categoria</string>
+    <string name="tab_title_estatisticas_nivel">Estatísticas Nivel</string>
+    <string name="tab_title_estatisticas_pergunta">Estatísticas Pergunta</string>
 
 
 </resources>

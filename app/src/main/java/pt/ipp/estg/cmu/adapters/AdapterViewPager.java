@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +15,9 @@ public class AdapterViewPager extends FragmentPagerAdapter {
     public AdapterViewPager(FragmentManager manager) {
         super(manager);
         mFragmentList = new ArrayList<>();
-        mTitlesList = null;
+        mTitlesList = new ArrayList<String>();
     }
+
 
     @Override
     public Fragment getItem(int position) {
@@ -31,9 +33,13 @@ public class AdapterViewPager extends FragmentPagerAdapter {
         mFragmentList.add(fragment);
     }
 
+    public void addTitle(String title) {
+        mTitlesList.add(title);
+    }
+
     @Override
     public CharSequence getPageTitle(int position) {
-        return "";
+        return mTitlesList.size() != 0 ? mTitlesList.get(position) : "";
     }
 }
 

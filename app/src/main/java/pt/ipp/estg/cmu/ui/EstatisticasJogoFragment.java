@@ -1,13 +1,11 @@
 package pt.ipp.estg.cmu.ui;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
@@ -20,10 +18,9 @@ import pt.ipp.estg.cmu.estatisticas.EstatisticasPergunta;
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * to handle interaction events.
- * Use the {@link EstatisticasFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EstatisticasFragment extends Fragment {
+public class EstatisticasJogoFragment extends Fragment {
 
     private EstatisticasJogo mEstatisticasJogo;
     private EstatisticasCategoria mEstatisticasCategoria;
@@ -40,18 +37,16 @@ public class EstatisticasFragment extends Fragment {
     private TextView nPontuacaoPerdidaText;
     //---------------------------------------------
 
-    public EstatisticasFragment() {
+    public EstatisticasJogoFragment() {
         // Required empty public constructor
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment EstatisticasFragment.
      */
-    public static EstatisticasFragment newInstance() {
-        EstatisticasFragment fragment = new EstatisticasFragment();
+    public static EstatisticasJogoFragment newInstance() {
+        EstatisticasJogoFragment fragment = new EstatisticasJogoFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -76,22 +71,22 @@ public class EstatisticasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_estatisticas, container, false);
+        View view = inflater.inflate(R.layout.fragment_estatisticas_jogo, container, false);
         //---------------------------------Jogo----------------------------------------
         nPontuacaoText = (TextView) view.findViewById(R.id.pontuacao_estatisticas_jogo);
-        nPontuacaoText.setText(""+mEstatisticasJogo.getPontuacao());
+        nPontuacaoText.setText("" + mEstatisticasJogo.getPontuacao());
         nPerguntasText = (TextView) view.findViewById(R.id.n_perguntas_estatisticas_jogo);
-        nPerguntasText.setText(""+mEstatisticasJogo.getnPerguntas());
+        nPerguntasText.setText("" + mEstatisticasJogo.getnPerguntas());
         nRespostasCertasText = (TextView) view.findViewById(R.id.n_respostas_certas_estatisticas_jogo);
-        nRespostasCertasText.setText(""+mEstatisticasJogo.getnRespostasCertas());
+        nRespostasCertasText.setText("" + mEstatisticasJogo.getnRespostasCertas());
         nRespostasErradasText = (TextView) view.findViewById(R.id.n_respostas_erradas_estatisticas_jogo);
-        nRespostasErradasText.setText(""+mEstatisticasJogo.getnRespostasErradas());
+        nRespostasErradasText.setText("" + mEstatisticasJogo.getnRespostasErradas());
         nAjudasUsadasText = (TextView) view.findViewById(R.id.n_ajudas_usadas_estatisticas_jogo);
-        nAjudasUsadasText.setText(""+mEstatisticasJogo.getnAjudasUsadas());
+        nAjudasUsadasText.setText("" + mEstatisticasJogo.getnAjudasUsadas());
         nPontuacaoGanhaText = (TextView) view.findViewById(R.id.pontuacao_ganha_estatisticas_jogo);
-        nPontuacaoGanhaText.setText(""+mEstatisticasJogo.getPontuacaoGanha());
+        nPontuacaoGanhaText.setText("" + mEstatisticasJogo.getPontuacaoGanha());
         nPontuacaoPerdidaText = (TextView) view.findViewById(R.id.pontuacao_perdida_estatisticas_jogo);
-        nPontuacaoGanhaText.setText(""+mEstatisticasJogo.getPontuacaoPerdida());
+        nPontuacaoGanhaText.setText("" + mEstatisticasJogo.getPontuacaoPerdida());
         //-----------------------------------------------------------------------------
 
 
