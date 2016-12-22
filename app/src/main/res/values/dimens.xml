@@ -19,6 +19,7 @@
 
     <!-- ActivityBase -->
     <dimen name="avatar_size">80dp</dimen>
+
     <!-- ActivityMain -->
     <dimen name="text_padding">8dp</dimen>
     <dimen name="button_padding">16dp</dimen>
@@ -83,5 +84,10 @@
     <dimen name="setup_image_avatar">120dp</dimen>
     <dimen name="setup_custom_layout_padding">16dp</dimen>
     <dimen name="setup_fngerprint_size">60dp</dimen>
+
+    <!-- Dialog Sign In -->
+    <dimen name="layout_top_space">100dp</dimen>
+    <dimen name="layout_fingerprint_padding">20dp</dimen>
+
 
 </resources>
