@@ -109,19 +109,5 @@ public class CategoriaRepo extends Repo implements RepositoryInterface<Categoria
         }
         return pontuacao;
     }
-//TODO retirar daqui e deixar so nas estatisticas do jogo
-    /**
-     * Retorna a soma de todas as pontuacoes da categorias
-     *
-     * @return
-     */
-    public int getPontuacaoJogo() {
-        int pontuacao = 0;
-        ArrayList<Categoria> categorias = this.getAll();
-        for (Categoria categoria : categorias) {
-            pontuacao+=this.getPontuacaoCategoria(categoria.getNome());
-        }
-        return pontuacao;
-    }
 
 }

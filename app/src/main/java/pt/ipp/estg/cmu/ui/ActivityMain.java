@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
+import pt.ipp.estg.cmu.estatisticas.EstatisticasJogo;
 import pt.ipp.estg.cmu.util.Util;
 
 
@@ -34,7 +35,7 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
         mNavigationView.setCheckedItem(R.id.nav_game);
 
         mCategoriaRepo = new CategoriaRepo(this);
-        mPontos = mCategoriaRepo.getPontuacaoJogo();
+        mPontos = new EstatisticasJogo(this).getPontuacao();
 
         mBtStart = (Button) findViewById(R.id.bt_start_game);
         mUserNameTxt = (TextView) findViewById(R.id.user_text);
@@ -43,7 +44,6 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
         mUserNameTxt.setText(getResources().getString(R.string.hello_text) + " " + mUserName);
         mWelcomeTxt.setText(getResources().getString(R.string.welcome_text));
-        //TODO fazer query para somar todas as pontuacoes de todos os niveis ativos ou ir actualizando pontuacao do jogo
         mScoreTxt.setText(getResources().getString(R.string.txt_score) + " : " + mPontos);
 
         mBtStart.setOnClickListener(this);

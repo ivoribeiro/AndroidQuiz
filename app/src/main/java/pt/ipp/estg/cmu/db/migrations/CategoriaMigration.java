@@ -1,5 +1,7 @@
 package pt.ipp.estg.cmu.db.migrations;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.db.Field;
@@ -7,7 +9,7 @@ import pt.ipp.estg.cmu.db.Field;
 
 public class CategoriaMigration extends Migration {
 
-    public CategoriaMigration() {
+    public CategoriaMigration(Context context) {
         super("categoria");
         this.addField(new Field(true, true, "id", "INTEGER"));
         this.addField(new Field(false, false, "nome", "VARCHAR(25)"));
