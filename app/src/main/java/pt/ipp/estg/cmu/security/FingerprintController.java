@@ -174,20 +174,20 @@ public class FingerprintController {
 
         @Override
         public void onAuthenticationError(int errMsgId, CharSequence errString) {
-            mInfoTextView.setText("Authentication error\n" + errString);
+            mInfoTextView.setText(errString);
             mCallBack.fingerprintAuthResult(false);
         }
 
         @Override
         public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
-            mInfoTextView.setText("Authentication help\n" + helpString);
+            mInfoTextView.setText(helpString);
             mCallBack.fingerprintAuthResult(false);
         }
 
         @Override
         public void onAuthenticationFailed() {
             mInfoImageView.setImageResource(R.drawable.vt_fingerprint_error);
-            mInfoTextView.setText("Authentication failed.");
+            mInfoTextView.setText(mContext.getString(R.string.setup_fingerprint_error));
             mCallBack.fingerprintAuthResult(false);
 
         }
@@ -195,7 +195,7 @@ public class FingerprintController {
         @Override
         public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
             mInfoImageView.setImageResource(R.drawable.vt_fingerprint_success);
-            mInfoTextView.setText("Authentication succeeded.");
+            mInfoTextView.setText(mContext.getString(R.string.setup_fingerprint_sucesso));
             mCallBack.fingerprintAuthResult(true);
         }
     }

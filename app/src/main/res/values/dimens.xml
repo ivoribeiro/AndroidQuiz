@@ -86,7 +86,7 @@
     <dimen name="setup_fingerprint_size">60dp</dimen>
 
     <!-- Dialog Sign In -->
-    <dimen name="layout_top_space">100dp</dimen>
+    <dimen name="layout_top_space">60dp</dimen>
     <dimen name="layout_fingerprint_padding">20dp</dimen>
 
 
