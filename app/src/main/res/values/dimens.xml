@@ -81,7 +81,7 @@
     <dimen name="loading_texts_padding">5dp</dimen>
     <dimen name="loading_elements_size">20dp</dimen>
     <dimen name="setup_image">150dp</dimen>
-    <dimen name="setup_image_avatar">120dp</dimen>
+    <dimen name="setup_image_avatar">100dp</dimen>
     <dimen name="setup_custom_layout_padding">16dp</dimen>
     <dimen name="setup_fngerprint_size">60dp</dimen>
 
