@@ -49,8 +49,8 @@
 
         <ImageView
             android:id="@+id/fingerprint_icon_info"
-            android:layout_width="@dimen/setup_fngerprint_size"
-            android:layout_height="@dimen/setup_fngerprint_size"
+            android:layout_width="@dimen/setup_fingerprint_size"
+            android:layout_height="@dimen/setup_fingerprint_size"
             android:background="@drawable/ic_fingerprint"
             android:padding="@dimen/setup_custom_layout_padding" />
 
@@ -72,8 +72,8 @@
 
         <ImageView
             android:id="@+id/fingerprint_icon_status"
-            android:layout_width="@dimen/setup_fngerprint_size"
-            android:layout_height="@dimen/setup_fngerprint_size"
+            android:layout_width="@dimen/setup_fingerprint_size"
+            android:layout_height="@dimen/setup_fingerprint_size"
             android:padding="@dimen/setup_custom_layout_padding" />
 
         <TextView
