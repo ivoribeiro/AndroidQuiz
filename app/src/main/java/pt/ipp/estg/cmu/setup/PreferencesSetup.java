@@ -94,28 +94,4 @@ public class PreferencesSetup {
         return sharedPreferences.getString(USER_FLAG_NICKNAME, "");
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////PIN
-
-    /**
-     * Guarda o nickname escolhido
-     *
-     * @param
-     */
-    public void saveFlagPinPreference(String flag) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(USER_FLAGS_PREFERENCE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(USER_FLAG_PIN, flag);
-        editor.commit();
-    }
-
-    /**
-     * Retorna o nickname escolhido
-     *
-     * @return
-     */
-    public String getFlagPinPreference() {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(USER_FLAGS_PREFERENCE, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(USER_FLAG_PIN, "");
-    }
-
 }
