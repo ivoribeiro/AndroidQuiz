@@ -28,7 +28,9 @@ public class PerguntaMigration extends Migration {
                 "'nRespostasErradas'," +
                 "'acertou'," +
                 "'stringAleatoria'" +
-                ") VALUES(1,'CMU/ny.jpg','NEW YORK',0,0,'NAEBWCYDOERFKG');");
+                "'respostaActual'" +
+                "'nAjudasUsadas'" +
+                ") VALUES(1,'CMU/ny.jpg','NEW YORK',0,0,'NAEBWCYDOERFKG','',0);");
         //this.setSeeders(seeder);
     }
 }
