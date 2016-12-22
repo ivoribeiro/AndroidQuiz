@@ -25,6 +25,7 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
         this.addField("ACERTOU", "acertou");
         this.addField("STRING_ALEATORIA", "stringAleatoria");
         this.addField("RESPOSTA_ACTUAL", "respostaActual");
+        this.addField("N_AJUDAS_USADAS", "nAjudasUsadas");
     }
 
     @Override
@@ -49,6 +50,7 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
                 pergunta.setAcertou(cursor.getInt(5) == 1 ? true : false);
                 pergunta.setStringAleatoria(cursor.getString(6));
                 pergunta.setRespostaActual(cursor.getString(7));
+                pergunta.setnAjudasUsadas(cursor.getInt(8));
                 perguntas.add(pergunta);
             } while (cursor.moveToNext());
         }
@@ -74,6 +76,7 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
         values.put(this.getField("ACERTOU"), 0);
         values.put(this.getField("STRING_ALEATORIA"), pergunta.getStringAleatoria());
         values.put(this.getField("RESPOSTA_ACTUAL"), pergunta.getRespostaActual());
+        values.put(this.getField("N_AJUDAS_USADAS"), 0);
         db.insert(this.getTable(), null, values);
         db.close();
         return pergunta;
@@ -112,6 +115,9 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
         values.put(this.getField("RESPOSTA"), pergunta.getRespostaCerta());
         values.put(this.getField("RESPOSTAS_ERRADAS"), pergunta.getnRespostasErradas());
         values.put(this.getField("ACERTOU"), pergunta.acertou());
+        values.put(this.getField("STRING_ALEATORIA"), pergunta.getStringAleatoria());
+        values.put(this.getField("RESPOSTA_ACTUAL"), pergunta.getRespostaActual());
+        values.put(this.getField("N_AJUDAS_USADAS"), pergunta.getnAjudasUsadas());
         db.update(this.getTable(), values, where, whereArgs);
         db.close();
         return pergunta;

@@ -38,7 +38,7 @@ public class NivelMigration extends Migration {
                 "'pontuacao'," +
                 "'nRespostasCertas'," +
                 "'nMinRespostasCertas'" +
-                ") VALUES('Nivel 1','Tech',0,1,100,15,5,0,10,0,0,5);");
+                ") VALUES('Nivel 1','Tech',0,0,100,15,5,0,10,0,0,5);");
         this.setSeeders(seeder);
 
     }

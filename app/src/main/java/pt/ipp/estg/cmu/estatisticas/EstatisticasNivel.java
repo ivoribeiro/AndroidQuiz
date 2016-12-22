@@ -16,10 +16,11 @@ public class EstatisticasNivel {
     private PerguntaRepo mPerguntaRepo;
     private Nivel nivel;
 
-    public EstatisticasNivel(Context context, int nivel) {
+    public EstatisticasNivel(Context context, Nivel nivel) {
         this.mContext = context;
         this.mNivelRepo = new NivelRepo(context);
-        this.nivel = mNivelRepo.getById(nivel);
+        this.mPerguntaRepo = new PerguntaRepo(context);
+        this.nivel = nivel;
     }
 
     /**

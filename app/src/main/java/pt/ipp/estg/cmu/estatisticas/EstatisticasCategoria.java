@@ -29,15 +29,20 @@ public class EstatisticasCategoria {
         this.categoria = categoria;
         this.context = context;
         this.niveisCategoria = mNivelRepo.getAllByCategoria(this.categoria);
-
+        this.pontuacao = 0;
+        this.pontuacaoGanha = 0;
+        this.pontuacaoPerdida = 0;
+        this.respostasErradas = 0;
+        this.respostasCertas = 0;
+        this.nperguntas = 0;
         for (Nivel nivel : niveisCategoria) {
-            EstatisticasNivel estatisticasNivel = new EstatisticasNivel(context, nivel.getId());
-            pontuacao += estatisticasNivel.getPontuacao();
-            pontuacaoGanha += estatisticasNivel.getPontuacaoGanha();
-            pontuacaoPerdida += estatisticasNivel.getPontuacaoPerdida();
-            respostasErradas += estatisticasNivel.getnRespostasErradas();
-            respostasCertas += estatisticasNivel.getnRespostasCertas();
-            nperguntas += estatisticasNivel.getnPerguntas();
+            EstatisticasNivel estatisticasNivel = new EstatisticasNivel(context, nivel);
+            this.pontuacao += estatisticasNivel.getPontuacao();
+            this.pontuacaoGanha += estatisticasNivel.getPontuacaoGanha();
+            this.pontuacaoPerdida += estatisticasNivel.getPontuacaoPerdida();
+            this.respostasErradas += estatisticasNivel.getnRespostasErradas();
+            this.respostasCertas += estatisticasNivel.getnRespostasCertas();
+            this.nperguntas += estatisticasNivel.getnPerguntas();
         }
     }
 
