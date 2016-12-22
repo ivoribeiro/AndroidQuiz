@@ -3,7 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_light"
+    android:padding="@dimen/layout_fingerprint_padding"
     android:orientation="vertical">
+
+
+    <TextView
+        style="@style/PrimaryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_title" />
 
     <android.support.v4.widget.Space
         android:layout_width="match_parent"

@@ -60,8 +60,9 @@ public class PageSetupActivity extends AppCompatActivity {
     private int lastLeftValue = 0, page = 0;//  to track page position
     private CoordinatorLayout mCoordinator;
 
-    //avatar layout
+    //admin layout
     private static EditText mEditTextAvatar;
+    private static EditText mEditTextPin;
     private static boolean avatarChosen;
 
     private PreferencesSetup mPreferences;
@@ -176,7 +177,7 @@ public class PageSetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!mPreferences.getFlagPinPreference().equals("")) {
+                if (!mEditTextPin.getText().toString().equals("")) {
                     finish();
                     PreferencesSetup userPreference = new PreferencesSetup(getApplicationContext());//guardar nos preferences que o setup foi concluido
                     userPreference.saveFlagSetupPreference(true);
@@ -238,7 +239,6 @@ public class PageSetupActivity extends AppCompatActivity {
         //admin layout
         private LinearLayout mLayoutInfo;
         private LinearLayout mLayoutStatus;
-        private EditText mEditTextPin;
 
         public PlaceholderFragment() {
         }
@@ -321,6 +321,7 @@ public class PageSetupActivity extends AppCompatActivity {
                     ImageView imageView = (ImageView) admin_layout.findViewById(R.id.fingerprint_icon_status);
                     TextView textView = (TextView) admin_layout.findViewById(R.id.fingerprint_text_status);
 
+
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         new FingerprintController(getContext(), imageView, textView, this);
                     } else {
@@ -370,19 +371,7 @@ public class PageSetupActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "SECTION 1";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
-                case 3:
-                    return "SECTION 4";
-                case 4:
-                    return "SECTION 5";
-            }
-            return null;
+            return "";
         }
     }
 }

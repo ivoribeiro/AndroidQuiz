@@ -6,8 +6,6 @@
     android:layout_margin="@dimen/adapter_level_row_margin"
     android:orientation="vertical">
 
-    <!--TODO Update layout height-->
-
     <LinearLayout
         android:id="@+id/pergunta_layout"
         android:layout_width="match_parent"

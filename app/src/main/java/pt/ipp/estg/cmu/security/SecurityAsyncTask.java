@@ -9,7 +9,6 @@ public class SecurityAsyncTask extends AsyncTask<String, Void, String> {
 
     private boolean isEncrypted;//false = encripta o texto recebido por parametro, true desencripta o texto guardado
     private Context mContext;
-    private PreferencesSetup mPreferencesSetup;
 
     private SecurityManager securityManager;
 
@@ -17,7 +16,6 @@ public class SecurityAsyncTask extends AsyncTask<String, Void, String> {
         this.isEncrypted = isEncrypted;
         this.mContext = context;
         securityManager = new SecurityManager(mContext, alias);
-        mPreferencesSetup = new PreferencesSetup(mContext);
     }
 
 
@@ -38,7 +36,6 @@ public class SecurityAsyncTask extends AsyncTask<String, Void, String> {
         } else {
             //encriptar
             String result = securityManager.encryptString(text);
-            mPreferencesSetup.saveFlagPinPreference(result);
             return result;
         }
 

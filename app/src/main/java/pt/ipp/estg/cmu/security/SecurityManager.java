@@ -36,6 +36,8 @@ public class SecurityManager {
     private static final String KEY_PROVIDER = "AndroidKeyStore";
     private static final String KEY_ALGORITHM = "RSA";
 
+    private static final String KEY_XML_CIPHER = "RSA";
+
     private KeyStore keyStore;
 
     private Context mContext;
@@ -160,7 +162,7 @@ public class SecurityManager {
         editor.clear();
         editor.commit();
 
-        editor.putString("text", text);
+        editor.putString(KEY_XML_CIPHER, text);
         editor.commit();
     }
 
@@ -171,7 +173,7 @@ public class SecurityManager {
      */
     private String retrieve() {
         SharedPreferences pref = mContext.getSharedPreferences(TAG, Context.MODE_PRIVATE);
-        return pref.getString("text", null);
+        return pref.getString(KEY_XML_CIPHER, null);
     }
 
 
