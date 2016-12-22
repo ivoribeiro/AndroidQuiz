@@ -222,23 +222,25 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             StringsOperations operations = new StringsOperations(respostaCerta.toUpperCase());
             String respostaRandom = operations.generateString();
             Pergunta p = new Pergunta();
+            mImagemPathText = mImagemPathText == null ? mPergunta.getImagem() : mImagemPathText;
             p.setImagem(mImagemPathText);
             p.setRespostaCerta(respostaCerta.toUpperCase());
             p.setStringAleatoria(respostaRandom);
 
-            //TODO call update/insert function
             if (!this.editMode) {
                 p.setNivel(mNivel.getId());
+                p.setRespostaActual("");
                 mRepositoryPergunta.insertInto(p);
                 mNivel.addnPerguntas();
                 mRepositoryNivel.updateNivel(mNivel);
 
             } else if (this.editMode) {
-                p.setRespostaActual(mPergunta.getRespostaActual());
+                p.setId(mPergunta.getId());
                 p.setnRespostasErradas(mPergunta.getnRespostasErradas());
                 p.setAcertou(mPergunta.isAcertou());
                 p.setNivel(mPergunta.getNivel());
                 p.setnAjudasUsadas(mPergunta.getnAjudasUsadas());
+                p.setRespostaActual(mPergunta.getRespostaActual());
                 mRepositoryPergunta.updatePergunta(p);
             }
 
