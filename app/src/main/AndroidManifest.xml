@@ -80,6 +80,11 @@
             android:label="@string/title_activity_setup"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>
