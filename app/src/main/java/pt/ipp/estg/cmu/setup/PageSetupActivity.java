@@ -322,7 +322,7 @@ public class PageSetupActivity extends AppCompatActivity {
                     TextView textView = (TextView) admin_layout.findViewById(R.id.fingerprint_text_status);
 
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//TODO handle permission dialog authorization
                         new FingerprintController(getContext(), imageView, textView, this);
                     } else {
                         mLayoutInfo.setVisibility(View.GONE);

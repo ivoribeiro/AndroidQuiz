@@ -31,6 +31,7 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mNavigationView.setCheckedItem(R.id.nav_game);
 
         mCategoriaRepo = new CategoriaRepo(this);
         mPontos = mCategoriaRepo.getPontuacaoJogo();

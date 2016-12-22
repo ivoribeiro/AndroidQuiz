@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -22,7 +20,7 @@ import pt.ipp.estg.cmu.security.FingerprintController;
 import pt.ipp.estg.cmu.security.SecurityAsyncTask;
 import pt.ipp.estg.cmu.util.Util;
 
-public class CategoriaActivity extends AppCompatActivity implements FingerprintControllerCallback {
+public class CategoriaActivity extends ActivityBase implements FingerprintControllerCallback {
 
     //layout
     private boolean isAdmin;
@@ -32,9 +30,7 @@ public class CategoriaActivity extends AppCompatActivity implements FingerprintC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categoria);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mNavigationView.setCheckedItem(R.id.nav_admin);
 
         isAdmin = getIntent().getBooleanExtra(Util.ARG_ADMIN, false);
 
@@ -44,7 +40,6 @@ public class CategoriaActivity extends AppCompatActivity implements FingerprintC
             startFragmetCategoria();
         }
     }
-
 
     private void buildDialog() {
         mDialog = new Dialog(this);
@@ -63,10 +58,9 @@ public class CategoriaActivity extends AppCompatActivity implements FingerprintC
         final ImageView imageView = (ImageView) mDialog.findViewById(R.id.fingerprint_icon_status);
         final TextView textView = (TextView) mDialog.findViewById(R.id.fingerprint_text_status);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { //TODO handle permission dialog authorization
             mLayoutFinger.setVisibility(View.VISIBLE);
             new FingerprintController(this, imageView, textView, this);
-
         } else {
             mLayoutFinger.setVisibility(View.GONE);
         }
@@ -93,18 +87,14 @@ public class CategoriaActivity extends AppCompatActivity implements FingerprintC
                                 }
                             }, 1000);
 
-
                         } else {
-
                             imageView.setImageResource(R.drawable.vt_fingerprint_error);
                             textView.setText(getApplicationContext().getString(R.string.setup_fingerprint_error));
-
                         }
                     }
                 }.execute("");
             }
         });
-
 
         mDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
@@ -121,7 +111,7 @@ public class CategoriaActivity extends AppCompatActivity implements FingerprintC
     }
 
 
-    public void startFragmetCategoria() {
+    private void startFragmetCategoria() {
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.frame_layout, CategoriaFragment.newInstance(isAdmin))

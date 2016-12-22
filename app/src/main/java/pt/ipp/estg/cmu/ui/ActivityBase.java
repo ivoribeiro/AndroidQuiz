@@ -112,15 +112,15 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
 
         switch (id) {
             case R.id.nav_game:
-                this.startActivity(new Intent(this, ActivityMain.class));
+                startActivity(new Intent(this, ActivityMain.class));
                 break;
 
             case R.id.nav_statistics:
-                this.startActivity(new Intent(this, EstatisticasActivity.class));
+                startActivity(new Intent(this, EstatisticasActivity.class));
                 break;
 
             case R.id.nav_admin:
-                this.startActivity(new Intent(this, CategoriaActivity.class).putExtra(Util.ARG_ADMIN, true));
+                startActivity(new Intent(this, CategoriaActivity.class).putExtra(Util.ARG_ADMIN, true));
                 break;
 
             case R.id.nav_settings:
