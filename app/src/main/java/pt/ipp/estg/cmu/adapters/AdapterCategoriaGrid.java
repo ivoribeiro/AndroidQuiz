@@ -38,6 +38,9 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
         this.mRecycler = recyclerView;
         this.isAdmin = isAdmin;
         this.mCategoriaRepo = new CategoriaRepo(this.mContext);
+        if (!isAdmin) {
+            removeDisabledCategories();
+        }
     }
 
     @Override
@@ -59,19 +62,17 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
             }
 
             holder.mCardView.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-                                                        if (mDataSet.get(position).isAtiva()) {
-                                                            mContext.startActivity(new Intent(mContext, LevelActivity.class)
-                                                                    .putExtra(Util.ARG_CATEGORIE, mDataSet.get(position))
-                                                                    .putExtra(Util.ARG_ADMIN, isAdmin));
-                                                        } else {
-                                                            Snackbar.make(mRecycler, mContext.getString(R.string.snack_bar_categorie_info), Snackbar.LENGTH_LONG).show();
-                                                        }
-                                                    }
-
-                                                }
-            );
+                @Override
+                public void onClick(View view) {
+                    if (mDataSet.get(position).isAtiva()) {
+                        mContext.startActivity(new Intent(mContext, LevelActivity.class)
+                                .putExtra(Util.ARG_CATEGORIE, mDataSet.get(position))
+                                .putExtra(Util.ARG_ADMIN, isAdmin));
+                    } else {
+                        Snackbar.make(mRecycler, mContext.getString(R.string.snack_bar_categorie_info), Snackbar.LENGTH_LONG).show();
+                    }
+                }
+            });
 
             holder.mCardView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -91,9 +92,12 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
                 }
             });
 
-        } else {//MODO JOGO
+        } else {
+            //MODO JOGO
             if (!mDataSet.get(position).isAtiva()) {
-                holder.mCardView.setVisibility(View.GONE);
+                //holder.mCardView.setVisibility(View.GONE);
+                //holder.mTitle.setVisibility(View.GONE);
+                //holder.mImageCategoria.setVisibility(View.GONE);
             } else {
                 holder.mCardView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -108,6 +112,7 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
             }
         }
     }
+
 
     @Override
     public int getItemCount() {
@@ -129,39 +134,45 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
     }
 
     private void setImageResource(AdapterCategoriaGrid.ViewHolder holder, int pos) {
-        switch (pos) {
-            case 0:
+        switch (mDataSet.get(pos).getId()) {
+            case 1:
                 holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_0));
                 break;
-            case 1:
+            case 2:
                 holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_1));
                 break;
-            case 2:
+            case 3:
                 holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_2));
                 break;
-            case 3:
+            case 4:
                 holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_3));
                 break;
-            case 4:
+            case 5:
                 holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_4));
                 break;
-            case 5:
+            case 6:
                 holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_5));
                 break;
-            case 6:
+            case 7:
                 holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_6));
                 break;
-            case 7:
+            case 8:
                 holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_7));
                 break;
-            case 8:
+            case 9:
                 holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_8));
                 break;
-            case 9:
+            case 10:
                 holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_9));
                 break;
         }
-
     }
 
+    private void removeDisabledCategories() {
+        for (int i = 0; i < mDataSet.size(); ++i) {
+            if (!mDataSet.get(i).isAtiva()) {
+                mDataSet.remove(i);
+            }
+        }
+    }
 }
