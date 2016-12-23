@@ -1,4 +1,4 @@
-package pt.ipp.estg.cmu;
+package pt.ipp.estg.cmu.widget;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;

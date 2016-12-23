@@ -58,10 +58,10 @@ public class FileOperations {
         File dest = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + "/CMU/" + dstString);
         dest.createNewFile();
 
-        File compressedFile = compressImageFile(dest);
+        //File compressedFile = compressImageFile(dest);
 
         InputStream in = new FileInputStream(src);
-        OutputStream out = new FileOutputStream(compressedFile);
+        OutputStream out = new FileOutputStream(dest);
 
         // Transfer bytes from in to out
         byte[] buf = new byte[1024];
