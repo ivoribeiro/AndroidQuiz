@@ -1,0 +1,20 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/prefs_text_notificacao">
+
+        <CheckBoxPreference
+            android:key="checkbox_preference"
+            android:summary="@string/prefs_text_notificacao_summary"
+            android:title="@string/prefs_text_notificacao_title" />
+
+        <ListPreference
+            android:dialogTitle="@string/prefs_text_notificacao_update_title"
+            android:entries="@array/frequencias"
+            android:entryValues="@array/frequencias"
+            android:key="list_preference"
+            android:summary="@string/prefs_text_notificacao_update_summary"
+            android:title="@string/prefs_text_notificacao_update_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

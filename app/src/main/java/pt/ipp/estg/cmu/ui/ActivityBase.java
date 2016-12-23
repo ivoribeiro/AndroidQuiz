@@ -124,6 +124,7 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
         }
 
