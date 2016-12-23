@@ -32,6 +32,7 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
 
     //layout
     private Toolbar mMainToolbar;
+    protected Toolbar mToolbar;
     private TextView mUserText;
     private ImageView mUserAvatar;
     private LinearLayout mHeaderLayout;
@@ -54,12 +55,22 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
         getLayoutInflater().inflate(layoutResID, activityContainer, true);
         super.setContentView(mDrawer);
 
+        Toolbar actualtoolbar;
         mMainToolbar = (Toolbar) mDrawer.findViewById(R.id.main_toolbar);
-        setSupportActionBar(mMainToolbar);
+        if (useToolbar()) {
+            mMainToolbar.setVisibility(View.VISIBLE);
+            setSupportActionBar(mMainToolbar);
+            actualtoolbar = mMainToolbar;
+        } else {
+            mMainToolbar.setVisibility(View.GONE);
+            mToolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(mToolbar);
+            actualtoolbar = mToolbar;
+        }
 
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, mMainToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, actualtoolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
         mNavigationView.setNavigationItemSelectedListener(this);
@@ -134,6 +145,9 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    protected boolean useToolbar() {
+        return true;
+    }
 
     private void setAvatar(int avatar) {
         switch (avatar) {

@@ -107,7 +107,7 @@ public class GameActivity extends AppCompatActivity implements GameInterfaceList
     @Override
     public void setAnswered(boolean hit) {
         final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.window_pop_up);
+        dialog.setContentView(R.layout.fragment_game_window_pop_up);
         ImageView imageView = (ImageView) dialog.findViewById(R.id.image_view);
         if (hit) {
             imageView.setBackground(getResources().getDrawable(R.drawable.img_correct));

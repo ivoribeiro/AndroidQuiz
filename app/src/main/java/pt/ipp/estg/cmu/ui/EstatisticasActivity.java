@@ -1,11 +1,9 @@
 package pt.ipp.estg.cmu.ui;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterViewPager;
@@ -23,18 +21,8 @@ public class EstatisticasActivity extends ActivityBase implements ViewPager.OnPa
         super.onCreate(savedInstanceState);
         setTheme(new PreferencesSettings(this).getThemePreference());
         setContentView(R.layout.activity_estatisticas);
-
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         setupViewPager();
@@ -59,6 +47,11 @@ public class EstatisticasActivity extends ActivityBase implements ViewPager.OnPa
         //adapter.addTitle(getString(R.string.tab_title_estatisticas_pergunta));
 
         mViewPager.setAdapter(adapter);
+    }
+
+    @Override
+    protected boolean useToolbar() {
+        return false;
     }
 
     @Override

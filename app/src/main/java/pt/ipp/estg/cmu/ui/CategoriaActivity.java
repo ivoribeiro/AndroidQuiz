@@ -47,7 +47,7 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
 
     private void buildDialog() {
         mDialog = new Dialog(this);
-        mDialog.setContentView(R.layout.dialog_sign_in);
+        mDialog.setContentView(R.layout.admin_dialog_sign_in);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(mDialog.getWindow().getAttributes());
