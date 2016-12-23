@@ -216,15 +216,14 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     private void savePergunta() {
         String respostaCerta = mRespostaText.getText().toString();
         //imagem de galeria ou camera
-        if (!respostaCerta.equals("")) {
+        if ((!respostaCerta.equals("") && ((!this.editMode && mImagemPathText != null) || (this.editMode)))) {
             StringsOperations operations = new StringsOperations(respostaCerta.toUpperCase());
             String respostaRandom = operations.generateString();
             Pergunta p = new Pergunta();
-            mImagemPathText = mImagemPathText == null ? mPergunta.getImagem() : mImagemPathText;
-            p.setImagem(mImagemPathText);
             p.setRespostaCerta(respostaCerta.toUpperCase());
             p.setStringAleatoria(respostaRandom);
             if (!this.editMode) {
+                p.setImagem(mImagemPathText);
                 p.setNivel(mNivel.getId());
                 p.setRespostaActual("");
                 mRepositoryPergunta.insertInto(p);
@@ -232,6 +231,8 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                 mRepositoryNivel.updateNivel(mNivel);
             } else if (this.editMode) {
                 p.setId(mPergunta.getId());
+                mImagemPathText = mImagemPathText == null ? mPergunta.getImagem() : mImagemPathText;
+                p.setImagem(mImagemPathText);
                 p.setnRespostasErradas(mPergunta.getnRespostasErradas());
                 p.setAcertou(mPergunta.isAcertou());
                 p.setNivel(mPergunta.getNivel());
