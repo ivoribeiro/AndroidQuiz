@@ -41,13 +41,14 @@ public class AdapterEstatisticasCategoria extends RecyclerView.Adapter<AdapterEs
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.mpontuacao_categoria.setText(""+mDataSet.get(position).getPontuacao());
-        holder.mperguntas_categorias.setText(""+mDataSet.get(position).getPontuacao());
-        holder.mrespostas_certas_categoria.setText(""+mDataSet.get(position).getPontuacao());
-        holder.mrespostas_erradas_categoria.setText(""+mDataSet.get(position).getPontuacao());
-        holder.majudas_usadas_categoria.setText(""+mDataSet.get(position).getPontuacao());
-        holder.mpontuacao_ganha_categoria.setText(""+mDataSet.get(position).getPontuacao());
-        holder.mpontuacao_perdida_categoria.setText(""+mDataSet.get(position).getPontuacao());
+        holder.mnome_categoria.setText(mDataSet.get(position).getCategoria());
+        holder.mpontuacao_categoria.setText("" + mDataSet.get(position).getPontuacao());
+        holder.mperguntas_categorias.setText("" + mDataSet.get(position).getnPerguntas());
+        holder.mrespostas_certas_categoria.setText("" + mDataSet.get(position).getnRespostasCertas());
+        holder.mrespostas_erradas_categoria.setText("" + mDataSet.get(position).getnRespostasErradas());
+        holder.majudas_usadas_categoria.setText("" + mDataSet.get(position).getAjudasUsadas());
+        holder.mpontuacao_ganha_categoria.setText("" + mDataSet.get(position).getPontuacaoGanha());
+        holder.mpontuacao_perdida_categoria.setText("" + mDataSet.get(position).getPontuacaoPerdida());
     }
 
     @Override
@@ -66,11 +67,13 @@ public class AdapterEstatisticasCategoria extends RecyclerView.Adapter<AdapterEs
         TextView majudas_usadas_categoria;
         TextView mpontuacao_ganha_categoria;
         TextView mpontuacao_perdida_categoria;
+        TextView mnome_categoria;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mCardView = (CardView) itemView.findViewById(R.id.card_view_estatisticas_categoria);
-           //mImage = (ImageView) itemView.findViewById(R.id.question_image);
+            //mImage = (ImageView) itemView.findViewById(R.id.question_image);
+            mnome_categoria = (TextView) itemView.findViewById(R.id.nome_categoria);
             mpontuacao_categoria = (TextView) itemView.findViewById(R.id.pontuacao_categoria);
             mperguntas_categorias = (TextView) itemView.findViewById(R.id.n_perguntas_categoria);
             mrespostas_certas_categoria = (TextView) itemView.findViewById(R.id.n_respostas_certas_categoria);

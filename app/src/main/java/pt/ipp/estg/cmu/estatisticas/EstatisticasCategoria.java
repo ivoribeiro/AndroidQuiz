@@ -22,6 +22,7 @@ public class EstatisticasCategoria {
     private int respostasErradas;
     private int respostasCertas;
     private int nperguntas;
+    private int nAjudasUsadas;
 
     public EstatisticasCategoria(Context context, String categoria) {
         mNivelRepo = new NivelRepo(context);
@@ -35,6 +36,7 @@ public class EstatisticasCategoria {
         this.respostasErradas = 0;
         this.respostasCertas = 0;
         this.nperguntas = 0;
+        this.nAjudasUsadas = 0;
         for (Nivel nivel : niveisCategoria) {
             EstatisticasNivel estatisticasNivel = new EstatisticasNivel(context, nivel);
             this.pontuacao += estatisticasNivel.getPontuacao();
@@ -43,7 +45,12 @@ public class EstatisticasCategoria {
             this.respostasErradas += estatisticasNivel.getnRespostasErradas();
             this.respostasCertas += estatisticasNivel.getnRespostasCertas();
             this.nperguntas += estatisticasNivel.getnPerguntas();
+            this.nAjudasUsadas += estatisticasNivel.getnAjudasUsadas();
         }
+    }
+
+    public String getCategoria() {
+        return this.categoria;
     }
 
     /**
@@ -102,5 +109,9 @@ public class EstatisticasCategoria {
     public int getnRespostasCertas() {
 
         return respostasCertas;
+    }
+
+    public int getAjudasUsadas() {
+        return this.nAjudasUsadas;
     }
 }
