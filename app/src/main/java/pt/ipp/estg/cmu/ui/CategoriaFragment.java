@@ -23,7 +23,7 @@ import pt.ipp.estg.cmu.util.Util;
  */
 public class CategoriaFragment extends Fragment {
 
-    private static final int NUM_GRID = 2;
+    private int NUM_GRID;
     //data
     private CategoriaRepo mRepository;
     private ArrayList<Categoria> mCategorias;
@@ -50,6 +50,7 @@ public class CategoriaFragment extends Fragment {
         if (getArguments() != null) {
             isAdmin = getArguments().getBoolean(Util.ARG_ADMIN);
         }
+        NUM_GRID = getContext().getResources().getInteger(R.integer.categoria_number_grid);
     }
 
     @Override

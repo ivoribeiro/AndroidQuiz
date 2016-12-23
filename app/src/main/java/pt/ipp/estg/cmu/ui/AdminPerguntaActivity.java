@@ -35,7 +35,7 @@ public class AdminPerguntaActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.frame_layout, AdminListaPerguntasFragment.newInstance(mNivel))
+                .add(R.id.frame_layout, AdminPerguntasListFragment.newInstance(mNivel))
                 .commit();
     }
 

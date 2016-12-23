@@ -3,7 +3,7 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin">64dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
@@ -45,8 +45,7 @@
     <dimen name="categoria_image_size">100dp</dimen>
     <dimen name="categoria_layout_padding">16dp</dimen>
     <dimen name="categoria_card_margin">8dp</dimen>
-    <integer name="categoria_number_grid">2</integer>
-
+    <integer name="categoria_number_grid">3</integer>
 
     <!-- ActivityQuestion -->
     <dimen name="app_bar_layout_margin_left">72dp</dimen>

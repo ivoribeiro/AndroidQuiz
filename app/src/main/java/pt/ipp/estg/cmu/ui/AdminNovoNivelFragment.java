@@ -114,10 +114,10 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
 
                 //TODO save level on db
 
-                if (this.editMode == false) {
+                if (!editMode) {
                     level.setCategoria(mCategoria.getNome());
                     mNivelRepo.insertInto(level);
-                } else if (this.editMode) {
+                } else {
                     level.setId(mNivel.getId());
                     level.setnPerguntas(mNivel.getnPerguntas());
                     level.setPontuacao(mNivel.getPontuacao());

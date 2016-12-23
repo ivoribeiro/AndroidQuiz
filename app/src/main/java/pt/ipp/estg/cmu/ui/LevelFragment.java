@@ -2,7 +2,9 @@ package pt.ipp.estg.cmu.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -23,12 +25,13 @@ import pt.ipp.estg.cmu.util.Util;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class LevelFragment extends Fragment {
+public class LevelFragment extends Fragment implements View.OnClickListener {
 
     //layout
     private int NUM_COLUMNS = 1;
     private RecyclerView mRecyclerView;
     private boolean isAdmin;
+    private FloatingActionButton mFab;
 
     //data
     private AdapterLevelList mAdapter;
@@ -62,6 +65,14 @@ public class LevelFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_level, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMNS));
+
+        mFab = (FloatingActionButton) view.findViewById(R.id.fab);
+        if (isAdmin) {
+            mFab.setOnClickListener(this);
+        } else {
+            mFab.setVisibility(View.GONE);
+        }
+
         return view;
     }
 
@@ -77,6 +88,18 @@ public class LevelFragment extends Fragment {
             RecyclerSwipeNivelTouchHelper swipeTouch = new RecyclerSwipeNivelTouchHelper(0, ItemTouchHelper.RIGHT, getContext(), mRecyclerView, mNiveis, mAdapter);
             ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeTouch);
             itemTouchHelper.attachToRecyclerView(mRecyclerView);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.fab) {
+            //mFab.setVisibility(View.INVISIBLE);
+            ((AppCompatActivity) getContext()).getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout, AdminNovoNivelFragment.newInstance(mCategoria, null))
+                    .addToBackStack(Util.STACK_ADMIN)
+                    .commit();
         }
     }
 
