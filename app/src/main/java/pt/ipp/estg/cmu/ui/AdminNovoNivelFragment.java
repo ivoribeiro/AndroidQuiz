@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.repositories.NivelRepo;
@@ -82,10 +83,10 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
         super.onActivityCreated(savedInstanceState);
         if (editMode) {
             mNome.setText(mNivel.getNumero());
-            mPontuacaoPergunta.setText(""+mNivel.getPontuacaoBase());
-            mPontuacaoRetiradaErrada.setText(""+mNivel.getPontuacaoBaseErrada());
-            mPontuacaoRetiradaAjuda.setText(""+mNivel.getPontuacaoHint());
-            mNumMaxAjudas.setText(""+mNivel.getnAjudas());
+            mPontuacaoPergunta.setText("" + mNivel.getPontuacaoBase());
+            mPontuacaoRetiradaErrada.setText("" + mNivel.getPontuacaoBaseErrada());
+            mPontuacaoRetiradaAjuda.setText("" + mNivel.getPontuacaoHint());
+            mNumMaxAjudas.setText("" + mNivel.getnAjudas());
             //TODO novos campos
         }
     }
@@ -98,32 +99,36 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
             String pontuacaoBaseErradas = mPontuacaoRetiradaErrada.getText().toString();
             String pontuacaoHint = mPontuacaoRetiradaAjuda.getText().toString();
             String nAjudas = mNumMaxAjudas.getText().toString();
-            Nivel level = new Nivel();
-            level.setNumero(nome);
-            level.setPontuacaoBase(Integer.parseInt(pontuacaoBase));
-            level.setPontuacaoBaseErrada(Integer.parseInt(pontuacaoBaseErradas));
-            level.setPontuacaoHint(Integer.parseInt(pontuacaoHint));
-            level.setnAjudas(Integer.parseInt(nAjudas));
-            //TODO FIX
-            level.setnMinRespostasCertas(10);
-            //TODO FIX
-            level.setBloqueado(false);
+            if (!nome.equals("") && !pontuacaoBase.equals("") && !pontuacaoBaseErradas.equals("") && !pontuacaoHint.equals("") && !nAjudas.equals("")) {
 
-            //TODO save level on db
+                Nivel level = new Nivel();
+                level.setNumero(nome);
+                level.setPontuacaoBase(Integer.parseInt(pontuacaoBase));
+                level.setPontuacaoBaseErrada(Integer.parseInt(pontuacaoBaseErradas));
+                level.setPontuacaoHint(Integer.parseInt(pontuacaoHint));
+                level.setnAjudas(Integer.parseInt(nAjudas));
+                //TODO FIX
+                level.setnMinRespostasCertas(10);
+                //TODO FIX
+                level.setBloqueado(false);
 
-            if (this.editMode == false) {
-                level.setCategoria(mCategoria.getNome());
-                mNivelRepo.insertInto(level);
-            } else if (this.editMode) {
-                level.setId(mNivel.getId());
-                level.setnPerguntas(mNivel.getnPerguntas());
-                level.setPontuacao(mNivel.getPontuacao());
-                level.setnRespostasCertas(mNivel.getnRespostasCertas());
-                mNivelRepo.updateNivel(level);
+                //TODO save level on db
+
+                if (this.editMode == false) {
+                    level.setCategoria(mCategoria.getNome());
+                    mNivelRepo.insertInto(level);
+                } else if (this.editMode) {
+                    level.setId(mNivel.getId());
+                    level.setnPerguntas(mNivel.getnPerguntas());
+                    level.setPontuacao(mNivel.getPontuacao());
+                    level.setnRespostasCertas(mNivel.getnRespostasCertas());
+                    mNivelRepo.updateNivel(level);
+                }
+
+                getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            } else {
+                Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_campos_erro), Toast.LENGTH_SHORT).show();
             }
-
-            getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
         }
     }
 }
