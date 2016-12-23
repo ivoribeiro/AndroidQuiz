@@ -2,6 +2,7 @@ package pt.ipp.estg.cmu.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import java.util.List;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
+import pt.ipp.estg.cmu.ui.AdminNovaPerguntaFragment;
+import pt.ipp.estg.cmu.ui.AdminNovoNivelFragment;
 import pt.ipp.estg.cmu.ui.AdminPerguntaActivity;
 import pt.ipp.estg.cmu.ui.GameActivity;
 import pt.ipp.estg.cmu.util.Util;
@@ -77,6 +80,21 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
                             .putExtra(Util.ARG_CATEGORIE, mCategoria)
                     );
                 }
+            }
+        });
+
+        holder.mCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (isAdmin) {//MODO ADMIN
+                    ((AppCompatActivity) mContext)
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frame_layout, AdminNovoNivelFragment.newInstance(null,mDataSet.get(position)))
+                            .addToBackStack(Util.STACK_ADMIN)
+                            .commit();
+                }
+                return true;
             }
         });
     }
