@@ -1,10 +1,7 @@
 package pt.ipp.estg.cmu.util;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -37,6 +34,7 @@ public class UtilUI {
 
     /**
      * Animacoes para o setup
+     *
      * @param context
      * @param v
      * @param animationId
@@ -49,6 +47,5 @@ public class UtilUI {
             animation.setStartOffset(offset);
         v.startAnimation(animation);
     }
-
 
 }

@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.settings.SettingsActivity;
 import pt.ipp.estg.cmu.setup.PageSetupActivity;
 import pt.ipp.estg.cmu.setup.PreferencesSetup;
 import pt.ipp.estg.cmu.util.Util;

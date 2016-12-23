@@ -9,6 +9,7 @@ import android.widget.TextView;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
 import pt.ipp.estg.cmu.estatisticas.EstatisticasJogo;
+import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
 
 
@@ -31,7 +32,7 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setTheme(new PreferencesSettings(this).getThemePreference());
         setContentView(R.layout.activity_main);
 
         mNavigationView.setCheckedItem(R.id.nav_game);

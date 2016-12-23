@@ -8,4 +8,12 @@
         <item>2 horas</item>
     </string-array>
 
+    <string-array name="temas">
+        <item>@string/theme_base</item>
+        <item>@string/theme_blue</item>
+        <item>@string/theme_pink</item>
+        <item>@string/theme_yellow</item>
+    </string-array>
+
+
 </resources>

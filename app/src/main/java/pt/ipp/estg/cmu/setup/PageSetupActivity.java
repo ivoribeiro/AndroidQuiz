@@ -65,7 +65,6 @@ public class PageSetupActivity extends AppCompatActivity {
     private static EditText mEditTextPin;
     private static boolean avatarChosen;
 
-    private PreferencesSetup mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +75,6 @@ public class PageSetupActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_page_setup);
         avatarChosen = false;
-        mPreferences = new PreferencesSetup(this);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mNextBtn = (ImageButton) findViewById(R.id.intro_btn_next);

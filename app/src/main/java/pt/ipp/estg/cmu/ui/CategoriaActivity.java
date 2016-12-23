@@ -18,6 +18,7 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.callbacks.FingerprintControllerCallback;
 import pt.ipp.estg.cmu.security.FingerprintController;
 import pt.ipp.estg.cmu.security.SecurityAsyncTask;
+import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
 
 public class CategoriaActivity extends ActivityBase implements FingerprintControllerCallback {
@@ -29,6 +30,7 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(new PreferencesSettings(this).getThemePreference());
         setContentView(R.layout.activity_categoria);
         isAdmin = getIntent().getBooleanExtra(Util.ARG_ADMIN, false);
 

@@ -7,10 +7,11 @@
     android:layout_height="match_parent"
     android:background="@color/primary_light"
     android:fitsSystemWindows="true"
-    tools:context="pt.ipp.estg.cmu.ui.SettingsActivity">
+    tools:context="pt.ipp.estg.cmu.settings.SettingsActivity">
 
     <FrameLayout
         android:id="@id/frame_layout"
+        style="@style/AppBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
