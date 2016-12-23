@@ -107,6 +107,35 @@ public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
         return this.getAllByField("categoria", "\'" + categoria + "\'");
     }
 
+    public ArrayList<Nivel> getBloquadosByCategoria(String categoria) {
+        String query = "SELECT * FROM categoria WHERE categoria=" + categoria + ";";
+        int num = 0;
+        ArrayList<Nivel> niveis = new ArrayList<>();
+        SQLiteDatabase db = super.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Nivel nivel = new Nivel();
+                nivel.setId(cursor.getInt(0));
+                nivel.setNumero(cursor.getString(1));
+                nivel.setCategoria(cursor.getString(2));
+                nivel.setBloqueado(cursor.getInt(3));
+                nivel.setnPerguntas(cursor.getInt(4));
+                nivel.setPontuacaoBase(cursor.getInt(5));
+                nivel.setPontuacaoBaseErrada(cursor.getInt(6));
+                nivel.setPontuacaoHint(cursor.getInt(7));
+                nivel.setnRespostasCertas(cursor.getInt(8));
+                nivel.setnAjudas(cursor.getInt(9));
+                nivel.setPontuacao(cursor.getInt(10));
+                nivel.setnMinRespostasCertas(cursor.getInt(11));
+                niveis.add(nivel);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return niveis;
+    }
+
     /**
      * Faz update a uma pergunta por id
      *

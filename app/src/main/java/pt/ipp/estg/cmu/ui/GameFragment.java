@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import pt.ipp.estg.cmu.R;
@@ -201,6 +202,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 //save on bd
                 mNivelRepository.updateNivel(mNivel);
                 mPerguntaRepository.updatePergunta(mPergunta);
+                unlockNextLevel();
             } else {
                 decrementPontosNivel();
                 mListener.setAnswered(false);
@@ -273,5 +275,28 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 decrementAjuda();
             }
         }
+    }
+
+    /**
+     * Desbloqueia o proximo nivel bloqueado da mesma categoria
+     */
+    private void unlockNextLevel() {
+        if (canUnlock()) {
+            ArrayList<Nivel> niveisCategoria = mNivelRepository.getBloquadosByCategoria(this.mNivel.getCategoria());
+            Nivel aDesbloquear = niveisCategoria.get(0);
+            aDesbloquear.setBloqueado(false);
+            this.mNivelRepository.updateNivel(aDesbloquear);
+        }
+    }
+
+    /**
+     * Verifica se pode desbloquear
+     * so podemos desbloquear quando o numero de respostas certas é igual
+     * ao numero de respostas minimas para desbloquear
+     *
+     * @return
+     */
+    private boolean canUnlock() {
+        return this.mNivel.getnRespostasCertas() == this.mNivel.getnMinRespostasCertas();
     }
 }
