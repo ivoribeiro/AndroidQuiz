@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_activity_question"
+    android:background="?android:colorBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -14,7 +15,6 @@
         android:id="@+id/question_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary_light"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -24,7 +24,7 @@
             android:layout_height="@dimen/arrow_size"
             android:layout_gravity="center_vertical"
             android:background="@drawable/vt_arrow_left"
-            android:backgroundTint="@color/primary_dark" />
+            android:backgroundTint="?colorPrimary" />
 
         <ImageView
             android:id="@+id/question_image"
@@ -37,7 +37,7 @@
             android:layout_height="@dimen/arrow_size"
             android:layout_gravity="center_vertical"
             android:background="@drawable/vt_arrow_right"
-            android:backgroundTint="@color/primary_dark" />
+            android:backgroundTint="?colorPrimary" />
 
     </LinearLayout>
 
@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:layout_margin="@dimen/view_divider_margin"
-        android:background="@color/primary_dark" />
+        android:background="?colorPrimary" />
 
     <TableLayout
         android:id="@+id/game_table_layout"
@@ -78,7 +78,7 @@
             android:layout_height="@dimen/button_images_size"
             android:layout_margin="@dimen/button_images_margin"
             android:background="@drawable/ic_help"
-            android:backgroundTint="@color/primary" />
+            android:backgroundTint="?colorPrimary" />
 
         <ImageButton
             android:id="@+id/reset"
@@ -86,7 +86,7 @@
             android:layout_height="@dimen/button_images_size"
             android:layout_margin="@dimen/button_images_margin"
             android:background="@drawable/ic_reset"
-            android:backgroundTint="@color/primary" />
+            android:backgroundTint="?colorPrimary" />
 
     </LinearLayout>
 

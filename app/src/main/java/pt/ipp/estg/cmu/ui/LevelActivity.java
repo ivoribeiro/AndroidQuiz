@@ -8,6 +8,7 @@ import android.view.View;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.Categoria;
+import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
 
 public class LevelActivity extends AppCompatActivity implements View.OnClickListener {
@@ -22,7 +23,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.CustomThemePink);
+        setTheme(new PreferencesSettings(this).getThemePreference());
         setContentView(R.layout.activity_level);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);

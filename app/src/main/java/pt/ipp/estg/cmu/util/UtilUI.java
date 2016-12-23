@@ -1,7 +1,9 @@
 package pt.ipp.estg.cmu.util;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -18,7 +20,13 @@ public class UtilUI {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(100, 150);
         params.weight = 1;
         button.setLayoutParams(params);
-        button.setTextColor(context.getResources().getColor(R.color.primary_dark));
+
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = context.getTheme();
+        theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true);
+        int color = typedValue.data;
+        button.setTextColor(color);
+
         button.setTypeface(Typeface.DEFAULT_BOLD);
         button.setText(String.valueOf(c));
         return button;

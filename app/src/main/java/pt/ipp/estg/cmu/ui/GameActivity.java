@@ -19,6 +19,7 @@ import pt.ipp.estg.cmu.interfaces.GameInterfaceListener;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
+import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
 
 public class GameActivity extends AppCompatActivity implements GameInterfaceListener, ViewPager.OnPageChangeListener {
@@ -44,6 +45,7 @@ public class GameActivity extends AppCompatActivity implements GameInterfaceList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(new PreferencesSettings(this).getThemePreference());
         setContentView(R.layout.activity_game);
 
         mNivel = getIntent().getParcelableExtra(Util.ARG_LEVEL);
