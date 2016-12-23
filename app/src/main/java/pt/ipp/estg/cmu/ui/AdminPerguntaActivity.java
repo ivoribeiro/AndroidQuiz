@@ -33,10 +33,12 @@ public class AdminPerguntaActivity extends AppCompatActivity {
 
         mNivel = getIntent().getParcelableExtra(Util.ARG_LEVEL);
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.frame_layout, AdminPerguntasListFragment.newInstance(mNivel))
-                .commit();
+        if (null == savedInstanceState) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.frame_layout, AdminPerguntasListFragment.newInstance(mNivel))
+                    .commit();
+        }
     }
 
     @Override

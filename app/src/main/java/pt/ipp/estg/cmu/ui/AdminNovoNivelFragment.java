@@ -60,6 +60,15 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
             mNivel = getArguments().getParcelable(Util.ARG_LEVEL);
             editMode = true;
         }
+
+        if (savedInstanceState != null) {
+            if (editMode) {
+                mNivel = savedInstanceState.getParcelable(Util.ARG_LEVEL);
+            } else {
+                mCategoria = savedInstanceState.getParcelable(Util.ARG_CATEGORIE);
+            }
+        }
+
         mNivelRepo = new NivelRepo(getContext());
 
     }
@@ -90,6 +99,17 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
             //TODO novos campos
         }
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (editMode) {
+            outState.putParcelable(Util.ARG_LEVEL, mNivel);
+        } else {
+            outState.putParcelable(Util.ARG_CATEGORIE, mCategoria);
+        }
+    }
+
 
     @Override
     public void onClick(View view) {

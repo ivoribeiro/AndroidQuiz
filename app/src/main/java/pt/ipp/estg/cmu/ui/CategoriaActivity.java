@@ -39,7 +39,9 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
             buildDialog();
         } else {
             mNavigationView.setCheckedItem(R.id.nav_game);
-            startFragmetCategoria();
+            if (null == savedInstanceState) {
+                startFragmetCategoria();
+            }
         }
     }
 
@@ -116,7 +118,7 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
     private void startFragmetCategoria() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.frame_layout, CategoriaFragment.newInstance(isAdmin))
+                .replace(R.id.frame_layout, CategoriaFragment.newInstance(isAdmin))
                 .commit();
     }
 

@@ -1,5 +1,6 @@
 package pt.ipp.estg.cmu.ui;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -37,10 +38,13 @@ public class LevelActivity extends AppCompatActivity {
         mCategoria = getIntent().getParcelableExtra(Util.ARG_CATEGORIE);
         isAdmin = getIntent().getBooleanExtra(Util.ARG_ADMIN, false);
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.frame_layout, LevelFragment.newInstance(mCategoria, isAdmin))
-                .commit();
+
+        if (null == savedInstanceState) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout, LevelFragment.newInstance(mCategoria, isAdmin))
+                    .commit();
+        }
     }
 
     @Override
