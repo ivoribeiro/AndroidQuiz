@@ -18,7 +18,6 @@ import java.util.List;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
-import pt.ipp.estg.cmu.ui.AdminNovaPerguntaFragment;
 import pt.ipp.estg.cmu.ui.AdminNovoNivelFragment;
 import pt.ipp.estg.cmu.ui.AdminPerguntaActivity;
 import pt.ipp.estg.cmu.ui.GameActivity;
@@ -90,7 +89,7 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
                     ((AppCompatActivity) mContext)
                             .getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.frame_layout, AdminNovoNivelFragment.newInstance(null,mDataSet.get(position)))
+                            .replace(R.id.frame_layout, AdminNovoNivelFragment.newInstance(null, mDataSet.get(position)))
                             .addToBackStack(Util.STACK_ADMIN)
                             .commit();
                 }

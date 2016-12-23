@@ -117,7 +117,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (editMode) {
-            setPreviewImage();
+            setPreviewImage(mPergunta.getImagem());
             mRespostaText.setText(mPergunta.getRespostaCerta());
         }
     }
@@ -129,21 +129,32 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         if (requestCode == RESULT_LOAD_IMAGE || requestCode == CAPTURE_IMAGE_ACTIVITY) {
             if (resultCode == RESULT_OK && null != data) {
                 try {
-                    Uri selectedImage = data.getData();
-                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
-                    Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                    if (cursor != null) {
-                        cursor.moveToFirst();
-                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                        String picturePath = cursor.getString(columnIndex);
-                        cursor.close();
+                    if (requestCode == RESULT_LOAD_IMAGE) {
+                        Uri selectedImage = data.getData();
+                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
-                        mImagemPathText = picturePath;
+                        Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                        if (cursor != null) {
+                            cursor.moveToFirst();
+                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                            String picturePath = cursor.getString(columnIndex);
+                            cursor.close();
 
-                        File sourceFile = new File(mImagemPathText);
-                        //File f = FileOperations.compressImageFile(sourceFile);
-                        FileOperations.copy(sourceFile, mImageName);
+                            mImagemPathText = picturePath;
+
+                            File sourceFile = new File(mImagemPathText);
+                            //File f = FileOperations.compressImageFile(sourceFile);
+                            FileOperations.copy(sourceFile, mImageName);
+                            setPreviewImage(sourceFile.getPath());
+                        }
+                    }
+
+                    if (requestCode == CAPTURE_IMAGE_ACTIVITY) {
+                        Uri mCameraTempUri = (Uri) data.getExtras().get(MediaStore.EXTRA_OUTPUT);
+                        //Bitmap photo = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), Uri.parse(mCurrentPhotoPath));
+                        //mImageView.setImageBitmap(mImageBitmap);
+                        //mImagePreview.setImageBitmap(photo);
                     }
 
                 } catch (Exception e) {
@@ -166,11 +177,24 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                 break;
 
             case R.id.bt_camera:
-                File dest = new File(Util.getAppFolderPath() + mImageName);
+/*                File dest = new File(Util.getAppFolderPath() + mImageName);
                 Uri outputFileUri = Uri.fromFile(dest);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY);
+                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY);*/
+
+
+/*                ContentValues values = new ContentValues(1);
+                values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg");
+                Uri mCameraTempUri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                if (mCameraTempUri != null) {
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, mCameraTempUri);
+                }
+                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY);*/
+
                 break;
 
             case R.id.fab:
@@ -179,12 +203,12 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         }
     }
 
-    private void setPreviewImage() {
-        String imagePath = mPergunta.getImagem();
+    private void setPreviewImage(String imagePath) {
         if (null != imagePath) {
             File imgFile = new File(imagePath);
             if (imgFile.exists()) {
                 Bitmap bmImg = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                mImagePreview.setBackground(null);
                 mImagePreview.setImageBitmap(bmImg);
             }
         }
@@ -216,20 +240,20 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     private void savePergunta() {
         String respostaCerta = mRespostaText.getText().toString();
         //imagem de galeria ou camera
-        if ((!respostaCerta.equals("") && ((!this.editMode && mImagemPathText != null) || (this.editMode)))) {
+        if ((!respostaCerta.equals("") && ((!editMode && mImagemPathText != null) || (editMode)))) {
             StringsOperations operations = new StringsOperations(respostaCerta.toUpperCase());
             String respostaRandom = operations.generateString();
             Pergunta p = new Pergunta();
             p.setRespostaCerta(respostaCerta.toUpperCase());
             p.setStringAleatoria(respostaRandom);
-            if (!this.editMode) {
+            if (!editMode) {
                 p.setImagem(mImagemPathText);
                 p.setNivel(mNivel.getId());
                 p.setRespostaActual("");
                 mRepositoryPergunta.insertInto(p);
                 mNivel.addnPerguntas();
                 mRepositoryNivel.updateNivel(mNivel);
-            } else if (this.editMode) {
+            } else {
                 p.setId(mPergunta.getId());
                 mImagemPathText = mImagemPathText == null ? mPergunta.getImagem() : mImagemPathText;
                 p.setImagem(mImagemPathText);

@@ -94,6 +94,7 @@ public class DownloadImage extends AsyncTask<String, String, String> {
                     mDialog.dismiss();
                 }
             }
+            mPreviewImage.setBackground(null);
             mPreviewImage.setImageBitmap(mBitMapImg);
             Toast.makeText(mContext, mContext.getResources().getString(R.string.admin_toast_download_sucesso), Toast.LENGTH_SHORT).show();
         }

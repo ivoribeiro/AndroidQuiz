@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_light"
+    android:background="?android:colorBackground"
     android:fitsSystemWindows="true"
     tools:context="pt.ipp.estg.cmu.ui.AdminPerguntaActivity">
 
@@ -27,8 +27,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-
-
 
 </android.support.design.widget.CoordinatorLayout>

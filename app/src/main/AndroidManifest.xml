@@ -7,6 +7,10 @@
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
 
     <application
         android:allowBackup="true"
@@ -59,7 +63,7 @@
                 android:value="pt.ipp.estg.cmu.ui.LevelActivity" />
         </activity>
 
-        <receiver android:name=".MyBroadcastReceiverWidget">
+        <receiver android:name=".widget.MyBroadcastReceiverWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name=".MESSAGE" />

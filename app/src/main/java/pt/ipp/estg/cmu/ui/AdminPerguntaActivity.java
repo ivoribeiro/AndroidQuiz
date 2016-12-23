@@ -7,6 +7,7 @@ import android.view.View;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.Nivel;
+import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
 
 public class AdminPerguntaActivity extends AppCompatActivity {
@@ -17,6 +18,7 @@ public class AdminPerguntaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(new PreferencesSettings(this).getThemePreference());
         setContentView(R.layout.activity_admin_pergunta);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -33,7 +35,7 @@ public class AdminPerguntaActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.frame_layout, AdminListaPerguntasFragment.newInstance(mNivel))
+                .add(R.id.frame_layout, AdminPerguntasListFragment.newInstance(mNivel))
                 .commit();
     }
 

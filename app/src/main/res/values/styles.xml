@@ -74,7 +74,7 @@
     <style name="ThirdTitle">
         <item name="android:textStyle">italic</item>
         <item name="android:textSize">@dimen/third_title_size</item>
-        <item name="android:color">@color/secondary_text</item>
+        <item name="android:color">?android:textColorSecondary</item>
     </style>
 
     <style name="PrimaryButton">
@@ -82,8 +82,5 @@
         <item name="android:background">?colorAccent</item>
     </style>
 
-    <style name="AppBackground">
-        <item name="android:background">?android:colorBackground</item>
-    </style>
 
 </resources>

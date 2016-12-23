@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterPerguntasList;
-import pt.ipp.estg.cmu.callbacks.RecyclerSwipeNivelTouchHelper;
 import pt.ipp.estg.cmu.callbacks.RecyclerSwipePerguntaTouchHelper;
 import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.models.Nivel;
@@ -25,7 +24,7 @@ import pt.ipp.estg.cmu.models.Pergunta;
 import pt.ipp.estg.cmu.util.Util;
 
 
-public class AdminListaPerguntasFragment extends Fragment implements View.OnClickListener {
+public class AdminPerguntasListFragment extends Fragment implements View.OnClickListener {
 
     private Nivel mNivel;
     private RecyclerView mRecycler;
@@ -35,12 +34,12 @@ public class AdminListaPerguntasFragment extends Fragment implements View.OnClic
 
     private ArrayList<Pergunta> mPerguntas;
 
-    public AdminListaPerguntasFragment() {
+    public AdminPerguntasListFragment() {
         // Required empty public constructor
     }
 
-    public static AdminListaPerguntasFragment newInstance(Nivel nivel) {
-        AdminListaPerguntasFragment fragment = new AdminListaPerguntasFragment();
+    public static AdminPerguntasListFragment newInstance(Nivel nivel) {
+        AdminPerguntasListFragment fragment = new AdminPerguntasListFragment();
         Bundle args = new Bundle();
         args.putParcelable(Util.ARG_LEVEL, nivel);
         fragment.setArguments(args);
