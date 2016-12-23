@@ -100,7 +100,7 @@ public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
     public void deleteById(int id) {
         String query = this.deleteByFieldQueryString("id", "" + id);
         SQLiteDatabase db = super.getWritableDatabase();
-        db.rawQuery(query, null);
+        db.execSQL(query);
     }
 
     public ArrayList<Nivel> getAllByCategoria(String categoria) {

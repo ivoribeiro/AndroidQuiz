@@ -86,7 +86,7 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
     public void deleteById(int id) {
         String query = this.deleteByFieldQueryString("id", "" + id);
         SQLiteDatabase db = super.getWritableDatabase();
-        db.rawQuery(query, null);
+        db.execSQL(query);
     }
 
     /**
