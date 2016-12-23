@@ -215,9 +215,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
 
     private void savePergunta() {
         String respostaCerta = mRespostaText.getText().toString();
-
         //imagem de galeria ou camera
-
         if (!respostaCerta.equals("")) {
             StringsOperations operations = new StringsOperations(respostaCerta.toUpperCase());
             String respostaRandom = operations.generateString();
@@ -226,14 +224,12 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             p.setImagem(mImagemPathText);
             p.setRespostaCerta(respostaCerta.toUpperCase());
             p.setStringAleatoria(respostaRandom);
-
             if (!this.editMode) {
                 p.setNivel(mNivel.getId());
                 p.setRespostaActual("");
                 mRepositoryPergunta.insertInto(p);
                 mNivel.addnPerguntas();
                 mRepositoryNivel.updateNivel(mNivel);
-
             } else if (this.editMode) {
                 p.setId(mPergunta.getId());
                 p.setnRespostasErradas(mPergunta.getnRespostasErradas());
@@ -243,8 +239,6 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                 p.setRespostaActual(mPergunta.getRespostaActual());
                 mRepositoryPergunta.updatePergunta(p);
             }
-
-
             getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         } else {
             Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_campos_erro), Toast.LENGTH_SHORT).show();

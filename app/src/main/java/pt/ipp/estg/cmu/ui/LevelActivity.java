@@ -56,7 +56,7 @@ public class LevelActivity extends AppCompatActivity implements View.OnClickList
             mFab.setVisibility(View.INVISIBLE);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frame_layout, AdminNovoNivelFragment.newInstance(mCategoria))
+                    .replace(R.id.frame_layout, AdminNovoNivelFragment.newInstance(mCategoria, null))
                     .addToBackStack(null)
                     .commit();
         }

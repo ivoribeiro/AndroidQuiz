@@ -21,10 +21,6 @@ import pt.ipp.estg.cmu.models.Pergunta;
 import pt.ipp.estg.cmu.ui.AdminNovaPerguntaFragment;
 import pt.ipp.estg.cmu.util.Util;
 
-/**
- * Created by Navega on 12/10/2016.
- */
-
 public class AdapterPerguntasList extends RecyclerView.Adapter<AdapterPerguntasList.ViewHolder> {
 
     private Context mContext;
@@ -55,15 +51,16 @@ public class AdapterPerguntasList extends RecyclerView.Adapter<AdapterPerguntasL
             }
         }
 
-        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+        holder.mCardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 ((AppCompatActivity) mContext)
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.frame_layout, AdminNovaPerguntaFragment.newInstance(null, mDataSet.get(position)))
                         .addToBackStack(Util.STACK_ADMIN)
                         .commit();
+                return true;
             }
         });
     }
