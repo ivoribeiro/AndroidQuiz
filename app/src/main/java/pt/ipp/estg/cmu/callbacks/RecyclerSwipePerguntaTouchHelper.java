@@ -14,9 +14,6 @@ import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.db.repositories.RepositoryInterface;
 import pt.ipp.estg.cmu.models.Pergunta;
 
-/**
- * Created by Navega on 12/14/2016.
- */
 
 public class RecyclerSwipePerguntaTouchHelper extends ItemTouchHelper.SimpleCallback {
 
