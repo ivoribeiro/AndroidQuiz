@@ -5,7 +5,7 @@
     android:id="@+id/coodinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_light"
+    android:background="?android:colorBackground"
     android:fitsSystemWindows="true"
     tools:context="pt.ipp.estg.cmu.ui.EstatisticasActivity">
 
@@ -19,7 +19,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/primary"
+            android:background="?android:colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
@@ -27,7 +27,7 @@
             android:id="@+id/slide_tabs_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary" />
+            android:background="?android:colorPrimary" />
 
     </android.support.design.widget.AppBarLayout>
 

@@ -9,8 +9,9 @@ import android.view.View;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterViewPager;
+import pt.ipp.estg.cmu.settings.PreferencesSettings;
 
-public class EstatisticasActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class EstatisticasActivity extends ActivityBase implements ViewPager.OnPageChangeListener {
 
     private Toolbar mToolbar;
     private ViewPager mViewPager;
@@ -20,6 +21,7 @@ public class EstatisticasActivity extends AppCompatActivity implements ViewPager
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(new PreferencesSettings(this).getThemePreference());
         setContentView(R.layout.activity_estatisticas);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -49,8 +51,8 @@ public class EstatisticasActivity extends AppCompatActivity implements ViewPager
         AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager());
         adapter.addFragment(EstatisticasJogoFragment.newInstance());
         adapter.addTitle(getString(R.string.tab_title_estatisticas_jogo));
-        //adapter.addFragment(EstatisticasCategoriaFragment.newInstance());
-        //adapter.addTitle(getString(R.string.tab_title_estatisticas_categoria));
+        adapter.addFragment(EstatisticasCategoriaFragment.newInstance());
+        adapter.addTitle(getString(R.string.tab_title_estatisticas_categoria));
         //adapter.addFragment(EstatisticasNivelFragment.newInstance());
         //adapter.addTitle(getString(R.string.tab_title_estatisticas_nivel));
         //adapter.addFragment(EstatisticasPerguntaFragment.newInstance());

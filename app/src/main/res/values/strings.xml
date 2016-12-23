@@ -178,5 +178,12 @@
     <string name="theme_blue">Azul</string>
     <string name="theme_pink">Rosa</string>
     <string name="theme_yellow">Amarelo</string>
+    <string name="pontuacao_estatisticas">Pontuação</string>
+    <string name="n_perguntas_estatisticas">Número perguntas</string>
+    <string name="n_respostas_certas_estatisticas">Respostas certas</string>
+    <string name="n_respostas_erradas_estatisticas">Respostas erradas</string>
+    <string name="n_ajudas_usadas_estatisticas">Ajudas usadas</string>
+    <string name="pontuacao_ganha_estatisticas">Pontuação ganha</string>
+    <string name="pontuacao_perdida_estatisticas">Pontuação perdida</string>
 
 </resources>
