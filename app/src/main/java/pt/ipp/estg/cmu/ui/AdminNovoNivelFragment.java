@@ -114,41 +114,50 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.fab) {
-            String nome = mNome.getText().toString();
-            String pontuacaoBase = mPontuacaoPergunta.getText().toString();
-            String pontuacaoBaseErradas = mPontuacaoRetiradaErrada.getText().toString();
-            String pontuacaoHint = mPontuacaoRetiradaAjuda.getText().toString();
-            String nAjudas = mNumMaxAjudas.getText().toString();
-            if (!nome.equals("") && !pontuacaoBase.equals("") && !pontuacaoBaseErradas.equals("") && !pontuacaoHint.equals("") && !nAjudas.equals("")) {
+            saveNivel();
+        }
+    }
 
-                Nivel level = new Nivel();
-                level.setNumero(nome);
-                level.setPontuacaoBase(Integer.parseInt(pontuacaoBase));
-                level.setPontuacaoBaseErrada(Integer.parseInt(pontuacaoBaseErradas));
-                level.setPontuacaoHint(Integer.parseInt(pontuacaoHint));
-                level.setnAjudas(Integer.parseInt(nAjudas));
-                //TODO FIX
-                level.setnMinRespostasCertas(10);
-                //TODO FIX
-                level.setBloqueado(false);
+    private void saveNivel() {
+        String nome = mNome.getText().toString();
+        String pontuacaoBase = mPontuacaoPergunta.getText().toString();
+        String pontuacaoBaseErradas = mPontuacaoRetiradaErrada.getText().toString();
+        String pontuacaoHint = mPontuacaoRetiradaAjuda.getText().toString();
+        String nAjudas = mNumMaxAjudas.getText().toString();
+        if (!nome.equals("") && !pontuacaoBase.equals("") && !pontuacaoBaseErradas.equals("") && !pontuacaoHint.equals("") && !nAjudas.equals("")) {
 
-                //TODO save level on db
+            Nivel level = new Nivel();
+            level.setNumero(nome);
+            level.setPontuacaoBase(Integer.parseInt(pontuacaoBase));
+            level.setPontuacaoBaseErrada(Integer.parseInt(pontuacaoBaseErradas));
+            level.setPontuacaoHint(Integer.parseInt(pontuacaoHint));
+            level.setnAjudas(Integer.parseInt(nAjudas));
+            //TODO FIX
+            level.setnMinRespostasCertas(10);
+            //TODO FIX
+            level.setBloqueado(false);
 
-                if (!editMode) {
-                    level.setCategoria(mCategoria.getNome());
-                    mNivelRepo.insertInto(level);
-                } else {
-                    level.setId(mNivel.getId());
-                    level.setnPerguntas(mNivel.getnPerguntas());
-                    level.setPontuacao(mNivel.getPontuacao());
-                    level.setnRespostasCertas(mNivel.getnRespostasCertas());
-                    mNivelRepo.updateNivel(level);
-                }
+            //TODO save level on db
 
-                getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            if (!editMode) {
+                level.setCategoria(mCategoria.getNome());
+                mNivelRepo.insertInto(level);
             } else {
-                Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_campos_erro), Toast.LENGTH_SHORT).show();
+                level.setId(mNivel.getId());
+                level.setCategoria(mNivel.getCategoria());
+                //TODO fix
+                level.setBloqueado(mNivel.isBloqueado());
+                level.setnPerguntas(mNivel.getnPerguntas());
+                level.setPontuacao(mNivel.getPontuacao());
+                level.setnRespostasCertas(mNivel.getnRespostasCertas());
+                //TODO fix
+                level.setnMinRespostasCertas(mNivel.getnMinRespostasCertas());
+                mNivelRepo.updateNivel(level);
             }
+
+            getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        } else {
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_campos_erro), Toast.LENGTH_SHORT).show();
         }
     }
 }
