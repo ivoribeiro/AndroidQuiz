@@ -1,52 +1,56 @@
 package pt.ipp.estg.cmu.db.repositories;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import pt.ipp.estg.cmu.db.DbHandler;
 import pt.ipp.estg.cmu.db.Field;
+import pt.ipp.estg.cmu.db.dbUtil;
+import pt.ipp.estg.cmu.models.Nivel;
 
-public class Repo<T> extends DbHandler {
+public abstract class Repo<T> extends DbHandler {
 
     private String table;
-    private HashMap<String, Field> fields;
 
     public Repo(Context context, String table) {
         super(context, DbHandler.DATABASE_NAME);
         this.table = table;
-        this.fields = new HashMap<>();
-    }
-
-    public HashMap<String, Field> getFields() {
-        return fields;
     }
 
     public String getTable() {
         return this.table;
     }
 
-    public void addField(String key, String value) {
-        this.fields.put(key, new Field(value));
+
+    public ArrayList<T> query(String[] tableColumns, String whereClause, String[] whereArgs, String orderBy) {
+        return null;
     }
 
-    public String getField(String key) {
-        return this.fields.get(key).getName();
+    public ArrayList<T> getAll() {
+        return this.query(null, null, null, null);
     }
 
-    public String getAllQueryString() {
-        return "SELECT * FROM " + this.table + " ;";
+    public ArrayList<T> getAllByFields(String[] fields, String[] values) {
+        return this.query(null, dbUtil.whereClause(fields), values, null);
     }
 
-    public String getByIdQueryString(int id) {
-        return "SELECT * FROM " + this.table + " WHERE id=" + id + ";";
+    public ArrayList<T> getAllByField(String field, String value) {
+        String[] fields = {field};
+        String[] values = {value};
+        return getAllByFields(fields, values);
     }
 
-    public String getAllByFieldQueryString(String field, String value) {
-        return "SELECT * FROM " + this.table + " WHERE " + field + "=" + value + ";";
+    public T getById(int id) {
+        return this.getAllByField("id", "" + id).get(0);
     }
 
-    public String deleteByFieldQueryString(String field, String value) {
-        return "DELETE FROM " + this.table + " WHERE " + field + "=" + value + ";";
+    public void deleteById(int id) {
+        String query = dbUtil.deleteByFieldQueryString(this.getTable(), "id", "" + id);
+        SQLiteDatabase db = super.getWritableDatabase();
+        db.execSQL(query);
+        db.close();
     }
 }

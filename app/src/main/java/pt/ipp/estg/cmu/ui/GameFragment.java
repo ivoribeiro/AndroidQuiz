@@ -200,15 +200,15 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 mHintButton.setVisibility(View.GONE);
                 mResetButton.setVisibility(View.GONE);
                 //save on bd
-                mNivelRepository.updateNivel(mNivel);
-                mPerguntaRepository.updatePergunta(mPergunta);
+                mNivelRepository.update(mNivel);
+                mPerguntaRepository.update(mPergunta);
                 unlockNextLevel();
             } else {
                 decrementPontosNivel();
                 mListener.setAnswered(false);
                 mPergunta.addRespostasErradas();
-                mNivelRepository.updateNivel(mNivel);
-                mPerguntaRepository.updatePergunta(mPergunta);
+                mNivelRepository.update(mNivel);
+                mPerguntaRepository.update(mPergunta);
                 createLayout();
             }
         }
@@ -222,7 +222,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private void decrementAjuda() {
         if (mNivel.getnAjudas() > 0) {
             mNivel.decrementnAjudas();
-            mNivelRepository.updateNivel(mNivel);
+            mNivelRepository.update(mNivel);
             mListener.setHint(mNivel.getnAjudas());
         } else {
             //TODO mostrar mensagem
@@ -285,7 +285,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             ArrayList<Nivel> niveisCategoria = mNivelRepository.getBloquadosByCategoria(this.mNivel.getCategoria());
             Nivel aDesbloquear = niveisCategoria.get(0);
             aDesbloquear.setBloqueado(false);
-            this.mNivelRepository.updateNivel(aDesbloquear);
+            this.mNivelRepository.update(aDesbloquear);
         }
     }
 

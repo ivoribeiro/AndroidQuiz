@@ -5,6 +5,18 @@ import android.os.Parcelable;
 
 public class Pergunta implements Parcelable {
 
+    public static final String TABLE = "pergunta";
+
+    public static final String ID_PERGUNTA = "id";
+    public static final String NIVEL = "nivel";
+    public static final String IMAGEM = "imagem";
+    public static final String RESPOSTA = "respostaCerta";
+    public static final String RESPOSTAS_ERRADAS = "nRespostasErradas";
+    public static final String ACERTOU = "acertou";
+    public static final String STRING_ALEATORIA = "stringAleatoria";
+    public static final String RESPOSTA_ACTUAL = "respostaActual";
+    public static final String N_AJUDAS_USADAS = "nAjudasUsadas";
+
     private int id;
     private int nivel;
     private String imagem;
@@ -15,15 +27,14 @@ public class Pergunta implements Parcelable {
     private String respostaActual;
     private int nAjudasUsadas;
 
+    public Pergunta() {
+    }
+
     public Pergunta(int nivel, String imagem, String respostaCerta) {
         this.nivel = nivel;
         this.imagem = imagem;
         this.respostaCerta = respostaCerta;
     }
-
-    public Pergunta() {
-    }
-
 
     /**
      * Retorna o numero e ajudas usadas para esta pergunta

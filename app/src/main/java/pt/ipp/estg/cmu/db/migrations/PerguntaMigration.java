@@ -4,20 +4,21 @@ package pt.ipp.estg.cmu.db.migrations;
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.db.Field;
+import pt.ipp.estg.cmu.models.Pergunta;
 
 public class PerguntaMigration extends Migration {
 
     public PerguntaMigration() {
         super("pergunta");
-        this.addField(new Field(true, true, "id", "INTEGER"));
-        this.addField(new Field(false, false, "nivel", "NUMERIC"));
-        this.addField(new Field(false, false, "imagem", "TEXT"));
-        this.addField(new Field(false, false, "respostaCerta", "VARCHAR(15)"));
-        this.addField(new Field(false, false, "nRespostasErradas", "NUMERIC"));
-        this.addField(new Field(false, false, "acertou", "NUMERIC"));
-        this.addField(new Field(false, false, "stringAleatoria", "VARCHAR(15)"));
-        this.addField(new Field(false, false, "respostaActual", "VARCHAR(15)"));
-        this.addField(new Field(false, false, "nAjudasUsadas", "NUMERIC"));
+        this.addField(new Field(true, true, Pergunta.ID_PERGUNTA, "INTEGER"));
+        this.addField(new Field(false, false, Pergunta.NIVEL, "NUMERIC"));
+        this.addField(new Field(false, false, Pergunta.IMAGEM, "TEXT"));
+        this.addField(new Field(false, false, Pergunta.RESPOSTA, "VARCHAR(15)"));
+        this.addField(new Field(false, false, Pergunta.RESPOSTAS_ERRADAS, "NUMERIC"));
+        this.addField(new Field(false, false, Pergunta.ACERTOU, "NUMERIC"));
+        this.addField(new Field(false, false, Pergunta.STRING_ALEATORIA, "VARCHAR(15)"));
+        this.addField(new Field(false, false, Pergunta.RESPOSTA_ACTUAL, "VARCHAR(15)"));
+        this.addField(new Field(false, false, Pergunta.N_AJUDAS_USADAS, "NUMERIC"));
         this.setCreate(this.generateCreate());
         this.setUpgrade(this.generateUpgrade());
 

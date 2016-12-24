@@ -6,15 +6,16 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.Field;
+import pt.ipp.estg.cmu.models.Categoria;
 
 
 public class CategoriaMigration extends Migration {
 
     public CategoriaMigration(Context context) {
         super("categoria");
-        this.addField(new Field(true, true, "id", "INTEGER"));
-        this.addField(new Field(false, false, "nome", "VARCHAR(25)"));
-        this.addField(new Field(false, false, "ativa", "NUMERIC"));
+        this.addField(new Field(true, true, Categoria.ID, "INTEGER"));
+        this.addField(new Field(false, false, Categoria.NOME, "VARCHAR(25)"));
+        this.addField(new Field(false, false, Categoria.ATIVA, "NUMERIC"));
         String create = this.generateCreate();
         this.setCreate(create);
         this.setUpgrade(this.generateUpgrade());

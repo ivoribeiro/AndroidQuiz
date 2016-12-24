@@ -154,7 +154,7 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
                 level.setCategoria(mNivel.getCategoria());
                 level.setPontuacao(mNivel.getPontuacao());
                 level.setnRespostasCertas(mNivel.getnRespostasCertas());
-                mNivelRepo.updateNivel(level);
+                mNivelRepo.update(level);
             }
 
             getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);

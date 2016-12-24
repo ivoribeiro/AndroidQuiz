@@ -252,7 +252,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                 p.setRespostaActual("");
                 mRepositoryPergunta.insertInto(p);
                 mNivel.addnPerguntas();
-                mRepositoryNivel.updateNivel(mNivel);
+                mRepositoryNivel.update(mNivel);
             } else {
                 p.setId(mPergunta.getId());
                 mImagemPathText = mImagemPathText == null ? mPergunta.getImagem() : mImagemPathText;
@@ -262,7 +262,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                 p.setNivel(mPergunta.getNivel());
                 p.setnAjudasUsadas(mPergunta.getnAjudasUsadas());
                 p.setRespostaActual(mPergunta.getRespostaActual());
-                mRepositoryPergunta.updatePergunta(p);
+                mRepositoryPergunta.update(p);
             }
             getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         } else {

@@ -8,111 +8,22 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import pt.ipp.estg.cmu.db.dbUtil;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
 
-public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
+public class NivelRepo extends Repo<Nivel> implements RepositoryInterface<Nivel> {
 
     public NivelRepo(Context context) {
-        super(context, "nivel");
-        this.setFields();
-    }
-
-    private void setFields() {
-        this.addField("ID", "id");
-        this.addField("NUMERO", "numero");
-        this.addField("CATEGORIA", "categoria");
-        this.addField("N_PERGUNTAS", "nPerguntas");
-        this.addField("PONTUACAO_CERTA", "pontuacaoBase");
-        this.addField("PONTUACAO_ERRADA", "pontuacaoBaseErrada");
-        this.addField("PONTUACAO_DICA", "pontuacaoHint");
-        this.addField("BLOQUEADO", "bloqueado");
-        this.addField("N_PERGUNTAS", "nPerguntas");
-        this.addField("N_AJUDAS", "nAjudas");
-        this.addField("PONTUACAO", "pontuacao");
-        this.addField("N_RESPOSTAS_CERTAS", "nRespostasCertas");
-        this.addField("N_MIN_RESPOSTAS_CERTAS", "nMinRespostasCertas");
-
+        super(context, Nivel.TABLE);
     }
 
     @Override
-    public ArrayList<Nivel> getAll() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Nivel> getAllByField(String field, String value) {
-        String query = this.getAllByFieldQueryString(field, value);
+    public ArrayList<Nivel> query(String[] tableColumns, String whereClause, String[] whereArgs, String orderBy) {
+        SQLiteDatabase db = super.getWritableDatabase();
+        Cursor cursor = db.query(super.getTable(), tableColumns, whereClause, whereArgs,
+                null, null, orderBy);
         ArrayList<Nivel> niveis = new ArrayList<>();
-        SQLiteDatabase db = super.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst()) {
-            do {
-                Nivel nivel = new Nivel();
-                nivel.setId(cursor.getInt(0));
-                nivel.setNumero(cursor.getString(1));
-                nivel.setCategoria(cursor.getString(2));
-                nivel.setBloqueado(cursor.getInt(3));
-                nivel.setnPerguntas(cursor.getInt(4));
-                nivel.setPontuacaoBase(cursor.getInt(5));
-                nivel.setPontuacaoBaseErrada(cursor.getInt(6));
-                nivel.setPontuacaoHint(cursor.getInt(7));
-                nivel.setnRespostasCertas(cursor.getInt(8));
-                nivel.setnAjudas(cursor.getInt(9));
-                nivel.setPontuacao(cursor.getInt(10));
-                nivel.setnMinRespostasCertas(cursor.getInt(11));
-                niveis.add(nivel);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-        return niveis;
-
-    }
-
-    @Override
-    public Nivel getById(int id) {
-        return null;
-    }
-
-    @Override
-    public Nivel insertInto(Nivel nivel) {
-        SQLiteDatabase db = super.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(this.getField("NUMERO"), nivel.getNumero());
-        values.put(this.getField("CATEGORIA"), nivel.getCategoria());
-        values.put(this.getField("N_PERGUNTAS"), nivel.getCategoria());
-        values.put(this.getField("PONTUACAO_CERTA"), nivel.getPontuacaoBase());
-        values.put(this.getField("PONTUACAO_ERRADA"), nivel.getPontuacaoBaseErrada());
-        values.put(this.getField("PONTUACAO_DICA"), nivel.getPontuacaoHint());
-        values.put(this.getField("BLOQUEADO"), nivel.isBloqueado() ? 1 : 0);
-        values.put(this.getField("N_PERGUNTAS"), 0);
-        values.put(this.getField("N_AJUDAS"), nivel.getnAjudas());
-        values.put(this.getField("PONTUACAO"), 0);
-        values.put(this.getField("N_RESPOSTAS_CERTAS"), 0);
-        values.put(this.getField("N_MIN_RESPOSTAS_CERTAS"), nivel.getnMinRespostasCertas());
-        db.insert(this.getTable(), null, values);
-        db.close();
-        return nivel;
-    }
-
-    @Override
-    public void deleteById(int id) {
-        String query = this.deleteByFieldQueryString("id", "" + id);
-        SQLiteDatabase db = super.getWritableDatabase();
-        db.execSQL(query);
-    }
-
-    public ArrayList<Nivel> getAllByCategoria(String categoria) {
-        return this.getAllByField("categoria", "\'" + categoria + "\'");
-    }
-
-    public ArrayList<Nivel> getBloquadosByCategoria(String categoria) {
-        String query = "SELECT * FROM categoria WHERE categoria=" + categoria + ";";
-        int num = 0;
-        ArrayList<Nivel> niveis = new ArrayList<>();
-        SQLiteDatabase db = super.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
             do {
                 Nivel nivel = new Nivel();
@@ -137,30 +48,82 @@ public class NivelRepo extends Repo implements RepositoryInterface<Nivel> {
     }
 
     /**
+     * Retorna todos os niveis com uma determinada categoria
+     *
+     * @param categoria
+     * @return
+     */
+    public ArrayList<Nivel> getAllByCategoria(String categoria) {
+        return super.getAllByField("categoria", categoria);
+    }
+
+    /**
+     * Retorna todos os niveis bloqueados de uma determinada categoria
+     *
+     * @param categoria
+     * @return
+     */
+    public ArrayList<Nivel> getBloquadosByCategoria(String categoria) {
+        String[] fields = {"categoria", "bloqueado"};
+        String[] values = {categoria, "1"};
+        return super.getAllByFields(fields, values);
+
+    }
+
+    /**
+     * Insere um novo nivel na base de dados
+     *
+     * @param nivel
+     * @return
+     */
+    @Override
+    public Nivel insertInto(Nivel nivel) {
+        SQLiteDatabase db = super.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Nivel.NUMERO, nivel.getNumero());
+        values.put(Nivel.CATEGORIA, nivel.getCategoria());
+        values.put(Nivel.PONTUACAO_CERTA, nivel.getPontuacaoBase());
+        values.put(Nivel.PONTUACAO_ERRADA, nivel.getPontuacaoBaseErrada());
+        values.put(Nivel.PONTUACAO_DICA, nivel.getPontuacaoHint());
+        values.put(Nivel.BLOQUEADO, nivel.isBloqueado() ? 1 : 0);
+        values.put(Nivel.N_PERGUNTAS, 0);
+        values.put(Nivel.N_AJUDAS, nivel.getnAjudas());
+        values.put(Nivel.PONTUACAO, 0);
+        values.put(Nivel.N_RESPOSTAS_CERTAS, 0);
+        values.put(Nivel.N_MIN_RESPOSTAS_CERTAS, nivel.getnMinRespostasCertas());
+        db.insert(this.getTable(), null, values);
+        db.close();
+        return nivel;
+    }
+
+    /**
      * Faz update a uma pergunta por id
      *
      * @param nivel
      * @return
      */
-    public Nivel updateNivel(Nivel nivel) {
+
+    @Override
+    public Nivel update(Nivel nivel) {
         SQLiteDatabase db = super.getWritableDatabase();
         String where = "id=?";
         String[] whereArgs = new String[]{String.valueOf(nivel.getId())};
         ContentValues values = new ContentValues();
-        values.put(this.getField("NUMERO"), nivel.getNumero());
-        values.put(this.getField("CATEGORIA"), nivel.getCategoria());
-        values.put(this.getField("N_PERGUNTAS"), nivel.getCategoria());
-        values.put(this.getField("PONTUACAO_CERTA"), nivel.getPontuacaoBase());
-        values.put(this.getField("PONTUACAO_ERRADA"), nivel.getPontuacaoBaseErrada());
-        values.put(this.getField("PONTUACAO_DICA"), nivel.getPontuacaoHint());
-        values.put(this.getField("BLOQUEADO"), nivel.isBloqueado() ? 1 : 0);
-        values.put(this.getField("N_PERGUNTAS"), nivel.getnPerguntas());
-        values.put(this.getField("N_AJUDAS"), nivel.getnAjudas());
-        values.put(this.getField("PONTUACAO"), nivel.getPontuacao());
-        values.put(this.getField("N_RESPOSTAS_CERTAS"), nivel.getnRespostasCertas());
-        values.put(this.getField("N_MIN_RESPOSTAS_CERTAS"), nivel.getnMinRespostasCertas());
+        values.put(Nivel.NUMERO, nivel.getNumero());
+        values.put(Nivel.CATEGORIA, nivel.getCategoria());
+        values.put(Nivel.PONTUACAO_CERTA, nivel.getPontuacaoBase());
+        values.put(Nivel.PONTUACAO_ERRADA, nivel.getPontuacaoBaseErrada());
+        values.put(Nivel.PONTUACAO_DICA, nivel.getPontuacaoHint());
+        values.put(Nivel.BLOQUEADO, nivel.isBloqueado() ? 1 : 0);
+        values.put(Nivel.N_PERGUNTAS, nivel.getnPerguntas());
+        values.put(Nivel.N_AJUDAS, nivel.getnAjudas());
+        values.put(Nivel.PONTUACAO, nivel.getPontuacao());
+        values.put(Nivel.N_RESPOSTAS_CERTAS, nivel.getnRespostasCertas());
+        values.put(Nivel.N_MIN_RESPOSTAS_CERTAS, nivel.getnMinRespostasCertas());
         db.update(this.getTable(), values, where, whereArgs);
         db.close();
         return nivel;
     }
+
+
 }

@@ -4,14 +4,22 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Categoria implements Parcelable {
+
+    public static final String TABLE = "categoria";
+    public final static String ID = "id";
+    public final static String NOME = "nome";
+    public final static String ATIVA = "ativa";
+
     private int id;
     private String nome;
     private boolean ativa;
 
     public Categoria() {
+
     }
 
     public Categoria(String nome) {
+
         this.nome = nome;
     }
 
@@ -66,4 +74,5 @@ public class Categoria implements Parcelable {
         nome = in.readString();
         ativa = in.readByte() != 0;
     }
+
 }

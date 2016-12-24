@@ -8,37 +8,21 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import pt.ipp.estg.cmu.db.dbUtil;
+import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
 
-public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> {
+public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<Pergunta> {
     public PerguntaRepo(Context context) {
-        super(context, "pergunta");
-        this.setFields();
-    }
-
-    private void setFields() {
-        this.addField("ID", "id");
-        this.addField("NIVEL", "nivel");
-        this.addField("IMAGEM", "imagem");
-        this.addField("RESPOSTA", "respostaCerta");
-        this.addField("RESPOSTAS_ERRADAS", "nRespostasErradas");
-        this.addField("ACERTOU", "acertou");
-        this.addField("STRING_ALEATORIA", "stringAleatoria");
-        this.addField("RESPOSTA_ACTUAL", "respostaActual");
-        this.addField("N_AJUDAS_USADAS", "nAjudasUsadas");
+        super(context, Pergunta.TABLE);
     }
 
     @Override
-    public ArrayList<Pergunta> getAll() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Pergunta> getAllByField(String field, String value) {
-        String query = this.getAllByFieldQueryString(field, value);
-        ArrayList<Pergunta> perguntas = new ArrayList<>();
+    public ArrayList<Pergunta> query(String[] tableColumns, String whereClause, String[] whereArgs, String orderBy) {
         SQLiteDatabase db = super.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
+        Cursor cursor = db.query(super.getTable(), tableColumns, whereClause, whereArgs,
+                null, null, orderBy);
+        ArrayList<Pergunta> perguntas = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
                 Pergunta pergunta = new Pergunta();
@@ -57,36 +41,6 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
         cursor.close();
         db.close();
         return perguntas;
-
-    }
-
-    @Override
-    public Pergunta getById(int id) {
-        return null;
-    }
-
-    @Override
-    public Pergunta insertInto(Pergunta pergunta) {
-        SQLiteDatabase db = super.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(this.getField("NIVEL"), pergunta.getNivel());
-        values.put(this.getField("IMAGEM"), pergunta.getImagem());
-        values.put(this.getField("RESPOSTA"), pergunta.getRespostaCerta());
-        values.put(this.getField("RESPOSTAS_ERRADAS"), 0);
-        values.put(this.getField("ACERTOU"), 0);
-        values.put(this.getField("STRING_ALEATORIA"), pergunta.getStringAleatoria());
-        values.put(this.getField("RESPOSTA_ACTUAL"), pergunta.getRespostaActual());
-        values.put(this.getField("N_AJUDAS_USADAS"), 0);
-        db.insert(this.getTable(), null, values);
-        db.close();
-        return pergunta;
-    }
-
-    @Override
-    public void deleteById(int id) {
-        String query = this.deleteByFieldQueryString("id", "" + id);
-        SQLiteDatabase db = super.getWritableDatabase();
-        db.execSQL(query);
     }
 
     /**
@@ -96,7 +50,25 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
      * @return
      */
     public ArrayList<Pergunta> getAllByNivel(int idNivel) {
-        return this.getAllByField("nivel", "" + idNivel + "");
+        return super.getAllByField("nivel", "" + idNivel + "");
+    }
+
+
+    @Override
+    public Pergunta insertInto(Pergunta pergunta) {
+        SQLiteDatabase db = super.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Pergunta.NIVEL, pergunta.getNivel());
+        values.put(Pergunta.IMAGEM, pergunta.getImagem());
+        values.put(Pergunta.RESPOSTA, pergunta.getRespostaCerta());
+        values.put(Pergunta.RESPOSTAS_ERRADAS, 0);
+        values.put(Pergunta.ACERTOU, 0);
+        values.put(Pergunta.STRING_ALEATORIA, pergunta.getStringAleatoria());
+        values.put(Pergunta.RESPOSTA_ACTUAL, "");
+        values.put(Pergunta.N_AJUDAS_USADAS, 0);
+        db.insert(this.getTable(), null, values);
+        db.close();
+        return pergunta;
     }
 
     /**
@@ -105,24 +77,31 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
      * @param pergunta
      * @return
      */
-    public Pergunta updatePergunta(Pergunta pergunta) {
+    @Override
+    public Pergunta update(Pergunta pergunta) {
         SQLiteDatabase db = super.getWritableDatabase();
         String where = "id=?";
         String[] whereArgs = new String[]{String.valueOf(pergunta.getId())};
         ContentValues values = new ContentValues();
-        values.put(this.getField("NIVEL"), pergunta.getNivel());
-        values.put(this.getField("IMAGEM"), pergunta.getImagem());
-        values.put(this.getField("RESPOSTA"), pergunta.getRespostaCerta());
-        values.put(this.getField("RESPOSTAS_ERRADAS"), pergunta.getnRespostasErradas());
-        values.put(this.getField("ACERTOU"), pergunta.acertou());
-        values.put(this.getField("STRING_ALEATORIA"), pergunta.getStringAleatoria());
-        values.put(this.getField("RESPOSTA_ACTUAL"), pergunta.getRespostaActual());
-        values.put(this.getField("N_AJUDAS_USADAS"), pergunta.getnAjudasUsadas());
+        values.put(Pergunta.NIVEL, pergunta.getNivel());
+        values.put(Pergunta.IMAGEM, pergunta.getImagem());
+        values.put(Pergunta.RESPOSTA, pergunta.getRespostaCerta());
+        values.put(Pergunta.RESPOSTAS_ERRADAS, pergunta.getnRespostasErradas());
+        values.put(Pergunta.ACERTOU, pergunta.acertou());
+        values.put(Pergunta.STRING_ALEATORIA, pergunta.getStringAleatoria());
+        values.put(Pergunta.RESPOSTA_ACTUAL, pergunta.getRespostaActual());
+        values.put(Pergunta.N_AJUDAS_USADAS, pergunta.getnAjudasUsadas());
         db.update(this.getTable(), values, where, whereArgs);
         db.close();
         return pergunta;
     }
 
+    /**
+     * Retorna o numero de registos de uma query
+     *
+     * @param query
+     * @return
+     */
     public int count(String query) {
         int num = 0;
         SQLiteDatabase db = super.getWritableDatabase();
@@ -165,12 +144,23 @@ public class PerguntaRepo extends Repo implements RepositoryInterface<Pergunta> 
         return count(query);
     }
 
-
+    /**
+     * Retorna a soma de todas as respostas erradas no nivel
+     *
+     * @param nivel
+     * @return
+     */
     public int getSumNivelErradas(int nivel) {
         String query = "SELECT sum(nRespostasErradas) FROM pergunta WHERE nivel =" + nivel + ";";
         return count(query);
     }
 
+    /**
+     * Retorna a soma de todas as ajudas usadas no nivel
+     *
+     * @param nivel
+     * @return
+     */
     public int getSumNivelAjudasUsadas(int nivel) {
         String query = "SELECT sum(nAjudasUsadas) FROM pergunta WHERE nivel =" + nivel + ";";
         return count(query);

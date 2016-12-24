@@ -1,7 +1,5 @@
 package pt.ipp.estg.cmu.db.migrations;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.db.Field;

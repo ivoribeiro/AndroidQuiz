@@ -5,6 +5,21 @@ import android.os.Parcelable;
 
 public class Nivel implements Parcelable {
 
+    public static final String TABLE = "nivel";
+
+    public static final String ID_NIVEL = "id";
+    public static final String NUMERO = "numero";
+    public static final String CATEGORIA = "categoria";
+    public static final String PONTUACAO_CERTA = "pontuacaoBase";
+    public static final String PONTUACAO_ERRADA = "pontuacaoBaseErrada";
+    public static final String PONTUACAO_DICA = "pontuacaoHint";
+    public static final String BLOQUEADO = "bloqueado";
+    public static final String N_PERGUNTAS = "nPerguntas";
+    public static final String N_AJUDAS = "nAjudas";
+    public static final String PONTUACAO = "pontuacao";
+    public static final String N_RESPOSTAS_CERTAS = "nRespostasCertas";
+    public static final String N_MIN_RESPOSTAS_CERTAS = "nMinRespostasCertas";
+
     private int id;
     private String numero;
     private String categoria;
@@ -18,6 +33,9 @@ public class Nivel implements Parcelable {
     private int nRespostasCertas;//numero de perguntas que o user acertou neste nivel
     private int nMinRespostasCertas; //numero minimo de respostas certas para desbloquer o proximo nivel
 
+    public Nivel() {
+    }
+
     public Nivel(int id, String numero, int nPerguntas, int pontuacaoBase, int pontuacaoBaseErrada, int pontuacaoHint, boolean bloqueado, String categoria, int nAjudas, int pontuacao) {
         this.id = id;
         this.numero = numero;
@@ -29,9 +47,6 @@ public class Nivel implements Parcelable {
         this.bloqueado = bloqueado;
         this.nAjudas = nAjudas;
         this.pontuacao = pontuacao;
-    }
-
-    public Nivel() {
     }
 
     public int getId() {
