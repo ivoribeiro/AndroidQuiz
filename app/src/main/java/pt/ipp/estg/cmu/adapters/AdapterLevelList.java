@@ -2,6 +2,7 @@ package pt.ipp.estg.cmu.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -33,12 +34,14 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
     private Context mContext;
     private Categoria mCategoria;
     private boolean isAdmin;
+    private RecyclerView mRecyclerView;
 
-    public AdapterLevelList(Context context, List<Nivel> data, Categoria categoria, boolean isAdmin) {
+    public AdapterLevelList(Context context, RecyclerView mRecyclerView, List<Nivel> data, Categoria categoria, boolean isAdmin) {
         this.mContext = context;
         this.mDataSet = data;
         this.mCategoria = categoria;
         this.isAdmin = isAdmin;
+        this.mRecyclerView = mRecyclerView;
     }
 
     @Override
@@ -73,11 +76,14 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
                             .putExtra(Util.ARG_LEVEL, mDataSet.get(position)));
 
 
-                } else {//MODO GAME
+                } else if (!isAdmin && !mDataSet.get(position).isBloqueado()) {//MODO GAME
                     mContext.startActivity(new Intent(mContext, GameActivity.class)
                             .putExtra(Util.ARG_LEVEL, mDataSet.get(position))
                             .putExtra(Util.ARG_CATEGORIE, mCategoria)
                     );
+                } else {
+                    Snackbar.make(mRecyclerView, mContext.getString(R.string.snack_bar_level_info), Snackbar.LENGTH_LONG).show();
+
                 }
             }
         });

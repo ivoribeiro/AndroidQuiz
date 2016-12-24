@@ -81,7 +81,7 @@ public class LevelFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         mRepository = new NivelRepo(getContext());
         mNiveis = getAllNiveis();
-        mAdapter = new AdapterLevelList(getActivity(), mNiveis, mCategoria, isAdmin);
+        mAdapter = new AdapterLevelList(getActivity(),mRecyclerView, mNiveis, mCategoria, isAdmin);
         mRecyclerView.setAdapter(mAdapter);
 
         if (isAdmin) {    //swipe to remove
