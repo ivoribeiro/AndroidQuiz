@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="?android:colorBackground"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -114,6 +114,37 @@
                     android:layout_margin="@dimen/novo_nivel_layout_margin"
                     android:hint="@string/admin_novo_nivel_ajuda_num"
                     android:inputType="number" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/novo_nivel_layout_margin"
+                android:padding="@dimen/novo_nivel_layout_margin">
+
+                <EditText
+                    android:id="@+id/level_min_num_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/novo_nivel_layout_margin"
+                    android:hint="@string/admin_novo_nivel_min_num"
+                    android:inputType="number" />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/novo_nivel_layout_margin"
+                android:padding="@dimen/novo_nivel_layout_margin">
+
+                <CheckBox
+                    android:id="@+id/level_block_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/novo_nivel_layout_margin"
+                    android:hint="@string/admin_novo_nivel_bloqueado" />
 
             </android.support.v7.widget.CardView>
 

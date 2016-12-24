@@ -185,5 +185,7 @@
     <string name="n_ajudas_usadas_estatisticas">Ajudas usadas</string>
     <string name="pontuacao_ganha_estatisticas">Pontuação ganha</string>
     <string name="pontuacao_perdida_estatisticas">Pontuação perdida</string>
+    <string name="admin_novo_nivel_min_num">Número minimo de respostas certas para desbloquear próximo nivel</string>
+    <string name="admin_novo_nivel_bloqueado">Nível bloqueado</string>
 
 </resources>

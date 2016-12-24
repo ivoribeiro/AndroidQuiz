@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -30,6 +31,9 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
     private EditText mPontuacaoRetiradaAjuda;
     private EditText mNumMaxAjudas;
     private FloatingActionButton mFab;
+    private CheckBox mBloqueado;
+    private EditText mNumMinDesbloquear;
+
     private boolean editMode;
     private Nivel mNivel;
     private NivelRepo mNivelRepo;
@@ -81,7 +85,9 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
         mPontuacaoRetiradaErrada = (EditText) view.findViewById(R.id.level_errada_text);
         mPontuacaoRetiradaAjuda = (EditText) view.findViewById(R.id.level_ajuda_text);
         mNumMaxAjudas = (EditText) view.findViewById(R.id.level_ajuda_num_text);
-        //TODO novos campos
+        mBloqueado = (CheckBox) view.findViewById(R.id.level_block_text);
+        mNumMinDesbloquear = (EditText) view.findViewById(R.id.level_min_num_text);
+
         mFab = (FloatingActionButton) view.findViewById(R.id.fab);
         mFab.setOnClickListener(this);
         return view;
@@ -96,7 +102,8 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
             mPontuacaoRetiradaErrada.setText("" + mNivel.getPontuacaoBaseErrada());
             mPontuacaoRetiradaAjuda.setText("" + mNivel.getPontuacaoHint());
             mNumMaxAjudas.setText("" + mNivel.getnAjudas());
-            //TODO novos campos
+            mBloqueado.setChecked(mNivel.isBloqueado());
+            mNumMinDesbloquear.setText("" + mNivel.getnMinRespostasCertas());
         }
     }
 
@@ -124,7 +131,10 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
         String pontuacaoBaseErradas = mPontuacaoRetiradaErrada.getText().toString();
         String pontuacaoHint = mPontuacaoRetiradaAjuda.getText().toString();
         String nAjudas = mNumMaxAjudas.getText().toString();
-        if (!nome.equals("") && !pontuacaoBase.equals("") && !pontuacaoBaseErradas.equals("") && !pontuacaoHint.equals("") && !nAjudas.equals("")) {
+        boolean bloqueado = mBloqueado.isChecked();
+        String nMinDesbloquear = mNumMinDesbloquear.getText().toString();
+
+        if (!nMinDesbloquear.equals("") && !nome.equals("") && !pontuacaoBase.equals("") && !pontuacaoBaseErradas.equals("") && !pontuacaoHint.equals("") && !nAjudas.equals("")) {
 
             Nivel level = new Nivel();
             level.setNumero(nome);
@@ -132,26 +142,18 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
             level.setPontuacaoBaseErrada(Integer.parseInt(pontuacaoBaseErradas));
             level.setPontuacaoHint(Integer.parseInt(pontuacaoHint));
             level.setnAjudas(Integer.parseInt(nAjudas));
-            //TODO FIX
-            level.setnMinRespostasCertas(10);
-            //TODO FIX
-            level.setBloqueado(false);
-
-            //TODO save level on db
+            level.setBloqueado(bloqueado);
+            level.setnMinRespostasCertas(Integer.parseInt(nMinDesbloquear));
 
             if (!editMode) {
                 level.setCategoria(mCategoria.getNome());
                 mNivelRepo.insertInto(level);
             } else {
                 level.setId(mNivel.getId());
-                level.setCategoria(mNivel.getCategoria());
-                //TODO fix
-                level.setBloqueado(mNivel.isBloqueado());
                 level.setnPerguntas(mNivel.getnPerguntas());
+                level.setCategoria(mNivel.getCategoria());
                 level.setPontuacao(mNivel.getPontuacao());
                 level.setnRespostasCertas(mNivel.getnRespostasCertas());
-                //TODO fix
-                level.setnMinRespostasCertas(mNivel.getnMinRespostasCertas());
                 mNivelRepo.updateNivel(level);
             }
 
