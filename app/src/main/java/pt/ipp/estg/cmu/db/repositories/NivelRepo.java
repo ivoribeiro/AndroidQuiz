@@ -80,10 +80,10 @@ public class NivelRepo extends Repo<Nivel> implements RepositoryInterface<Nivel>
         ContentValues values = new ContentValues();
         values.put(Nivel.NUMERO, nivel.getNumero());
         values.put(Nivel.CATEGORIA, nivel.getCategoria());
+        values.put(Nivel.BLOQUEADO, nivel.isBloqueado() ? 1 : 0);
         values.put(Nivel.PONTUACAO_CERTA, nivel.getPontuacaoBase());
         values.put(Nivel.PONTUACAO_ERRADA, nivel.getPontuacaoBaseErrada());
         values.put(Nivel.PONTUACAO_DICA, nivel.getPontuacaoHint());
-        values.put(Nivel.BLOQUEADO, nivel.isBloqueado() ? 1 : 0);
         values.put(Nivel.N_AJUDAS, nivel.getnAjudas());
         values.put(Nivel.PONTUACAO, 0);
         values.put(Nivel.N_MIN_RESPOSTAS_CERTAS, nivel.getnMinRespostasCertas());

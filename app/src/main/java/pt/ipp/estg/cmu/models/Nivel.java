@@ -14,10 +14,8 @@ public class Nivel implements Parcelable {
     public static final String PONTUACAO_ERRADA = "pontuacaoBaseErrada";
     public static final String PONTUACAO_DICA = "pontuacaoHint";
     public static final String BLOQUEADO = "bloqueado";
-    public static final String N_PERGUNTAS = "nPerguntas";
     public static final String N_AJUDAS = "nAjudas";
     public static final String PONTUACAO = "pontuacao";
-    public static final String N_RESPOSTAS_CERTAS = "nRespostasCertas";
     public static final String N_MIN_RESPOSTAS_CERTAS = "nMinRespostasCertas";
 
     private int id;

@@ -251,7 +251,6 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                 p.setNivel(mNivel.getId());
                 p.setRespostaActual("");
                 mRepositoryPergunta.insertInto(p);
-                mRepositoryNivel.update(mNivel);
             } else {
                 p.setId(mPergunta.getId());
                 mImagemPathText = mImagemPathText == null ? mPergunta.getImagem() : mImagemPathText;
