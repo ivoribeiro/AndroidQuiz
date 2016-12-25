@@ -1,10 +1,12 @@
 package pt.ipp.estg.cmu.callbacks;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -44,7 +46,7 @@ public class RecyclerSwipePerguntaTouchHelper extends ItemTouchHelper.SimpleCall
         final int position = viewHolder.getAdapterPosition();
         final Pergunta pergunta = mPerguntas.get(position);
 
-        Snackbar.make(mRecycler,
+        Snackbar snackbar = Snackbar.make(mRecycler,
                 mContext.getResources().getString(R.string.snack_deleted) + " " + mPerguntas.get(viewHolder.getAdapterPosition()).getRespostaCerta(),
                 Snackbar.LENGTH_LONG).setAction(mContext.getResources().getString(R.string.snack_undo),
                 new View.OnClickListener() {
@@ -56,7 +58,27 @@ public class RecyclerSwipePerguntaTouchHelper extends ItemTouchHelper.SimpleCall
                         //mAdapter.notifyDataSetChanged();
                         //mRecycler.setAdapter(new AdapterCategoriaGrid(mContext, mCategorias, true));
                     }
-                }).show();
+                });
+/*
+        snackbar.getView().addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(View v) {
+            }
+
+            @Override
+            public void onViewDetachedFromWindow(View v) {
+
+                Handler h = new Handler();
+                h.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(mContext, "this is my Toast message!!! =)",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }, 1000);
+            }
+        });*/
+        snackbar.show();
         mRepository.deleteById(pergunta.getId());
         mPerguntas.remove(position);
         mRecycler.removeViewAt(position);

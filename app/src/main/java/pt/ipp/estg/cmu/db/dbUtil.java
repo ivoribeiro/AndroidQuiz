@@ -9,7 +9,7 @@ public class dbUtil {
     public static String whereClause(String[] fields) {
         String whereClause = "";
         for (String field : fields) {
-            whereClause += field + "=? AND";
+            whereClause += " "+field + "=? AND";
         }
         int index = whereClause.lastIndexOf(" ");
         whereClause = whereClause.substring(0, index);

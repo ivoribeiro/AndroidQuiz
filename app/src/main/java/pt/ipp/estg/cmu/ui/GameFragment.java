@@ -286,6 +286,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             Nivel aDesbloquear = niveisCategoria.get(0);
             aDesbloquear.setBloqueado(false);
             this.mNivelRepository.update(aDesbloquear);
+            //TODO mostrar snackbar
         }
     }
 
