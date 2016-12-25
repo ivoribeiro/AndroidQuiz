@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -38,6 +40,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private static final int ROW_2 = 9;
     private static final int ROW_3 = 14;
 
+    private Context mContext;
     private GameInterfaceListener mListener;
     private Nivel mNivel;
     private Pergunta mPergunta;
@@ -45,6 +48,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private PerguntaRepo mPerguntaRepository;
 
     //layout
+    private ViewGroup mViewGroup;
     private LinearLayout mAnswerLayout;
     private TableLayout mTableLayout;
     private ImageView mImageView;
@@ -85,6 +89,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mViewGroup = container;
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
         mAnswerLayout = (LinearLayout) view.findViewById(R.id.answer_layout);
@@ -116,6 +121,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mContext = context;
         mListener = (GameActivity) context;
         mEstatisticasNivel = new EstatisticasNivel(context, mNivel);
 
@@ -126,6 +132,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.hint:
                 setHintLetter();
+                //TODO adicionar ao numero de ajudas usadas
                 break;
             case R.id.reset:
                 createLayout();
@@ -226,8 +233,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             mNivel.decrementnAjudas();
             mNivelRepository.update(mNivel);
             mListener.setHint(mNivel.getnAjudas());
-        } else {
-            //TODO mostrar mensagem
         }
     }
 
@@ -277,6 +282,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 decrementAjuda();
             }
         }
+        else {
+            Snackbar.make(mViewGroup, getContext().getResources().getString(R.string.jogo_sem_ajudas_info), Snackbar.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -285,10 +293,12 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private void unlockNextLevel() {
         if (canUnlock()) {
             ArrayList<Nivel> niveisCategoria = mNivelRepository.getBloquadosByCategoria(this.mNivel.getCategoria());
-            Nivel aDesbloquear = niveisCategoria.get(0);
-            aDesbloquear.setBloqueado(false);
-            this.mNivelRepository.update(aDesbloquear);
-            //TODO mostrar snackbar
+            if (niveisCategoria.size() == 1) {
+                Nivel aDesbloquear = niveisCategoria.get(0);
+                aDesbloquear.setBloqueado(false);
+                this.mNivelRepository.update(aDesbloquear);
+                //TODO mostrar snackbar
+            }
         }
     }
 

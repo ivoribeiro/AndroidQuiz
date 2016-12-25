@@ -188,5 +188,6 @@
     <string name="admin_novo_nivel_min_num">Número minimo de respostas certas para desbloquear próximo nivel</string>
     <string name="admin_novo_nivel_bloqueado">Nível bloqueado</string>
     <string name="snack_bar_level_info">Nivel bloqueado</string>
+    <string name="jogo_sem_ajudas_info">Ficou sem ajudas para este nível</string>
 
 </resources>
