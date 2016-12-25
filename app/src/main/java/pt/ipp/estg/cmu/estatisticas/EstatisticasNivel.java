@@ -29,7 +29,7 @@ public class EstatisticasNivel {
      * @return
      */
     public int getnPerguntas() {
-        return nivel.getnPerguntas();
+        return mPerguntaRepo.countAllByNivel(nivel.getId());
     }
 
     /**
@@ -56,7 +56,7 @@ public class EstatisticasNivel {
      * @return
      */
     public int getnRespostasCertas() {
-        return this.nivel.getnRespostasCertas();
+        return this.mPerguntaRepo.countCertasNivel(nivel.getId());
     }
 
     /**
@@ -76,7 +76,7 @@ public class EstatisticasNivel {
      * @return
      */
     public int getPontuacaoGanha() {
-        return this.nivel.getPontuacaoBase() * this.nivel.getnRespostasCertas();
+        return this.nivel.getPontuacaoBase() * this.getnRespostasCertas();
     }
 
     /**

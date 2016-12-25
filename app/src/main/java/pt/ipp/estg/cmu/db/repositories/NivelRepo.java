@@ -31,14 +31,12 @@ public class NivelRepo extends Repo<Nivel> implements RepositoryInterface<Nivel>
                 nivel.setNumero(cursor.getString(1));
                 nivel.setCategoria(cursor.getString(2));
                 nivel.setBloqueado(cursor.getInt(3));
-                nivel.setnPerguntas(cursor.getInt(4));
-                nivel.setPontuacaoBase(cursor.getInt(5));
-                nivel.setPontuacaoBaseErrada(cursor.getInt(6));
-                nivel.setPontuacaoHint(cursor.getInt(7));
-                nivel.setnRespostasCertas(cursor.getInt(8));
-                nivel.setnAjudas(cursor.getInt(9));
-                nivel.setPontuacao(cursor.getInt(10));
-                nivel.setnMinRespostasCertas(cursor.getInt(11));
+                nivel.setPontuacaoBase(cursor.getInt(4));
+                nivel.setPontuacaoBaseErrada(cursor.getInt(5));
+                nivel.setPontuacaoHint(cursor.getInt(6));
+                nivel.setnAjudas(cursor.getInt(7));
+                nivel.setPontuacao(cursor.getInt(8));
+                nivel.setnMinRespostasCertas(cursor.getInt(9));
                 niveis.add(nivel);
             } while (cursor.moveToNext());
         }
@@ -86,10 +84,8 @@ public class NivelRepo extends Repo<Nivel> implements RepositoryInterface<Nivel>
         values.put(Nivel.PONTUACAO_ERRADA, nivel.getPontuacaoBaseErrada());
         values.put(Nivel.PONTUACAO_DICA, nivel.getPontuacaoHint());
         values.put(Nivel.BLOQUEADO, nivel.isBloqueado() ? 1 : 0);
-        values.put(Nivel.N_PERGUNTAS, 0);
         values.put(Nivel.N_AJUDAS, nivel.getnAjudas());
         values.put(Nivel.PONTUACAO, 0);
-        values.put(Nivel.N_RESPOSTAS_CERTAS, 0);
         values.put(Nivel.N_MIN_RESPOSTAS_CERTAS, nivel.getnMinRespostasCertas());
         db.insert(this.getTable(), null, values);
         db.close();
@@ -115,10 +111,8 @@ public class NivelRepo extends Repo<Nivel> implements RepositoryInterface<Nivel>
         values.put(Nivel.PONTUACAO_ERRADA, nivel.getPontuacaoBaseErrada());
         values.put(Nivel.PONTUACAO_DICA, nivel.getPontuacaoHint());
         values.put(Nivel.BLOQUEADO, nivel.isBloqueado() ? 1 : 0);
-        values.put(Nivel.N_PERGUNTAS, nivel.getnPerguntas());
         values.put(Nivel.N_AJUDAS, nivel.getnAjudas());
         values.put(Nivel.PONTUACAO, nivel.getPontuacao());
-        values.put(Nivel.N_RESPOSTAS_CERTAS, nivel.getnRespostasCertas());
         values.put(Nivel.N_MIN_RESPOSTAS_CERTAS, nivel.getnMinRespostasCertas());
         db.update(this.getTable(), values, where, whereArgs);
         db.close();

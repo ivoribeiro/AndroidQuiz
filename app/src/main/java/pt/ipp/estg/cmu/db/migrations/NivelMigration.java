@@ -14,11 +14,9 @@ public class NivelMigration extends Migration {
         this.addField(new Field(false, false, Nivel.NUMERO, "VARCHAR(20)"));
         this.addField(new Field(false, false, Nivel.CATEGORIA, "VARCHAR(20)"));
         this.addField(new Field(false, false, Nivel.BLOQUEADO, "NUMERIC"));
-        this.addField(new Field(false, false, Nivel.N_PERGUNTAS, "NUMERIC"));
         this.addField(new Field(false, false, Nivel.PONTUACAO_CERTA, "NUMERIC"));
         this.addField(new Field(false, false, Nivel.PONTUACAO_ERRADA, "NUMERIC"));
         this.addField(new Field(false, false, Nivel.PONTUACAO_DICA, "NUMERIC"));
-        this.addField(new Field(false, false, Nivel.N_RESPOSTAS_CERTAS, "NUMERIC"));
         this.addField(new Field(false, false, Nivel.N_AJUDAS, "NUMERIC"));
         this.addField(new Field(false, false, Nivel.PONTUACAO, "NUMERIC"));
         this.addField(new Field(false, false, Nivel.N_MIN_RESPOSTAS_CERTAS, "NUMERIC"));
@@ -30,16 +28,14 @@ public class NivelMigration extends Migration {
         seeder.add("INSERT INTO nivel ('numero'," +
                 "'categoria'," +
                 "'bloqueado'," +
-                "'nPerguntas'," +
                 "'pontuacaoBase'," +
                 "'pontuacaoBaseErrada'," +
                 "'pontuacaoHint'," +
                 "'nRespostasCertas'," +
                 "'nAjudas'," +
                 "'pontuacao'," +
-                "'nRespostasCertas'," +
                 "'nMinRespostasCertas'" +
-                ") VALUES('Nivel 1','Tech',0,0,100,15,5,0,10,0,0,5);");
+                ") VALUES('Nivel 1','Tech',0,100,15,5,10,0,0,5);");
         //this.setSeeders(seeder);
 
     }

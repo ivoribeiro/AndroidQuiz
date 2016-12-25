@@ -150,10 +150,8 @@ public class AdminNovoNivelFragment extends Fragment implements View.OnClickList
                 mNivelRepo.insertInto(level);
             } else {
                 level.setId(mNivel.getId());
-                level.setnPerguntas(mNivel.getnPerguntas());
                 level.setCategoria(mNivel.getCategoria());
                 level.setPontuacao(mNivel.getPontuacao());
-                level.setnRespostasCertas(mNivel.getnRespostasCertas());
                 mNivelRepo.update(level);
             }
 

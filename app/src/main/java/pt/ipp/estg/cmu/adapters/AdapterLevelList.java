@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.estatisticas.EstatisticasNivel;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.ui.AdminNovoNivelFragment;
@@ -35,6 +36,7 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
     private Categoria mCategoria;
     private boolean isAdmin;
     private RecyclerView mRecyclerView;
+    private EstatisticasNivel mEstatisticasNivel;
 
     public AdapterLevelList(Context context, RecyclerView mRecyclerView, List<Nivel> data, Categoria categoria, boolean isAdmin) {
         this.mContext = context;
@@ -65,8 +67,10 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
             holder.mImageState.setBackground(mContext.getDrawable(R.drawable.img_lock));
         }
 
-        holder.mProgressBar.setMax(mDataSet.get(position).getnPerguntas());
-        holder.mProgressBar.setProgress(mDataSet.get(position).getnRespostasCertas());
+        this.mEstatisticasNivel = new EstatisticasNivel(mContext, mDataSet.get(position));
+
+        holder.mProgressBar.setMax(this.mEstatisticasNivel.getnPerguntas());
+        holder.mProgressBar.setProgress(this.mEstatisticasNivel.getnRespostasCertas());
 
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override

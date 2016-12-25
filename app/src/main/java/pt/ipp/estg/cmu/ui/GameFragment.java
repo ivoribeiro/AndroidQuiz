@@ -22,6 +22,7 @@ import java.util.Random;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.repositories.NivelRepo;
 import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
+import pt.ipp.estg.cmu.estatisticas.EstatisticasNivel;
 import pt.ipp.estg.cmu.interfaces.GameInterfaceListener;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
@@ -55,6 +56,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private String[] mUserAnswerArray;
     private int mUserAnswerIndex;
 
+    EstatisticasNivel mEstatisticasNivel;
+
     public GameFragment() {
     }
 
@@ -77,9 +80,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         }
         mPerguntaRepository = new PerguntaRepo(this.getContext());
         mNivelRepository = new NivelRepo(this.getContext());
-
         mUserAnswerArray = new String[mCorrectAnswerConcat.length()];
-
     }
 
     @Override
@@ -116,6 +117,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public void onAttach(Context context) {
         super.onAttach(context);
         mListener = (GameActivity) context;
+        mEstatisticasNivel = new EstatisticasNivel(context, mNivel);
+
     }
 
     @Override
@@ -196,7 +199,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 incrementPontosNivel();
                 mListener.setAnswered(true);
                 mPergunta.setAcertou(true);
-                mNivel.addnRespostasCertas();
                 mHintButton.setVisibility(View.GONE);
                 mResetButton.setVisibility(View.GONE);
                 //save on bd
@@ -298,6 +300,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
      * @return
      */
     private boolean canUnlock() {
-        return this.mNivel.getnRespostasCertas() == this.mNivel.getnMinRespostasCertas();
+        return this.mEstatisticasNivel.getnRespostasCertas() == this.mNivel.getnMinRespostasCertas();
     }
 }

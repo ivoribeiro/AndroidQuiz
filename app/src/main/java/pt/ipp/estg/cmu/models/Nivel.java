@@ -27,26 +27,11 @@ public class Nivel implements Parcelable {
     private int pontuacaoBaseErrada;// pontuacao retirada por cada pergunta errada neste nivel
     private int pontuacaoHint;//pontuacao retirada por cada ajuda usada neste nivel
     private boolean bloqueado;//estado do nivel, se o user ja desbloqueou o anterior ou nao
-    private int nPerguntas;//numero de perguntas do nivel
     private int nAjudas;// numero de ajudas restantes neste nivel
     private int pontuacao;//numero de pontos ganhos neste nivel
-    private int nRespostasCertas;//numero de perguntas que o user acertou neste nivel
     private int nMinRespostasCertas; //numero minimo de respostas certas para desbloquer o proximo nivel
 
     public Nivel() {
-    }
-
-    public Nivel(int id, String numero, int nPerguntas, int pontuacaoBase, int pontuacaoBaseErrada, int pontuacaoHint, boolean bloqueado, String categoria, int nAjudas, int pontuacao) {
-        this.id = id;
-        this.numero = numero;
-        this.categoria = categoria;
-        this.nPerguntas = nPerguntas;
-        this.pontuacaoBase = pontuacaoBase;
-        this.pontuacaoBaseErrada = pontuacaoBaseErrada;
-        this.pontuacaoHint = pontuacaoHint;
-        this.bloqueado = bloqueado;
-        this.nAjudas = nAjudas;
-        this.pontuacao = pontuacao;
     }
 
     public int getId() {
@@ -110,30 +95,6 @@ public class Nivel implements Parcelable {
         this.bloqueado = bloqueado == 1;
     }
 
-    public int getnPerguntas() {
-        return nPerguntas;
-    }
-
-    public void setnPerguntas(int nPerguntas) {
-        this.nPerguntas = nPerguntas;
-    }
-
-    public void addnPerguntas() {
-        this.nPerguntas++;
-    }
-
-    public int getnRespostasCertas() {
-        return nRespostasCertas;
-    }
-
-    public void setnRespostasCertas(int nRespostasCertas) {
-        this.nRespostasCertas = nRespostasCertas;
-    }
-
-    public void addnRespostasCertas() {
-        this.nRespostasCertas++;
-    }
-
     public int getnAjudas() {
         return nAjudas;
     }
@@ -189,10 +150,8 @@ public class Nivel implements Parcelable {
         parcel.writeInt(pontuacaoHint);
         parcel.writeValue(bloqueado);
         parcel.writeString(categoria);
-        parcel.writeInt(nPerguntas);
         parcel.writeInt(nAjudas);
         parcel.writeInt(pontuacao);
-        parcel.writeInt(nRespostasCertas);
         parcel.writeInt(nMinRespostasCertas);
     }
 
@@ -216,10 +175,8 @@ public class Nivel implements Parcelable {
         pontuacaoHint = in.readInt();
         bloqueado = (Boolean) in.readValue(null);
         categoria = in.readString();
-        nPerguntas = in.readInt();
         nAjudas = in.readInt();
         pontuacao = in.readInt();
-        nRespostasCertas = in.readInt();
         nMinRespostasCertas = in.readInt();
 
     }

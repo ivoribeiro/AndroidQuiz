@@ -124,6 +124,17 @@ public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<
         return count(query);
     }
 
+
+    /**
+     * Retorna o numero de perguntas existentes num nivel
+     *
+     * @return
+     */
+    public int countAllByNivel(int nivel) {
+        String query = "SELECT count(id) FROM pergunta WHERE nivel=" + nivel + ";";
+        return count(query);
+    }
+
     /**
      * Retorna o numero de perguntas que forram respondidas corretamente
      *
@@ -131,6 +142,17 @@ public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<
      */
     public int countCertas() {
         String query = "SELECT count(id) FROM pergunta WHERE acertou = 1;";
+        return count(query);
+    }
+
+
+    /**
+     * Retorna o numero de perguntas que forram respondidas corretamente
+     *
+     * @return
+     */
+    public int countCertasNivel(int nivel) {
+        String query = "SELECT count(id) FROM pergunta WHERE acertou = 1 AND nivel=" + nivel + ";";
         return count(query);
     }
 
