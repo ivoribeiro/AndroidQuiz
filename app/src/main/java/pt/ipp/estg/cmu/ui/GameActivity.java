@@ -3,6 +3,7 @@ package pt.ipp.estg.cmu.ui;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -105,7 +106,7 @@ public class GameActivity extends AppCompatActivity implements GameInterfaceList
     }
 
     @Override
-    public void setAnswered(boolean hit) {
+    public void setAnswered(final boolean hit) {
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.fragment_game_window_pop_up);
         ImageView imageView = (ImageView) dialog.findViewById(R.id.image_view);
@@ -119,7 +120,24 @@ public class GameActivity extends AppCompatActivity implements GameInterfaceList
         handler.postDelayed(new Runnable() {
             public void run() {
                 dialog.dismiss();
-                mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+                if (hit) {
+                    mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+                }
+            }
+        }, WAIT_MSECS);
+    }
+
+    @Override
+    public void unlock() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.fragment_game_window_pop_up);
+        ImageView imageView = (ImageView) dialog.findViewById(R.id.image_view);
+        imageView.setBackground( ContextCompat.getDrawable(this,R.drawable.img_unlock));
+        dialog.show();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                dialog.dismiss();
             }
         }, WAIT_MSECS);
     }
