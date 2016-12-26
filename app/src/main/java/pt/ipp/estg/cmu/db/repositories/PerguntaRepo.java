@@ -96,6 +96,11 @@ public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<
         return pergunta;
     }
 
+    @Override
+    public boolean canDelete(Pergunta pergunta) {
+        return pergunta.acertou() ==false && pergunta.getnAjudasUsadas() == 0 && pergunta.getnRespostasErradas() == 0;
+    }
+
     /**
      * Retorna o numero de registos de uma query
      *

@@ -73,4 +73,9 @@ public class CategoriaRepo extends Repo<Categoria> implements RepositoryInterfac
         return categoria;
 
     }
+
+    @Override
+    public boolean canDelete(Categoria resource) {
+        return false;
+    }
 }

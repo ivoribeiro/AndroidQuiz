@@ -23,4 +23,5 @@ public interface RepositoryInterface<T> {
     T update(T resource);
 
 
+    boolean canDelete(T resource);
 }

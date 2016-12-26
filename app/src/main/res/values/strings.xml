@@ -189,5 +189,6 @@
     <string name="admin_novo_nivel_bloqueado">Nível bloqueado</string>
     <string name="snack_bar_level_info">Nivel bloqueado</string>
     <string name="jogo_sem_ajudas_info">Ficou sem ajudas para este nível</string>
+    <string name="cant_delete">Não é possivel realizar a operação pretendida</string>
 
 </resources>

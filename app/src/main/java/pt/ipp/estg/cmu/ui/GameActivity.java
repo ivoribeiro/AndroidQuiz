@@ -149,7 +149,7 @@ public class GameActivity extends AppCompatActivity implements GameInterfaceList
 
     @Override
     public void setScore(int score) {
-        mScoreInfo.setText(mNivel.getPontuacao() + " " + getResources().getString(R.string.pontos_ganhos));
+        mScoreInfo.setText(score+ " " + getResources().getString(R.string.pontos_ganhos));
     }
 
     @Override

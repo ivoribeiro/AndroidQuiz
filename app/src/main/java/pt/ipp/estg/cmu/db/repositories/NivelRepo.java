@@ -9,13 +9,19 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.db.dbUtil;
+import pt.ipp.estg.cmu.estatisticas.EstatisticasNivel;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
 
 public class NivelRepo extends Repo<Nivel> implements RepositoryInterface<Nivel> {
 
+    private Context mContext;
+    private EstatisticasNivel estatisticasNivel;
+
     public NivelRepo(Context context) {
+
         super(context, Nivel.TABLE);
+        mContext = context;
     }
 
     @Override
@@ -117,6 +123,12 @@ public class NivelRepo extends Repo<Nivel> implements RepositoryInterface<Nivel>
         db.update(this.getTable(), values, where, whereArgs);
         db.close();
         return nivel;
+    }
+
+    @Override
+    public boolean canDelete(Nivel nivel) {
+        estatisticasNivel = new EstatisticasNivel(mContext, nivel);
+        return estatisticasNivel.getPontuacaoGanha() == 0 && estatisticasNivel.getPontuacaoPerdida() == 0;
     }
 
 

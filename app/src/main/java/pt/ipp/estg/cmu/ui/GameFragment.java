@@ -85,6 +85,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         mPerguntaRepository = new PerguntaRepo(this.getContext());
         mNivelRepository = new NivelRepo(this.getContext());
         mUserAnswerArray = new String[mCorrectAnswerConcat.length()];
+        mEstatisticasNivel = new EstatisticasNivel(this.getContext(), mNivel);
+
     }
 
     @Override
@@ -123,8 +125,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         super.onAttach(context);
         mContext = context;
         mListener = (GameActivity) context;
-        mEstatisticasNivel = new EstatisticasNivel(context, mNivel);
-
     }
 
     @Override
@@ -132,7 +132,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.hint:
                 setHintLetter();
-                //TODO adicionar ao numero de ajudas usadas
                 break;
             case R.id.reset:
                 createLayout();
@@ -229,9 +228,18 @@ public class GameFragment extends Fragment implements View.OnClickListener {
      * Actualiza o layout
      */
     private void decrementAjuda() {
+        //tem ajudas?
         if (mNivel.getnAjudas() > 0) {
+            //decrementa ajudas ao nivel
             mNivel.decrementnAjudas();
+            //actualiza as vistas e decrementa os pontos ao nivel
+            decrementPontosHint();
+            //incrementa ao numero de ajudas usadas
+            mPergunta.addAjudasUsadas();
+            //faz update a bd
+            mPerguntaRepository.update(mPergunta);
             mNivelRepository.update(mNivel);
+            //actauliza as vistas para o numero de dicas disponiveis no nivel
             mListener.setHint(mNivel.getnAjudas());
         }
     }
@@ -241,7 +249,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
      */
     private void incrementPontosNivel() {
         mNivel.addPontuacao(mNivel.getPontuacaoBase());
-        mListener.setScore(mNivel.getPontuacaoBase());
+        mListener.setScore(mNivel.getPontuacao());
     }
 
     /**
@@ -250,7 +258,14 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private void decrementPontosNivel() {
         if (mNivel.getPontuacao() - mNivel.getPontuacaoBaseErrada() >= 0) {
             mNivel.removePontuacao(mNivel.getPontuacaoBaseErrada());
-            mListener.setScore(mNivel.getPontuacaoBase());
+            mListener.setScore(mNivel.getPontuacao());
+        }
+    }
+
+    private void decrementPontosHint() {
+        if (mNivel.getPontuacao() - mNivel.getPontuacaoHint() >= 0) {
+            mNivel.removePontuacao(mNivel.getPontuacaoHint());
+            mListener.setScore(mNivel.getPontuacao());
         }
     }
 
@@ -280,9 +295,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 ++mUserAnswerIndex;
                 checkIfIsFinished();
                 decrementAjuda();
+
             }
-        }
-        else {
+        } else {
             Snackbar.make(mViewGroup, getContext().getResources().getString(R.string.jogo_sem_ajudas_info), Snackbar.LENGTH_SHORT).show();
         }
     }
@@ -297,7 +312,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 Nivel aDesbloquear = niveisCategoria.get(0);
                 aDesbloquear.setBloqueado(false);
                 this.mNivelRepository.update(aDesbloquear);
-                //TODO mostrar snackbar
+                mListener.unlock();
             }
         }
     }

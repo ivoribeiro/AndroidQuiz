@@ -30,12 +30,6 @@ public class Pergunta implements Parcelable {
     public Pergunta() {
     }
 
-    public Pergunta(int nivel, String imagem, String respostaCerta) {
-        this.nivel = nivel;
-        this.imagem = imagem;
-        this.respostaCerta = respostaCerta;
-    }
-
     /**
      * Retorna o numero e ajudas usadas para esta pergunta
      *
@@ -124,6 +118,10 @@ public class Pergunta implements Parcelable {
         this.nRespostasErradas++;
     }
 
+    public void addAjudasUsadas() {
+        this.nAjudasUsadas++;
+    }
+
     public void setAcertou(boolean acertou) {
         this.acertou = acertou;
     }
@@ -145,6 +143,7 @@ public class Pergunta implements Parcelable {
         parcel.writeValue(acertou);
         parcel.writeString(stringAleatoria);
         parcel.writeString(respostaActual);
+        parcel.writeInt(nAjudasUsadas);
 
 
     }
@@ -170,5 +169,6 @@ public class Pergunta implements Parcelable {
         acertou = in.readByte() != 0;
         stringAleatoria = in.readString();
         respostaActual = in.readString();
+        nAjudasUsadas = in.readInt();
     }
 }
