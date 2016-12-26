@@ -6,13 +6,14 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
 import pt.ipp.estg.cmu.db.repositories.NivelRepo;
+import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
 
 public class EstatisticasCategoria {
 
     private NivelRepo mNivelRepo;
     private CategoriaRepo mCategoriaRepo;
-    private String categoria;
+    private Categoria categoria;
     private Context context;
     private ArrayList<Nivel> niveisCategoria;
 
@@ -27,9 +28,9 @@ public class EstatisticasCategoria {
     public EstatisticasCategoria(Context context, String categoria) {
         mNivelRepo = new NivelRepo(context);
         mCategoriaRepo = new CategoriaRepo(context);
-        this.categoria = categoria;
+        this.categoria = mCategoriaRepo.getByName(categoria);
         this.context = context;
-        this.niveisCategoria = mNivelRepo.getAllByCategoria(this.categoria);
+        this.niveisCategoria = mNivelRepo.getAllByCategoria(categoria);
         this.pontuacao = 0;
         this.pontuacaoGanha = 0;
         this.pontuacaoPerdida = 0;
@@ -49,7 +50,7 @@ public class EstatisticasCategoria {
         }
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return this.categoria;
     }
 

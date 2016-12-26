@@ -9,17 +9,25 @@ public class Categoria implements Parcelable {
     public final static String ID = "id";
     public final static String NOME = "nome";
     public final static String ATIVA = "ativa";
+    public final static String IMAGEM = "imagem";
 
     private int id;
     private String nome;
     private boolean ativa;
+    private String imagem;
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
 
     public Categoria() {
-
     }
 
     public Categoria(String nome) {
-
         this.nome = nome;
     }
 

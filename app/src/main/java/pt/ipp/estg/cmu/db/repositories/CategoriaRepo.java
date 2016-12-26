@@ -35,6 +35,7 @@ public class CategoriaRepo extends Repo<Categoria> implements RepositoryInterfac
                 categoria.setId(cursor.getInt(0));
                 categoria.setNome(cursor.getString(1));
                 categoria.setAtiva(cursor.getInt(2) == 1);
+                categoria.setImagem(cursor.getString(3));
                 categorias.add(categoria);
             }
             while (cursor.moveToNext());
@@ -77,5 +78,10 @@ public class CategoriaRepo extends Repo<Categoria> implements RepositoryInterfac
     @Override
     public boolean canDelete(Categoria resource) {
         return false;
+    }
+
+    public Categoria getByName(String categoria) {
+        return this.getAllByField("nome", categoria).get(0);
+
     }
 }

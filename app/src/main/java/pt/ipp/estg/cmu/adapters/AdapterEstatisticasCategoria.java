@@ -3,6 +3,7 @@ package pt.ipp.estg.cmu.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -41,7 +42,11 @@ public class AdapterEstatisticasCategoria extends RecyclerView.Adapter<AdapterEs
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.mnome_categoria.setText(mDataSet.get(position).getCategoria());
+        String uri = "@drawable/" + mDataSet.get(position).getCategoria().getImagem();
+        int imageResource = mContext.getResources().getIdentifier(uri, null, mContext.getPackageName());
+        Drawable res = mContext.getResources().getDrawable(imageResource);
+        holder.mImage.setBackground(res);
+        holder.mnome_categoria.setText(mDataSet.get(position).getCategoria().getNome());
         holder.mpontuacao_categoria.setText("" + mDataSet.get(position).getPontuacao());
         holder.mperguntas_categorias.setText("" + mDataSet.get(position).getnPerguntas());
         holder.mrespostas_certas_categoria.setText("" + mDataSet.get(position).getnRespostasCertas());
@@ -72,7 +77,7 @@ public class AdapterEstatisticasCategoria extends RecyclerView.Adapter<AdapterEs
         public ViewHolder(View itemView) {
             super(itemView);
             mCardView = (CardView) itemView.findViewById(R.id.card_view_estatisticas_categoria);
-            //mImage = (ImageView) itemView.findViewById(R.id.question_image);
+            mImage = (ImageView) itemView.findViewById(R.id.estatisticas_categoria_image);
             mnome_categoria = (TextView) itemView.findViewById(R.id.nome_categoria);
             mpontuacao_categoria = (TextView) itemView.findViewById(R.id.pontuacao_categoria);
             mperguntas_categorias = (TextView) itemView.findViewById(R.id.n_perguntas_categoria);

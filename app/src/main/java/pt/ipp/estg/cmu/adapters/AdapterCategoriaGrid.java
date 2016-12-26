@@ -2,6 +2,7 @@ package pt.ipp.estg.cmu.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -134,38 +135,11 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
     }
 
     private void setImageResource(AdapterCategoriaGrid.ViewHolder holder, int pos) {
-        switch (mDataSet.get(pos).getId()) {
-            case 1:
-                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_0));
-                break;
-            case 2:
-                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_1));
-                break;
-            case 3:
-                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_2));
-                break;
-            case 4:
-                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_3));
-                break;
-            case 5:
-                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_4));
-                break;
-            case 6:
-                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_5));
-                break;
-            case 7:
-                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_6));
-                break;
-            case 8:
-                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_7));
-                break;
-            case 9:
-                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_8));
-                break;
-            case 10:
-                holder.mImageCategoria.setBackground(mContext.getDrawable(R.drawable.img_cat_9));
-                break;
-        }
+        String uri = "@drawable/" + mDataSet.get(pos).getImagem();
+
+        int imageResource = mContext.getResources().getIdentifier(uri, null, mContext.getPackageName());
+        Drawable res = mContext.getResources().getDrawable(imageResource);
+        holder.mImageCategoria.setBackground(res);
     }
 
     private void removeDisabledCategories() {
