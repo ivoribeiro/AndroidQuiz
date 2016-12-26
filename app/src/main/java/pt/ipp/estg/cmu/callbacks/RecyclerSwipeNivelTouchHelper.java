@@ -19,7 +19,7 @@ public class RecyclerSwipeNivelTouchHelper extends ItemTouchHelper.SimpleCallbac
     private ArrayList<Nivel> mNiveis;
     private RecyclerView mRecycler;
     private Context mContext;
-    private RepositoryInterface<?> mRepository;
+    private RepositoryInterface<Nivel> mRepository;
 
     private AdapterLevelList mAdapter;
 
@@ -42,25 +42,34 @@ public class RecyclerSwipeNivelTouchHelper extends ItemTouchHelper.SimpleCallbac
 
         final int position = viewHolder.getAdapterPosition();
         final Nivel nivel = mNiveis.get(position);
-
-        Snackbar.make(mRecycler,
-                mContext.getResources().getString(R.string.snack_deleted) + " " + mNiveis.get(viewHolder.getAdapterPosition()).getNumero(),
-                Snackbar.LENGTH_LONG).setAction(mContext.getResources().getString(R.string.snack_undo),
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mNiveis.add(nivel);
-                        mAdapter.notifyItemRangeRemoved(0, mNiveis.size() - 1);
-                        mAdapter.notifyItemRangeInserted(0, mNiveis.size());
-                        //mAdapter.notifyDataSetChanged();
-                        //mRecycler.setAdapter(new AdapterCategoriaGrid(mContext, mCategorias, true));
-                    }
-                }).show();
-        mRepository.deleteById(nivel.getId());
-        mNiveis.remove(position);
-        mRecycler.removeViewAt(position);
-
-        mAdapter.notifyItemRemoved(position);
-        mAdapter.notifyItemRangeChanged(position, mNiveis.size());
+        if (mRepository.canDelete(nivel)) {
+            Snackbar.make(mRecycler,
+                    mContext.getResources().getString(R.string.snack_deleted) + " " + mNiveis.get(viewHolder.getAdapterPosition()).getNumero(),
+                    Snackbar.LENGTH_LONG).setAction(mContext.getResources().getString(R.string.snack_undo),
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mNiveis.add(nivel);
+                            mAdapter.notifyItemRangeRemoved(0, mNiveis.size() - 1);
+                            mAdapter.notifyItemRangeInserted(0, mNiveis.size());
+                            //mAdapter.notifyDataSetChanged();
+                            //mRecycler.setAdapter(new AdapterCategoriaGrid(mContext, mCategorias, true));
+                        }
+                    }).show();
+            mRepository.deleteById(nivel.getId());
+            mNiveis.remove(position);
+            mRecycler.removeViewAt(position);
+            mAdapter.notifyItemRemoved(position);
+            mAdapter.notifyItemRangeChanged(position, mNiveis.size());
+        } else {
+            mNiveis.remove(position);
+            mRecycler.removeViewAt(position);
+            mAdapter.notifyItemRemoved(position);
+            mAdapter.notifyItemRangeChanged(position, mNiveis.size());
+            mNiveis.add(nivel);
+            mAdapter.notifyItemRangeRemoved(0, mNiveis.size() - 1);
+            mAdapter.notifyItemRangeInserted(0, mNiveis.size());
+            Snackbar.make(mRecycler, mContext.getResources().getString(R.string.cant_delete), Snackbar.LENGTH_SHORT).show();
+        }
     }
 }
