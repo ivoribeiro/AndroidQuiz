@@ -5,17 +5,17 @@ import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.callbacks.FingerprintControllerCallback;
+import pt.ipp.estg.cmu.interfaces.FingerprintControllerCallback;
 import pt.ipp.estg.cmu.security.FingerprintController;
 import pt.ipp.estg.cmu.security.SecurityAsyncTask;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
@@ -45,6 +45,7 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void buildDialog() {
         mDialog = new Dialog(this);
         mDialog.setContentView(R.layout.admin_dialog_sign_in);
@@ -58,16 +59,10 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
         mDialog.setCancelable(false);
 
         final EditText editText = (EditText) mDialog.findViewById(R.id.edit_pin);
-        LinearLayout mLayoutFinger = (LinearLayout) mDialog.findViewById(R.id.fingerprint_layout_status);
         final ImageView imageView = (ImageView) mDialog.findViewById(R.id.fingerprint_icon_status);
         final TextView textView = (TextView) mDialog.findViewById(R.id.fingerprint_text_status);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { //TODO handle permission dialog authorization
-            mLayoutFinger.setVisibility(View.VISIBLE);
-            new FingerprintController(this, imageView, textView, this);
-        } else {
-            mLayoutFinger.setVisibility(View.GONE);
-        }
+        new FingerprintController(this, imageView, textView, this);
 
         Button ok = (Button) mDialog.findViewById(R.id.dialog_ok);
         ok.setOnClickListener(new View.OnClickListener() {

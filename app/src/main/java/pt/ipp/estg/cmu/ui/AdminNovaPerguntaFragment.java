@@ -168,15 +168,18 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_download:
+                //TODO permissao ficheiros
                 showDownloadDialog();
                 break;
 
             case R.id.bt_galeria:
+                //TODO permissao ficheiros
                 Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
                 break;
 
             case R.id.bt_camera:
+                //TODO permissao camera
 /*                File dest = new File(Util.getAppFolderPath() + mImageName);
                 Uri outputFileUri = Uri.fromFile(dest);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

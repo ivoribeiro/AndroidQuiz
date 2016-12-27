@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterLevelList;
-import pt.ipp.estg.cmu.callbacks.RecyclerSwipeNivelTouchHelper;
+import pt.ipp.estg.cmu.helpers.RecyclerSwipeNivelTouchHelper;
 import pt.ipp.estg.cmu.db.repositories.NivelRepo;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;

@@ -32,7 +32,7 @@
 
         <TextView
             android:id="@+id/section_description"
-            style="@style/SecondaryTitle"
+            style="@style/PrimarySmallTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.8"

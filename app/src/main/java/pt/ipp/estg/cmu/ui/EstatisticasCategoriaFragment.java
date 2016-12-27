@@ -3,25 +3,19 @@ package pt.ipp.estg.cmu.ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterEstatisticasCategoria;
-import pt.ipp.estg.cmu.adapters.AdapterPerguntasList;
-import pt.ipp.estg.cmu.callbacks.RecyclerSwipePerguntaTouchHelper;
 import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
 import pt.ipp.estg.cmu.estatisticas.EstatisticasCategoria;
-import pt.ipp.estg.cmu.estatisticas.EstatisticasJogo;
 import pt.ipp.estg.cmu.models.Categoria;
 
 public class EstatisticasCategoriaFragment extends Fragment {

@@ -1,4 +1,4 @@
-package pt.ipp.estg.cmu.callbacks;
+package pt.ipp.estg.cmu.helpers;
 
 import android.content.Context;
 import android.text.Editable;
@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.interfaces.AdapterPageSetupCallback;
 import pt.ipp.estg.cmu.security.SecurityAsyncTask;
 import pt.ipp.estg.cmu.setup.PreferencesSetup;
 import pt.ipp.estg.cmu.util.Util;
@@ -18,12 +19,13 @@ public class TextWatcherHelper implements TextWatcher {
 
     private Context mContext;
     private EditText mEditText;
-
+    AdapterPageSetupCallback mListener;
     private PreferencesSetup mPreferencesSetup;
 
-    public TextWatcherHelper(Context mContext, EditText mEditText) {
-        this.mContext = mContext;
-        this.mEditText = mEditText;
+    public TextWatcherHelper(Context context, AdapterPageSetupCallback listener, EditText editText) {
+        mContext = context;
+        mEditText = editText;
+        mListener = listener;
         mPreferencesSetup = new PreferencesSetup(mContext);
     }
 
@@ -41,10 +43,12 @@ public class TextWatcherHelper implements TextWatcher {
     public void afterTextChanged(Editable editable) {
         switch (mEditText.getId()) {
             case R.id.edit_nickname://edittext do nickname no setup
+                mListener.onEditTextNickNameUpdate(editable.toString());
                 mPreferencesSetup.saveFlagNickNamePreference(editable.toString());
                 break;
 
-            case R.id.edit_pin://edittext do nickname no setup
+            case R.id.edit_pin://edittext do pin no setup
+                mListener.onEditTextPinUpdate(editable.toString());
                 new SecurityAsyncTask(mContext, Util.APP_TAG, false).execute(editable.toString());
                 break;
         }

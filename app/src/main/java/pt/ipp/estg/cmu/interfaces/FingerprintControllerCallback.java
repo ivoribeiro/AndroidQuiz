@@ -1,4 +1,4 @@
-package pt.ipp.estg.cmu.callbacks;
+package pt.ipp.estg.cmu.interfaces;
 
 /**
  * Created by Navega on 12/21/2016.

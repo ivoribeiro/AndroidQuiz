@@ -1,12 +1,10 @@
-package pt.ipp.estg.cmu.callbacks;
+package pt.ipp.estg.cmu.helpers;
 
 import android.content.Context;
-import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 

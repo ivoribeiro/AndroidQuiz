@@ -19,6 +19,12 @@ public class Util {
     public static final String ARG_CATEGORIE = "CATEGORIE";
     public static final String ARG_ADMIN = "ADMIN";
 
+    public static final String ARG_SECTION = "SECTION";
+
+
+    //request code ints
+    public static final int PERMISSIONS_REQUEST_FINGERPRINT = 0;
+
     //stack admin settings
     public static final String STACK_ADMIN = "STACK_ADMIN";
 

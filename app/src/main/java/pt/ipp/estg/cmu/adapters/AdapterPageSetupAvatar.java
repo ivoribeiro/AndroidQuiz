@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.callbacks.AdapterPageSetupCallback;
+import pt.ipp.estg.cmu.interfaces.AdapterPageSetupCallback;
 
 /**
  * Created by Navega on 12/21/2016.
@@ -67,7 +67,7 @@ public class AdapterPageSetupAvatar extends RecyclerView.Adapter<AdapterPageSetu
         holder.mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onRecyclerItemSelected(holder.getAdapterPosition());
+                mListener.onAvatarRecyclerItemSelected(holder.getAdapterPosition());
             }
         });
     }

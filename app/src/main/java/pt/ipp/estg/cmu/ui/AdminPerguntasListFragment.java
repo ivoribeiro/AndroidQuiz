@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterPerguntasList;
-import pt.ipp.estg.cmu.callbacks.RecyclerSwipePerguntaTouchHelper;
+import pt.ipp.estg.cmu.helpers.RecyclerSwipePerguntaTouchHelper;
 import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;

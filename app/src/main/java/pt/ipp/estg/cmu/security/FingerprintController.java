@@ -12,6 +12,7 @@ import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,7 +32,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.callbacks.FingerprintControllerCallback;
+import pt.ipp.estg.cmu.interfaces.FingerprintControllerCallback;
 
 public class FingerprintController {
 
@@ -64,6 +65,19 @@ public class FingerprintController {
         keyguardManager = (KeyguardManager) mContext.getSystemService(mContext.KEYGUARD_SERVICE);
         fingerprintManager = (android.hardware.fingerprint.FingerprintManager) mContext.getSystemService(mContext.FINGERPRINT_SERVICE);
 
+        //sem marshmallow
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            mInfoTextView.setVisibility(View.GONE);
+            mInfoImageView.setVisibility(View.GONE);
+            return;
+        }
+
+        //sem sensor
+        if (!fingerprintManager.isHardwareDetected()) {
+            mInfoTextView.setVisibility(View.GONE);
+            mInfoImageView.setVisibility(View.GONE);
+            return;
+        }
 
         if (!keyguardManager.isKeyguardSecure()) {
             mInfoTextView.setText(mContext.getString(R.string.setup_fingerprint_error_lockscreen));

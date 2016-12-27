@@ -1,4 +1,4 @@
-package pt.ipp.estg.cmu.callbacks;
+package pt.ipp.estg.cmu.helpers;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
@@ -8,9 +8,9 @@ import android.util.AttributeSet;
 import android.view.View;
 
 
-public class FabHideOnScroll extends FloatingActionButton.Behavior {
+public class FabHideOnScrollHelper extends FloatingActionButton.Behavior {
 
-    public FabHideOnScroll(Context context, AttributeSet attrs) {
+    public FabHideOnScrollHelper(Context context, AttributeSet attrs) {
         super();
     }
 

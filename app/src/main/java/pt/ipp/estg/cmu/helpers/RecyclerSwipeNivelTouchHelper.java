@@ -1,4 +1,4 @@
-package pt.ipp.estg.cmu.callbacks;
+package pt.ipp.estg.cmu.helpers;
 
 import android.content.Context;
 import android.support.design.widget.Snackbar;
