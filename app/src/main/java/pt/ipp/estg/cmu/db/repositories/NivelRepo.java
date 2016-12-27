@@ -17,11 +17,13 @@ public class NivelRepo extends Repo<Nivel> implements RepositoryInterface<Nivel>
 
     private Context mContext;
     private EstatisticasNivel estatisticasNivel;
+    private PerguntaRepo mPerguntaRepo;
 
     public NivelRepo(Context context) {
 
         super(context, Nivel.TABLE);
         mContext = context;
+        mPerguntaRepo = new PerguntaRepo(context);
     }
 
     @Override
@@ -130,6 +132,10 @@ public class NivelRepo extends Repo<Nivel> implements RepositoryInterface<Nivel>
         estatisticasNivel = new EstatisticasNivel(mContext, nivel);
         return estatisticasNivel.getPontuacaoGanha() == 0 && estatisticasNivel.getPontuacaoPerdida() == 0;
     }
-
-
+//Delete the level and all the questions
+    @Override
+    public void deleteById(int id) {
+        super.deleteById(id);
+        mPerguntaRepo.deleteByNivel(id);
+    }
 }

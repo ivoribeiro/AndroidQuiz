@@ -98,7 +98,7 @@ public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<
 
     @Override
     public boolean canDelete(Pergunta pergunta) {
-        return pergunta.acertou() ==false && pergunta.getnAjudasUsadas() == 0 && pergunta.getnRespostasErradas() == 0;
+        return pergunta.acertou() == false && pergunta.getnAjudasUsadas() == 0 && pergunta.getnRespostasErradas() == 0;
     }
 
     /**
@@ -191,5 +191,12 @@ public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<
     public int getSumNivelAjudasUsadas(int nivel) {
         String query = "SELECT sum(nAjudasUsadas) FROM pergunta WHERE nivel =" + nivel + ";";
         return count(query);
+    }
+
+    public void deleteByNivel(int id) {
+        String query = dbUtil.deleteByFieldQueryString(this.getTable(), "nivel", "" + id);
+        SQLiteDatabase db = super.getWritableDatabase();
+        db.execSQL(query);
+        db.close();
     }
 }
