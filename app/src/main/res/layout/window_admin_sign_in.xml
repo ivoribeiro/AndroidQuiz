@@ -59,41 +59,25 @@
 
 
         <LinearLayout
-            android:id="@+id/fingerprint_layout"
-            android:layout_width="match_parent"
+            android:id="@+id/fingerprint_layout_status"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:padding="@dimen/layout_fingerprint_padding">
 
             <ImageView
-                android:id="@+id/fingerprint_icon_info"
+                android:id="@+id/fingerprint_icon_status"
                 android:layout_width="@dimen/setup_fingerprint_size"
                 android:layout_height="@dimen/setup_fingerprint_size"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_fingerprint" />
+                android:background="@drawable/ic_fingerprint"
+                android:padding="@dimen/layout_fingerprint_padding" />
 
-            <LinearLayout
-                android:id="@+id/fingerprint_layout_status"
+            <TextView
+                android:id="@+id/fingerprint_text_status"
+                style="@style/SecondaryTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/layout_fingerprint_padding">
-
-                <ImageView
-                    android:id="@+id/fingerprint_icon_status"
-                    android:layout_width="@dimen/setup_fingerprint_size"
-                    android:layout_height="@dimen/setup_fingerprint_size"
-                    android:padding="@dimen/layout_fingerprint_padding" />
-
-                <TextView
-                    android:id="@+id/fingerprint_text_status"
-                    style="@style/SecondaryTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
+                android:layout_height="wrap_content" />
         </LinearLayout>
-
 
     </LinearLayout>
 </ScrollView>

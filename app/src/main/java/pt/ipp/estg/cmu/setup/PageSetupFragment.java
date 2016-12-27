@@ -43,7 +43,6 @@ public class PageSetupFragment extends Fragment implements FingerprintController
     private AdapterPageSetupCallback mListener;
 
     //admin layout
-    private LinearLayout mLayoutInfo;
     private LinearLayout mLayoutStatus;
 
     private int position;
@@ -120,7 +119,6 @@ public class PageSetupFragment extends Fragment implements FingerprintController
                 EditText mEditTextPin = (EditText) admin_layout.findViewById(R.id.edit_pin);
                 mEditTextPin.addTextChangedListener(new TextWatcherHelper(getContext(), mListener, mEditTextPin));
 
-                mLayoutInfo = (LinearLayout) admin_layout.findViewById(R.id.fingerprint_layout_info);
                 mLayoutStatus = (LinearLayout) admin_layout.findViewById(R.id.fingerprint_layout_status);
 
                 ImageView imageView = (ImageView) admin_layout.findViewById(R.id.fingerprint_icon_status);
@@ -149,6 +147,6 @@ public class PageSetupFragment extends Fragment implements FingerprintController
 
     @Override
     public void fingerprintAuthResult(boolean result) {
-        mLayoutInfo.setVisibility(View.GONE);
+        mLayoutStatus.setVisibility(View.GONE);
     }
 }

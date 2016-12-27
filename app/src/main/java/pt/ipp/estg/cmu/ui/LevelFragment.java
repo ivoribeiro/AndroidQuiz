@@ -11,13 +11,14 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterLevelList;
-import pt.ipp.estg.cmu.helpers.RecyclerSwipeNivelTouchHelper;
 import pt.ipp.estg.cmu.db.repositories.NivelRepo;
+import pt.ipp.estg.cmu.helpers.RecyclerSwipeNivelTouchHelper;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.util.Util;
@@ -32,6 +33,8 @@ public class LevelFragment extends Fragment implements View.OnClickListener {
     private RecyclerView mRecyclerView;
     private boolean isAdmin;
     private FloatingActionButton mFab;
+
+    private LinearLayout mEmptyLayout;
 
     //data
     private AdapterLevelList mAdapter;
@@ -58,37 +61,36 @@ public class LevelFragment extends Fragment implements View.OnClickListener {
             mCategoria = getArguments().getParcelable(Util.ARG_CATEGORIE);
             isAdmin = getArguments().getBoolean(Util.ARG_ADMIN);
         }
+        mRepository = new NivelRepo(getContext());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_level, container, false);
+
+        mEmptyLayout = (LinearLayout) view.findViewById(R.id.inclued_layout);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMNS));
-
         mFab = (FloatingActionButton) view.findViewById(R.id.fab);
+
         if (isAdmin) {
             mFab.setOnClickListener(this);
         } else {
             mFab.setVisibility(View.GONE);
         }
-
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mRepository = new NivelRepo(getContext());
-        mNiveis = getAllNiveis();
-        mAdapter = new AdapterLevelList(getActivity(),mRecyclerView, mNiveis, mCategoria, isAdmin);
-        mRecyclerView.setAdapter(mAdapter);
+        populateRecycler();
+    }
 
-        if (isAdmin) {    //swipe to remove
-            RecyclerSwipeNivelTouchHelper swipeTouch = new RecyclerSwipeNivelTouchHelper(0, ItemTouchHelper.RIGHT, getContext(), mRecyclerView, mNiveis, mAdapter);
-            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeTouch);
-            itemTouchHelper.attachToRecyclerView(mRecyclerView);
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
+        populateRecycler();
     }
 
     @Override
@@ -105,5 +107,21 @@ public class LevelFragment extends Fragment implements View.OnClickListener {
 
     private ArrayList<Nivel> getAllNiveis() {
         return mRepository.getAllByCategoria(mCategoria.getNome());
+    }
+
+    private void populateRecycler() {
+        mNiveis = getAllNiveis();
+        if (mNiveis.size() > 0) {
+            mEmptyLayout.setVisibility(View.GONE);
+
+            mAdapter = new AdapterLevelList(getActivity(), mRecyclerView, mNiveis, mCategoria, isAdmin);
+            mRecyclerView.setAdapter(mAdapter);
+
+            if (isAdmin) {    //swipe to remove
+                RecyclerSwipeNivelTouchHelper swipeTouch = new RecyclerSwipeNivelTouchHelper(0, ItemTouchHelper.RIGHT, getContext(), mRecyclerView, mNiveis, mAdapter);
+                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeTouch);
+                itemTouchHelper.attachToRecyclerView(mRecyclerView);
+            }
+        }
     }
 }

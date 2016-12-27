@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -306,12 +305,12 @@ public class GameFragment extends Fragment implements View.OnClickListener {
      * Desbloqueia o proximo nivel bloqueado da mesma categoria
      */
     private void unlockNextLevel() {
-        if (canUnlock()) {
-            ArrayList<Nivel> niveisCategoria = mNivelRepository.getBloquadosByCategoria(this.mNivel.getCategoria());
+        if (mEstatisticasNivel.getnRespostasCertas() == mNivel.getnMinRespostasCertas()) {
+            ArrayList<Nivel> niveisCategoria = mNivelRepository.getBloquadosByCategoria(mNivel.getCategoria());
             if (niveisCategoria.size() == 1) {
                 Nivel aDesbloquear = niveisCategoria.get(0);
                 aDesbloquear.setBloqueado(false);
-                this.mNivelRepository.update(aDesbloquear);
+                mNivelRepository.update(aDesbloquear);
                 mListener.unlock();
             }
         }
@@ -325,6 +324,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
      * @return
      */
     private boolean canUnlock() {
-        return this.mEstatisticasNivel.getnRespostasCertas() == this.mNivel.getnMinRespostasCertas();
+        return mEstatisticasNivel.getnRespostasCertas() == this.mNivel.getnMinRespostasCertas();
     }
 }

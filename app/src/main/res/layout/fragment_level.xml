@@ -4,7 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
     tools:context="pt.ipp.estg.cmu.ui.LevelFragment">
+
+    <include
+        android:id="@+id/inclued_layout"
+        layout="@layout/window_empty" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -18,7 +26,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchorGravity="bottom|right|end"
-        app:layout_behavior="pt.ipp.estg.cmu.callbacks.FabHideOnScroll"
+        app:layout_behavior="pt.ipp.estg.cmu.helpers.FabHideOnScrollHelper"
         app:srcCompat="@drawable/ic_add" />
 
 </android.support.design.widget.CoordinatorLayout>

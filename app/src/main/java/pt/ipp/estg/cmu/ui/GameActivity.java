@@ -113,7 +113,7 @@ public class GameActivity extends AppCompatActivity implements GameInterfaceList
         if (hit) {
             imageView.setBackground(getResources().getDrawable(R.drawable.img_correct));
         } else {
-            imageView.setBackground(getResources().getDrawable(R.drawable.img_lock));
+            imageView.setBackground(getResources().getDrawable(R.drawable.img_wrong));
         }
         dialog.show();
         Handler handler = new Handler();
@@ -132,7 +132,7 @@ public class GameActivity extends AppCompatActivity implements GameInterfaceList
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.fragment_game_window_pop_up);
         ImageView imageView = (ImageView) dialog.findViewById(R.id.image_view);
-        imageView.setBackground( ContextCompat.getDrawable(this,R.drawable.img_unlock));
+        imageView.setBackground(ContextCompat.getDrawable(this, R.drawable.img_unlock));
         dialog.show();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -149,7 +149,7 @@ public class GameActivity extends AppCompatActivity implements GameInterfaceList
 
     @Override
     public void setScore(int score) {
-        mScoreInfo.setText(score+ " " + getResources().getString(R.string.pontos_ganhos));
+        mScoreInfo.setText(score + " " + getResources().getString(R.string.pontos_ganhos));
     }
 
     @Override

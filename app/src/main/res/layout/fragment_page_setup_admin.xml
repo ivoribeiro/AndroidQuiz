@@ -40,28 +40,6 @@
 
     </android.support.v7.widget.CardView>
 
-    <LinearLayout
-        android:id="@+id/fingerprint_layout_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/setup_custom_layout_padding">
-
-        <ImageView
-            android:id="@+id/fingerprint_icon_info"
-            android:layout_width="@dimen/setup_fingerprint_size"
-            android:layout_height="@dimen/setup_fingerprint_size"
-            android:background="@drawable/ic_fingerprint"
-            android:padding="@dimen/setup_custom_layout_padding" />
-
-        <TextView
-            android:id="@+id/fingerprint_text_info"
-            style="@style/SecondaryTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/setup_fingerprint_teste" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/fingerprint_layout_status"

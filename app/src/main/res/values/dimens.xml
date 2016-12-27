@@ -91,5 +91,8 @@
     <dimen name="layout_fingerprint_padding">20dp</dimen>
     <dimen name="adapter_estatisticas_categoria_image_size">60dp</dimen>
 
+    <!-- Empty Data Layout-->
+    <dimen name="empty_data_layout_image_size">160dp</dimen>
+
 
 </resources>

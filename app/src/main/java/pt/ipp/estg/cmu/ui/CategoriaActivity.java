@@ -27,20 +27,23 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
     private boolean isAdmin;
     private Dialog mDialog;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(new PreferencesSettings(this).getThemePreference());
-        setContentView(R.layout.activity_categoria);
-        isAdmin = getIntent().getBooleanExtra(Util.ARG_ADMIN, false);
+        if (null == savedInstanceState) {
+            setTheme(new PreferencesSettings(this).getThemePreference());
+            setContentView(R.layout.activity_categoria);
+            isAdmin = getIntent().getBooleanExtra(Util.ARG_ADMIN, false);
 
-        if (isAdmin) {
-            mNavigationView.setCheckedItem(R.id.nav_admin);
-            buildDialog();
-        } else {
-            mNavigationView.setCheckedItem(R.id.nav_game);
-            if (null == savedInstanceState) {
-                startFragmetCategoria();
+            if (isAdmin) {
+                mNavigationView.setCheckedItem(R.id.nav_admin);
+                buildDialog();
+            } else {
+                mNavigationView.setCheckedItem(R.id.nav_game);
+                if (null == savedInstanceState) {
+                    startFragmetCategoria();
+                }
             }
         }
     }
@@ -48,7 +51,7 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void buildDialog() {
         mDialog = new Dialog(this);
-        mDialog.setContentView(R.layout.admin_dialog_sign_in);
+        mDialog.setContentView(R.layout.window_admin_sign_in);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(mDialog.getWindow().getAttributes());
@@ -109,6 +112,13 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
         mDialog.getWindow().setAttributes(lp);
     }
 
+    @Override
+    public void fingerprintAuthResult(boolean result) {
+        if (result) {
+            mDialog.dismiss();
+            startFragmetCategoria();
+        }
+    }
 
     private void startFragmetCategoria() {
         getSupportFragmentManager()
@@ -117,11 +127,4 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
                 .commit();
     }
 
-    @Override
-    public void fingerprintAuthResult(boolean result) {
-        if (result) {
-            mDialog.dismiss();
-            startFragmetCategoria();
-        }
-    }
 }

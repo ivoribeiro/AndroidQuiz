@@ -178,6 +178,8 @@
     <string name="theme_blue">Azul</string>
     <string name="theme_pink">Rosa</string>
     <string name="theme_yellow">Amarelo</string>
+
+
     <string name="pontuacao_estatisticas">Pontuação</string>
     <string name="n_perguntas_estatisticas">Número perguntas</string>
     <string name="n_respostas_certas_estatisticas">Respostas certas</string>
@@ -190,5 +192,11 @@
     <string name="snack_bar_level_info">Nivel bloqueado</string>
     <string name="jogo_sem_ajudas_info">Ficou sem ajudas para este nível</string>
     <string name="cant_delete">Não é possivel realizar a operação pretendida</string>
+
+
+    <!-- permissions dialog warnings -->
+    <string name="permission_denied">Não é possivel usar a funcionalidade pretendida, sem as permissões necessárias.</string>
+
+    <string name="empty_data">Sem informação para apresentar</string>
 
 </resources>

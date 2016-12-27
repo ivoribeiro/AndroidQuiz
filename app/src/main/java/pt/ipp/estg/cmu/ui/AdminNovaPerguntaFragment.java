@@ -1,17 +1,25 @@
 package pt.ipp.estg.cmu.ui;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +67,8 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     private Button mCameraBt;
     private ImageView mImagePreview;
     private String mImageName;
+    private CoordinatorLayout mRootLayout;
+
 
     public AdminNovaPerguntaFragment() {
         // Required empty public constructor
@@ -98,6 +108,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_admin_nova_pergunta, container, false);
 
+        mRootLayout = (CoordinatorLayout) view.findViewById(R.id.root_layout);
         mRespostaText = (EditText) view.findViewById(R.id.admin_nova_pergunta_resposta);
         mDownloadBt = (Button) view.findViewById(R.id.bt_download);
         mFab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -164,18 +175,17 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         }
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_download:
-                //TODO permissao ficheiros
-                showDownloadDialog();
+                dialogPermission(Util.PERMISSIONS_REQUEST_WRITE_DOWNLOAD);
                 break;
 
             case R.id.bt_galeria:
-                //TODO permissao ficheiros
-                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
+                dialogPermission(Util.PERMISSIONS_REQUEST_WRITE_GALERIA);
                 break;
 
             case R.id.bt_camera:
@@ -203,6 +213,50 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             case R.id.fab:
                 savePergunta();
                 break;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case Util.PERMISSIONS_REQUEST_WRITE_DOWNLOAD: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    showDownloadDialog();
+                } else {
+                    Snackbar.make(mRootLayout, getContext().getResources().getString(R.string.permission_denied), Snackbar.LENGTH_SHORT).show();
+                }
+                return;
+            }
+            case Util.PERMISSIONS_REQUEST_WRITE_GALERIA: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, RESULT_LOAD_IMAGE);
+                } else {
+                    Snackbar.make(mRootLayout, getContext().getResources().getString(R.string.permission_denied), Snackbar.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void dialogPermission(int requestcode) {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_CONTACTS)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+            } else {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestcode);
+            }
+        } else {
+            switch (requestcode) {
+                case Util.PERMISSIONS_REQUEST_WRITE_DOWNLOAD:
+                    showDownloadDialog();
+                    break;
+                case Util.PERMISSIONS_REQUEST_WRITE_GALERIA:
+                    Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, RESULT_LOAD_IMAGE);
+                    break;
+            }
         }
     }
 

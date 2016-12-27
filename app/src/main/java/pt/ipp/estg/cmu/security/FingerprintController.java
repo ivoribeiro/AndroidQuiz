@@ -62,48 +62,50 @@ public class FingerprintController {
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void start() {
 
-        keyguardManager = (KeyguardManager) mContext.getSystemService(mContext.KEYGUARD_SERVICE);
-        fingerprintManager = (android.hardware.fingerprint.FingerprintManager) mContext.getSystemService(mContext.FINGERPRINT_SERVICE);
-
         //sem marshmallow
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             mInfoTextView.setVisibility(View.GONE);
             mInfoImageView.setVisibility(View.GONE);
             return;
-        }
 
-        //sem sensor
-        if (!fingerprintManager.isHardwareDetected()) {
-            mInfoTextView.setVisibility(View.GONE);
-            mInfoImageView.setVisibility(View.GONE);
-            return;
-        }
+        } else {
+            keyguardManager = (KeyguardManager) mContext.getSystemService(mContext.KEYGUARD_SERVICE);
+            fingerprintManager = (android.hardware.fingerprint.FingerprintManager) mContext.getSystemService(mContext.FINGERPRINT_SERVICE);
 
-        if (!keyguardManager.isKeyguardSecure()) {
-            mInfoTextView.setText(mContext.getString(R.string.setup_fingerprint_error_lockscreen));
-            return;
-        }
 
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
-            mInfoTextView.setText(mContext.getString(R.string.setup_fingerprint_error_permission));
-            return;
-        }
+            //sem sensor
+            if (!fingerprintManager.isHardwareDetected()) {
+                mInfoTextView.setVisibility(View.GONE);
+                mInfoImageView.setVisibility(View.GONE);
+                return;
+            }
 
-        if (!fingerprintManager.hasEnrolledFingerprints()) {
-            mInfoTextView.setText(mContext.getString(R.string.setup_fingerprint_error_register));
-            return;
-        }
+            if (!keyguardManager.isKeyguardSecure()) {
+                mInfoTextView.setText(mContext.getString(R.string.setup_fingerprint_error_lockscreen));
+                return;
+            }
 
-        generateKey();
+            if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
+                mInfoTextView.setText(mContext.getString(R.string.setup_fingerprint_error_permission));
+                return;
+            }
 
-        if (cipherInit()) {
-            cryptoObject = new android.hardware.fingerprint.FingerprintManager.CryptoObject(cipher);
-        }
+            if (!fingerprintManager.hasEnrolledFingerprints()) {
+                mInfoTextView.setText(mContext.getString(R.string.setup_fingerprint_error_register));
+                return;
+            }
 
-        if (cipherInit()) {
-            cryptoObject = new android.hardware.fingerprint.FingerprintManager.CryptoObject(cipher);
-            FingerprintHandler helper = new FingerprintHandler(mContext, mInfoImageView, mInfoTextView, mListener);
-            helper.startAuth(fingerprintManager, cryptoObject);
+            generateKey();
+
+            if (cipherInit()) {
+                cryptoObject = new android.hardware.fingerprint.FingerprintManager.CryptoObject(cipher);
+            }
+
+            if (cipherInit()) {
+                cryptoObject = new android.hardware.fingerprint.FingerprintManager.CryptoObject(cipher);
+                FingerprintHandler helper = new FingerprintHandler(mContext, mInfoImageView, mInfoTextView, mListener);
+                helper.startAuth(fingerprintManager, cryptoObject);
+            }
         }
     }
 

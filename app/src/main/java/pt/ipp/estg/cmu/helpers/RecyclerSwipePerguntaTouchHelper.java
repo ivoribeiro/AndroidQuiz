@@ -40,25 +40,23 @@ public class RecyclerSwipePerguntaTouchHelper extends ItemTouchHelper.SimpleCall
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-
-        final int position = viewHolder.getAdapterPosition();
-        final Pergunta pergunta = mPerguntas.get(position);
-        if (mRepository.canDelete(pergunta)) {
-
-
-            Snackbar snackbar = Snackbar.make(mRecycler,
-                    mContext.getResources().getString(R.string.snack_deleted) + " " + mPerguntas.get(viewHolder.getAdapterPosition()).getRespostaCerta(),
-                    Snackbar.LENGTH_LONG).setAction(mContext.getResources().getString(R.string.snack_undo),
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            mPerguntas.add(pergunta);
-                            mAdapter.notifyItemRangeRemoved(0, mPerguntas.size() - 1);
-                            mAdapter.notifyItemRangeInserted(0, mPerguntas.size());
-                            //mAdapter.notifyDataSetChanged();
-                            //mRecycler.setAdapter(new AdapterCategoriaGrid(mContext, mCategorias, true));
-                        }
-                    });
+        try {
+            final int position = viewHolder.getAdapterPosition();
+            final Pergunta pergunta = mPerguntas.get(position);
+            if (mRepository.canDelete(pergunta)) {
+                Snackbar snackbar = Snackbar.make(mRecycler,
+                        mContext.getResources().getString(R.string.snack_deleted) + " " + mPerguntas.get(viewHolder.getAdapterPosition()).getRespostaCerta(),
+                        Snackbar.LENGTH_LONG).setAction(mContext.getResources().getString(R.string.snack_undo),
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                mPerguntas.add(pergunta);
+                                mAdapter.notifyItemRangeRemoved(0, mPerguntas.size() - 1);
+                                mAdapter.notifyItemRangeInserted(0, mPerguntas.size());
+                                //mAdapter.notifyDataSetChanged();
+                                //mRecycler.setAdapter(new AdapterCategoriaGrid(mContext, mCategorias, true));
+                            }
+                        });
 
 /*
         snackbar.getView().addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
@@ -79,22 +77,25 @@ mPerguntas
                 }, 1000);
             }
         });*/
-            snackbar.show();
-            mRepository.deleteById(pergunta.getId());
-            mPerguntas.remove(position);
-            mRecycler.removeViewAt(position);
-            mAdapter.notifyItemRemoved(position);
-            mAdapter.notifyItemRangeChanged(position, mPerguntas.size());
-        }
-        else{
-            mPerguntas.remove(position);
-            mRecycler.removeViewAt(position);
-            mAdapter.notifyItemRemoved(position);
-            mAdapter.notifyItemRangeChanged(position, mPerguntas.size());
-            mPerguntas.add(pergunta);
-            mAdapter.notifyItemRangeRemoved(0, mPerguntas.size() - 1);
-            mAdapter.notifyItemRangeInserted(0, mPerguntas.size());
-            Snackbar.make(mRecycler,mContext.getResources().getString(R.string.cant_delete),Snackbar.LENGTH_SHORT).show();
+                snackbar.show();
+                mRepository.deleteById(pergunta.getId());
+                mPerguntas.remove(position);
+                mRecycler.removeViewAt(position);
+                mAdapter.notifyItemRemoved(position);
+                mAdapter.notifyItemRangeChanged(position, mPerguntas.size());
+            } else {
+                mPerguntas.remove(position);
+                mRecycler.removeViewAt(position);
+                mAdapter.notifyItemRemoved(position);
+                mAdapter.notifyItemRangeChanged(position, mPerguntas.size());
+                mPerguntas.add(pergunta);
+                mAdapter.notifyItemRangeRemoved(0, mPerguntas.size() - 1);
+                mAdapter.notifyItemRangeInserted(0, mPerguntas.size());
+                Snackbar.make(mRecycler, mContext.getResources().getString(R.string.cant_delete), Snackbar.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+
         }
     }
+
 }

@@ -24,6 +24,8 @@ public class Util {
 
     //request code ints
     public static final int PERMISSIONS_REQUEST_FINGERPRINT = 0;
+    public static final int PERMISSIONS_REQUEST_WRITE_GALERIA = 0;
+    public static final int PERMISSIONS_REQUEST_WRITE_DOWNLOAD = 1;
 
     //stack admin settings
     public static final String STACK_ADMIN = "STACK_ADMIN";
