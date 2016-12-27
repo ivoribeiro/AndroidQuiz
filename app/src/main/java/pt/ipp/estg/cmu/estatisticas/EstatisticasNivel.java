@@ -23,6 +23,10 @@ public class EstatisticasNivel {
         this.nivel = nivel;
     }
 
+    public Nivel getNivel() {
+        return this.nivel;
+    }
+
     /**
      * Retorna o numero de perguntas do nivel
      *

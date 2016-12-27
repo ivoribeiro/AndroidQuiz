@@ -29,9 +29,6 @@ public class EstatisticasActivity extends ActivityBase implements ViewPager.OnPa
         mViewPager.setOnPageChangeListener(this);
         mTabLayout = (TabLayout) findViewById(R.id.slide_tabs_layout);
         mTabLayout.setupWithViewPager(mViewPager);
-        //adapter.addFragment(EstatisticasCategoriaFragment.newInstance());
-        //adapter.addFragment(EstatisticasNivelFragment.newInstance());
-        //adapter.addFragment(EstatisticasPerguntaFragment.newInstance());
 
     }
 
@@ -41,8 +38,8 @@ public class EstatisticasActivity extends ActivityBase implements ViewPager.OnPa
         adapter.addTitle(getString(R.string.tab_title_estatisticas_jogo));
         adapter.addFragment(EstatisticasCategoriaFragment.newInstance());
         adapter.addTitle(getString(R.string.tab_title_estatisticas_categoria));
-        //adapter.addFragment(EstatisticasNivelFragment.newInstance());
-        //adapter.addTitle(getString(R.string.tab_title_estatisticas_nivel));
+        adapter.addFragment(EstatisticasNivelFragment.newInstance());
+        adapter.addTitle(getString(R.string.tab_title_estatisticas_nivel));
         //adapter.addFragment(EstatisticasPerguntaFragment.newInstance());
         //adapter.addTitle(getString(R.string.tab_title_estatisticas_pergunta));
 
