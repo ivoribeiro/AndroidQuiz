@@ -46,13 +46,11 @@ public class UtilUI {
      * @param context
      * @param v
      * @param animationId
-     * @param offset
      */
 
-    public static void setViewAnimation(Context context, View v, int animationId, int offset) {
+    public static void setViewAnimation(Context context, View v, int animationId, int duration) {
         Animation animation = AnimationUtils.loadAnimation(context.getApplicationContext(), animationId);
-        if (offset > 0)
-            animation.setStartOffset(offset);
+        animation.setDuration(duration);
         v.startAnimation(animation);
     }
 

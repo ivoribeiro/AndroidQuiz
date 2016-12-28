@@ -24,6 +24,7 @@ import pt.ipp.estg.cmu.ui.AdminNovoNivelFragment;
 import pt.ipp.estg.cmu.ui.AdminPerguntaActivity;
 import pt.ipp.estg.cmu.ui.GameActivity;
 import pt.ipp.estg.cmu.util.Util;
+import pt.ipp.estg.cmu.util.UtilUI;
 
 /**
  * Adapter contendo um cardview com uma textview e uma imageview, responsavel por listar os niveis, mostrar o score obtido em cada nivel, e se esta bloqueado
@@ -106,6 +107,9 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
                 return true;
             }
         });
+
+        UtilUI.setViewAnimation(mContext, holder.mCardView, R.anim.list_bottom_top, 500);
+
     }
 
     @Override

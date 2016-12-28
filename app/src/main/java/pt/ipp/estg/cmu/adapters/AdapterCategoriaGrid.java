@@ -20,6 +20,7 @@ import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.ui.LevelActivity;
 import pt.ipp.estg.cmu.util.Util;
+import pt.ipp.estg.cmu.util.UtilUI;
 
 /**
  * Adapter contendo um cardview com uma textview e uma imageview, responsavel por listar as categorias recebidas
@@ -112,6 +113,8 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
                 });
             }
         }
+
+        UtilUI.setViewAnimation(mContext, holder.mCardView, R.anim.list_bottom_top, 500);
     }
 
 

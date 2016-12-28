@@ -20,6 +20,7 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.Pergunta;
 import pt.ipp.estg.cmu.ui.AdminNovaPerguntaFragment;
 import pt.ipp.estg.cmu.util.Util;
+import pt.ipp.estg.cmu.util.UtilUI;
 
 public class AdapterPerguntasList extends RecyclerView.Adapter<AdapterPerguntasList.ViewHolder> {
 
@@ -63,6 +64,8 @@ public class AdapterPerguntasList extends RecyclerView.Adapter<AdapterPerguntasL
                 return true;
             }
         });
+
+        UtilUI.setViewAnimation(mContext, holder.mCardView, R.anim.list_bottom_top, 500);
     }
 
     @Override

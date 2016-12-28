@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -158,6 +160,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             } else {
                 Button bt = UtilUI.newButton(getActivity(), ' ');
                 bt.setId(index++);
+
                 mAnswerLayout.addView(bt);
             }
         }
@@ -172,6 +175,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 1.0f);
         for (int i = 0; i < mPergunta.getStringAleatoria().length(); ++i) {
             final Button bt_game = UtilUI.newButton(getActivity(), mPergunta.getStringAleatoria().charAt(i));
+
             //verificar se a pergunta foi respondida, para n deixar clicar caso tenha sido respondida
             if (!mPergunta.acertou()) {
                 bt_game.setOnClickListener(new View.OnClickListener() {
