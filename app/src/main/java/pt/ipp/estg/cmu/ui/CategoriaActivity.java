@@ -87,7 +87,7 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
                                     mDialog.dismiss();
                                     startFragmetCategoria();
                                 }
-                            }, 1000);
+                            }, 500);
 
                         } else {
                             imageView.setImageResource(R.drawable.vt_fingerprint_error);

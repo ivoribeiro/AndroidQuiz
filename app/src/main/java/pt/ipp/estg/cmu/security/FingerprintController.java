@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.CancellationSignal;
+import android.os.Handler;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
@@ -202,6 +203,7 @@ public class FingerprintController {
 
         @Override
         public void onAuthenticationFailed() {
+            mInfoImageView.setBackground(null);
             mInfoImageView.setImageResource(R.drawable.vt_fingerprint_error);
             mInfoTextView.setText(mContext.getString(R.string.setup_fingerprint_error));
             mCallBack.fingerprintAuthResult(false);
@@ -210,9 +212,16 @@ public class FingerprintController {
 
         @Override
         public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
+            mInfoImageView.setBackground(null);
             mInfoImageView.setImageResource(R.drawable.vt_fingerprint_success);
             mInfoTextView.setText(mContext.getString(R.string.setup_fingerprint_sucesso));
-            mCallBack.fingerprintAuthResult(true);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mCallBack.fingerprintAuthResult(true);
+                }
+            }, 500);
         }
     }
 }
