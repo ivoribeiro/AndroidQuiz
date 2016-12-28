@@ -1,15 +1,17 @@
 package pt.ipp.estg.cmu.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.interfaces.SettingsRestartListener;
 import pt.ipp.estg.cmu.ui.ActivityBase;
 
 /**
  * Created by Navega on 12/22/2016.
  */
 
-public class SettingsActivity extends ActivityBase {
+public class SettingsActivity extends ActivityBase implements SettingsRestartListener {
 
 
     @Override
@@ -26,4 +28,10 @@ public class SettingsActivity extends ActivityBase {
     }
 
 
+    @Override
+    public void onThemeRestart() {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
 }

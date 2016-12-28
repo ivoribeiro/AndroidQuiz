@@ -29,4 +29,13 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/prefs_text_sound_title">
+
+        <CheckBoxPreference
+            android:key="checkbox_sound_preference"
+            android:summary="@string/prefs_text_sound_summary"
+            android:title="@string/prefs_text_sound_title" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

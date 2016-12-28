@@ -88,7 +88,8 @@
                 android:layout_height="@dimen/button_images_size"
                 android:layout_margin="@dimen/button_images_margin"
                 android:background="@drawable/ic_help"
-                android:backgroundTint="?colorPrimary" />
+                android:backgroundTint="?colorPrimary"
+                android:soundEffectsEnabled="false" />
 
             <ImageButton
                 android:id="@+id/reset"
@@ -96,8 +97,8 @@
                 android:layout_height="@dimen/button_images_size"
                 android:layout_margin="@dimen/button_images_margin"
                 android:background="@drawable/ic_reset"
-                android:backgroundTint="?colorPrimary" />
-
+                android:backgroundTint="?colorPrimary"
+                android:soundEffectsEnabled="false" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

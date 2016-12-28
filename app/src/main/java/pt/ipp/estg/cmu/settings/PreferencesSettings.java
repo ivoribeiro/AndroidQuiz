@@ -2,9 +2,9 @@ package pt.ipp.estg.cmu.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.enums.ThemeEnum;
 
 /**
  * Created by Navega on 12/23/2016.
@@ -12,53 +12,40 @@ import pt.ipp.estg.cmu.enums.ThemeEnum;
 
 public class PreferencesSettings {
 
-    private static final String SETTINGS_PREFERENCE = "user_flags_settings";
-    private static final String USER_FLAG_THEME = "flag_theme";
-
     private Context mContext;
 
-    public PreferencesSettings(Context mContext) {
-        this.mContext = mContext;
+    public PreferencesSettings(Context context) {
+        mContext = context;
     }
 
-    /**
-     * Guarda o nickname escolhido
-     *
-     * @param
-     */
-    public void saveThemePreference(int flag) {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SETTINGS_PREFERENCE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.putInt(USER_FLAG_THEME, flag);
-        editor.commit();
-    }
-
-    /**
-     * Retorna o nickname escolhido
-     *
-     * @return
-     */
     public int getThemePreference() {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences(SETTINGS_PREFERENCE, Context.MODE_PRIVATE);
-        int theme = sharedPreferences.getInt(USER_FLAG_THEME, 0);
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(mContext);
+        String theme = SP.getString("list_preference_temas", mContext.getString(R.string.theme_base));
 
-        if (theme == ThemeEnum.BASE.ordinal()) {
+
+        if (theme.equals(mContext.getString(R.string.theme_base))) {
             return R.style.AppTheme;
         }
 
-        if (theme == ThemeEnum.BASE_BLUE.ordinal()) {
+        if (theme.equals(mContext.getString(R.string.theme_blue))) {
             return R.style.CustomThemeBlue;
         }
 
-        if (theme == ThemeEnum.BASE_PINK.ordinal()) {
+        if (theme.equals(mContext.getString(R.string.theme_pink))) {
             return R.style.CustomThemePink;
         }
 
-        if (theme == ThemeEnum.BASE_YELLOW.ordinal()) {
+        if (theme.equals(mContext.getString(R.string.theme_yellow))) {
             return R.style.CustomThemeYellow;
         }
 
         return R.style.AppTheme;
+    }
+
+
+    public boolean getSoundPreference() {
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(mContext);
+        boolean sound = SP.getBoolean("checkbox_sound_preference", false);
+        return sound;
     }
 }

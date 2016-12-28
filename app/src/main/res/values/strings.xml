@@ -172,6 +172,9 @@
     <string name="prefs_text_theme_title">Temas</string>
     <string name="prefs_text_theme_title_summary">Escolhe o tema que mais te agrada</string>
 
+    <string name="prefs_text_sound_title">Sons</string>
+    <string name="prefs_text_sound_summary">Sons durante o jogo.</string>
+
 
     <!-- Color Temas -->
     <string name="theme_base">Base</string>

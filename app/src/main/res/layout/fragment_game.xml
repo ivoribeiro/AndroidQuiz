@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_activity_question"
-    android:background="?android:colorBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?android:colorBackground"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -77,7 +77,8 @@
             android:layout_height="@dimen/button_images_size"
             android:layout_margin="@dimen/button_images_margin"
             android:background="@drawable/ic_help"
-            android:backgroundTint="?colorPrimary" />
+            android:backgroundTint="?colorPrimary"
+            android:soundEffectsEnabled="false" />
 
         <ImageButton
             android:id="@+id/reset"
@@ -85,7 +86,8 @@
             android:layout_height="@dimen/button_images_size"
             android:layout_margin="@dimen/button_images_margin"
             android:background="@drawable/ic_reset"
-            android:backgroundTint="?colorPrimary" />
+            android:backgroundTint="?colorPrimary"
+            android:soundEffectsEnabled="false" />
 
     </LinearLayout>
 

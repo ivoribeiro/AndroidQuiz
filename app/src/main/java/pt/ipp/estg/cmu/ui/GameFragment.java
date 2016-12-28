@@ -10,8 +10,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -25,7 +23,9 @@ import java.util.Random;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.repositories.NivelRepo;
 import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
+import pt.ipp.estg.cmu.enums.SoundEnum;
 import pt.ipp.estg.cmu.estatisticas.EstatisticasNivel;
+import pt.ipp.estg.cmu.helpers.MediaSoundsHelper;
 import pt.ipp.estg.cmu.interfaces.GameInterfaceListener;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
@@ -42,6 +42,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private static final int ROW_2 = 9;
     private static final int ROW_3 = 14;
 
+    private MediaSoundsHelper mSoundHelper;
     private GameInterfaceListener mListener;
     private Nivel mNivel;
     private Pergunta mPergunta;
@@ -84,11 +85,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             mPergunta = getArguments().getParcelable(Util.ARG_QUESTION);
             mCorrectAnswerConcat = mPergunta.getRespostaCerta().replaceAll("\\s", "");
         }
+        mSoundHelper = new MediaSoundsHelper(getContext());
         mPerguntaRepository = new PerguntaRepo(this.getContext());
         mNivelRepository = new NivelRepo(this.getContext());
         mUserAnswerArray = new String[mCorrectAnswerConcat.length()];
         mEstatisticasNivel = new EstatisticasNivel(this.getContext(), mNivel);
-
     }
 
     @Override
@@ -134,6 +135,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 setHintLetter();
                 break;
             case R.id.reset:
+                mSoundHelper.play(SoundEnum.CLEAR);
                 createLayout();
                 break;
         }
@@ -175,12 +177,13 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 1.0f);
         for (int i = 0; i < mPergunta.getStringAleatoria().length(); ++i) {
             final Button bt_game = UtilUI.newButton(getActivity(), mPergunta.getStringAleatoria().charAt(i));
-
             //verificar se a pergunta foi respondida, para n deixar clicar caso tenha sido respondida
             if (!mPergunta.acertou()) {
                 bt_game.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        mSoundHelper.play(SoundEnum.BUTTON_CLICK);
+
                         //verificar se esse botao ja nao tem uma ajuda
                         if (null != mUserAnswerArray[mUserAnswerIndex]) {
                             ++mUserAnswerIndex;
@@ -295,6 +298,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             } while (null != mUserAnswerArray[result]);
             Button bt_answer = (Button) mAnswerLayout.findViewById(result);
             if (null != bt_answer) {
+                mSoundHelper.play(SoundEnum.HELP);
                 char hint = mCorrectAnswerConcat.charAt(result);
                 bt_answer.setText(hint + "");
                 mUserAnswerArray[result] = hint + "";

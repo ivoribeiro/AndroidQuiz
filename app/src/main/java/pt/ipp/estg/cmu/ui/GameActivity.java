@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterViewPager;
 import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
+import pt.ipp.estg.cmu.enums.SoundEnum;
+import pt.ipp.estg.cmu.helpers.MediaSoundsHelper;
 import pt.ipp.estg.cmu.interfaces.GameInterfaceListener;
 import pt.ipp.estg.cmu.models.Categoria;
 import pt.ipp.estg.cmu.models.Nivel;
@@ -26,9 +28,9 @@ import pt.ipp.estg.cmu.util.Util;
 public class GameActivity extends AppCompatActivity implements GameInterfaceListener, ViewPager.OnPageChangeListener {
 
     private static final int WAIT_MSECS = 2000;
-    private int NUM_SWIPE_PAGES = 2;
 
     //layout
+    private MediaSoundsHelper mSoundHelper;
     private ViewPager mViewPager;
     private TextView mLevelInfoText;
     private TextView mQuestionInfoText;
@@ -48,6 +50,7 @@ public class GameActivity extends AppCompatActivity implements GameInterfaceList
         super.onCreate(savedInstanceState);
         setTheme(new PreferencesSettings(this).getThemePreference());
         setContentView(R.layout.activity_game);
+        mSoundHelper = new MediaSoundsHelper(this);
 
         mNivel = getIntent().getParcelableExtra(Util.ARG_LEVEL);
         mCategoria = getIntent().getParcelableExtra(Util.ARG_CATEGORIE);
@@ -111,8 +114,10 @@ public class GameActivity extends AppCompatActivity implements GameInterfaceList
         dialog.setContentView(R.layout.fragment_game_window_pop_up);
         ImageView imageView = (ImageView) dialog.findViewById(R.id.image_view);
         if (hit) {
+            mSoundHelper.play(SoundEnum.HIT);
             imageView.setBackground(getResources().getDrawable(R.drawable.img_correct));
         } else {
+            mSoundHelper.play(SoundEnum.FAILED);
             imageView.setBackground(getResources().getDrawable(R.drawable.img_wrong));
         }
         dialog.show();
@@ -134,6 +139,7 @@ public class GameActivity extends AppCompatActivity implements GameInterfaceList
         ImageView imageView = (ImageView) dialog.findViewById(R.id.image_view);
         imageView.setBackground(ContextCompat.getDrawable(this, R.drawable.img_unlock));
         dialog.show();
+        mSoundHelper.play(SoundEnum.UNLOCK);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {

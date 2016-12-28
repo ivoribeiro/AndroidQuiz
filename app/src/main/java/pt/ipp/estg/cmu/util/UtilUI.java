@@ -21,6 +21,8 @@ public class UtilUI {
         params.weight = 1;
         button.setLayoutParams(params);
 
+        button.setSoundEffectsEnabled(false);
+
         TypedValue typedValue = new TypedValue();
         Resources.Theme theme = context.getTheme();
         theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true);
