@@ -27,6 +27,7 @@ import pt.ipp.estg.cmu.estatisticas.EstatisticasNivel;
 import pt.ipp.estg.cmu.interfaces.GameInterfaceListener;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
+import pt.ipp.estg.cmu.util.StringsOperations;
 import pt.ipp.estg.cmu.util.Util;
 import pt.ipp.estg.cmu.util.UtilUI;
 
@@ -39,7 +40,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private static final int ROW_2 = 9;
     private static final int ROW_3 = 14;
 
-    private Context mContext;
     private GameInterfaceListener mListener;
     private Nivel mNivel;
     private Pergunta mPergunta;
@@ -58,6 +58,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private String mCorrectAnswerConcat;
     private String[] mUserAnswerArray;
     private int mUserAnswerIndex;
+    private int mUserAnswerSize;
 
     EstatisticasNivel mEstatisticasNivel;
 
@@ -113,7 +114,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         Bitmap bitmap = BitmapFactory.decodeFile(mPergunta.getImagem());
         mImageView.setImageBitmap(bitmap);
         createLayout();
@@ -122,7 +122,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext = context;
         mListener = (GameActivity) context;
     }
 
@@ -143,6 +142,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         buildLayoutAnswer();
         mUserAnswerArray = new String[mCorrectAnswerConcat.length()];
         mUserAnswerIndex = 0;
+        mUserAnswerSize = 0;
     }
 
     /**
@@ -172,19 +172,28 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 1.0f);
         for (int i = 0; i < mPergunta.getStringAleatoria().length(); ++i) {
             final Button bt_game = UtilUI.newButton(getActivity(), mPergunta.getStringAleatoria().charAt(i));
-            bt_game.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Button bt_answer = (Button) mAnswerLayout.findViewById(mUserAnswerIndex);
-                    if (bt_answer != null) {
-                        bt_answer.setText(bt_game.getText());
-                        bt_game.setVisibility(View.INVISIBLE);
-                        mUserAnswerArray[mUserAnswerIndex] = bt_game.getText().toString();//array com cada letra da resposta do user, preenchido a medida que vai respondendo
-                        ++mUserAnswerIndex;
+            //verificar se a pergunta foi respondida, para n deixar clicar caso tenha sido respondida
+            if (!mPergunta.acertou()) {
+                bt_game.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //verificar se esse botao ja nao tem uma ajuda
+                        if (null != mUserAnswerArray[mUserAnswerIndex]) {
+                            ++mUserAnswerIndex;
+                        }
+                        //obter o proximo botao da resposta a ser preenchido
+                        Button bt_answer = (Button) mAnswerLayout.findViewById(mUserAnswerIndex);
+                        if (bt_answer != null) {
+                            bt_answer.setText(bt_game.getText());
+                            bt_game.setVisibility(View.INVISIBLE);
+                            mUserAnswerArray[mUserAnswerIndex] = bt_game.getText().toString();//array com cada letra da resposta do user, preenchido a medida que vai respondendo
+                            ++mUserAnswerIndex;
+                            ++mUserAnswerSize;
+                        }
                         checkIfIsFinished();
                     }
-                }
-            });
+                });
+            }
             row.addView(bt_game, params);
             if (i == ROW_1 || i == ROW_2 || i == ROW_3) {
                 mTableLayout.addView(row);
@@ -199,8 +208,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
      * retira pontuacao ao mNivel se respondeu de forma errada
      */
     private void checkIfIsFinished() {
-        if (mUserAnswerIndex == mCorrectAnswerConcat.length()) {
-            if (arrayToString().equals(mCorrectAnswerConcat)) {
+        if (mUserAnswerSize == mCorrectAnswerConcat.length()) {
+            if (StringsOperations.arrayToString(mUserAnswerSize, mUserAnswerArray).equals(mCorrectAnswerConcat)) {
                 incrementPontosNivel();
                 mListener.setAnswered(true);
                 mPergunta.setAcertou(true);
@@ -268,15 +277,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-
-    private String arrayToString() {
-        String result = "";
-        for (int i = 0; i < mUserAnswerIndex; ++i) {
-            result += mUserAnswerArray[i];
-        }
-        return result;
-    }
-
+    /**
+     * preenche um botao aleatorio do layout da resposta com uma letra de ajuda
+     */
     private void setHintLetter() {
         if (mNivel.getnAjudas() > 0) {
             Random random = new Random();
@@ -291,11 +294,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 char hint = mCorrectAnswerConcat.charAt(result);
                 bt_answer.setText(hint + "");
                 mUserAnswerArray[result] = hint + "";
-                ++mUserAnswerIndex;
-                checkIfIsFinished();
+                ++mUserAnswerSize;
                 decrementAjuda();
 
             }
+            checkIfIsFinished();
         } else {
             Snackbar.make(mViewGroup, getContext().getResources().getString(R.string.jogo_sem_ajudas_info), Snackbar.LENGTH_SHORT).show();
         }
@@ -314,16 +317,5 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 mListener.unlock();
             }
         }
-    }
-
-    /**
-     * Verifica se pode desbloquear
-     * so podemos desbloquear quando o numero de respostas certas é igual
-     * ao numero de respostas minimas para desbloquear
-     *
-     * @return
-     */
-    private boolean canUnlock() {
-        return mEstatisticasNivel.getnRespostasCertas() == this.mNivel.getnMinRespostasCertas();
     }
 }

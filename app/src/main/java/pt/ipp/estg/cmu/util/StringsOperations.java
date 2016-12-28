@@ -55,5 +55,13 @@ public class StringsOperations {
         }
         mRandomString = mRandomString + text;
     }
+
+    public static String arrayToString(int index, String[] array) {
+        String result = "";
+        for (int i = 0; i < index; ++i) {
+            result += array[i];
+        }
+        return result;
+    }
 }
 
