@@ -94,5 +94,8 @@
     <!-- Empty Data Layout-->
     <dimen name="empty_data_layout_image_size">160dp</dimen>
 
+    <!--Estatisticas Categoria Fragment -->
+    <dimen name="adapter_estatisticas_categoria_layout_padding">8dp</dimen>
+
 
 </resources>

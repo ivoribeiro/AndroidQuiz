@@ -1,20 +1,15 @@
 package pt.ipp.estg.cmu.ui;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.estatisticas.EstatisticasCategoria;
 import pt.ipp.estg.cmu.estatisticas.EstatisticasJogo;
-import pt.ipp.estg.cmu.estatisticas.EstatisticasNivel;
-import pt.ipp.estg.cmu.estatisticas.EstatisticasPergunta;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,49 +42,41 @@ public class EstatisticasJogoFragment extends Fragment {
      */
     public static EstatisticasJogoFragment newInstance() {
         EstatisticasJogoFragment fragment = new EstatisticasJogoFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mEstatisticasJogo = new EstatisticasJogo(context);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mEstatisticasJogo = new EstatisticasJogo(getContext());
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_estatisticas_jogo, container, false);
 
         //---------------------------------Jogo----------------------------------------
         nPontuacaoText = (TextView) view.findViewById(R.id.pontuacao_jogo);
-        nPontuacaoText.setText("" + mEstatisticasJogo.getPontuacao());
         nPerguntasText = (TextView) view.findViewById(R.id.n_perguntas_jogo);
-        nPerguntasText.setText("" + mEstatisticasJogo.getnPerguntas());
         nRespostasCertasText = (TextView) view.findViewById(R.id.n_respostas_certas_jogo);
-        nRespostasCertasText.setText("" + mEstatisticasJogo.getnRespostasCertas());
         nRespostasErradasText = (TextView) view.findViewById(R.id.n_respostas_erradas_jogo);
-        nRespostasErradasText.setText("" + mEstatisticasJogo.getnRespostasErradas());
         nAjudasUsadasText = (TextView) view.findViewById(R.id.n_ajudas_usadas_jogo);
-        nAjudasUsadasText.setText("" + mEstatisticasJogo.getnAjudasUsadas());
         nPontuacaoGanhaText = (TextView) view.findViewById(R.id.pontuacao_ganha_jogo);
-        nPontuacaoGanhaText.setText("" + mEstatisticasJogo.getPontuacaoGanha());
         nPontuacaoPerdidaText = (TextView) view.findViewById(R.id.pontuacao_perdida_jogo);
-        nPontuacaoGanhaText.setText("" + mEstatisticasJogo.getPontuacaoPerdida());
         //-----------------------------------------------------------------------------
 
-
-        // Inflate the layout for this fragment
         return view;
     }
 
-
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        nPontuacaoText.setText("" + mEstatisticasJogo.getPontuacao());
+        nPerguntasText.setText("" + mEstatisticasJogo.getnPerguntas());
+        nRespostasCertasText.setText("" + mEstatisticasJogo.getnRespostasCertas());
+        nRespostasErradasText.setText("" + mEstatisticasJogo.getnRespostasErradas());
+        nAjudasUsadasText.setText("" + mEstatisticasJogo.getnAjudasUsadas());
+        nPontuacaoGanhaText.setText("" + mEstatisticasJogo.getPontuacaoGanha());
+        nPontuacaoGanhaText.setText("" + mEstatisticasJogo.getPontuacaoPerdida());
+    }
 }

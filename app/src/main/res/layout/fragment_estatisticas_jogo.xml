@@ -1,219 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="pt.ipp.estg.cmu.ui.EstatisticasNivelFragment">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/card_view_estatisticas_jogo"
+        <LinearLayout
+            android:id="@+id/estatisticas_jogo_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/adapter_level_row_margin"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/adapter_level_layout_padding">
 
             <LinearLayout
-                android:id="@+id/estatisticas_jogo_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="@dimen/adapter_level_layout_padding">
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                <TextView
+                    style="@style/PrimarySmallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:padding="@dimen/adapter_level_layout_padding"
+                    android:text="@string/pontuacao_estatisticas" />
 
-                    <TextView
-                        style="@style/PrimarySmallTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/adapter_level_layout_padding"
-                        android:text="@string/pontuacao_estatisticas" />
-
-                    <TextView
-                        android:id="@+id/pontuacao_jogo"
-                        style="@style/PrimarySmallTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/adapter_level_layout_padding" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                <TextView
+                    android:id="@+id/pontuacao_jogo"
+                    style="@style/PrimarySmallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:padding="@dimen/adapter_level_layout_padding" />
+            </LinearLayout>
 
-                    <TextView
-                        style="@style/PrimarySmallTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/adapter_level_layout_padding"
-                        android:text="@string/n_perguntas_estatisticas" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/n_perguntas_jogo"
-                        style="@style/PrimarySmallTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/adapter_level_layout_padding" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                <TextView
+                    style="@style/PrimarySmallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:padding="@dimen/adapter_level_layout_padding"
+                    android:text="@string/n_perguntas_estatisticas" />
 
-                    <TextView
-                        style="@style/PrimarySmallTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/adapter_level_layout_padding"
-                        android:text="@string/n_respostas_certas_estatisticas" />
-
-                    <TextView
-                        android:id="@+id/n_respostas_certas_jogo"
-                        style="@style/PrimarySmallTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/adapter_level_layout_padding" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                <TextView
+                    android:id="@+id/n_perguntas_jogo"
+                    style="@style/PrimarySmallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:padding="@dimen/adapter_level_layout_padding" />
 
-                    <TextView
-                        style="@style/PrimarySmallTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/adapter_level_layout_padding"
-                        android:text="@string/n_respostas_erradas_estatisticas" />
-
-                    <TextView
-                        android:id="@+id/n_respostas_erradas_jogo"
-                        style="@style/PrimarySmallTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/adapter_level_layout_padding" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/n_ajudas_usadas_categoria_label"
-                        style="@style/PrimarySmallTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/adapter_level_layout_padding"
-                        android:text="@string/n_ajudas_usadas_estatisticas" />
-
-                    <TextView
-                        android:id="@+id/n_ajudas_usadas_jogo"
-                        style="@style/PrimarySmallTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/adapter_level_layout_padding" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/PrimarySmallTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/adapter_level_layout_padding"
-                        android:text="@string/pontuacao_ganha_estatisticas" />
-
-                    <TextView
-                        android:id="@+id/pontuacao_ganha_jogo"
-                        style="@style/PrimarySmallTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/adapter_level_layout_padding" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/PrimarySmallTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/adapter_level_layout_padding"
-                        android:text="@string/pontuacao_perdida_estatisticas" />
-
-                    <TextView
-                        android:id="@+id/pontuacao_perdida_jogo"
-                        style="@style/PrimarySmallTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/adapter_level_layout_padding" />
-                </LinearLayout>
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
-    </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/PrimarySmallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/adapter_level_layout_padding"
+                    android:text="@string/n_respostas_certas_estatisticas" />
+
+                <TextView
+                    android:id="@+id/n_respostas_certas_jogo"
+                    style="@style/PrimarySmallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/adapter_level_layout_padding" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/PrimarySmallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/adapter_level_layout_padding"
+                    android:text="@string/n_respostas_erradas_estatisticas" />
+
+                <TextView
+                    android:id="@+id/n_respostas_erradas_jogo"
+                    style="@style/PrimarySmallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/adapter_level_layout_padding" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/n_ajudas_usadas_categoria_label"
+                    style="@style/PrimarySmallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/adapter_level_layout_padding"
+                    android:text="@string/n_ajudas_usadas_estatisticas" />
+
+                <TextView
+                    android:id="@+id/n_ajudas_usadas_jogo"
+                    style="@style/PrimarySmallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/adapter_level_layout_padding" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/PrimarySmallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/adapter_level_layout_padding"
+                    android:text="@string/pontuacao_ganha_estatisticas" />
+
+                <TextView
+                    android:id="@+id/pontuacao_ganha_jogo"
+                    style="@style/PrimarySmallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/adapter_level_layout_padding" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/PrimarySmallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/adapter_level_layout_padding"
+                    android:text="@string/pontuacao_perdida_estatisticas" />
+
+                <TextView
+                    android:id="@+id/pontuacao_perdida_jogo"
+                    style="@style/PrimarySmallTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/adapter_level_layout_padding" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

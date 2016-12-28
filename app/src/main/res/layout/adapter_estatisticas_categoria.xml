@@ -18,13 +18,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/adapter_estatisticas_categoria_layout_padding">
 
             <ImageView
                 android:id="@+id/estatisticas_categoria_image"
                 android:layout_width="@dimen/adapter_estatisticas_categoria_image_size"
-                android:layout_height="@dimen/adapter_estatisticas_categoria_image_size"
-                android:padding="@dimen/adapter_level_layout_padding" />
+                android:layout_height="@dimen/adapter_estatisticas_categoria_image_size" />
 
             <TextView
                 android:id="@+id/nome_categoria"
@@ -33,8 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding"
-                />
+                android:padding="@dimen/adapter_estatisticas_categoria_layout_padding" />
 
         </LinearLayout>
 
@@ -43,26 +42,25 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/adapter_estatisticas_categoria_layout_padding">
 
             <TextView
                 android:id="@+id/pontuacao_categoria_label"
-                style="@style/PrimarySmallTitle"
+                style="@style/SecondaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding"
                 android:text="@string/pontuacao_estatisticas" />
 
             <TextView
                 android:id="@+id/pontuacao_categoria"
-                style="@style/PrimarySmallTitle"
+                style="@style/SecondaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding" />
+                android:gravity="center" />
         </LinearLayout>
 
         <LinearLayout
@@ -70,28 +68,25 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/adapter_estatisticas_categoria_layout_padding">
 
             <TextView
                 android:id="@+id/n_perguntas_categoria_label"
-                style="@style/PrimarySmallTitle"
+                style="@style/SecondaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding"
                 android:text="@string/n_perguntas_estatisticas" />
 
             <TextView
                 android:id="@+id/n_perguntas_categoria"
-                style="@style/PrimarySmallTitle"
+                style="@style/SecondaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding" />
-
-
+                android:gravity="center" />
         </LinearLayout>
 
         <LinearLayout
@@ -99,26 +94,25 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/adapter_estatisticas_categoria_layout_padding">
 
             <TextView
                 android:id="@+id/n_respostas_certas_categoria_label"
-                style="@style/PrimarySmallTitle"
+                style="@style/SecondaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding"
                 android:text="@string/n_respostas_certas_estatisticas" />
 
             <TextView
                 android:id="@+id/n_respostas_certas_categoria"
-                style="@style/PrimarySmallTitle"
+                style="@style/SecondaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding" />
+                android:gravity="center" />
         </LinearLayout>
 
         <LinearLayout
@@ -126,26 +120,25 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/adapter_estatisticas_categoria_layout_padding">
 
             <TextView
                 android:id="@+id/n_respostas_erradas_categoria_label"
-                style="@style/PrimarySmallTitle"
+                style="@style/SecondaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding"
                 android:text="@string/n_respostas_erradas_estatisticas" />
 
             <TextView
                 android:id="@+id/n_respostas_erradas_categoria"
-                style="@style/PrimarySmallTitle"
+                style="@style/SecondaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding" />
+                android:gravity="center" />
         </LinearLayout>
 
         <LinearLayout
@@ -153,26 +146,25 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/adapter_estatisticas_categoria_layout_padding">
 
             <TextView
                 android:id="@+id/n_ajudas_usadas_categoria_label"
-                style="@style/PrimarySmallTitle"
+                style="@style/SecondaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding"
                 android:text="@string/n_ajudas_usadas_estatisticas" />
 
             <TextView
                 android:id="@+id/n_ajudas_usadas_categoria"
-                style="@style/PrimarySmallTitle"
+                style="@style/SecondaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding" />
+                android:gravity="center" />
 
         </LinearLayout>
 
@@ -181,26 +173,25 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/adapter_estatisticas_categoria_layout_padding">
 
             <TextView
                 android:id="@+id/pontuacao_ganha_categoria_label"
-                style="@style/PrimarySmallTitle"
+                style="@style/SecondaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding"
                 android:text="@string/pontuacao_ganha_estatisticas" />
 
             <TextView
                 android:id="@+id/pontuacao_ganha_categoria"
-                style="@style/PrimarySmallTitle"
+                style="@style/SecondaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding" />
+                android:gravity="center" />
         </LinearLayout>
 
         <LinearLayout
@@ -208,26 +199,25 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/adapter_estatisticas_categoria_layout_padding">
 
             <TextView
                 android:id="@+id/pontuacao_perdida_categoria_label"
-                style="@style/PrimarySmallTitle"
+                style="@style/SecondaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding"
                 android:text="@string/pontuacao_perdida_estatisticas" />
 
             <TextView
                 android:id="@+id/pontuacao_perdida_categoria"
-                style="@style/PrimarySmallTitle"
+                style="@style/SecondaryTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/adapter_level_layout_padding" />
+                android:gravity="center" />
         </LinearLayout>
 
     </LinearLayout>
