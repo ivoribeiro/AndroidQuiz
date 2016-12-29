@@ -8,7 +8,10 @@ import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
+import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.estatisticas.EstatisticasJogo;
+import pt.ipp.estg.cmu.models.Pergunta;
+import pt.ipp.estg.cmu.services.RandQuestionService;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
 
@@ -16,8 +19,8 @@ import pt.ipp.estg.cmu.util.Util;
 public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
     //widget
-    public static final String INTENT_MESSAGE = "pt.ipp.estgf.cmu.widgetproject.MESSAGE";
-    public static final String INTENT_MESSAGE_EXTRA = "message_extra";
+    public static final String WIDGET_ACTION = "pt.ipp.estgf.cmu.MESSAGE";
+    public static final String RAND_QUESTION_TIME = "rand_question_time";
 
     //layout
     private Button mBtStart;
@@ -50,6 +53,12 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
         mScoreTxt.setText(getResources().getString(R.string.txt_score) + " : " + mPontos);
 
         mBtStart.setOnClickListener(this);
+
+
+
+        Intent mIntent = new Intent(this, RandQuestionService.class);
+        mIntent.putExtra(RAND_QUESTION_TIME, 1);
+        startService(mIntent);
     }
 
     @Override
