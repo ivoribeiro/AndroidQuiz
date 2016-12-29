@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import pt.ipp.estg.cmu.db.dbUtil;
 import pt.ipp.estg.cmu.estatisticas.EstatisticasNivel;
@@ -132,10 +133,17 @@ public class NivelRepo extends Repo<Nivel> implements RepositoryInterface<Nivel>
         estatisticasNivel = new EstatisticasNivel(mContext, nivel);
         return estatisticasNivel.getPontuacaoGanha() == 0 && estatisticasNivel.getPontuacaoPerdida() == 0;
     }
-//Delete the level and all the questions
+
+    //Delete the level and all the questions
     @Override
     public void deleteById(int id) {
         super.deleteById(id);
         mPerguntaRepo.deleteByNivel(id);
+    }
+
+    public Nivel getRandNivel() {
+        ArrayList<Nivel> niveis = super.getAllByField("bloqueado", "0");
+        Random random = new Random();
+        return niveis.get(random.nextInt((niveis.size() - 1) - 0 + 1) + 0);
     }
 }

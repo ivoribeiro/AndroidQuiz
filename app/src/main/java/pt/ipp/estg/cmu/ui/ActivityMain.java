@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
+import pt.ipp.estg.cmu.db.repositories.NivelRepo;
 import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.estatisticas.EstatisticasJogo;
 import pt.ipp.estg.cmu.models.Pergunta;
@@ -55,10 +56,12 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
         mBtStart.setOnClickListener(this);
 
 
-
         Intent mIntent = new Intent(this, RandQuestionService.class);
         mIntent.putExtra(RAND_QUESTION_TIME, 1);
-        startService(mIntent);
+        //TODO verificar se existem perguntas de niveis desbloqueados
+        if (new NivelRepo(this).getAll().size() > 0) {
+            startService(mIntent);
+        }
     }
 
     @Override
