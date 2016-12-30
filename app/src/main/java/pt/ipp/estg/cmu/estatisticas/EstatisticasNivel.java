@@ -37,6 +37,14 @@ public class EstatisticasNivel {
     }
 
     /**
+     *
+     * @return
+     */
+    public int getnPerguntasPorResponder() {
+        return mPerguntaRepo.countPorResponder();
+    }
+
+    /**
      * Retorna a pontuacao acumulada do nivel
      *
      * @return

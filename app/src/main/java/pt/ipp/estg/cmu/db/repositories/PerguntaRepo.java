@@ -215,4 +215,9 @@ public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<
         db.execSQL(query);
         db.close();
     }
+
+    public int countPorResponder() {
+        String query = "SELECT count(id) FROM pergunta WHERE acertou = 0;";
+        return count(query);
+    }
 }

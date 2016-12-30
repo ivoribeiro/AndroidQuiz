@@ -26,7 +26,12 @@ public class EstatisticasJogo {
     private int respostasErradas;
     private int respostasCertas;
     private int nPerguntas;
+    private int nPerguntasPorResponder;
 
+
+    public int getnPerguntasPorResponder() {
+        return nPerguntasPorResponder;
+    }
 
     public EstatisticasJogo(Context context) {
 
@@ -36,6 +41,7 @@ public class EstatisticasJogo {
         this.mNivelRepo = new NivelRepo(context);
         this.categoriasJogo = mCategoriaRepo.getAll();
 
+
         for (Categoria categoria : categoriasJogo) {
             EstatisticasCategoria estatisticasCategoria = new EstatisticasCategoria(mContext, categoria.getNome());
             this.pontuacao += estatisticasCategoria.getPontuacao();
@@ -44,6 +50,7 @@ public class EstatisticasJogo {
             this.respostasCertas += estatisticasCategoria.getnRespostasCertas();
             this.respostasErradas += estatisticasCategoria.getnRespostasErradas();
             this.nPerguntas += estatisticasCategoria.getnPerguntas();
+            this.nPerguntasPorResponder += estatisticasCategoria.getNperguntasporresponder();
         }
     }
 
