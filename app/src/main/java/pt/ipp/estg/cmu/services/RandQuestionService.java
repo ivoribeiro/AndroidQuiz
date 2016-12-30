@@ -61,7 +61,7 @@ public class RandQuestionService extends Service {
                     new NotificationCompat.Builder(mcontext)
                             .setSmallIcon(R.drawable.ic_fingerprint)
                             .setContentTitle(getString(R.string.notification_title))
-                            .setContentText(getString(R.string.notification_description));
+                            .setContentText(getString(R.string.notification_description ));
             NotificationManager mNotificationManager =
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 // mId allows you to update the notification later on.
