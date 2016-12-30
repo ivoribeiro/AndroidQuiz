@@ -55,10 +55,9 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
         mBtStart.setOnClickListener(this);
 
 
-
-        Intent mIntent = new Intent(this, RandQuestionService.class);
-        mIntent.putExtra(RAND_QUESTION_TIME, 1);
-        startService(mIntent);
+        //Intent mIntent = new Intent(this, RandQuestionService.class);
+        //mIntent.putExtra(RAND_QUESTION_TIME, 1);
+        //startService(mIntent);
     }
 
     @Override

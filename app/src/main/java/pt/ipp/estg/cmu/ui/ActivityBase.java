@@ -72,6 +72,7 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, actualtoolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.setDrawerListener(mDrawerToggle);
+        //mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
         mDrawerToggle.syncState();
         mNavigationView.setNavigationItemSelectedListener(this);
 
