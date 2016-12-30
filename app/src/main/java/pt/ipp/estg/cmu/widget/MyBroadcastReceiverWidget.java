@@ -7,13 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.widget.ImageView;
 import android.widget.RemoteViews;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.Pergunta;
 import pt.ipp.estg.cmu.services.RandQuestionService;
-import pt.ipp.estg.cmu.ui.ActivityMain;
+
+import android.widget.Button;
 
 public class MyBroadcastReceiverWidget extends AppWidgetProvider {
 
@@ -27,14 +27,15 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
         ComponentName thisWidget = new ComponentName(context, MyBroadcastReceiverWidget.class);
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 
-        if (intent.hasExtra(RandQuestionService.QUESTION_TO_WIDGET))
+        if (intent.hasExtra(RandQuestionService.QUESTION_TO_WIDGET)) {
             pergunta = intent.getParcelableExtra(RandQuestionService.QUESTION_TO_WIDGET);
-        lastAction = intent.getAction();
+            lastAction = intent.getAction();
 
-        // executa onUpdate sempre que recebe um Intent neste caso trata-se de um Intents do tipo
-        onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(thisWidget));
+            // executa onUpdate sempre que recebe um Intent neste caso trata-se de um Intents do tipo
+            onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(thisWidget));
+            super.onReceive(context, intent);
 
-        super.onReceive(context, intent);
+        }
     }
 
     @Override

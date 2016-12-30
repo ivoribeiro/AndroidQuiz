@@ -7,10 +7,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import pt.ipp.estg.cmu.db.dbUtil;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
+
+import static android.R.attr.max;
 
 public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<Pergunta> {
     public PerguntaRepo(Context context) {
@@ -51,6 +54,19 @@ public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<
      */
     public ArrayList<Pergunta> getAllByNivel(int idNivel) {
         return super.getAllByField("nivel", "" + idNivel + "");
+    }
+
+    /**
+     * Retorna uma pergunta ,do ultimo nivel jogado, que ainda nao tenha respondido
+     *
+     * @return
+     */
+    public Pergunta getRandQuestion(int nivel) {
+        String[] fields = {"acertou", "nivel"};
+        String[] values = {"0", "" + nivel};
+        ArrayList<Pergunta> perguntas = super.getAllByFields(fields, values);
+        Random random = new Random();
+        return perguntas.get(random.nextInt((perguntas.size() - 1) - 0 + 1) + 0);
     }
 
 
@@ -198,5 +214,10 @@ public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<
         SQLiteDatabase db = super.getWritableDatabase();
         db.execSQL(query);
         db.close();
+    }
+
+    public int countPorResponder() {
+        String query = "SELECT count(id) FROM pergunta WHERE acertou = 0;";
+        return count(query);
     }
 }

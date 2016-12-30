@@ -202,4 +202,7 @@
 
     <string name="empty_data">Sem informação para apresentar</string>
 
+    <string name="notification_title">Nova pergunta</string>
+    <string name="notification_description">Uma nova pergunta foi carregada no widget!</string>
+
 </resources>
