@@ -1,5 +1,6 @@
 package pt.ipp.estg.cmu.settings;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -47,5 +48,11 @@ public class SettingsFragment extends PreferenceFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mListener = (SettingsRestartListener) context;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mListener = (SettingsRestartListener) activity;
     }
 }
