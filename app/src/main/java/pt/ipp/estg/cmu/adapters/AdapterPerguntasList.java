@@ -77,8 +77,8 @@ public class AdapterPerguntasList extends RecyclerView.Adapter<AdapterPerguntasL
         public ViewHolder(View itemView) {
             super(itemView);
             mCardView = (CardView) itemView.findViewById(R.id.card_view);
-            mImage = (ImageView) itemView.findViewById(R.id.question_image);
-            mAnswerText = (TextView) itemView.findViewById(R.id.answer_title);
+            mImage = (ImageView) itemView.findViewById(R.id.user_avatar);
+            mAnswerText = (TextView) itemView.findViewById(R.id.user_name);
         }
     }
 }

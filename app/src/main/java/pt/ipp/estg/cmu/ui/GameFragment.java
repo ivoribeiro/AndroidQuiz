@@ -101,7 +101,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         mTableLayout = (TableLayout) view.findViewById(R.id.game_table_layout);
         mResetButton = (ImageButton) view.findViewById(R.id.reset);
         mHintButton = (ImageButton) view.findViewById(R.id.hint);
-        mImageView = (ImageView) view.findViewById(R.id.question_image);
+        mImageView = (ImageView) view.findViewById(R.id.user_avatar);
 
         mHintButton.setOnClickListener(this);
         mResetButton.setOnClickListener(this);

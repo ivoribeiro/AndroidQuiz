@@ -118,7 +118,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         mFab = (FloatingActionButton) view.findViewById(R.id.fab);
         mGaleriaBt = (Button) view.findViewById(R.id.bt_galeria);
         mCameraBt = (Button) view.findViewById(R.id.bt_camera);
-        mImagePreview = (ImageView) view.findViewById(R.id.question_image);
+        mImagePreview = (ImageView) view.findViewById(R.id.user_avatar);
 
         mDownloadBt.setOnClickListener(this);
         mFab.setOnClickListener(this);

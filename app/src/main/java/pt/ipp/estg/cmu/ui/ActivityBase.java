@@ -134,6 +134,10 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, EstatisticasActivity.class));
                 break;
 
+            case R.id.nav_online:
+                startActivity(new Intent(this, OnlineScoreActivity.class));
+                break;
+
             case R.id.nav_admin:
                 startActivity(new Intent(this, CategoriaActivity.class).putExtra(Util.ARG_ADMIN, true));
                 break;

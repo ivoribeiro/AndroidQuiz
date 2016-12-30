@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="pt.ipp.estg.cmu.ui.CategoriaActivity">
+    tools:context="pt.ipp.estg.cmu.ui.OnlineScoreActivity">
 
     <FrameLayout
         android:id="@id/frame_layout"

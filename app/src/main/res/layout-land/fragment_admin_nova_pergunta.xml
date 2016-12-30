@@ -41,7 +41,7 @@
                         android:text="@string/admin_nova_pergunta_imagem" />
 
                     <ImageView
-                        android:id="@+id/question_image"
+                        android:id="@+id/user_avatar"
                         android:layout_width="@dimen/nova_pergunta_not_found_size"
                         android:layout_height="@dimen/nova_pergunta_not_found_size"
                         android:layout_gravity="center_horizontal"
