@@ -1,6 +1,7 @@
 package pt.ipp.estg.cmu.ui;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -36,6 +37,7 @@ import java.sql.Timestamp;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.repositories.NivelRepo;
 import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
+import pt.ipp.estg.cmu.interfaces.AdminPerguntaAdapterChangeListener;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
 import pt.ipp.estg.cmu.tasks.DownloadImage;
@@ -49,6 +51,8 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
 
     private static int RESULT_LOAD_IMAGE = 1;
     private static int CAPTURE_IMAGE_ACTIVITY = 2;
+
+    private AdminPerguntaAdapterChangeListener mListener;
 
     private Nivel mNivel;
     private Pergunta mPergunta;
@@ -131,6 +135,18 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             setPreviewImage(mPergunta.getImagem());
             mRespostaText.setText(mPergunta.getRespostaCerta());
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mListener = (AdminPerguntaAdapterChangeListener) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     @Override
@@ -320,6 +336,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                 mRepositoryPergunta.update(p);
             }
             getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            mListener.onPerguntaSave();
         } else {
             Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_campos_erro), Toast.LENGTH_SHORT).show();
         }

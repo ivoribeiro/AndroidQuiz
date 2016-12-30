@@ -6,12 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import pt.ipp.estg.cmu.db.dbUtil;
 import pt.ipp.estg.cmu.models.Categoria;
-import pt.ipp.estg.cmu.models.Nivel;
-import pt.ipp.estg.cmu.models.Pergunta;
 
 public class CategoriaRepo extends Repo<Categoria> implements RepositoryInterface<Categoria> {
 

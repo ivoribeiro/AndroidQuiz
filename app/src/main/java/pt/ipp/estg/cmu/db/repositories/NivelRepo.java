@@ -9,10 +9,8 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.Random;
 
-import pt.ipp.estg.cmu.db.dbUtil;
 import pt.ipp.estg.cmu.estatisticas.EstatisticasNivel;
 import pt.ipp.estg.cmu.models.Nivel;
-import pt.ipp.estg.cmu.models.Pergunta;
 
 public class NivelRepo extends Repo<Nivel> implements RepositoryInterface<Nivel> {
 

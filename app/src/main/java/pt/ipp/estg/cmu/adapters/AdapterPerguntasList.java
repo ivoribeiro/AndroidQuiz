@@ -3,7 +3,6 @@ package pt.ipp.estg.cmu.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,19 +16,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.interfaces.AdminPerguntaLayoutListener;
 import pt.ipp.estg.cmu.models.Pergunta;
-import pt.ipp.estg.cmu.ui.AdminNovaPerguntaFragment;
-import pt.ipp.estg.cmu.util.Util;
 import pt.ipp.estg.cmu.util.UtilUI;
 
 public class AdapterPerguntasList extends RecyclerView.Adapter<AdapterPerguntasList.ViewHolder> {
 
     private Context mContext;
+    private AdminPerguntaLayoutListener mListener;
     private List<Pergunta> mDataSet = new ArrayList<>();
 
-    public AdapterPerguntasList(Context context, ArrayList<Pergunta> perguntas) {
-        this.mContext = context;
-        this.mDataSet = perguntas;
+    public AdapterPerguntasList(Context context, AdminPerguntaLayoutListener listener, ArrayList<Pergunta> perguntas) {
+        mContext = context;
+        mListener = listener;
+        mDataSet = perguntas;
     }
 
     @Override
@@ -55,12 +55,7 @@ public class AdapterPerguntasList extends RecyclerView.Adapter<AdapterPerguntasL
         holder.mCardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                ((AppCompatActivity) mContext)
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame_layout, AdminNovaPerguntaFragment.newInstance(null, mDataSet.get(position)))
-                        .addToBackStack(Util.STACK_ADMIN)
-                        .commit();
+                mListener.openNovaPerguntaFragment(null, mDataSet.get(position));
                 return true;
             }
         });

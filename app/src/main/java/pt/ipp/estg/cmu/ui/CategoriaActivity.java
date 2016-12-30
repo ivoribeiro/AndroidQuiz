@@ -31,19 +31,17 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (null == savedInstanceState) {
-            setTheme(new PreferencesSettings(this).getThemePreference());
-            setContentView(R.layout.activity_categoria);
-            isAdmin = getIntent().getBooleanExtra(Util.ARG_ADMIN, false);
+        setTheme(new PreferencesSettings(this).getThemePreference());
+        setContentView(R.layout.activity_categoria);
+        isAdmin = getIntent().getBooleanExtra(Util.ARG_ADMIN, false);
 
-            if (isAdmin) {
-                mNavigationView.setCheckedItem(R.id.nav_admin);
-                buildDialog();
-            } else {
-                mNavigationView.setCheckedItem(R.id.nav_game);
-                if (null == savedInstanceState) {
-                    startFragmetCategoria();
-                }
+        if (isAdmin) {
+            mNavigationView.setCheckedItem(R.id.nav_admin);
+            buildDialog();
+        } else {
+            mNavigationView.setCheckedItem(R.id.nav_game);
+            if (null == savedInstanceState) {
+                startFragmetCategoria();
             }
         }
     }

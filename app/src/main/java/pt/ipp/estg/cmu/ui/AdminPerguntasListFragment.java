@@ -1,11 +1,11 @@
 package pt.ipp.estg.cmu.ui;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -20,6 +20,7 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterPerguntasList;
 import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.helpers.RecyclerSwipePerguntaTouchHelper;
+import pt.ipp.estg.cmu.interfaces.AdminPerguntaLayoutListener;
 import pt.ipp.estg.cmu.models.Nivel;
 import pt.ipp.estg.cmu.models.Pergunta;
 import pt.ipp.estg.cmu.util.Util;
@@ -27,6 +28,7 @@ import pt.ipp.estg.cmu.util.Util;
 
 public class AdminPerguntasListFragment extends Fragment implements View.OnClickListener {
 
+    private AdminPerguntaLayoutListener mListener;
     private Nivel mNivel;
     private RecyclerView mRecycler;
     private PerguntaRepo mRepository;
@@ -81,20 +83,27 @@ public class AdminPerguntasListFragment extends Fragment implements View.OnClick
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.fab) {
-            ((AppCompatActivity) getContext())
-                    .getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.frame_layout, AdminNovaPerguntaFragment.newInstance(mNivel, null))
-                    .addToBackStack(Util.STACK_ADMIN)
-                    .commit();
+            mListener.openNovaPerguntaFragment(mNivel, null);
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mListener = (AdminPerguntaLayoutListener) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     private void populateRecycler() {
         mPerguntas = mRepository.getAllByNivel(mNivel.getId());
         if (mPerguntas.size() > 0) {
             mEmptyLayout.setVisibility(View.GONE);
-            mAdapter = new AdapterPerguntasList(getContext(), mPerguntas);
+            mAdapter = new AdapterPerguntasList(getContext(), mListener, mPerguntas);
             mRecycler.setAdapter(mAdapter);
 
             //swipe to remove

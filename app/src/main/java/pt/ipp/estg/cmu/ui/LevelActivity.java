@@ -38,7 +38,6 @@ public class LevelActivity extends AppCompatActivity {
         mCategoria = getIntent().getParcelableExtra(Util.ARG_CATEGORIE);
         isAdmin = getIntent().getBooleanExtra(Util.ARG_ADMIN, false);
 
-
         if (null == savedInstanceState) {
             getSupportFragmentManager()
                     .beginTransaction()

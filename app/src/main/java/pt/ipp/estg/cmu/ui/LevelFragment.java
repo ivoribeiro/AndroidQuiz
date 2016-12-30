@@ -29,7 +29,7 @@ import pt.ipp.estg.cmu.util.Util;
 public class LevelFragment extends Fragment implements View.OnClickListener {
 
     //layout
-    private int NUM_COLUMNS = 1;
+    private int NUM_GRID;
     private RecyclerView mRecyclerView;
     private boolean isAdmin;
     private FloatingActionButton mFab;
@@ -62,6 +62,7 @@ public class LevelFragment extends Fragment implements View.OnClickListener {
             isAdmin = getArguments().getBoolean(Util.ARG_ADMIN);
         }
         mRepository = new NivelRepo(getContext());
+        NUM_GRID = getContext().getResources().getInteger(R.integer.nivel_number_grid);
     }
 
     @Override
@@ -70,7 +71,7 @@ public class LevelFragment extends Fragment implements View.OnClickListener {
 
         mEmptyLayout = (LinearLayout) view.findViewById(R.id.inclued_layout);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLUMNS));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_GRID));
         mFab = (FloatingActionButton) view.findViewById(R.id.fab);
 
         if (isAdmin) {

@@ -39,7 +39,7 @@
     <dimen name="icon_size">30dp</dimen>
     <dimen name="adapter_level_layout_padding">12dp</dimen>
     <dimen name="adapter_level_image_size">130dp</dimen>
-
+    <integer name="nivel_number_grid">1</integer>
 
     <!-- Adapter Categoria Grid -->
     <dimen name="categoria_image_size">100dp</dimen>
