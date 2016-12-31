@@ -132,7 +132,7 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
 
             case R.id.intro_btn_finish:
                 if (!isEditTextPinNull) {
-                    finish();
+                    //finish();
                     PreferencesSetup userPreference = new PreferencesSetup(getApplicationContext());//guardar nos preferences que o setup foi concluido
                     userPreference.saveFlagSetupPreference(true);
                     callCreatePlayer();
@@ -171,7 +171,7 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
                 mViewPager.setBackgroundColor(color4);
                 break;
         }
-
+//TODO @ivo to @NAVEGA ele entra aqui alguma vez ?
         if (page == 4 && !avatarPageIsFinished()) {
             mViewPager.setCurrentItem(3, true);
         } else {
@@ -228,11 +228,10 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
     }
 
     private void callCreatePlayer() {
-        new Request(RequestTypeEnum.GET, this, JsonBuilder.BUILD_PLAYER(pickedNickName, pickedAvatar + "")) {
+        new Request(RequestTypeEnum.POST, this, JsonBuilder.BUILD_PLAYER(pickedNickName, pickedAvatar + "")) {
             @Override
             public void onPostExecute(JSONObject data) {
                 super.onPostExecute(data);
-                System.out.println(data.toString());
                 startAppActivity();
             }
         }.execute(Util.SERVER_CREATE_PLAYER);

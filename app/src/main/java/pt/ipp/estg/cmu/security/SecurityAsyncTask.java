@@ -43,7 +43,7 @@ public class SecurityAsyncTask extends AsyncTask<String, Void, String> {
 
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        System.out.println("SecurityAsyncTask -----> " + result);
+        //System.out.println("SecurityAsyncTask -----> " + result);
     }
 
 }

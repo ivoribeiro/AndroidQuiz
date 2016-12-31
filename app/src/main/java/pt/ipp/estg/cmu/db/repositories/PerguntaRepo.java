@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.Random;
 
-import pt.ipp.estg.cmu.db.DbUtil;
+import pt.ipp.estg.cmu.helpers.DbHelper;
 import pt.ipp.estg.cmu.models.Pergunta;
 
 public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<Pergunta> {
@@ -207,7 +207,7 @@ public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<
     }
 
     public void deleteByNivel(int id) {
-        String query = DbUtil.deleteByFieldQueryString(this.getTable(), "nivel", "" + id);
+        String query = DbHelper.deleteByFieldQueryString(this.getTable(), "nivel", "" + id);
         SQLiteDatabase db = super.getWritableDatabase();
         db.execSQL(query);
         db.close();

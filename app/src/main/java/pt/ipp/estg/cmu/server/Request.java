@@ -78,12 +78,16 @@ public class Request extends AsyncTask<String, Boolean, JSONObject> {
                     writer.write(mStringBuild.getBytes("UTF-8"));
                     writer.flush();
                     writer.close();
+                    InputStream inputStream = new BufferedInputStream(connection.getInputStream());
+                    BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+                    json = read(rd);
+                    jsonObject = new JSONObject(json);
                 }
             }
 
 
             int responseCode = connection.getResponseCode();
-            System.out.println("CODE" + responseCode);
+            //System.out.println("CODE" + responseCode);
 
         } catch (IOException e) {
             System.out.println(e);

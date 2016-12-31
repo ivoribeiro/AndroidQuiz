@@ -1,6 +1,6 @@
-package pt.ipp.estg.cmu.db;
+package pt.ipp.estg.cmu.helpers;
 
-public class DbUtil {
+public class DbHelper {
 
     public static String deleteByFieldQueryString(String table, String field, String value) {
         return "DELETE FROM " + table + " WHERE " + field + "=" + value + ";";
