@@ -20,7 +20,7 @@ import pt.ipp.estg.cmu.util.Util;
 public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
     //widget
-    public static final String WIDGET_ACTION = "pt.ipp.estgf.cmu.MESSAGE";
+    public static final String WIDGET_ACTION = "pt.ipp.estg.cmu.MESSAGE";
     public static final String RAND_QUESTION_TIME = "rand_question_time";
 
     //layout
@@ -44,7 +44,6 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
         mCategoriaRepo = new CategoriaRepo(this);
         EstatisticasJogo estatisticasJogo = new EstatisticasJogo(this);
         mPontos = estatisticasJogo.getPontuacao();
-
 
         mBtStart = (Button) findViewById(R.id.bt_start_game);
         mUserNameTxt = (TextView) findViewById(R.id.user_text);

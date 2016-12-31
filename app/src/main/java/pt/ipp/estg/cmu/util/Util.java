@@ -12,15 +12,20 @@ import android.support.v4.app.ActivityCompat;
 
 public class Util {
 
+    //server strings
+    public static final String SERVER = "http://androidquiz.ddns.net/api/";
+    public static final String SERVER_CREATE_PLAYER = "createPlayer";
+    public static final String SERVER_GET_SCORES = "getScores";
+    public static final String SERVER_UPDATE_PLAYER_SCORE = "updatePlayerScore";
+
+
     //argument strings
     public static final String APP_TAG = "CMUQUIZ";
     public static final String ARG_LEVEL = "LEVEL";
     public static final String ARG_QUESTION = "QUESTION";
     public static final String ARG_CATEGORIE = "CATEGORIE";
     public static final String ARG_ADMIN = "ADMIN";
-
     public static final String ARG_SECTION = "SECTION";
-
 
     //request code ints
     public static final int PERMISSIONS_REQUEST_FINGERPRINT = 0;

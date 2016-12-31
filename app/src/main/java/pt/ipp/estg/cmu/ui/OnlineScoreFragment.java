@@ -11,11 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterOnlineScore;
+import pt.ipp.estg.cmu.enums.RequestTypeEnum;
 import pt.ipp.estg.cmu.models.OnlineScore;
+import pt.ipp.estg.cmu.server.GetScoresServerSource;
+import pt.ipp.estg.cmu.server.Request;
+import pt.ipp.estg.cmu.util.Util;
 
 
 public class OnlineScoreFragment extends Fragment {
@@ -46,6 +52,8 @@ public class OnlineScoreFragment extends Fragment {
         mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mSwipe = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
 
+        callGetScores();
+
         return view;
     }
 
@@ -64,5 +72,16 @@ public class OnlineScoreFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    private void callGetScores() {
+        new Request(RequestTypeEnum.GET, getContext(), null) {
+            @Override
+            public void onPostExecute(JSONObject data) {
+                super.onPostExecute(data);
+                mSwipe.setRefreshing(false);
+                new GetScoresServerSource().execute(data);
+            }
+        }.execute(Util.SERVER_GET_SCORES);
     }
 }

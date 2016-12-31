@@ -14,10 +14,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterViewPager;
+import pt.ipp.estg.cmu.enums.RequestTypeEnum;
 import pt.ipp.estg.cmu.interfaces.AdapterPageSetupCallback;
+import pt.ipp.estg.cmu.server.JsonBuilder;
+import pt.ipp.estg.cmu.server.Request;
 import pt.ipp.estg.cmu.ui.ActivityMain;
+import pt.ipp.estg.cmu.util.Util;
 
 
 public class PageSetupActivity extends AppCompatActivity implements AdapterPageSetupCallback, ViewPager.OnPageChangeListener, View.OnClickListener {
@@ -50,9 +56,9 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
     private boolean isEditTextPinNull;
     private boolean isAvatarPicked;
 
-    //private static EditText mEditTextAvatar;
-    //private static EditText mEditTextPin;
-
+    //server data
+    private int pickedAvatar;
+    private String pickedNickName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,8 +135,7 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
                     finish();
                     PreferencesSetup userPreference = new PreferencesSetup(getApplicationContext());//guardar nos preferences que o setup foi concluido
                     userPreference.saveFlagSetupPreference(true);
-
-                    startActivity(new Intent(PageSetupActivity.this, ActivityMain.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    callCreatePlayer();
                 } else {
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.setup_toast_warning_pin), Toast.LENGTH_SHORT).show();
                 }
@@ -184,6 +189,7 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
     @Override
     public void onAvatarRecyclerItemSelected(int avatar) {
         isAvatarPicked = true;
+        pickedAvatar = avatar;
         mPreferencesSetup.saveFlagAvatarPreference(avatar);
         Toast.makeText(this, getResources().getString(R.string.setup_toast_avatar_sucess), Toast.LENGTH_SHORT).show();
     }
@@ -195,6 +201,7 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
         } else {
             isEditTextNickNameNull = false;
         }
+        pickedNickName = input;
     }
 
     @Override
@@ -218,5 +225,20 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
             return false;
         }
         return true;
+    }
+
+    private void callCreatePlayer() {
+        new Request(RequestTypeEnum.GET, this, JsonBuilder.BUILD_PLAYER(pickedNickName, pickedAvatar + "")) {
+            @Override
+            public void onPostExecute(JSONObject data) {
+                super.onPostExecute(data);
+                System.out.println(data.toString());
+                startAppActivity();
+            }
+        }.execute(Util.SERVER_CREATE_PLAYER);
+    }
+
+    private void startAppActivity() {
+        startActivity(new Intent(PageSetupActivity.this, ActivityMain.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
     }
 }
