@@ -1,15 +1,16 @@
 package pt.ipp.estg.cmu.security;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import pt.ipp.estg.cmu.setup.PreferencesSetup;
+import pt.ipp.estg.cmu.R;
 
 public class SecurityAsyncTask extends AsyncTask<String, Void, String> {
 
     private boolean isEncrypted;//false = encripta o texto recebido por parametro, true desencripta o texto guardado
     private Context mContext;
-
+    private ProgressDialog mProgrees;
     private SecurityManager securityManager;
 
     public SecurityAsyncTask(Context context, String alias, boolean isEncrypted) {
@@ -22,6 +23,9 @@ public class SecurityAsyncTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        mProgrees = new ProgressDialog(mContext);
+        mProgrees.setMessage(mContext.getResources().getString(R.string.loading));
+        mProgrees.show();
     }
 
     @Override
@@ -43,6 +47,7 @@ public class SecurityAsyncTask extends AsyncTask<String, Void, String> {
 
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
+        mProgrees.dismiss();
         //System.out.println("SecurityAsyncTask -----> " + result);
     }
 

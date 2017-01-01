@@ -7,9 +7,7 @@ import android.widget.EditText;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.interfaces.AdapterPageSetupCallback;
-import pt.ipp.estg.cmu.security.SecurityAsyncTask;
 import pt.ipp.estg.cmu.setup.PreferencesSetup;
-import pt.ipp.estg.cmu.util.Util;
 
 /**
  * Created by Navega on 12/21/2016.
@@ -49,7 +47,6 @@ public class TextWatcherHelper implements TextWatcher {
 
             case R.id.edit_pin://edittext do pin no setup
                 mListener.onEditTextPinUpdate(editable.toString());
-                new SecurityAsyncTask(mContext, Util.APP_TAG, false).execute(editable.toString());
                 break;
         }
     }

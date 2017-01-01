@@ -20,6 +20,7 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterViewPager;
 import pt.ipp.estg.cmu.enums.RequestTypeEnum;
 import pt.ipp.estg.cmu.interfaces.AdapterPageSetupCallback;
+import pt.ipp.estg.cmu.security.SecurityAsyncTask;
 import pt.ipp.estg.cmu.server.JsonBuilder;
 import pt.ipp.estg.cmu.server.Request;
 import pt.ipp.estg.cmu.ui.ActivityMain;
@@ -53,6 +54,7 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
     private boolean isEditTextNickNameNull;
     private boolean isEditTextPinNull;
     private boolean isAvatarPicked;
+    private String chosenPin;
 
     //server data
     private int pickedAvatar;
@@ -130,8 +132,13 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
 
             case R.id.intro_btn_finish:
                 if (!isEditTextPinNull) {
+                    //encriptar pin
+                    new SecurityAsyncTask(this, Util.APP_TAG, false).execute(chosenPin);
+
+                    //guardar que setup foi concluido
                     PreferencesSetup userPreference = new PreferencesSetup(getApplicationContext());//guardar nos preferences que o setup foi concluido
                     userPreference.saveFlagSetupPreference(true);
+
                     finish();
                     startActivity(new Intent(PageSetupActivity.this, ActivityMain.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
 
@@ -210,6 +217,7 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
         } else {
             isEditTextPinNull = false;
         }
+        chosenPin = input;
     }
 
     private void updateIndicators(int position) {

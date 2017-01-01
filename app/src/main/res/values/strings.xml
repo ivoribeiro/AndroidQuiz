@@ -142,6 +142,7 @@
     <string name="setup_fingerprint_sucesso">Autenticação com sucesso</string>
     <string name="setup_fingerprint_error">Autenticação falhada</string>
 
+    <string name="loading">A carregar</string>
 
     <!-- Estatisticas -->
     <string name="pontuacao_estatisticas_jogo_label">Pontuação do Jogo</string>

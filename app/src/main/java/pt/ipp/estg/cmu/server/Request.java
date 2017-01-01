@@ -17,6 +17,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.enums.RequestTypeEnum;
 import pt.ipp.estg.cmu.util.Util;
 
@@ -41,7 +42,7 @@ public class Request extends AsyncTask<String, Boolean, JSONObject> {
     protected void onPreExecute() {
         super.onPreExecute();
         mProgrees = new ProgressDialog(mContext);
-        mProgrees.setMessage("Loading");
+        mProgrees.setMessage(mContext.getResources().getString(R.string.loading));
         mProgrees.show();
     }
 
