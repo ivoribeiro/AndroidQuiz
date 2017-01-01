@@ -1,36 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/online_score_item_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/online_list_margin"
     android:orientation="horizontal"
-    android:padding="@dimen/adapter_level_layout_padding">
-
+    android:padding="@dimen/online_layout_padding">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/text_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/user_avatar"
+        android:orientation="vertical"
+        android:padding="@dimen/online_layout_padding">
 
         <TextView
             android:id="@+id/user_name"
             style="@style/PrimarySmallTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/adapter_level_layout_padding" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/user_score"
             style="@style/SecondarySmallTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/adapter_level_layout_padding" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/user_avatar"
-        android:layout_width="@dimen/avatar_size"
-        android:layout_height="@dimen/avatar_size" />
+        android:layout_width="@dimen/online_image_size"
+        android:layout_height="@dimen/avatar_size"
+        android:layout_alignParentEnd="true"
+        android:padding="@dimen/online_layout_padding" />
 
 
-</LinearLayout>
+</RelativeLayout>

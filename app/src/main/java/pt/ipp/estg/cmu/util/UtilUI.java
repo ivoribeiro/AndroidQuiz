@@ -56,4 +56,36 @@ public class UtilUI {
         v.startAnimation(animation);
     }
 
+    public static void setAvatar(Context context, View view, int avatar) {
+        switch (avatar) {
+            case 0:
+                view.setBackground(context.getDrawable(R.drawable.img_avatar_0));
+                break;
+            case 1:
+                view.setBackground(context.getDrawable(R.drawable.img_avatar_1));
+                break;
+            case 2:
+                view.setBackground(context.getDrawable(R.drawable.img_avatar_2));
+                break;
+            case 3:
+                view.setBackground(context.getDrawable(R.drawable.img_avatar_3));
+                break;
+            case 4:
+                view.setBackground(context.getDrawable(R.drawable.img_avatar_4));
+                break;
+            case 5:
+                view.setBackground(context.getDrawable(R.drawable.img_avatar_5));
+                break;
+            case 6:
+                view.setBackground(context.getDrawable(R.drawable.img_avatar_6));
+                break;
+            case 7:
+                view.setBackground(context.getDrawable(R.drawable.img_avatar_7));
+                break;
+            case 8:
+                view.setBackground(context.getDrawable(R.drawable.img_avatar_8));
+                break;
+        }
+    }
+
 }

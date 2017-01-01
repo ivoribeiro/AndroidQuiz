@@ -47,6 +47,12 @@
     <dimen name="categoria_card_margin">8dp</dimen>
     <integer name="categoria_number_grid">2</integer>
 
+    <!-- Adapter Online Score -->
+    <dimen name="online_image_size">70dp</dimen>
+    <dimen name="online_layout_padding">8dp</dimen>
+    <dimen name="online_list_margin">16dp</dimen>
+    <integer name="online_number_grid">1</integer>
+
 
     <!-- ActivityQuestion -->
     <dimen name="app_bar_layout_margin_left">72dp</dimen>

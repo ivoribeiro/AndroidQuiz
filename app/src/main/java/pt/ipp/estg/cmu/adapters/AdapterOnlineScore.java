@@ -6,13 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.models.OnlineScore;
+import pt.ipp.estg.cmu.util.UtilUI;
 
 /**
  * Created by Navega on 12/30/2016.
@@ -39,8 +40,11 @@ public class AdapterOnlineScore extends RecyclerView.Adapter<AdapterOnlineScore.
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
+        holder.mUserName.setText(mDataSet.get(position).getUsername());
+        holder.mUserScore.setText(mDataSet.get(position).getScore() + " " + mContext.getResources().getString(R.string.pontos_ganhos));
+        UtilUI.setAvatar(mContext, holder.mUserAvatar, mDataSet.get(position).getAvatar());
 
-        //UtilUI.setViewAnimation(mContext, holder.mCardView, R.anim.list_bottom_top, 500);
+        UtilUI.setViewAnimation(mContext, holder.mLayout, R.anim.list_bottom_top, 500);
     }
 
     @Override
@@ -50,14 +54,14 @@ public class AdapterOnlineScore extends RecyclerView.Adapter<AdapterOnlineScore.
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout mLayout;
+        RelativeLayout mLayout;
         ImageView mUserAvatar;
         TextView mUserName;
         TextView mUserScore;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mLayout = (LinearLayout) itemView.findViewById(R.id.online_score_item_layout);
+            mLayout = (RelativeLayout) itemView.findViewById(R.id.online_score_item_layout);
             mUserAvatar = (ImageView) itemView.findViewById(R.id.user_avatar);
             mUserName = (TextView) itemView.findViewById(R.id.user_name);
             mUserScore = (TextView) itemView.findViewById(R.id.user_score);

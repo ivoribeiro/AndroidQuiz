@@ -2,10 +2,8 @@ package pt.ipp.estg.cmu.ui;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,18 +11,15 @@ import android.view.ViewGroup;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterOnlineScore;
 import pt.ipp.estg.cmu.enums.RequestTypeEnum;
-import pt.ipp.estg.cmu.models.OnlineScore;
 import pt.ipp.estg.cmu.server.GetScoresServerSource;
 import pt.ipp.estg.cmu.server.Request;
 import pt.ipp.estg.cmu.util.Util;
 
 
-public class OnlineScoreFragment extends Fragment {
+public class OnlineScoreFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private RecyclerView mRecycler;
     private AdapterOnlineScore mAdapter;
@@ -49,19 +44,11 @@ public class OnlineScoreFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_online_score, container, false);
 
         mRecycler = (RecyclerView) view.findViewById(R.id.recycler_view);
-        mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mSwipe = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
+        mSwipe.setOnRefreshListener(this);
 
         callGetScores();
-
         return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mAdapter = new AdapterOnlineScore(getContext(), new ArrayList<OnlineScore>());
-        mRecycler.setAdapter(mAdapter);
     }
 
     @Override
@@ -74,14 +61,21 @@ public class OnlineScoreFragment extends Fragment {
         super.onDetach();
     }
 
+    @Override
+    public void onRefresh() {
+        callGetScores();
+    }
+
     private void callGetScores() {
         new Request(RequestTypeEnum.GET, getContext(), null) {
             @Override
             public void onPostExecute(JSONObject data) {
                 super.onPostExecute(data);
                 mSwipe.setRefreshing(false);
-                new GetScoresServerSource().execute(data);
+                new GetScoresServerSource(getContext(), mSwipe, mRecycler).execute(data);
             }
         }.execute(Util.SERVER_GET_SCORES);
     }
+
+
 }

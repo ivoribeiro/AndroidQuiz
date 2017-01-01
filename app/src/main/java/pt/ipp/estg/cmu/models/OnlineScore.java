@@ -42,4 +42,13 @@ public class OnlineScore {
     public void setAvatar(int avatar) {
         this.avatar = avatar;
     }
+
+    @Override
+    public String toString() {
+        return "OnlineScore{" +
+                "username='" + username + '\'' +
+                ", score='" + score + '\'' +
+                ", avatar=" + avatar +
+                '}';
+    }
 }

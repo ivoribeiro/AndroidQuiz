@@ -8,11 +8,7 @@ import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
-import pt.ipp.estg.cmu.db.repositories.NivelRepo;
-import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.estatisticas.EstatisticasJogo;
-import pt.ipp.estg.cmu.models.Pergunta;
-import pt.ipp.estg.cmu.services.RandQuestionService;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
 
@@ -56,12 +52,11 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
         mBtStart.setOnClickListener(this);
 
-
-        Intent mIntent = new Intent(this, RandQuestionService.class);
+/*        Intent mIntent = new Intent(this, RandQuestionService.class);
         mIntent.putExtra(RAND_QUESTION_TIME, 1);
         if (estatisticasJogo.getnPerguntasPorResponder() > 0) {
             startService(mIntent);
-        }
+        }*/
     }
 
     @Override

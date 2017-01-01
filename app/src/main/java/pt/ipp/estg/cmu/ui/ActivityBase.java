@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
@@ -22,6 +21,7 @@ import pt.ipp.estg.cmu.settings.SettingsActivity;
 import pt.ipp.estg.cmu.setup.PageSetupActivity;
 import pt.ipp.estg.cmu.setup.PreferencesSetup;
 import pt.ipp.estg.cmu.util.Util;
+import pt.ipp.estg.cmu.util.UtilUI;
 
 public class ActivityBase extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -34,12 +34,12 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
     private Toolbar mMainToolbar;
     protected Toolbar mToolbar;
     private TextView mUserText;
-    private ImageView mUserAvatar;
-    private LinearLayout mHeaderLayout;
+    private ImageView mUserAvatarView;
 
     //data
     protected PreferencesSetup mPreferencesSetup;
     protected String mUserName;
+    protected int mUserAvatar;
 
 
     @Override
@@ -72,15 +72,13 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, actualtoolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.setDrawerListener(mDrawerToggle);
-        //mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
         mDrawerToggle.syncState();
         mNavigationView.setNavigationItemSelectedListener(this);
 
         //header
         View header = mNavigationView.getHeaderView(0);
         mUserText = (TextView) header.findViewById(R.id.username);
-        mUserAvatar = (ImageView) header.findViewById(R.id.avatar);
-        mHeaderLayout = (LinearLayout) header.findViewById(R.id.header_layout);
+        mUserAvatarView = (ImageView) header.findViewById(R.id.avatar);
 
         //data preferences
         mPreferencesSetup = new PreferencesSetup(this);
@@ -88,7 +86,8 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(ActivityBase.this, PageSetupActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
         } else {
             mUserName = mPreferencesSetup.getFlagNickNamePreference();
-            setAvatar(mPreferencesSetup.getFlagAvatarPreference());
+            mUserAvatar = mPreferencesSetup.getFlagAvatarPreference();
+            UtilUI.setAvatar(this, mUserAvatarView, mUserAvatar);
             mUserText.setText(mUserName);
         }
     }
@@ -156,35 +155,5 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void setAvatar(int avatar) {
-        switch (avatar) {
-            case 0:
-                mUserAvatar.setBackground(getDrawable(R.drawable.img_avatar_0));
-                break;
-            case 1:
-                mUserAvatar.setBackground(getDrawable(R.drawable.img_avatar_1));
-                break;
-            case 2:
-                mUserAvatar.setBackground(getDrawable(R.drawable.img_avatar_2));
-                break;
-            case 3:
-                mUserAvatar.setBackground(getDrawable(R.drawable.img_avatar_3));
-                break;
-            case 4:
-                mUserAvatar.setBackground(getDrawable(R.drawable.img_avatar_4));
-                break;
-            case 5:
-                mUserAvatar.setBackground(getDrawable(R.drawable.img_avatar_5));
-                break;
-            case 6:
-                mUserAvatar.setBackground(getDrawable(R.drawable.img_avatar_6));
-                break;
-            case 7:
-                mUserAvatar.setBackground(getDrawable(R.drawable.img_avatar_7));
-                break;
-            case 8:
-                mUserAvatar.setBackground(getDrawable(R.drawable.img_avatar_8));
-                break;
-        }
-    }
+
 }
