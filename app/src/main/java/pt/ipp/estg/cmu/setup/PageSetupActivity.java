@@ -28,8 +28,6 @@ import pt.ipp.estg.cmu.util.Util;
 
 public class PageSetupActivity extends AppCompatActivity implements AdapterPageSetupCallback, ViewPager.OnPageChangeListener, View.OnClickListener {
 
-    private static int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
-
     //layout
     private AdapterViewPager mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -45,7 +43,7 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
     private ImageView zero, one, two, three, four;
     private ImageView[] indicators;
 
-    private int lastLeftValue = 0, page = 0;//  to track page position
+    private int page = 0;//  to track page position
     private CoordinatorLayout mCoordinator;
 
     private PreferencesSetup mPreferencesSetup;
@@ -132,10 +130,11 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
 
             case R.id.intro_btn_finish:
                 if (!isEditTextPinNull) {
-                    //finish();
                     PreferencesSetup userPreference = new PreferencesSetup(getApplicationContext());//guardar nos preferences que o setup foi concluido
                     userPreference.saveFlagSetupPreference(true);
-                    callCreatePlayer();
+                    finish();
+                    startActivity(new Intent(PageSetupActivity.this, ActivityMain.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+
                 } else {
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.setup_toast_warning_pin), Toast.LENGTH_SHORT).show();
                 }
@@ -145,7 +144,6 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        //color update
         int colorUpdate = (Integer) evaluator.evaluate(positionOffset, colorList[position], colorList[position == 4 ? position : position + 1]);
         mViewPager.setBackgroundColor(colorUpdate);
     }
@@ -168,10 +166,11 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
                 mViewPager.setBackgroundColor(color3);
                 break;
             case 4:
+                callCreatePlayer();
                 mViewPager.setBackgroundColor(color4);
                 break;
         }
-//TODO @ivo to @NAVEGA ele entra aqui alguma vez ?
+
         if (page == 4 && !avatarPageIsFinished()) {
             mViewPager.setCurrentItem(3, true);
         } else {
@@ -232,12 +231,8 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
             @Override
             public void onPostExecute(JSONObject data) {
                 super.onPostExecute(data);
-                startAppActivity();
             }
         }.execute(Util.SERVER_CREATE_PLAYER);
     }
 
-    private void startAppActivity() {
-        startActivity(new Intent(PageSetupActivity.this, ActivityMain.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-    }
 }
