@@ -132,11 +132,10 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
 
             case R.id.intro_btn_finish:
                 if (!isEditTextPinNull) {
-                    finish();
+                    //finish();
                     PreferencesSetup userPreference = new PreferencesSetup(getApplicationContext());//guardar nos preferences que o setup foi concluido
                     userPreference.saveFlagSetupPreference(true);
-                    startActivity(new Intent(PageSetupActivity.this, ActivityMain.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-
+                    callCreatePlayer();
                 } else {
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.setup_toast_warning_pin), Toast.LENGTH_SHORT).show();
                 }
@@ -169,11 +168,10 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
                 mViewPager.setBackgroundColor(color3);
                 break;
             case 4:
-                callApiCreatePlayer();
                 mViewPager.setBackgroundColor(color4);
                 break;
         }
-
+//TODO @ivo to @NAVEGA ele entra aqui alguma vez ?
         if (page == 4 && !avatarPageIsFinished()) {
             mViewPager.setCurrentItem(3, true);
         } else {
@@ -215,18 +213,6 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
         }
     }
 
-    private void callApiCreatePlayer() {
-        String json = JsonBuilder.BUILD_PLAYER("testename", 0 + "");
-        System.out.println("JSON" + json);
-        new Request(RequestTypeEnum.GET, this, json) {
-            @Override
-            public void onPostExecute(JSONObject data) {
-                super.onPostExecute(data);
-                //System.out.println(data.toString());
-            }
-        }.execute(Util.SERVER_CREATE_PLAYER);
-    }
-
     private void updateIndicators(int position) {
         for (int i = 0; i < indicators.length; i++) {
             indicators[i].setBackgroundResource(i == position ? R.drawable.shp_indicator_selected : R.drawable.shp_indicator_unselected);
@@ -239,5 +225,19 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
             return false;
         }
         return true;
+    }
+
+    private void callCreatePlayer() {
+        new Request(RequestTypeEnum.POST, this, JsonBuilder.BUILD_PLAYER(pickedNickName, pickedAvatar + "")) {
+            @Override
+            public void onPostExecute(JSONObject data) {
+                super.onPostExecute(data);
+                startAppActivity();
+            }
+        }.execute(Util.SERVER_CREATE_PLAYER);
+    }
+
+    private void startAppActivity() {
+        startActivity(new Intent(PageSetupActivity.this, ActivityMain.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
     }
 }

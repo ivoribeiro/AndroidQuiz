@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.db.DbHandler;
-import pt.ipp.estg.cmu.db.DbUtil;
+import pt.ipp.estg.cmu.helpers.DbHelper;
 
 public abstract class Repo<T> extends DbHandler {
 
@@ -31,7 +31,7 @@ public abstract class Repo<T> extends DbHandler {
     }
 
     public ArrayList<T> getAllByFields(String[] fields, String[] values) {
-        return this.query(null, DbUtil.whereClause(fields), values, null);
+        return this.query(null, DbHelper.whereClause(fields), values, null);
     }
 
     public ArrayList<T> getAllByField(String field, String value) {
@@ -45,7 +45,7 @@ public abstract class Repo<T> extends DbHandler {
     }
 
     public void deleteById(int id) {
-        String query = DbUtil.deleteByFieldQueryString(this.getTable(), "id", "" + id);
+        String query = DbHelper.deleteByFieldQueryString(this.getTable(), "id", "" + id);
         SQLiteDatabase db = super.getWritableDatabase();
         db.execSQL(query);
         db.close();
