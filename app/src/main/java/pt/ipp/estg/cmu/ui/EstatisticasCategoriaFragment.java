@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterEstatisticasCategoria;
-import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
-import pt.ipp.estg.cmu.estatisticas.EstatisticasCategoria;
-import pt.ipp.estg.cmu.models.Categoria;
+import pt.ipp.estg.dblib.repositories.CategoriaRepo;
+import pt.ipp.estg.dblib.estatisticas.EstatisticasCategoria;
+import pt.ipp.estg.dblib.models.Categoria;
 
 public class EstatisticasCategoriaFragment extends Fragment {
 

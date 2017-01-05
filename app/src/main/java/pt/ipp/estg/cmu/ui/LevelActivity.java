@@ -1,13 +1,12 @@
 package pt.ipp.estg.cmu.ui;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.models.Categoria;
+import pt.ipp.estg.dblib.models.Categoria;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
 

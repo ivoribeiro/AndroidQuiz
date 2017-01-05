@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.adapters.AdapterOnlineScore;
-import pt.ipp.estg.cmu.models.OnlineScore;
+import pt.ipp.estg.dblib.models.OnlineScore;
 
 /**
  * Created by Navega on 12/31/2016.

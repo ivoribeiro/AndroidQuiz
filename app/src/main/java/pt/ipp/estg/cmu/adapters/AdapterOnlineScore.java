@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.models.OnlineScore;
+import pt.ipp.estg.dblib.models.OnlineScore;
 import pt.ipp.estg.cmu.util.UtilUI;
 
 /**

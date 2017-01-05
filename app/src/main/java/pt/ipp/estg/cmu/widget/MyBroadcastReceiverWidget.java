@@ -10,10 +10,8 @@ import android.graphics.BitmapFactory;
 import android.widget.RemoteViews;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.models.Pergunta;
+import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.services.RandQuestionService;
-
-import android.widget.Button;
 
 public class MyBroadcastReceiverWidget extends AppWidgetProvider {
 

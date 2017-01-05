@@ -7,8 +7,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
-import pt.ipp.estg.cmu.estatisticas.EstatisticasJogo;
+import pt.ipp.estg.dblib.repositories.CategoriaRepo;
+import pt.ipp.estg.dblib.estatisticas.EstatisticasJogo;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
 

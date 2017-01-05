@@ -18,11 +18,11 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterPerguntasList;
-import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
+import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.helpers.RecyclerSwipePerguntaTouchHelper;
 import pt.ipp.estg.cmu.interfaces.AdminPerguntaLayoutListener;
-import pt.ipp.estg.cmu.models.Nivel;
-import pt.ipp.estg.cmu.models.Pergunta;
+import pt.ipp.estg.dblib.models.Nivel;
+import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.util.Util;
 
 

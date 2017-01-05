@@ -17,7 +17,7 @@ import java.util.List;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.interfaces.AdminPerguntaLayoutListener;
-import pt.ipp.estg.cmu.models.Pergunta;
+import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.util.UtilUI;
 
 public class AdapterPerguntasList extends RecyclerView.Adapter<AdapterPerguntasList.ViewHolder> {

@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterLevelList;
-import pt.ipp.estg.cmu.db.repositories.NivelRepo;
-import pt.ipp.estg.cmu.db.repositories.RepositoryInterface;
-import pt.ipp.estg.cmu.models.Nivel;
+import pt.ipp.estg.dblib.repositories.NivelRepo;
+import pt.ipp.estg.dblib.repositories.RepositoryInterface;
+import pt.ipp.estg.dblib.models.Nivel;
 
 public class RecyclerSwipeNivelTouchHelper extends ItemTouchHelper.SimpleCallback {
 

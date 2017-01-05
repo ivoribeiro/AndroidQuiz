@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.db.repositories.CategoriaRepo;
-import pt.ipp.estg.cmu.models.Categoria;
+import pt.ipp.estg.dblib.repositories.CategoriaRepo;
+import pt.ipp.estg.dblib.models.Categoria;
 import pt.ipp.estg.cmu.ui.LevelActivity;
 import pt.ipp.estg.cmu.util.Util;
 import pt.ipp.estg.cmu.util.UtilUI;

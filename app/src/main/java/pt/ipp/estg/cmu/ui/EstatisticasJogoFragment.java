@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.estatisticas.EstatisticasJogo;
+import pt.ipp.estg.dblib.estatisticas.EstatisticasJogo;
 
 /**
  * A simple {@link Fragment} subclass.

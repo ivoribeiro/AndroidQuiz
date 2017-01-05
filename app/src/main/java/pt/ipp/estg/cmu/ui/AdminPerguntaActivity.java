@@ -9,8 +9,8 @@ import android.view.View;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.interfaces.AdminPerguntaAdapterChangeListener;
 import pt.ipp.estg.cmu.interfaces.AdminPerguntaLayoutListener;
-import pt.ipp.estg.cmu.models.Nivel;
-import pt.ipp.estg.cmu.models.Pergunta;
+import pt.ipp.estg.dblib.models.Nivel;
+import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
 

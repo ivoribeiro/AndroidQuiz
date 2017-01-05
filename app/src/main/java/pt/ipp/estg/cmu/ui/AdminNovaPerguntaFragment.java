@@ -35,11 +35,11 @@ import java.io.File;
 import java.sql.Timestamp;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.db.repositories.NivelRepo;
-import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
+import pt.ipp.estg.dblib.repositories.NivelRepo;
+import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.interfaces.AdminPerguntaAdapterChangeListener;
-import pt.ipp.estg.cmu.models.Nivel;
-import pt.ipp.estg.cmu.models.Pergunta;
+import pt.ipp.estg.dblib.models.Nivel;
+import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.tasks.DownloadImage;
 import pt.ipp.estg.cmu.util.FileOperations;
 import pt.ipp.estg.cmu.util.StringsOperations;

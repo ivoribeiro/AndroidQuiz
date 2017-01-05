@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterPerguntasList;
-import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
-import pt.ipp.estg.cmu.db.repositories.RepositoryInterface;
-import pt.ipp.estg.cmu.models.Pergunta;
+import pt.ipp.estg.cmu.util.FileOperations;
+import pt.ipp.estg.dblib.repositories.PerguntaRepo;
+import pt.ipp.estg.dblib.models.Pergunta;
 
 
 public class RecyclerSwipePerguntaTouchHelper extends ItemTouchHelper.SimpleCallback {
@@ -20,7 +20,7 @@ public class RecyclerSwipePerguntaTouchHelper extends ItemTouchHelper.SimpleCall
     private ArrayList<Pergunta> mPerguntas;
     private RecyclerView mRecycler;
     private Context mContext;
-    private RepositoryInterface<Pergunta> mRepository;
+    private PerguntaRepo mRepository;
 
     private AdapterPerguntasList mAdapter;
 
@@ -79,6 +79,7 @@ mPerguntas
         });*/
                 snackbar.show();
                 mRepository.deleteById(pergunta.getId());
+                FileOperations.delete(pergunta.getImagem());
                 mPerguntas.remove(position);
                 mRecycler.removeViewAt(position);
                 mAdapter.notifyItemRemoved(position);

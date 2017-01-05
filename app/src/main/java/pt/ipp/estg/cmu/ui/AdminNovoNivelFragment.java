@@ -14,9 +14,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.db.repositories.NivelRepo;
-import pt.ipp.estg.cmu.models.Categoria;
-import pt.ipp.estg.cmu.models.Nivel;
+import pt.ipp.estg.dblib.repositories.NivelRepo;
+import pt.ipp.estg.dblib.models.Categoria;
+import pt.ipp.estg.dblib.models.Nivel;
 import pt.ipp.estg.cmu.util.Util;
 
 

@@ -1,11 +1,8 @@
 package pt.ipp.estg.cmu.interfaces;
 
-import pt.ipp.estg.cmu.models.Nivel;
-import pt.ipp.estg.cmu.models.Pergunta;
 
-/**
- * Created by Navega on 12/30/2016.
- */
+import pt.ipp.estg.dblib.models.Nivel;
+import pt.ipp.estg.dblib.models.Pergunta;
 
 public interface AdminPerguntaLayoutListener {
 

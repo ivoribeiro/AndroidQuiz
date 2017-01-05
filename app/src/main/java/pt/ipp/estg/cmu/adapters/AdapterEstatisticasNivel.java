@@ -1,10 +1,6 @@
 package pt.ipp.estg.cmu.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,15 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.estatisticas.EstatisticasNivel;
-import pt.ipp.estg.cmu.models.Pergunta;
-import pt.ipp.estg.cmu.ui.AdminNovaPerguntaFragment;
-import pt.ipp.estg.cmu.util.Util;
+import pt.ipp.estg.dblib.estatisticas.EstatisticasNivel;
 
 public class AdapterEstatisticasNivel extends RecyclerView.Adapter<AdapterEstatisticasNivel.ViewHolder> {
 

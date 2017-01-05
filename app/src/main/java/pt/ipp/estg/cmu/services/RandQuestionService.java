@@ -5,17 +5,16 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.db.repositories.NivelRepo;
-import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
-import pt.ipp.estg.cmu.models.Nivel;
-import pt.ipp.estg.cmu.models.Pergunta;
+import pt.ipp.estg.dblib.repositories.NivelRepo;
+import pt.ipp.estg.dblib.repositories.PerguntaRepo;
+import pt.ipp.estg.dblib.models.Nivel;
+import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.ui.ActivityMain;
 
 

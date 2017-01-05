@@ -15,13 +15,13 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterViewPager;
-import pt.ipp.estg.cmu.db.repositories.PerguntaRepo;
+import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.enums.SoundEnum;
 import pt.ipp.estg.cmu.helpers.MediaSoundsHelper;
 import pt.ipp.estg.cmu.interfaces.GameInterfaceListener;
-import pt.ipp.estg.cmu.models.Categoria;
-import pt.ipp.estg.cmu.models.Nivel;
-import pt.ipp.estg.cmu.models.Pergunta;
+import pt.ipp.estg.dblib.models.Categoria;
+import pt.ipp.estg.dblib.models.Nivel;
+import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
 

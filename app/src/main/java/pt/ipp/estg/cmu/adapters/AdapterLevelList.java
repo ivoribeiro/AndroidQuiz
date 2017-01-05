@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.estatisticas.EstatisticasNivel;
-import pt.ipp.estg.cmu.models.Categoria;
-import pt.ipp.estg.cmu.models.Nivel;
+import pt.ipp.estg.dblib.estatisticas.EstatisticasNivel;
+import pt.ipp.estg.dblib.models.Categoria;
+import pt.ipp.estg.dblib.models.Nivel;
 import pt.ipp.estg.cmu.ui.AdminNovoNivelFragment;
 import pt.ipp.estg.cmu.ui.AdminPerguntaActivity;
 import pt.ipp.estg.cmu.ui.GameActivity;
