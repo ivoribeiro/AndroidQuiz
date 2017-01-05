@@ -80,8 +80,10 @@ public class FileOperations {
      * @return
      */
     public static boolean delete(String name) {
-        File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + "/CMU/" + name);
-        return file.delete();
+        File file = new File(name);
+        boolean deleted;
+        deleted = file.delete();
+        return deleted;
     }
 
 
