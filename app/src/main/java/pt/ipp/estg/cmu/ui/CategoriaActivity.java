@@ -55,14 +55,13 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void buildDialog() {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
         mDialog = new Dialog(this);
         mDialog.setContentView(R.layout.window_admin_sign_in);
@@ -93,7 +92,7 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
                         super.onPostExecute(result);
 
                         if (editText.getText().toString().equals(result)) {
-                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+                            //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 
                             imageView.setBackground(null);
                             imageView.setImageResource(R.drawable.vt_fingerprint_success);
@@ -134,7 +133,7 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
     @Override
     public void fingerprintAuthResult(boolean result) {
         if (result) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+            //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
             mDialog.dismiss();
             startFragmetCategoria();
         }

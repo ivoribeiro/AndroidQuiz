@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterLevelList;
+import pt.ipp.estg.cmu.helpers.RecyclerOnScrollListenerHelper;
 import pt.ipp.estg.dblib.repositories.NivelRepo;
 import pt.ipp.estg.cmu.helpers.RecyclerSwipeNivelTouchHelper;
 import pt.ipp.estg.dblib.models.Categoria;
@@ -71,8 +73,11 @@ public class LevelFragment extends Fragment implements View.OnClickListener {
 
         mEmptyLayout = (LinearLayout) view.findViewById(R.id.inclued_layout);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_GRID));
+
         mFab = (FloatingActionButton) view.findViewById(R.id.fab);
+
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_GRID));
+        mRecyclerView.addOnScrollListener(new RecyclerOnScrollListenerHelper(mFab));
 
         if (isAdmin) {
             mFab.setOnClickListener(this);
