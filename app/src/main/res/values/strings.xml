@@ -59,6 +59,8 @@
     <string name="tab_title_pergunta">Perguntas</string>
     <string name="tab_title_nivel">Niveis</string>
     <string name="tab_title_categoria">Categorias</string>
+    <string name="admin_toolbar_subtitle">Área Administrador</string>
+
 
     <!--AdapterCategoriaGrid -->
     <string name="snack_bar_categorie_false">Categoria desativada</string>

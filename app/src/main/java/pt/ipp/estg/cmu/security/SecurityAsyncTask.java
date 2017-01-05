@@ -1,5 +1,6 @@
 package pt.ipp.estg.cmu.security;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -12,6 +13,8 @@ public class SecurityAsyncTask extends AsyncTask<String, Void, String> {
     private Context mContext;
     private ProgressDialog mProgrees;
     private SecurityManager securityManager;
+
+
 
     public SecurityAsyncTask(Context context, String alias, boolean isEncrypted) {
         this.isEncrypted = isEncrypted;

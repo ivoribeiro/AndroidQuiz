@@ -2,6 +2,7 @@ package pt.ipp.estg.cmu.ui;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -34,6 +35,7 @@ public class AdminPerguntaActivity extends AppCompatActivity implements AdminPer
                 onBackPressed();
             }
         });
+        mToolbar.setSubtitle(getResources().getString(R.string.admin_toolbar_subtitle));
 
         mNivel = getIntent().getParcelableExtra(Util.ARG_LEVEL);
 
@@ -60,7 +62,6 @@ public class AdminPerguntaActivity extends AppCompatActivity implements AdminPer
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.frame_layout, AdminNovaPerguntaFragment.newInstance(nivel, pergunta))
-                    .addToBackStack(Util.STACK_ADMIN)
                     .commit();
         }
     }

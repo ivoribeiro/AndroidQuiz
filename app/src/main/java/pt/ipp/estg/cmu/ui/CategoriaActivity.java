@@ -1,7 +1,9 @@
 package pt.ipp.estg.cmu.ui;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,11 +35,17 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
         super.onCreate(savedInstanceState);
         setTheme(new PreferencesSettings(this).getThemePreference());
         setContentView(R.layout.activity_categoria);
+
         isAdmin = getIntent().getBooleanExtra(Util.ARG_ADMIN, false);
+        if (isAdmin) {
+            super.mActualToolbar.setSubtitle(getResources().getString(R.string.admin_toolbar_subtitle));
+        }
 
         if (isAdmin) {
             mNavigationView.setCheckedItem(R.id.nav_admin);
-            buildDialog();
+            if (null == savedInstanceState) {
+                buildDialog();
+            }
         } else {
             mNavigationView.setCheckedItem(R.id.nav_game);
             if (null == savedInstanceState) {
@@ -46,8 +54,16 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void buildDialog() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+
         mDialog = new Dialog(this);
         mDialog.setContentView(R.layout.window_admin_sign_in);
 
@@ -65,16 +81,21 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
 
         new FingerprintController(this, imageView, textView, this);
 
+        final Activity activity = this;
+
         Button ok = (Button) mDialog.findViewById(R.id.dialog_ok);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new SecurityAsyncTask(getApplicationContext(), Util.APP_TAG, true) {
+                new SecurityAsyncTask(activity, Util.APP_TAG, true) {
                     @Override
                     protected void onPostExecute(String result) {
                         super.onPostExecute(result);
 
                         if (editText.getText().toString().equals(result)) {
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+
+                            imageView.setBackground(null);
                             imageView.setImageResource(R.drawable.vt_fingerprint_success);
                             textView.setText(getApplicationContext().getString(R.string.setup_fingerprint_sucesso));
 
@@ -113,6 +134,7 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
     @Override
     public void fingerprintAuthResult(boolean result) {
         if (result) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
             mDialog.dismiss();
             startFragmetCategoria();
         }
@@ -124,5 +146,4 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
                 .replace(R.id.frame_layout, CategoriaFragment.newInstance(isAdmin))
                 .commit();
     }
-
 }
