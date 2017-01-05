@@ -34,6 +34,7 @@ public class AdminPerguntaActivity extends AppCompatActivity implements AdminPer
                 onBackPressed();
             }
         });
+        mToolbar.setSubtitle(getResources().getString(R.string.admin_toolbar_subtitle));
 
         mNivel = getIntent().getParcelableExtra(Util.ARG_LEVEL);
 
