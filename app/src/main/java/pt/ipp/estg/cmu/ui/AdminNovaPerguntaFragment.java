@@ -173,6 +173,8 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                             File sourceFile = new File(mImagemPathText);
                             //File f = FileOperations.compressImageFile(sourceFile);
                             FileOperations.copy(sourceFile, mImageName);
+                            mImagemPathText = Util.getAppFolderPath() + mImageName;
+
                             setPreviewImage(sourceFile.getPath());
                         }
                     }
