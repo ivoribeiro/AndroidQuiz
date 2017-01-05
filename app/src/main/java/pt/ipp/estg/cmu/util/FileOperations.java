@@ -73,6 +73,17 @@ public class FileOperations {
         out.close();
     }
 
+    /**
+     * delete a file from CMU folder, returns true if sucess, false otherwise
+     *
+     * @param name
+     * @return
+     */
+    public static boolean delete(String name) {
+        File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + "/CMU/" + name);
+        return file.delete();
+    }
+
 
     public static File compressImageFile(File file) {
         try {
