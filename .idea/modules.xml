@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$USER_HOME$/Dropbox/Documentos/Escola/ESTGF/LEI/3Ano/CMU/TP/AndroidQuiz/AndroidQuiz.iml" filepath="$USER_HOME$/Dropbox/Documentos/Escola/ESTGF/LEI/3Ano/CMU/TP/AndroidQuiz/AndroidQuiz.iml" />
       <module fileurl="file://$USER_HOME$/Dropbox/Documentos/Escola/ESTGF/LEI/3Ano/CMU/TP/AndroidQuiz/app/app.iml" filepath="$USER_HOME$/Dropbox/Documentos/Escola/ESTGF/LEI/3Ano/CMU/TP/AndroidQuiz/app/app.iml" />
+      <module fileurl="file://$USER_HOME$/Dropbox/Documentos/Escola/ESTGF/LEI/3Ano/CMU/TP/AndroidQuiz/dblib/dblib.iml" filepath="$USER_HOME$/Dropbox/Documentos/Escola/ESTGF/LEI/3Ano/CMU/TP/AndroidQuiz/dblib/dblib.iml" />
     </modules>
   </component>
 </project>
