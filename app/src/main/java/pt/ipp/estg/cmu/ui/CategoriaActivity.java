@@ -54,6 +54,12 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void buildDialog() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
@@ -98,7 +104,6 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
                                 @Override
                                 public void run() {
                                     mDialog.dismiss();
-
                                     startFragmetCategoria();
                                 }
                             }, 500);
@@ -141,5 +146,4 @@ public class CategoriaActivity extends ActivityBase implements FingerprintContro
                 .replace(R.id.frame_layout, CategoriaFragment.newInstance(isAdmin))
                 .commit();
     }
-
 }

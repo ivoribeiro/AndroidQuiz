@@ -335,7 +335,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                 p.setRespostaActual(mPergunta.getRespostaActual());
                 mRepositoryPergunta.update(p);
             }
-            getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            //getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             mListener.onPerguntaSave();
         } else {
             Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_campos_erro), Toast.LENGTH_SHORT).show();
