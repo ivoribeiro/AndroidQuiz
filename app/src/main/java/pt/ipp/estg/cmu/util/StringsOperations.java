@@ -59,7 +59,11 @@ public class StringsOperations {
     public static String arrayToString(int index, String[] array) {
         String result = "";
         for (int i = 0; i < index; ++i) {
-            result += array[i];
+            if (null != array[i]) {
+                result += array[i];
+            } else {
+                result += " ";
+            }
         }
         return result;
     }

@@ -158,7 +158,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchorGravity="bottom|right|end"
-        app:layout_behavior="pt.ipp.estg.cmu.helpers.FabHideOnScrollHelper"
         app:srcCompat="@drawable/ic_check" />
 
 </android.support.design.widget.CoordinatorLayout>

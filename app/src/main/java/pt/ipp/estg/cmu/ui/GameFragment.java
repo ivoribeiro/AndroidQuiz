@@ -136,6 +136,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.reset:
                 mSoundHelper.play(SoundEnum.CLEAR);
+                //update resposta atual
+                mPergunta.setRespostaActual("");
+                mPerguntaRepository.update(mPergunta);
                 createLayout();
                 break;
         }
@@ -160,9 +163,18 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             if (mPergunta.getRespostaCerta().charAt(i) == ' ') {
                 mAnswerLayout.addView(UtilUI.newView(getActivity()));
             } else {
-                Button bt = UtilUI.newButton(getActivity(), ' ');
-                bt.setId(index++);
+                //create resposta atual se existir
+                char text = ' ';
+                String respostaAtual = mPergunta.getRespostaActual();
+                int respostaAtualSize = mPergunta.getRespostaActual().length();
 
+                if (i < respostaAtualSize) {
+                    if (respostaAtual.charAt(i) != ' ') {
+                        text = respostaAtual.charAt(i);
+                    }
+                }
+                Button bt = UtilUI.newButton(getActivity(), text);
+                bt.setId(index++);
                 mAnswerLayout.addView(bt);
             }
         }
@@ -196,6 +208,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                             mUserAnswerArray[mUserAnswerIndex] = bt_game.getText().toString();//array com cada letra da resposta do user, preenchido a medida que vai respondendo
                             ++mUserAnswerIndex;
                             ++mUserAnswerSize;
+
+                            //update resposta atual
+                            mPergunta.setRespostaActual(StringsOperations.arrayToString(mUserAnswerIndex, mUserAnswerArray));
+                            mPerguntaRepository.update(mPergunta);
                         }
                         checkIfIsFinished();
                     }
@@ -305,6 +321,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 ++mUserAnswerSize;
                 decrementAjuda();
 
+                //update resposta atual
+                mPergunta.setRespostaActual(StringsOperations.arrayToString(mUserAnswerArray.length, mUserAnswerArray));
+                mPerguntaRepository.update(mPergunta);
             }
             checkIfIsFinished();
         } else {
