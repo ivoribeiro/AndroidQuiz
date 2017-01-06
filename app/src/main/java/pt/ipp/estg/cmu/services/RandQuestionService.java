@@ -20,7 +20,7 @@ import pt.ipp.estg.cmu.ui.ActivityMain;
 
 public class RandQuestionService extends Service {
     private int mRandQuestionTime;
-    private Pergunta mPergunta;
+    private boolean wantNotifications;
     public static final String QUESTION_TO_WIDGET = "pergunta_a_actualizar";
     private static Timer timer = new Timer();
 
@@ -30,6 +30,7 @@ public class RandQuestionService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         mRandQuestionTime = intent.getExtras().getInt(ActivityMain.RAND_QUESTION_TIME);
+        wantNotifications = intent.getExtras().getBoolean(ActivityMain.WANT_NOTIFICATIONS);
         timer.scheduleAtFixedRate(new mainTask(this), 0, mRandQuestionTime * 1000 * 60);
 
         return START_REDELIVER_INTENT;
@@ -56,15 +57,16 @@ public class RandQuestionService extends Service {
             Nivel randnivel = nivelRepo.getRandNivel();
             Pergunta pergunta = new PerguntaRepo(mcontext).getRandQuestion(randnivel.getId());
             mIntent.putExtra(QUESTION_TO_WIDGET, pergunta);
-            NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(mcontext)
-                            .setSmallIcon(R.drawable.ic_fingerprint)
-                            .setContentTitle(getString(R.string.notification_title))
-                            .setContentText(getString(R.string.notification_description ));
-            NotificationManager mNotificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-// mId allows you to update the notification later on.
-            mNotificationManager.notify(0, mBuilder.build());
+            if (wantNotifications) {
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(mcontext)
+                                .setSmallIcon(R.drawable.ic_fingerprint)
+                                .setContentTitle(getString(R.string.notification_title))
+                                .setContentText(getString(R.string.notification_description));
+                NotificationManager mNotificationManager =
+                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager.notify(0, mBuilder.build());
+            }
             sendBroadcast(mIntent);
         }
     }

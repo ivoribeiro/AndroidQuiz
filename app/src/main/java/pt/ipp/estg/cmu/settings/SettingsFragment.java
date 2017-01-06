@@ -10,10 +10,6 @@ import android.preference.PreferenceFragment;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.interfaces.SettingsRestartListener;
 
-/**
- * Created by Navega on 12/22/2016.
- */
-
 public class SettingsFragment extends PreferenceFragment {
 
     private ListPreference mThemeList;

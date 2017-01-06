@@ -19,6 +19,7 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
     //widget
     public static final String WIDGET_ACTION = "pt.ipp.estg.cmu.MESSAGE";
     public static final String RAND_QUESTION_TIME = "rand_question_time";
+    public static final String WANT_NOTIFICATIONS = "want_notifications";
 
     //layout
     private Button mBtStart;
@@ -54,11 +55,13 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
         mBtStart.setOnClickListener(this);
 
-        int minutos=mPreferenceSettings.getFrequenciaUpdate();
+        int minutos = mPreferenceSettings.getFrequenciaUpdate();
+        boolean notifications = mPreferenceSettings.wantNotifications();
 
 
         Intent mIntent = new Intent(this, RandQuestionService.class);
         mIntent.putExtra(RAND_QUESTION_TIME, 1);
+        mIntent.putExtra(WANT_NOTIFICATIONS, notifications);
         if (estatisticasJogo.getnPerguntasPorResponder() > 0) {
             startService(mIntent);
         }

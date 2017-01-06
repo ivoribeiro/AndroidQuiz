@@ -72,4 +72,9 @@ public class PreferencesSettings {
         }
         return index;
     }
+
+    public boolean wantNotifications() {
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return SP.getBoolean("checkbox_preference", true);
+    }
 }
