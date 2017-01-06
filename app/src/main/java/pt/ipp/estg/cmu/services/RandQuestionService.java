@@ -58,11 +58,10 @@ public class RandQuestionService extends Service {
             Pergunta pergunta = new PerguntaRepo(mcontext).getRandQuestion();
             mIntent.putExtra(QUESTION_TO_WIDGET, pergunta);
             if (wantNotifications) {
-                NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(mcontext)
-                                .setSmallIcon(R.drawable.ic_fingerprint)
-                                .setContentTitle(getString(R.string.notification_title))
-                                .setContentText(getString(R.string.notification_description));
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mcontext)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentTitle(getString(R.string.notification_title))
+                        .setContentText(getString(R.string.notification_description));
                 NotificationManager mNotificationManager =
                         (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 mNotificationManager.notify(0, mBuilder.build());

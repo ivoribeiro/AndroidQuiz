@@ -141,7 +141,12 @@ public class NivelRepo extends Repo<Nivel> implements RepositoryInterface<Nivel>
 
     public Nivel getRandNivel() {
         ArrayList<Nivel> niveis = super.getAllByField("bloqueado", "0");
+        ArrayList<Nivel> possiveis = new ArrayList<>();
+        for (Nivel nivel: niveis){
+            EstatisticasNivel estatisticasNivel =new EstatisticasNivel(mContext,nivel);
+            if (estatisticasNivel.getnPerguntas()!=0){ possiveis.add(nivel);}
+        }
         Random random = new Random();
-        return niveis.get(random.nextInt((niveis.size() - 1) - 0 + 1) + 0);
+        return possiveis.get(random.nextInt((possiveis.size() - 1) - 0 + 1) + 0);
     }
 }
