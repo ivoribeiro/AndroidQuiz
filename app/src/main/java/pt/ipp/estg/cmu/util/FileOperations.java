@@ -18,49 +18,13 @@ import java.nio.channels.FileChannel;
 
 public class FileOperations {
 
-    public static void copyImageToAppFolder(String sourcePath, String destName) throws IOException {
-        File file_dest = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + "/CMU/");
-        file_dest.mkdirs();
-        File file = new File(file_dest, destName);
-
-        //File compressed = compressImageFile(file);
-
-
-        File file_source = new File(sourcePath);
-        //copyFile(file_source, file_dest);
-
-    }
-
-
-    /**
-     * public static void copyFile(File sourceFile, File destFile) throws IOException {
-     * if (!sourceFile.exists()) {
-     * return;
-     * }
-     * FileChannel source = null;
-     * FileChannel destination = null;
-     * source = new FileInputStream(sourceFile).getChannel();
-     * destination = new FileOutputStream(destFile).getChannel();
-     * if (destination != null && source != null) {
-     * destination.transferFrom(source, 0, source.size());
-     * }
-     * if (source != null) {
-     * source.close();
-     * }
-     * if (destination != null) {
-     * destination.close();
-     * }
-     * }
-     **/
-
     public static void copy(File src, String dstString) throws IOException {
+        File compressedFile = compressImageFile(src);
 
         File dest = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + "/CMU/" + dstString);
         dest.createNewFile();
 
-        //File compressedFile = compressImageFile(dest);
-
-        InputStream in = new FileInputStream(src);
+        InputStream in = new FileInputStream(compressedFile);
         OutputStream out = new FileOutputStream(dest);
 
         // Transfer bytes from in to out
@@ -87,7 +51,7 @@ public class FileOperations {
     }
 
 
-    public static File compressImageFile(File file) {
+    private static File compressImageFile(File file) {
         try {
             // BitmapFactory options to downsize the image
             BitmapFactory.Options o = new BitmapFactory.Options();
@@ -100,7 +64,7 @@ public class FileOperations {
             inputStream.close();
 
             // The new size we want to scale to
-            final int REQUIRED_SIZE = 75;
+            final int REQUIRED_SIZE = 50;
 
             // Find the correct scale value. It should be the power of 2.
             int scale = 1;
