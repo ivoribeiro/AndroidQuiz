@@ -26,7 +26,6 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
     private TextView mScoreTxt;
 
     private int mPontos;
-    private CategoriaRepo mCategoriaRepo;
 
 
     @Override
@@ -37,7 +36,6 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
         mNavigationView.setCheckedItem(R.id.nav_game);
 
-        mCategoriaRepo = new CategoriaRepo(this);
         EstatisticasJogo estatisticasJogo = new EstatisticasJogo(this);
         mPontos = estatisticasJogo.getPontuacao();
 

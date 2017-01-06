@@ -7,4 +7,9 @@ public class JsonBuilder {
         return result;
     }
 
+    public static String BUILD_UPDATE_SCORE(String username, int score) {
+        String result = "{\"username\":\"" + username + "\",\"pontuacao\":" + score + "}";
+        return result;
+    }
+
 }

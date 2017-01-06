@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -17,16 +18,23 @@ import pt.ipp.estg.cmu.adapters.AdapterOnlineScore;
 import pt.ipp.estg.cmu.enums.RequestTypeEnum;
 import pt.ipp.estg.cmu.helpers.RecyclerOnScrollListenerHelper;
 import pt.ipp.estg.cmu.server.GetScoresServerSource;
+import pt.ipp.estg.cmu.server.JsonBuilder;
 import pt.ipp.estg.cmu.server.Request;
+import pt.ipp.estg.cmu.setup.PreferencesSetup;
 import pt.ipp.estg.cmu.util.Util;
+import pt.ipp.estg.dblib.estatisticas.EstatisticasJogo;
 
 
 public class OnlineScoreFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     private RecyclerView mRecycler;
     private SwipeRefreshLayout mSwipe;
-
     private FloatingActionButton mFab;
+
+    private EstatisticasJogo mEstatisticasSource;
+    private PreferencesSetup mPreferencesSetup;
+    private String mUserName;
+    private int mPontos;
 
     public OnlineScoreFragment() {
         // Required empty public constructor
@@ -40,6 +48,11 @@ public class OnlineScoreFragment extends Fragment implements SwipeRefreshLayout.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPreferencesSetup = new PreferencesSetup(getContext());
+        mUserName = mPreferencesSetup.getFlagNickNamePreference();
+
+        mEstatisticasSource = new EstatisticasJogo(getContext());
+        mPontos = mEstatisticasSource.getPontuacao();
     }
 
     @Override
@@ -73,6 +86,13 @@ public class OnlineScoreFragment extends Fragment implements SwipeRefreshLayout.
         callGetScores();
     }
 
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.fab) {
+            callUpdateScore();
+        }
+    }
+
     private void callGetScores() {
         new Request(RequestTypeEnum.GET, getContext(), null) {
             @Override
@@ -84,10 +104,14 @@ public class OnlineScoreFragment extends Fragment implements SwipeRefreshLayout.
         }.execute(Util.SERVER_GET_SCORES);
     }
 
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.fab) {
-
-        }
+    private void callUpdateScore() {
+        String json = JsonBuilder.BUILD_UPDATE_SCORE(mUserName, mPontos);
+        new Request(RequestTypeEnum.POST, getContext(), json) {
+            @Override
+            public void onPostExecute(JSONObject data) {
+                super.onPostExecute(data);
+                Toast.makeText(getContext(), getContext().getResources().getString(R.string.send_sucess), Toast.LENGTH_SHORT).show();
+            }
+        }.execute(Util.SERVER_UPDATE_PLAYER_SCORE);
     }
 }

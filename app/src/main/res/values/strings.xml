@@ -209,7 +209,8 @@
     <string name="notification_title">Nova pergunta</string>
     <string name="notification_description">Uma nova pergunta foi carregada no widget!</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- online score fragment -->
+    <string name="send_sucess">Pontuação enviada com sucesso</string>
+
 
 </resources>
