@@ -53,9 +53,9 @@ public class RandQuestionService extends Service {
         }
 
         public void run() {
-            NivelRepo nivelRepo = new NivelRepo(mcontext);
-            Nivel randnivel = nivelRepo.getRandNivel();
-            Pergunta pergunta = new PerguntaRepo(mcontext).getRandQuestion(randnivel.getId());
+            //NivelRepo nivelRepo = new NivelRepo(mcontext);
+            //Nivel randnivel = nivelRepo.getRandNivel();
+            Pergunta pergunta = new PerguntaRepo(mcontext).getRandQuestion();
             mIntent.putExtra(QUESTION_TO_WIDGET, pergunta);
             if (wantNotifications) {
                 NotificationCompat.Builder mBuilder =

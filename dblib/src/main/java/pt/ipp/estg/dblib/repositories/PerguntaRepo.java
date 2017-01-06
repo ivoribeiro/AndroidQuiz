@@ -58,7 +58,7 @@ public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<
      *
      * @return
      */
-    public Pergunta getRandQuestion(int nivel) {
+    public Pergunta getRandNivelQuestion(int nivel) {
         String[] fields = {"acertou", "nivel"};
         String[] values = {"0", "" + nivel};
         ArrayList<Pergunta> perguntas = super.getAllByFields(fields, values);
@@ -66,6 +66,11 @@ public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<
         return perguntas.get(random.nextInt((perguntas.size() - 1) - 0 + 1) + 0);
     }
 
+    public Pergunta getRandQuestion() {
+        ArrayList<Pergunta> perguntas = super.getAll();
+        Random random = new Random();
+        return perguntas.get(random.nextInt((perguntas.size() - 1) - 0 + 1) + 0);
+    }
 
     @Override
     public Pergunta insertInto(Pergunta pergunta) {
