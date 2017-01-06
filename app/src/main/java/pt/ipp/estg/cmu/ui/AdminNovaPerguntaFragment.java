@@ -1,6 +1,7 @@
 package pt.ipp.estg.cmu.ui;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -212,7 +213,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                 startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY);*/
 
 
-/*                ContentValues values = new ContentValues(1);
+                ContentValues values = new ContentValues(1);
                 values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg");
                 Uri mCameraTempUri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
@@ -221,7 +222,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                 if (mCameraTempUri != null) {
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, mCameraTempUri);
                 }
-                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY);*/
+                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY);
 
                 break;
 

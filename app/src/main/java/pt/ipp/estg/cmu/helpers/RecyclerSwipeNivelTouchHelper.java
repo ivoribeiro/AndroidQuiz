@@ -74,6 +74,7 @@ public class RecyclerSwipeNivelTouchHelper extends ItemTouchHelper.SimpleCallbac
                 mAdapter.notifyItemRemoved(position);
                 mAdapter.notifyItemRangeChanged(position, mNiveis.size());
 
+
             } else {
                 mNiveis.remove(position);
                 mRecycler.removeViewAt(position);
