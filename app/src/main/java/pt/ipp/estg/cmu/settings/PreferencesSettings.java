@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import java.util.Arrays;
+
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.enums.FrequenciaUpdateEnum;
 
 /**
  * Created by Navega on 12/23/2016.
@@ -47,5 +50,26 @@ public class PreferencesSettings {
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(mContext);
         boolean sound = SP.getBoolean("checkbox_sound_preference", false);
         return sound;
+    }
+
+    public int getFrequenciaUpdate() {
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(mContext);
+        String[] info = mContext.getResources().getStringArray(R.array.frequencias);
+
+        String frequencia = SP.getString("list_preference_frequencia", info[0]);
+
+        int index = Arrays.asList(info).indexOf(frequencia);
+
+        switch (index) {
+            case 0:
+                return 10;
+            case 1:
+                return 30;
+            case 2:
+                return 60;
+            case 3:
+                return 120;
+        }
+        return index;
     }
 }

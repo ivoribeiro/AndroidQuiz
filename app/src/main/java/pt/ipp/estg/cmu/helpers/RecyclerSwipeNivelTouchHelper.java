@@ -47,9 +47,9 @@ public class RecyclerSwipeNivelTouchHelper extends ItemTouchHelper.SimpleCallbac
         try {
             final int position = viewHolder.getAdapterPosition();
             final Nivel nivel = mNiveis.get(position);
+            //so se pode apagar se o nivel ainda nao tiver sido iniciado
             if (mRepository.canDelete(nivel)) {
-                Snackbar.make(mRecycler,
-                        mContext.getResources().getString(R.string.snack_deleted) + " " + mNiveis.get(viewHolder.getAdapterPosition()).getNumero(),
+                Snackbar.make(mRecycler, mContext.getResources().getString(R.string.snack_deleted) + " " + mNiveis.get(viewHolder.getAdapterPosition()).getNumero(),
                         Snackbar.LENGTH_LONG).setAction(mContext.getResources().getString(R.string.snack_undo),
                         new View.OnClickListener() {
                             @Override
@@ -64,16 +64,16 @@ public class RecyclerSwipeNivelTouchHelper extends ItemTouchHelper.SimpleCallbac
                 int idNivel;
                 idNivel = nivel.getId();
                 ArrayList<Pergunta> perguntas = mRepositoryPergunta.getAllByNivel(idNivel);
-                for (Pergunta pergunta : perguntas ) {
+                for (Pergunta pergunta : perguntas) {
                     FileOperations.delete(pergunta.getImagem());
                 }
                 mRepository.deleteById(idNivel);
-
 
                 mNiveis.remove(position);
                 mRecycler.removeViewAt(position);
                 mAdapter.notifyItemRemoved(position);
                 mAdapter.notifyItemRangeChanged(position, mNiveis.size());
+
             } else {
                 mNiveis.remove(position);
                 mRecycler.removeViewAt(position);

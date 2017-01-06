@@ -11,7 +11,7 @@
             android:dialogTitle="@string/prefs_text_notificacao_update_title"
             android:entries="@array/frequencias"
             android:entryValues="@array/frequencias"
-            android:key="list_preference"
+            android:key="list_preference_frequencia"
             android:summary="@string/prefs_text_notificacao_update_summary"
             android:title="@string/prefs_text_notificacao_update_title" />
 

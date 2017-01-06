@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.services.RandQuestionService;
 import pt.ipp.estg.dblib.repositories.CategoriaRepo;
 import pt.ipp.estg.dblib.estatisticas.EstatisticasJogo;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
@@ -27,11 +28,14 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
     private int mPontos;
 
+    private PreferencesSettings mPreferenceSettings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(new PreferencesSettings(this).getThemePreference());
+        mPreferenceSettings = new PreferencesSettings(this);
+        setTheme(mPreferenceSettings.getThemePreference());
         setContentView(R.layout.activity_main);
 
         mNavigationView.setCheckedItem(R.id.nav_game);
@@ -50,11 +54,15 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
         mBtStart.setOnClickListener(this);
 
-/*        Intent mIntent = new Intent(this, RandQuestionService.class);
+        int minutos=mPreferenceSettings.getFrequenciaUpdate();
+
+
+        Intent mIntent = new Intent(this, RandQuestionService.class);
         mIntent.putExtra(RAND_QUESTION_TIME, 1);
         if (estatisticasJogo.getnPerguntasPorResponder() > 0) {
             startService(mIntent);
-        }*/
+        }
+
     }
 
     @Override
