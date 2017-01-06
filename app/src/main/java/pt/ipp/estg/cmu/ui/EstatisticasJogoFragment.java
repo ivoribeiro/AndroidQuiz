@@ -77,6 +77,6 @@ public class EstatisticasJogoFragment extends Fragment {
         nRespostasErradasText.setText("" + mEstatisticasJogo.getnRespostasErradas());
         nAjudasUsadasText.setText("" + mEstatisticasJogo.getnAjudasUsadas());
         nPontuacaoGanhaText.setText("" + mEstatisticasJogo.getPontuacaoGanha());
-        nPontuacaoGanhaText.setText("" + mEstatisticasJogo.getPontuacaoPerdida());
+        nPontuacaoPerdidaText.setText("" + mEstatisticasJogo.getPontuacaoPerdida());
     }
 }
