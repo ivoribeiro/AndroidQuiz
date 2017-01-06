@@ -68,7 +68,7 @@
         <receiver android:name=".widget.MyBroadcastReceiverWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="pt.ipp.estgf.cmu.MESSAGE" />
+                <action android:name="pt.ipp.estg.cmu.MESSAGE" />
             </intent-filter>
 
             <meta-data

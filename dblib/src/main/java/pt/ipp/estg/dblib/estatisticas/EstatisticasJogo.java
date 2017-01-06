@@ -26,6 +26,7 @@ public class EstatisticasJogo {
     private int respostasCertas;
     private int nPerguntas;
     private int nPerguntasPorResponder;
+    private int nAjudasUsadas;
 
 
     public int getnPerguntasPorResponder() {
@@ -50,6 +51,7 @@ public class EstatisticasJogo {
             this.respostasErradas += estatisticasCategoria.getnRespostasErradas();
             this.nPerguntas += estatisticasCategoria.getnPerguntas();
             this.nPerguntasPorResponder += estatisticasCategoria.getNperguntasporresponder();
+            this.nAjudasUsadas += estatisticasCategoria.getAjudasUsadas();
         }
     }
 
@@ -87,7 +89,7 @@ public class EstatisticasJogo {
     }
 
     public int getnAjudasUsadas() {
-        return 0;
+        return this.nAjudasUsadas;
     }
 
     /**
