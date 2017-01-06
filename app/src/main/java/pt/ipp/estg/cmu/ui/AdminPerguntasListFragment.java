@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterPerguntasList;
+import pt.ipp.estg.cmu.helpers.RecyclerOnScrollListenerHelper;
 import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.helpers.RecyclerSwipePerguntaTouchHelper;
 import pt.ipp.estg.cmu.interfaces.AdminPerguntaLayoutListener;
@@ -65,11 +66,12 @@ public class AdminPerguntasListFragment extends Fragment implements View.OnClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_admin_lista_perguntas, container, false);
         mEmptyLayout = (LinearLayout) view.findViewById(R.id.inclued_layout);
+        mFab = (FloatingActionButton) view.findViewById(R.id.fab);
 
         mRecycler = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecycler.addOnScrollListener(new RecyclerOnScrollListenerHelper(mFab));
 
-        mFab = (FloatingActionButton) view.findViewById(R.id.fab);
         mFab.setOnClickListener(this);
         return view;
     }

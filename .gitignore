@@ -50,3 +50,5 @@ Removeria .idea/
 .externalNativeBuild
 
 .idea/modules.xml
+
+.idea/vcs.xml
