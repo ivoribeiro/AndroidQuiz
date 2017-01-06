@@ -10,7 +10,10 @@ import java.util.ArrayList;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterLevelList;
+import pt.ipp.estg.cmu.util.FileOperations;
+import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.dblib.repositories.NivelRepo;
+import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 import pt.ipp.estg.dblib.repositories.RepositoryInterface;
 import pt.ipp.estg.dblib.models.Nivel;
 
@@ -20,6 +23,7 @@ public class RecyclerSwipeNivelTouchHelper extends ItemTouchHelper.SimpleCallbac
     private RecyclerView mRecycler;
     private Context mContext;
     private RepositoryInterface<Nivel> mRepository;
+    private PerguntaRepo mRepositoryPergunta;
 
     private AdapterLevelList mAdapter;
 
@@ -30,6 +34,7 @@ public class RecyclerSwipeNivelTouchHelper extends ItemTouchHelper.SimpleCallbac
         this.mNiveis = nivels;
         this.mAdapter = adapter;
         this.mRepository = new NivelRepo(context);
+        mRepositoryPergunta = new PerguntaRepo(context);
     }
 
     @Override
@@ -56,7 +61,15 @@ public class RecyclerSwipeNivelTouchHelper extends ItemTouchHelper.SimpleCallbac
                                 //mRecycler.setAdapter(new AdapterCategoriaGrid(mContext, mCategorias, true));
                             }
                         }).show();
-                mRepository.deleteById(nivel.getId());
+                int idNivel;
+                idNivel = nivel.getId();
+                ArrayList<Pergunta> perguntas = mRepositoryPergunta.getAllByNivel(idNivel);
+                for (Pergunta pergunta : perguntas ) {
+                    FileOperations.delete(pergunta.getImagem());
+                }
+                mRepository.deleteById(idNivel);
+
+
                 mNiveis.remove(position);
                 mRecycler.removeViewAt(position);
                 mAdapter.notifyItemRemoved(position);
