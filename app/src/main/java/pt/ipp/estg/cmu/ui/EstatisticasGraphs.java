@@ -22,9 +22,6 @@ import java.util.List;
 
 import pt.ipp.estg.cmu.R;
 
-/**
- * Created by Navega on 12/27/2016.
- */
 
 public class EstatisticasGraphs extends Fragment {
 
