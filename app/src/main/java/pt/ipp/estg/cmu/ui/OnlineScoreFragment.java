@@ -2,6 +2,7 @@ package pt.ipp.estg.cmu.ui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -14,16 +15,18 @@ import org.json.JSONObject;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterOnlineScore;
 import pt.ipp.estg.cmu.enums.RequestTypeEnum;
+import pt.ipp.estg.cmu.helpers.RecyclerOnScrollListenerHelper;
 import pt.ipp.estg.cmu.server.GetScoresServerSource;
 import pt.ipp.estg.cmu.server.Request;
 import pt.ipp.estg.cmu.util.Util;
 
 
-public class OnlineScoreFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class OnlineScoreFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     private RecyclerView mRecycler;
-    private AdapterOnlineScore mAdapter;
     private SwipeRefreshLayout mSwipe;
+
+    private FloatingActionButton mFab;
 
     public OnlineScoreFragment() {
         // Required empty public constructor
@@ -43,7 +46,11 @@ public class OnlineScoreFragment extends Fragment implements SwipeRefreshLayout.
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_online_score, container, false);
 
+        mFab = (FloatingActionButton) view.findViewById(R.id.fab);
+        mFab.setOnClickListener(this);
         mRecycler = (RecyclerView) view.findViewById(R.id.recycler_view);
+        mRecycler.addOnScrollListener(new RecyclerOnScrollListenerHelper(mFab));
+
         mSwipe = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
         mSwipe.setOnRefreshListener(this);
 
@@ -77,5 +84,10 @@ public class OnlineScoreFragment extends Fragment implements SwipeRefreshLayout.
         }.execute(Util.SERVER_GET_SCORES);
     }
 
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.fab) {
 
+        }
+    }
 }
