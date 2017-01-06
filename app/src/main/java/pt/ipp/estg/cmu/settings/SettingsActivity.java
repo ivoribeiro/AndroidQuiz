@@ -7,10 +7,6 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.interfaces.SettingsRestartListener;
 import pt.ipp.estg.cmu.ui.ActivityBase;
 
-/**
- * Created by Navega on 12/22/2016.
- */
-
 public class SettingsActivity extends ActivityBase implements SettingsRestartListener {
 
 

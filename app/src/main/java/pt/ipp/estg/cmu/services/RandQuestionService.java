@@ -11,6 +11,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.dblib.repositories.NivelRepo;
 import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 import pt.ipp.estg.dblib.models.Nivel;
@@ -28,9 +29,13 @@ public class RandQuestionService extends Service {
     @SuppressWarnings("unused")
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        //preferencias
+        PreferencesSettings mPreferenceSettings = new PreferencesSettings(this);
+        int minutos = mPreferenceSettings.getFrequenciaUpdate();
+        boolean notifications = mPreferenceSettings.wantNotifications();
 
-        mRandQuestionTime = intent.getExtras().getInt(ActivityMain.RAND_QUESTION_TIME);
-        wantNotifications = intent.getExtras().getBoolean(ActivityMain.WANT_NOTIFICATIONS);
+        mRandQuestionTime = minutos;
+        wantNotifications = notifications;
         timer.scheduleAtFixedRate(new mainTask(this), 0, mRandQuestionTime * 1000 * 60);
 
         return START_REDELIVER_INTENT;

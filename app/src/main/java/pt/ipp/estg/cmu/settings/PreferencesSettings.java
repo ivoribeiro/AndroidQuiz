@@ -9,10 +9,6 @@ import java.util.Arrays;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.enums.FrequenciaUpdateEnum;
 
-/**
- * Created by Navega on 12/23/2016.
- */
-
 public class PreferencesSettings {
 
     private Context mContext;
@@ -62,12 +58,14 @@ public class PreferencesSettings {
 
         switch (index) {
             case 0:
-                return 10;
+                return 1;
             case 1:
-                return 30;
+                return 10;
             case 2:
-                return 60;
+                return 30;
             case 3:
+                return 60;
+            case 4:
                 return 120;
         }
         return index;
@@ -75,6 +73,6 @@ public class PreferencesSettings {
 
     public boolean wantNotifications() {
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return SP.getBoolean("checkbox_preference", true);
+        return SP.getBoolean("checkbox_preference", false);
     }
 }

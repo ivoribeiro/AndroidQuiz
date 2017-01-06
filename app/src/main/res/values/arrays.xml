@@ -2,6 +2,7 @@
 <resources>
 
     <string-array name="frequencias">
+        <item>1 minuto</item>
         <item>10 minutos</item>
         <item>30 minutos</item>
         <item>1 hora</item>

@@ -55,13 +55,10 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
         mBtStart.setOnClickListener(this);
 
-        int minutos = mPreferenceSettings.getFrequenciaUpdate();
-        boolean notifications = mPreferenceSettings.wantNotifications();
 
 
         Intent mIntent = new Intent(this, RandQuestionService.class);
         mIntent.putExtra(RAND_QUESTION_TIME, 1);
-        mIntent.putExtra(WANT_NOTIFICATIONS, notifications);
         if (estatisticasJogo.getnPerguntasPorResponder() > 0) {
             startService(mIntent);
         }
