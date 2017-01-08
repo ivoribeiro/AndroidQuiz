@@ -61,12 +61,12 @@
 
 
     <!-- FragmentQuestion -->
-    <dimen name="question_image_width">250dp</dimen>
-    <dimen name="question_image_height">175dp</dimen>
+    <dimen name="question_image_width">225dp</dimen>
+    <dimen name="question_image_height">150dp</dimen>
     <dimen name="arrow_size">40dp</dimen>
-    <dimen name="divider_margin">10dp</dimen>
-    <dimen name="button_images_size">70dp</dimen>
-    <dimen name="button_images_margin">10dp</dimen>
+    <dimen name="divider_margin">8dp</dimen>
+    <dimen name="button_images_size">65dp</dimen>
+    <dimen name="button_images_margin">8dp</dimen>
     <dimen name="view_divider_margin">5dp</dimen>
 
     <!-- QuestionPopUp -->
@@ -74,11 +74,11 @@
     <dimen name="layout_popup_padding">20dp</dimen>
 
     <!--AdminNovoNivel-->
-    <dimen name="novo_nivel_layout_margin">12dp</dimen>
+    <dimen name="novo_nivel_layout_margin">8dp</dimen>
 
     <!--AdminNovaPergunta-->
     <dimen name="novo_nivel_layout_button_margin">12dp</dimen>
-    <dimen name="nova_pergunta_not_found_size">120dp</dimen>
+    <dimen name="nova_pergunta_not_found_size">100dp</dimen>
 
 
     <!-- PageSetupActivity-->
