@@ -20,7 +20,8 @@
             style="@style/PrimaryTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dialog_title_admin" />
+            android:text="@string/dialog_title_admin"
+            android:textSize="30dp" />
 
         <TextView
             style="@style/SecondaryTitle"

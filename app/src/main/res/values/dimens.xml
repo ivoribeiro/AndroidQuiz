@@ -94,7 +94,7 @@
 
     <!-- Dialog Sign In -->
     <dimen name="layout_top_space">60dp</dimen>
-    <dimen name="layout_fingerprint_padding">20dp</dimen>
+    <dimen name="layout_fingerprint_padding">10dp</dimen>
     <dimen name="adapter_estatisticas_categoria_image_size">60dp</dimen>
 
     <!-- Empty Data Layout-->

@@ -52,8 +52,8 @@ public class FingerprintController {
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public FingerprintController(Context mContext, ImageView imageView, TextView textView, FingerprintControllerCallback fingerprintControllerCallback) {
-        this.mContext = mContext;
+    public FingerprintController(Context context, ImageView imageView, TextView textView, FingerprintControllerCallback fingerprintControllerCallback) {
+        this.mContext = context;
         mInfoImageView = imageView;
         mInfoTextView = textView;
         mListener = fingerprintControllerCallback;
@@ -65,19 +65,20 @@ public class FingerprintController {
 
         //sem marshmallow
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            mInfoTextView.setVisibility(View.GONE);
-            mInfoImageView.setVisibility(View.GONE);
+            //mInfoTextView.setVisibility(View.GONE);
+            //mInfoImageView.setVisibility(View.GONE);
+            mInfoImageView.setBackground(null);
             return;
 
         } else {
             keyguardManager = (KeyguardManager) mContext.getSystemService(mContext.KEYGUARD_SERVICE);
             fingerprintManager = (android.hardware.fingerprint.FingerprintManager) mContext.getSystemService(mContext.FINGERPRINT_SERVICE);
 
-
             //sem sensor
             if (!fingerprintManager.isHardwareDetected()) {
-                mInfoTextView.setVisibility(View.GONE);
-                mInfoImageView.setVisibility(View.GONE);
+                //mInfoTextView.setVisibility(View.GONE);
+                //mInfoImageView.setVisibility(View.GONE);
+                mInfoImageView.setBackground(null);
                 return;
             }
 
