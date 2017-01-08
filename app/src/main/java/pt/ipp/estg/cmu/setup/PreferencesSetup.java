@@ -3,10 +3,6 @@ package pt.ipp.estg.cmu.setup;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-/**
- * Created by Navega on 12/21/2016.
- */
-
 public class PreferencesSetup {
 
     private static final String USER_FLAGS_PREFERENCE = "user_flags";
@@ -14,6 +10,9 @@ public class PreferencesSetup {
     private static final String USER_FLAG_AVATAR = "flag_chosen_avatar";
     private static final String USER_FLAG_NICKNAME = "flag_chosen_nickname";
     private static final String USER_FLAG_PIN = "flag_chosen_pin";
+    private static final String WIDGET_INDEX_PREFERENCE = "widget_index_preference";
+    private static final String WIDGET_RESPOSTA_PREFERENCE = "widget_resposta_preference";
+
 
     private Context mContext;
 
@@ -93,5 +92,50 @@ public class PreferencesSetup {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(USER_FLAGS_PREFERENCE, Context.MODE_PRIVATE);
         return sharedPreferences.getString(USER_FLAG_NICKNAME, "");
     }
+
+    /**
+     * Guarda o index actual da resposta no widget
+     *
+     * @param index
+     */
+    public void saveIndexRespostaWidget(int index) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(WIDGET_INDEX_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(WIDGET_INDEX_PREFERENCE, index);
+        editor.commit();
+    }
+
+    /**
+     * Retorna o index actual da resposta no widget
+     *
+     * @return
+     */
+    public int getIndexRespostaWidget() {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(WIDGET_INDEX_PREFERENCE, Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(WIDGET_INDEX_PREFERENCE, 0);
+    }
+
+    /**
+     * Guarda a resposta actua do widget
+     *
+     * @param respostaActual
+     */
+    public void saveRespostaActualWidget(String respostaActual) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(WIDGET_RESPOSTA_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(WIDGET_RESPOSTA_PREFERENCE, respostaActual);
+        editor.commit();
+    }
+
+    /**
+     * Retorna o index actual da resposta no widget
+     *
+     * @return
+     */
+    public String getRespostaActualWidget() {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(WIDGET_RESPOSTA_PREFERENCE, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(WIDGET_RESPOSTA_PREFERENCE, "");
+    }
+
 
 }

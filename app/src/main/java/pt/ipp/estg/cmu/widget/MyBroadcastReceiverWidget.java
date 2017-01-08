@@ -12,12 +12,14 @@ import android.os.Bundle;
 import android.widget.RemoteViews;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.setup.PreferencesSetup;
 import pt.ipp.estg.cmu.ui.ActivityMain;
 import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.services.RandQuestionService;
 import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -63,6 +65,7 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
     private String resposta = " ";
     private Context mcontext;
     private RemoteViews views;
+    private PreferencesSetup mPreferencesSetup;
 
     protected PendingIntent getPendingSelfIntent(Context context, String action, String letra, Pergunta pergunta, String intent_string) {
         Intent intent = new Intent(context, getClass());
@@ -96,6 +99,7 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
         this.views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
         mcontext = context;
         Bundle b = intent.getExtras();
+        mPreferencesSetup = new PreferencesSetup(context);
 
 
         if (ActivityMain.WIDGET_ACTION.equals(intent.getAction())) {
@@ -130,12 +134,14 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
             this.pergunta.setStringAleatoria(b.getString("string_aleatoria_pergunta"));
             this.pergunta.setRespostaCerta(b.getString("resposta_certa_pergunta"));
             String respostaCerta = b.getString("resposta_certa_pergunta");
-            int index = intent.getIntExtra(INDEXINTENT, 0);
-            this.resposta += letra;
+
+            int index = mPreferencesSetup.getIndexRespostaWidget();
+            String resposta = mPreferencesSetup.getRespostaActualWidget();
+            resposta=resposta + letra;
+            mPreferencesSetup.saveRespostaActualWidget(resposta);
             switch (index) {
                 case 0:
                     views.setTextViewText(R.id.bt_aw_0, letra);
-                    System.out.println(letra);
                     break;
                 case 1:
                     views.setTextViewText(R.id.bt_aw_1, letra);
@@ -147,9 +153,17 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
                     views.setTextViewText(R.id.bt_aw_3, letra);
                     break;
             }
-            System.out.println("---->" + this.resposta);
-            if (respostaCerta.equals(resposta)) {
-                System.out.println("Acertei");
+            mPreferencesSetup.saveIndexRespostaWidget(++index);
+            if (index == 4) {
+                if (respostaCerta.equals(resposta)) {
+                    this.limparResposta(mPreferencesSetup);
+                    Toast.makeText(context, "Acertou", Toast.LENGTH_SHORT).show();
+                    this.pergunta = perguntaRepo.getRandQuestion4letters();
+                } else {
+                    this.limparResposta(mPreferencesSetup);
+                    Toast.makeText(context, "Errou", Toast.LENGTH_SHORT).show();
+
+                }
             }
         } else {
             if (perguntaRepo.getPerguntas4letras().size() > 0) {
@@ -161,6 +175,19 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
             super.onReceive(context, intent);
         }
 
+
+    }
+
+    public void limparResposta(PreferencesSetup mPreferencesSetup) {
+        //limpar botoes
+        views.setTextViewText(R.id.bt_aw_0, "");
+        views.setTextViewText(R.id.bt_aw_1, "");
+        views.setTextViewText(R.id.bt_aw_2, "");
+        views.setTextViewText(R.id.bt_aw_3, "");
+        //limpar resposta actual
+        mPreferencesSetup.saveRespostaActualWidget("");
+        //limpar index
+        mPreferencesSetup.saveIndexRespostaWidget(0);
 
     }
 
