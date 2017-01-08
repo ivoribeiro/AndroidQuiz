@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 
@@ -61,7 +62,12 @@ public class RandQuestionService extends Service {
             //NivelRepo nivelRepo = new NivelRepo(mcontext);
             //Nivel randnivel = nivelRepo.getRandNivel();
             Pergunta pergunta = new PerguntaRepo(mcontext).getRandQuestion();
-            mIntent.putExtra(QUESTION_TO_WIDGET, pergunta);
+            Bundle b = new Bundle();
+            b.putString("resposta_certa_pergunta", pergunta.getRespostaCerta());
+            b.putString("string_aleatoria_pergunta", pergunta.getStringAleatoria());
+            b.putString("imagem_pergunta", pergunta.getImagem());
+            mIntent.putExtras(b);
+            //mIntent.putExtra(QUESTION_TO_WIDGET, pergunta);
             if (wantNotifications) {
                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mcontext)
                         .setSmallIcon(R.mipmap.ic_launcher)

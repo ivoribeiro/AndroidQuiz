@@ -58,7 +58,6 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
 
         Intent mIntent = new Intent(this, RandQuestionService.class);
-        mIntent.putExtra(RAND_QUESTION_TIME, 1);
         if (estatisticasJogo.getnPerguntasPorResponder() > 0) {
             startService(mIntent);
         }
