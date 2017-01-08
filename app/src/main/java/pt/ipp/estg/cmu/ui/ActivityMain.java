@@ -12,6 +12,7 @@ import pt.ipp.estg.dblib.repositories.CategoriaRepo;
 import pt.ipp.estg.dblib.estatisticas.EstatisticasJogo;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
+import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
 
 public class ActivityMain extends ActivityBase implements View.OnClickListener {
@@ -56,9 +57,10 @@ public class ActivityMain extends ActivityBase implements View.OnClickListener {
         mBtStart.setOnClickListener(this);
 
 
-
         Intent mIntent = new Intent(this, RandQuestionService.class);
-        if (estatisticasJogo.getnPerguntasPorResponder() > 0) {
+        PerguntaRepo perguntaRepo = new PerguntaRepo(this);
+
+        if (perguntaRepo.getPerguntas4letras().size() > 0) {
             startService(mIntent);
         }
 

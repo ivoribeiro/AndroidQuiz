@@ -223,4 +223,18 @@ public class PerguntaRepo extends Repo<Pergunta> implements RepositoryInterface<
         return count(query);
     }
 
+    public ArrayList<Pergunta> getPerguntas4letras() {
+        ArrayList<Pergunta> all = this.getAll();
+        ArrayList<Pergunta> validas = new ArrayList<>();
+        for (Pergunta pergunta : all) {
+            if (pergunta.getRespostaCerta().length() == 4) validas.add(pergunta);
+        }
+        return validas;
+    }
+
+    public Pergunta getRandQuestion4letters() {
+        ArrayList<Pergunta> perguntas = this.getPerguntas4letras();
+        Random random = new Random();
+        return perguntas.get(random.nextInt((perguntas.size() - 1) - 0 + 1) + 0);
+    }
 }

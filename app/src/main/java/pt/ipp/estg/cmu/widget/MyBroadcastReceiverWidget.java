@@ -15,6 +15,7 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.ui.ActivityMain;
 import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.services.RandQuestionService;
+import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
 import android.widget.Button;
 
@@ -89,7 +90,7 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
 
     public void onReceive(Context context, Intent intent) {
 
-
+        PerguntaRepo perguntaRepo = new PerguntaRepo(context);
         ComponentName thisWidget = new ComponentName(context, MyBroadcastReceiverWidget.class);
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         this.views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
@@ -106,7 +107,7 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
         }
 
 //Se carregou numa letra para dar a resposta
-        if (RESPOSTACLICK1.equals(intent.getAction()) || RESPOSTACLICK2.equals(intent.getAction()) || RESPOSTACLICK3.equals(intent.getAction()) || RESPOSTACLICK4.equals(intent.getAction()) || RESPOSTACLICK5.equals(intent.getAction()) || RESPOSTACLICK6.equals(intent.getAction()) || RESPOSTACLICK7.equals(intent.getAction()) || RESPOSTACLICK8.equals(intent.getAction()) || RESPOSTACLICK9.equals(intent.getAction()) || RESPOSTACLICK10.equals(intent.getAction()) || RESPOSTACLICK11.equals(intent.getAction()) || RESPOSTACLICK12.equals(intent.getAction()) || RESPOSTACLICK13.equals(intent.getAction()) || RESPOSTACLICK14.equals(intent.getAction()) || RESPOSTACLICK15.equals(intent.getAction())) {
+        else if (RESPOSTACLICK1.equals(intent.getAction()) || RESPOSTACLICK2.equals(intent.getAction()) || RESPOSTACLICK3.equals(intent.getAction()) || RESPOSTACLICK4.equals(intent.getAction()) || RESPOSTACLICK5.equals(intent.getAction()) || RESPOSTACLICK6.equals(intent.getAction()) || RESPOSTACLICK7.equals(intent.getAction()) || RESPOSTACLICK8.equals(intent.getAction()) || RESPOSTACLICK9.equals(intent.getAction()) || RESPOSTACLICK10.equals(intent.getAction()) || RESPOSTACLICK11.equals(intent.getAction()) || RESPOSTACLICK12.equals(intent.getAction()) || RESPOSTACLICK13.equals(intent.getAction()) || RESPOSTACLICK14.equals(intent.getAction()) || RESPOSTACLICK15.equals(intent.getAction())) {
             String letra = "";
             if (intent.hasExtra(LETRAINTENT1)) letra = b.getString(LETRAINTENT1);
             else if (intent.hasExtra(LETRAINTENT2)) letra = b.getString(LETRAINTENT2);
@@ -130,7 +131,7 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
             this.pergunta.setRespostaCerta(b.getString("resposta_certa_pergunta"));
             String respostaCerta = b.getString("resposta_certa_pergunta");
             int index = intent.getIntExtra(INDEXINTENT, 0);
-            this.resposta+=letra;
+            this.resposta += letra;
             switch (index) {
                 case 0:
                     views.setTextViewText(R.id.bt_aw_0, letra);
@@ -146,13 +147,19 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
                     views.setTextViewText(R.id.bt_aw_3, letra);
                     break;
             }
-            System.out.println("---->"+this.resposta);
+            System.out.println("---->" + this.resposta);
             if (respostaCerta.equals(resposta)) {
                 System.out.println("Acertei");
             }
+        } else {
+            if (perguntaRepo.getPerguntas4letras().size() > 0) {
+                this.pergunta = perguntaRepo.getRandQuestion4letters();
+            }
         }
-        onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(thisWidget));
-        super.onReceive(context, intent);
+        if (perguntaRepo.getPerguntas4letras().size() > 0) {
+            onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(thisWidget));
+            super.onReceive(context, intent);
+        }
 
 
     }
