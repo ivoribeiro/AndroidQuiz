@@ -5,13 +5,14 @@
     android:background="?android:colorBackground"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin">
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="5dp">
 
 
     <ImageView
         android:id="@+id/question_image_widget"
         android:layout_width="@dimen/question_image_width"
-        android:layout_height="@dimen/question_image_height"
+        android:layout_height="125dp"
         android:layout_gravity="center" />
 
     <LinearLayout
@@ -48,14 +49,6 @@
 
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/view_divider"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_margin="@dimen/view_divider_margin"
-        android:background="?colorPrimary" />
-
 
     <LinearLayout
         android:id="@+id/widget_answer_layout"
