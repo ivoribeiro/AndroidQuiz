@@ -21,7 +21,7 @@ public class MediaSoundsHelper {
     }
 
     public void play(SoundEnum type) {
-        mMediaPlayer = null;
+        mMediaPlayer = new MediaPlayer();
         switch (type) {
             case BUTTON_CLICK:
                 mMediaPlayer = MediaPlayer.create(mContext, R.raw.sound_game_button);
@@ -52,6 +52,4 @@ public class MediaSoundsHelper {
             mMediaPlayer.start();
         }
     }
-
-
 }

@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.enums.SoundEnum;
+import pt.ipp.estg.cmu.helpers.MediaSoundsHelper;
 import pt.ipp.estg.cmu.interfaces.GameInterfaceListener;
 import pt.ipp.estg.cmu.util.StringsOperations;
 import pt.ipp.estg.cmu.util.Util;
@@ -38,7 +40,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private static final int ROW_2 = 9;
     private static final int ROW_3 = 14;
 
-    //private MediaSoundsHelper mMediaSoundHelper;
+    private MediaSoundsHelper mMediaSoundHelper;
     private GameInterfaceListener mListener;
     private Nivel mNivel;
     private Pergunta mPergunta;
@@ -81,7 +83,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             mPergunta = getArguments().getParcelable(Util.ARG_QUESTION);
             mCorrectRespostaConcat = mPergunta.getRespostaCerta().replaceAll("\\s", "");
         }
-        //mMediaSoundHelper = new MediaSoundsHelper(getContext());
+        mMediaSoundHelper = new MediaSoundsHelper(getContext());
         mPerguntaRepository = new PerguntaRepo(this.getContext());
         mNivelRepository = new NivelRepo(this.getContext());
         mEstatisticasNivel = new EstatisticasNivel(this.getContext(), mNivel);
@@ -130,7 +132,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 setHintLetter();
                 break;
             case R.id.reset:
-                //mMediaSoundHelper.play(SoundEnum.CLEAR);
+                mMediaSoundHelper.play(SoundEnum.CLEAR);
                 //update resposta atual
                 mPergunta.setRespostaActual("");
                 mPerguntaRepository.update(mPergunta);
@@ -184,28 +186,31 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 bt_game.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //mMediaSoundHelper.play(SoundEnum.BUTTON_CLICK);
+                        //verificar se a resposta esta completa
+                        if (mRespostaUserSize < mCorrectRespostaConcat.length()) {
+                            mMediaSoundHelper.play(SoundEnum.BUTTON_CLICK);
 
-                        //verificar se esse botao ja nao tem uma ajuda ou um espaco(#)
-                        if (mRespostaUserArray[mRespostaUserIndex] != null) {
-                            while (mRespostaUserArray[mRespostaUserIndex] != null) {
-                                ++mRespostaUserIndex;
+                            //verificar se esse botao ja nao tem uma ajuda ou um espaco(#)
+                            if (mRespostaUserArray[mRespostaUserIndex] != null) {
+                                while (mRespostaUserArray[mRespostaUserIndex] != null) {
+                                    ++mRespostaUserIndex;
+                                }
                             }
-                        }
-                        //obter o proximo botao da resposta a ser preenchido
-                        Button bt_answer = (Button) mAnswerLayout.findViewById(mRespostaUserIndex);
-                        if (bt_answer != null) {
-                            bt_answer.setText(bt_game.getText());
-                            bt_game.setVisibility(View.INVISIBLE);
-                            mRespostaUserArray[mRespostaUserIndex] = bt_game.getText().toString();
-                            ++mRespostaUserIndex;
-                            ++mRespostaUserSize;
+                            //obter o proximo botao da resposta a ser preenchido
+                            Button bt_answer = (Button) mAnswerLayout.findViewById(mRespostaUserIndex);
+                            if (bt_answer != null) {
+                                bt_answer.setText(bt_game.getText());
+                                bt_game.setVisibility(View.INVISIBLE);
+                                mRespostaUserArray[mRespostaUserIndex] = bt_game.getText().toString();
+                                ++mRespostaUserIndex;
+                                ++mRespostaUserSize;
 
-                            //update resposta atual
-                            mPergunta.setRespostaActual(StringsOperations.arrayToString(mRespostaUserArray.length, mRespostaUserArray));
-                            mPerguntaRepository.update(mPergunta);
+                                //update resposta atual
+                                mPergunta.setRespostaActual(StringsOperations.arrayToString(mRespostaUserArray.length, mRespostaUserArray));
+                                mPerguntaRepository.update(mPergunta);
+                            }
+                            checkIfIsFinished();
                         }
-                        checkIfIsFinished();
                     }
                 });
             }
@@ -305,7 +310,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             Button bt_answer = (Button) mAnswerLayout.findViewById(result);
             if (null != bt_answer) {
-                //mMediaSoundHelper.play(SoundEnum.HELP);
+                mMediaSoundHelper.play(SoundEnum.HELP);
                 char hint = mPergunta.getRespostaCerta().charAt(result);
                 bt_answer.setText(hint + "");
                 mRespostaUserArray[result] = hint + "";
