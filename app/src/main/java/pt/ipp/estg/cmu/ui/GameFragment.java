@@ -21,33 +21,30 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.dblib.repositories.NivelRepo;
-import pt.ipp.estg.dblib.repositories.PerguntaRepo;
-import pt.ipp.estg.cmu.enums.SoundEnum;
-import pt.ipp.estg.dblib.estatisticas.EstatisticasNivel;
-import pt.ipp.estg.cmu.helpers.MediaSoundsHelper;
 import pt.ipp.estg.cmu.interfaces.GameInterfaceListener;
-import pt.ipp.estg.dblib.models.Nivel;
-import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.util.StringsOperations;
 import pt.ipp.estg.cmu.util.Util;
 import pt.ipp.estg.cmu.util.UtilUI;
+import pt.ipp.estg.dblib.estatisticas.EstatisticasNivel;
+import pt.ipp.estg.dblib.models.Nivel;
+import pt.ipp.estg.dblib.models.Pergunta;
+import pt.ipp.estg.dblib.repositories.NivelRepo;
+import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class GameFragment extends Fragment implements View.OnClickListener {
 
     private static final int ROW_1 = 4;
     private static final int ROW_2 = 9;
     private static final int ROW_3 = 14;
 
-    private MediaSoundsHelper mSoundHelper;
+    //private MediaSoundsHelper mMediaSoundHelper;
     private GameInterfaceListener mListener;
     private Nivel mNivel;
     private Pergunta mPergunta;
     private NivelRepo mNivelRepository;
     private PerguntaRepo mPerguntaRepository;
+    private EstatisticasNivel mEstatisticasNivel;
 
     //layout
     private ViewGroup mViewGroup;
@@ -58,12 +55,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private ImageButton mHintButton;
 
     //resposta
-    private String mCorrectAnswerConcat;
-    private String[] mUserAnswerArray;
-    private int mUserAnswerIndex;
-    private int mUserAnswerSize;
+    private String mCorrectRespostaConcat; // resposta certa sem espacos
+    private String[] mRespostaUserArray; // array com cada letra que o user responde, # representa um espaco da resposta verdadeira
+    private int mRespostaUserIndex; // posicao do mRespostaUserArray em que a resposta dada pelo user se encontra
+    private int mRespostaUserSize;// tamanho atual da resposta dada pelo user
 
-    EstatisticasNivel mEstatisticasNivel;
 
     public GameFragment() {
     }
@@ -83,12 +79,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         if (getArguments() != null) {
             mNivel = getArguments().getParcelable(Util.ARG_LEVEL);
             mPergunta = getArguments().getParcelable(Util.ARG_QUESTION);
-            mCorrectAnswerConcat = mPergunta.getRespostaCerta().replaceAll("\\s", "");
+            mCorrectRespostaConcat = mPergunta.getRespostaCerta().replaceAll("\\s", "");
         }
-        mSoundHelper = new MediaSoundsHelper(getContext());
+        //mMediaSoundHelper = new MediaSoundsHelper(getContext());
         mPerguntaRepository = new PerguntaRepo(this.getContext());
         mNivelRepository = new NivelRepo(this.getContext());
-        mUserAnswerArray = new String[mCorrectAnswerConcat.length()];
         mEstatisticasNivel = new EstatisticasNivel(this.getContext(), mNivel);
     }
 
@@ -135,7 +130,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 setHintLetter();
                 break;
             case R.id.reset:
-                mSoundHelper.play(SoundEnum.CLEAR);
+                //mMediaSoundHelper.play(SoundEnum.CLEAR);
                 //update resposta atual
                 mPergunta.setRespostaActual("");
                 mPerguntaRepository.update(mPergunta);
@@ -145,11 +140,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
     private void createLayout() {
+        mRespostaUserArray = StringsOperations.stringToArray(mPergunta.getRespostaCerta(), mPergunta.getRespostaActual());
+        mRespostaUserIndex = StringsOperations.getIndexOfFirstSpace(mCorrectRespostaConcat.length(), mPergunta.getRespostaActual());
+        mRespostaUserSize = StringsOperations.getNumberOfLetterInValue(mCorrectRespostaConcat.length(), mPergunta.getRespostaActual());
         buildLayoutGame();
         buildLayoutAnswer();
-        mUserAnswerArray = new String[mCorrectAnswerConcat.length()];
-        mUserAnswerIndex = 0;
-        mUserAnswerSize = 0;
     }
 
     /**
@@ -159,29 +154,24 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         mAnswerLayout.removeAllViews();
         int index = 0;
         for (int i = 0; i < mPergunta.getRespostaCerta().length(); ++i) {
-            //invisible button to simulate empty space
+            //invisible view to simulate empty space
             if (mPergunta.getRespostaCerta().charAt(i) == ' ') {
                 mAnswerLayout.addView(UtilUI.newView(getActivity()));
             } else {
                 //create resposta atual se existir
                 char text = ' ';
-                String respostaAtual = mPergunta.getRespostaActual();
-                int respostaAtualSize = mPergunta.getRespostaActual().length();
-
-                if (i < respostaAtualSize) {
-                    if (respostaAtual.charAt(i) != ' ') {
-                        text = respostaAtual.charAt(i);
-                    }
+                if (null != mRespostaUserArray[i]) {
+                    text = mRespostaUserArray[i].charAt(0);
                 }
                 Button bt = UtilUI.newButton(getActivity(), text);
-                bt.setId(index++);
+                bt.setId(i);
                 mAnswerLayout.addView(bt);
             }
         }
     }
 
     /**
-     * Cria o layout com os caracteres do jogo
+     * Cria o layout com os caracteres da string aletatoria
      */
     private void buildLayoutGame() {
         mTableLayout.removeAllViews();
@@ -194,23 +184,25 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 bt_game.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mSoundHelper.play(SoundEnum.BUTTON_CLICK);
+                        //mMediaSoundHelper.play(SoundEnum.BUTTON_CLICK);
 
-                        //verificar se esse botao ja nao tem uma ajuda
-                        if (null != mUserAnswerArray[mUserAnswerIndex]) {
-                            ++mUserAnswerIndex;
+                        //verificar se esse botao ja nao tem uma ajuda ou um espaco(#)
+                        if (mRespostaUserArray[mRespostaUserIndex] != null) {
+                            while (mRespostaUserArray[mRespostaUserIndex] != null) {
+                                ++mRespostaUserIndex;
+                            }
                         }
                         //obter o proximo botao da resposta a ser preenchido
-                        Button bt_answer = (Button) mAnswerLayout.findViewById(mUserAnswerIndex);
+                        Button bt_answer = (Button) mAnswerLayout.findViewById(mRespostaUserIndex);
                         if (bt_answer != null) {
                             bt_answer.setText(bt_game.getText());
                             bt_game.setVisibility(View.INVISIBLE);
-                            mUserAnswerArray[mUserAnswerIndex] = bt_game.getText().toString();//array com cada letra da resposta do user, preenchido a medida que vai respondendo
-                            ++mUserAnswerIndex;
-                            ++mUserAnswerSize;
+                            mRespostaUserArray[mRespostaUserIndex] = bt_game.getText().toString();
+                            ++mRespostaUserIndex;
+                            ++mRespostaUserSize;
 
                             //update resposta atual
-                            mPergunta.setRespostaActual(StringsOperations.arrayToString(mUserAnswerIndex, mUserAnswerArray));
+                            mPergunta.setRespostaActual(StringsOperations.arrayToString(mRespostaUserArray.length, mRespostaUserArray));
                             mPerguntaRepository.update(mPergunta);
                         }
                         checkIfIsFinished();
@@ -231,8 +223,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
      * retira pontuacao ao mNivel se respondeu de forma errada
      */
     private void checkIfIsFinished() {
-        if (mUserAnswerSize == mCorrectAnswerConcat.length()) {
-            if (StringsOperations.arrayToString(mUserAnswerSize, mUserAnswerArray).equals(mCorrectAnswerConcat)) {
+        if (mRespostaUserSize == mCorrectRespostaConcat.length()) {
+            String value = StringsOperations.arrayToString(mRespostaUserArray.length, mRespostaUserArray);
+            if (value.equals(mCorrectRespostaConcat)) {
                 incrementPontosNivel();
                 mListener.setAnswered(true);
                 mPergunta.setAcertou(true);
@@ -261,13 +254,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private void decrementAjuda() {
         //tem ajudas?
         if (mNivel.getnAjudas() > 0) {
-            //decrementa ajudas ao nivel
             mNivel.decrementnAjudas();
-            //actualiza as vistas e decrementa os pontos ao nivel
             decrementPontosHint();
-            //incrementa ao numero de ajudas usadas
             mPergunta.addAjudasUsadas();
-            //faz update a bd
+            //update a bd
             mPerguntaRepository.update(mPergunta);
             mNivelRepository.update(mNivel);
             //actauliza as vistas para o numero de dicas disponiveis no nivel
@@ -307,22 +297,23 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         if (mNivel.getnAjudas() > 0) {
             Random random = new Random();
             int low = 0;
-            int high = mCorrectAnswerConcat.length();
+            int high = mPergunta.getRespostaCerta().length();
             int result;
             do {
                 result = random.nextInt(high - low) + low;
-            } while (null != mUserAnswerArray[result]);
+            } while (mRespostaUserArray[result] != null);
+
             Button bt_answer = (Button) mAnswerLayout.findViewById(result);
             if (null != bt_answer) {
-                mSoundHelper.play(SoundEnum.HELP);
-                char hint = mCorrectAnswerConcat.charAt(result);
+                //mMediaSoundHelper.play(SoundEnum.HELP);
+                char hint = mPergunta.getRespostaCerta().charAt(result);
                 bt_answer.setText(hint + "");
-                mUserAnswerArray[result] = hint + "";
-                ++mUserAnswerSize;
+                mRespostaUserArray[result] = hint + "";
+                ++mRespostaUserSize;
                 decrementAjuda();
 
                 //update resposta atual
-                mPergunta.setRespostaActual(StringsOperations.arrayToString(mUserAnswerArray.length, mUserAnswerArray));
+                mPergunta.setRespostaActual(StringsOperations.arrayToString(mRespostaUserArray.length, mRespostaUserArray));
                 mPerguntaRepository.update(mPergunta);
             }
             checkIfIsFinished();

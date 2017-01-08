@@ -56,16 +56,71 @@ public class StringsOperations {
         mRandomString = mRandomString + text;
     }
 
-    public static String arrayToString(int index, String[] array) {
+    public static String arrayToString(int size, String[] array) {
         String result = "";
-        for (int i = 0; i < index; ++i) {
-            if (null != array[i]) {
+        for (int i = 0; i < size; ++i) {
+            if (null != array[i] && !array[i].equals("#")) {
                 result += array[i];
-            } else {
+            } else if (null == array[i]) {
                 result += " ";
             }
         }
         return result;
     }
+
+    public static String[] stringToArray(String valueOriginal, String valueAtual) {
+        int size = valueOriginal.length();
+        String[] result = new String[size];
+
+        for (int i = 0; i < size; ++i) {
+            if (valueOriginal.charAt(i) == ' ') {
+                result[i] = "#";
+            }
+        }
+        if (valueAtual.length() == 0) {
+            return result;
+        }
+
+        int indexAtual = 0;
+        for (int i = 0; i < size; ++i) {
+            if (null == result[i]) {
+
+                if (indexAtual == valueAtual.length()) {
+                    break;
+                }
+                if (' ' != valueAtual.charAt(indexAtual)) {
+                    result[i] = Character.toString(valueAtual.charAt(indexAtual));
+                }
+                ++indexAtual;
+            }
+        }
+
+        return result;
+    }
+
+    public static int getIndexOfFirstSpace(int size, String value) {
+        for (int i = 0; i < size; ++i) {
+            if (i < value.length()) {
+                if (' ' == value.charAt(i)) {
+                    return i;
+                }
+            }
+        }
+        return value.length();
+    }
+
+
+    public static int getNumberOfLetterInValue(int size, String value) {
+        int result = 0;
+        for (int i = 0; i < size; ++i) {
+            if (i < value.length()) {
+                if (' ' != value.charAt(i)) {
+                    ++result;
+                }
+            }
+        }
+        return result;
+    }
+
 }
 
