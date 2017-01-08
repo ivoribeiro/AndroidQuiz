@@ -1,5 +1,6 @@
 package pt.ipp.estg.cmu.ui;
 
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -15,6 +16,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.settings.SettingsActivity;
@@ -94,18 +98,6 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onBackPressed() {
-        if (mDrawer != null) {
-            if (mDrawer.isDrawerOpen(GravityCompat.START)) {
-                mDrawer.closeDrawer(GravityCompat.START);
-            } else {
-                super.onBackPressed();
-            }
-        }
-    }
-
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_base, menu);
         return true;
@@ -156,5 +148,60 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+
+    //////////////////////////////////////////////////////////////////////////////////////////////// HANDLE BACK PRESSED
+
+
+/*    @Override
+    public void onBackPressed() {
+        if (mDrawer != null) {
+            if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+                mDrawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
+        }
+    }*/
+
+
+    private long back_pressed;
+    private String[] activities = {
+            "pt.ipp.estg.cmu.ui.ActivityMain",
+            "pt.ipp.estg.cmu.ui.EstatisticasActivity",
+            "pt.ipp.estg.cmu.ui.OnlineScoreActivity",
+            "pt.ipp.estg.cmu.ui.CategoriaActivity",
+            "pt.ipp.estg.cmu.ui.SettingsActivity"};
+
+    @Override
+    public void onBackPressed() {
+        ActivityManager am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            String currentScreen = taskInfo.get(0).topActivity.getClassName();
+            int show = 0;
+            for (int i = 0; i < activities.length; i++) {
+                if (currentScreen.equals(activities[i])) {
+                    show++;
+                }
+            }
+            if (show > 0) {
+                if (back_pressed + 2000 > System.currentTimeMillis()) {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this, getResources().getString(R.string.click_exit), Toast.LENGTH_SHORT).show();
+                }
+                back_pressed = System.currentTimeMillis();
+            } else {
+                super.onBackPressed();
+            }
+        }
+    }
 
 }

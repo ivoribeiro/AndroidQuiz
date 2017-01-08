@@ -145,6 +145,7 @@
     <string name="setup_fingerprint_error">Autenticação falhada</string>
 
     <string name="loading">A carregar</string>
+    <string name="click_exit">Clique novamente para sair</string>
 
     <!-- Estatisticas -->
     <string name="pontuacao_estatisticas_jogo_label">Pontuação do Jogo</string>
