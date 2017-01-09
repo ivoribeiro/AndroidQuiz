@@ -3,10 +3,12 @@ package pt.ipp.estg.cmu.ui;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +30,6 @@ import pt.ipp.estg.cmu.util.Util;
 
 public class CategoriaAdminDialog extends DialogFragment implements View.OnClickListener, FingerprintControllerCallback {
 
-
     private AdminLoginListener mListener;
 
     private EditText mEditText;
@@ -41,6 +42,7 @@ public class CategoriaAdminDialog extends DialogFragment implements View.OnClick
 
     public static CategoriaAdminDialog newInstance() {
         CategoriaAdminDialog dialog = new CategoriaAdminDialog();
+        dialog.setCancelable(false);
         return dialog;
     }
 
@@ -59,9 +61,7 @@ public class CategoriaAdminDialog extends DialogFragment implements View.OnClick
         mTextView = (TextView) rootView.findViewById(R.id.fingerprint_text_status);
 
         ok = (Button) rootView.findViewById(R.id.dialog_ok);
-
         ok.setOnClickListener(this);
-
 
         return rootView;
     }
@@ -93,6 +93,28 @@ public class CategoriaAdminDialog extends DialogFragment implements View.OnClick
         }
     }
 
+    @Override
+    public void fingerprintAuthResult(boolean result) {
+        if (result) {
+            dismiss();
+            mListener.onLoginSucess();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(android.content.DialogInterface dialog, int keyCode, android.view.KeyEvent event) {
+                if ((keyCode == android.view.KeyEvent.KEYCODE_BACK)) {
+                    return true;
+                } else
+                    return false;
+            }
+        });
+    }
+
     private void callLogin() {
         new SecurityAsyncTask(getActivity(), Util.APP_TAG, true) {
             @Override
@@ -122,13 +144,5 @@ public class CategoriaAdminDialog extends DialogFragment implements View.OnClick
                 }
             }
         }.execute("");
-    }
-
-    @Override
-    public void fingerprintAuthResult(boolean result) {
-        if (result) {
-            dismiss();
-            mListener.onLoginSucess();
-        }
     }
 }
