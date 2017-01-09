@@ -55,7 +55,6 @@ public class EstatisticasJogoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_estatisticas_jogo, container, false);
 
-        //---------------------------------Jogo----------------------------------------
         nPontuacaoText = (TextView) view.findViewById(R.id.pontuacao_jogo);
         nPerguntasText = (TextView) view.findViewById(R.id.n_perguntas_jogo);
         nRespostasCertasText = (TextView) view.findViewById(R.id.n_respostas_certas_jogo);
@@ -63,7 +62,6 @@ public class EstatisticasJogoFragment extends Fragment {
         nAjudasUsadasText = (TextView) view.findViewById(R.id.n_ajudas_usadas_jogo);
         nPontuacaoGanhaText = (TextView) view.findViewById(R.id.pontuacao_ganha_jogo);
         nPontuacaoPerdidaText = (TextView) view.findViewById(R.id.pontuacao_perdida_jogo);
-        //-----------------------------------------------------------------------------
 
         return view;
     }

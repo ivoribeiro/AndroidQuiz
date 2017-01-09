@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,9 +21,10 @@ import pt.ipp.estg.dblib.models.Nivel;
 
 public class EstatisticasNivelFragment extends Fragment {
 
-    ArrayList<EstatisticasNivel> mEstatisticasNivel;
+    private ArrayList<EstatisticasNivel> mEstatisticasNivel;
     private RecyclerView mRecycler;
     private AdapterEstatisticasNivel mAdapter;
+    private int NUM_GRID;
 
 
     /**
@@ -36,27 +38,19 @@ public class EstatisticasNivelFragment extends Fragment {
         return fragment;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        this.mEstatisticasNivel = new ArrayList<>();
-        ArrayList<Nivel> niveis = new NivelRepo(context).getAll();
-        for (Nivel nivel : niveis) {
-            this.mEstatisticasNivel.add(new EstatisticasNivel(context, nivel));
-        }
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        NUM_GRID = getContext().getResources().getInteger(R.integer.nivel_number_grid);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_estatisticas_nivel, container, false);
         mRecycler = (RecyclerView) view.findViewById(R.id.recycler_view);
-        mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecycler.setLayoutManager(new GridLayoutManager(getActivity(), NUM_GRID));
+
         return view;
     }
 
@@ -65,6 +59,16 @@ public class EstatisticasNivelFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mAdapter = new AdapterEstatisticasNivel(getContext(), mEstatisticasNivel);
         mRecycler.setAdapter(mAdapter);
-
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mEstatisticasNivel = new ArrayList<>();
+        ArrayList<Nivel> niveis = new NivelRepo(context).getAll();
+        for (Nivel nivel : niveis) {
+            mEstatisticasNivel.add(new EstatisticasNivel(context, nivel));
+        }
+    }
+
 }
