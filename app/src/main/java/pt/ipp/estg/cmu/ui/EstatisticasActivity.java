@@ -21,8 +21,6 @@ public class EstatisticasActivity extends ActivityBase implements ViewPager.OnPa
         super.onCreate(savedInstanceState);
         setTheme(new PreferencesSettings(this).getThemePreference());
         setContentView(R.layout.activity_estatisticas);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         setupViewPager();
