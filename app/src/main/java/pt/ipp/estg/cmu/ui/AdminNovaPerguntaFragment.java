@@ -312,33 +312,37 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
 
     private void savePergunta() {
         String respostaCerta = mRespostaText.getText().toString();
-        //imagem de galeria ou camera
-        if ((!respostaCerta.equals("") && ((!editMode && mImagemPathText != null) || (editMode)))) {
-            StringsOperations operations = new StringsOperations(respostaCerta.toUpperCase());
-            String respostaRandom = operations.generateString();
-            Pergunta p = new Pergunta();
-            p.setRespostaCerta(respostaCerta.toUpperCase());
-            p.setStringAleatoria(respostaRandom);
-            if (!editMode) {
-                p.setImagem(mImagemPathText);
-                p.setNivel(mNivel.getId());
-                p.setRespostaActual("");
-                mRepositoryPergunta.insertInto(p);
-            } else {
-                p.setId(mPergunta.getId());
-                mImagemPathText = mImagemPathText == null ? mPergunta.getImagem() : mImagemPathText;
-                p.setImagem(mImagemPathText);
-                p.setnRespostasErradas(mPergunta.getnRespostasErradas());
-                p.setAcertou(mPergunta.isAcertou());
-                p.setNivel(mPergunta.getNivel());
-                p.setnAjudasUsadas(mPergunta.getnAjudasUsadas());
-                p.setRespostaActual(mPergunta.getRespostaActual());
-                mRepositoryPergunta.update(p);
-            }
-            //getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            mListener.onPerguntaSave();
+        if (respostaCerta.contains("#")) {
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_forbidden_characters), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_campos_erro), Toast.LENGTH_SHORT).show();
+            //imagem de galeria ou camera
+            if ((!respostaCerta.equals("") && ((!editMode && mImagemPathText != null) || (editMode)))) {
+                StringsOperations operations = new StringsOperations(respostaCerta.toUpperCase().replaceAll("\\s", ""));
+                String respostaRandom = operations.generateString();
+                Pergunta p = new Pergunta();
+                p.setRespostaCerta(respostaCerta.toUpperCase());
+                p.setStringAleatoria(respostaRandom);
+                if (!editMode) {
+                    p.setImagem(mImagemPathText);
+                    p.setNivel(mNivel.getId());
+                    p.setRespostaActual("");
+                    mRepositoryPergunta.insertInto(p);
+                } else {
+                    p.setId(mPergunta.getId());
+                    mImagemPathText = mImagemPathText == null ? mPergunta.getImagem() : mImagemPathText;
+                    p.setImagem(mImagemPathText);
+                    p.setnRespostasErradas(mPergunta.getnRespostasErradas());
+                    p.setAcertou(mPergunta.isAcertou());
+                    p.setNivel(mPergunta.getNivel());
+                    p.setnAjudasUsadas(mPergunta.getnAjudasUsadas());
+                    p.setRespostaActual(mPergunta.getRespostaActual());
+                    mRepositoryPergunta.update(p);
+                }
+                //getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                mListener.onPerguntaSave();
+            } else {
+                Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_campos_erro), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

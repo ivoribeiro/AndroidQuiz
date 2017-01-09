@@ -92,6 +92,7 @@
     <string name="admin_toast_download_erro">Erro no download</string>
     <string name="admin_toast_campos_erro">Deve preencher todos os campos</string>
     <string name="admin_toast_campo_url_erro">Deve introduzir um url correto</string>
+    <string name="admin_toast_forbidden_characters">A resposta contém caracteres proibidos</string>
 
     <string name="admin_download_dialog_title">Download Imagem</string>
     <string name="admin_download_dialog_message">Introduza o url para fazer o download</string>

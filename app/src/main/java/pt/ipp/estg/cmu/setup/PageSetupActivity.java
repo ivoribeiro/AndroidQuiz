@@ -173,13 +173,22 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
                 mViewPager.setBackgroundColor(color3);
                 break;
             case 4:
-                callCreatePlayer();
                 mViewPager.setBackgroundColor(color4);
                 break;
         }
 
+
+        if (page == 4 && avatarPageIsFinished()) {
+            //ultima pagina setup
+            //pin e avatar concluido
+            //criar player na api
+            callCreatePlayer();
+        }
+
         if (page == 4 && !avatarPageIsFinished()) {
+            //avatar page nao concluida
             mViewPager.setCurrentItem(3, true);
+
         } else {
             mNextBtn.setVisibility(position == 4 ? View.GONE : View.VISIBLE);
             mFinishBtn.setVisibility(position == 4 ? View.VISIBLE : View.GONE);

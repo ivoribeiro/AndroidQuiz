@@ -9,9 +9,9 @@
 
 
     <!-- styles dimens -->
-    <dimen name="primary_title_size">40dp</dimen>
+    <dimen name="primary_title_size">35dp</dimen>
     <dimen name="primary_title_small_size">25dp</dimen>
-    <dimen name="secondary_title_size">25dp</dimen>
+    <dimen name="secondary_title_size">23dp</dimen>
     <dimen name="secondary_title_small_size">16dp</dimen>
     <dimen name="third_title_size">12dp</dimen>
     <dimen name="primary_button_width">150dp</dimen>
@@ -87,8 +87,8 @@
     <dimen name="loading_texts_size">18dp</dimen>
     <dimen name="loading_texts_padding">5dp</dimen>
     <dimen name="loading_elements_size">20dp</dimen>
-    <dimen name="setup_image">150dp</dimen>
-    <dimen name="setup_image_avatar">120dp</dimen>
+    <dimen name="setup_image">140dp</dimen>
+    <dimen name="setup_image_avatar">110dp</dimen>
     <dimen name="setup_custom_layout_padding">16dp</dimen>
     <dimen name="setup_fingerprint_size">60dp</dimen>
 
