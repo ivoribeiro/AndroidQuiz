@@ -102,6 +102,7 @@
 
     <!--Estatisticas Categoria Fragment -->
     <dimen name="adapter_estatisticas_categoria_layout_padding">8dp</dimen>
+    <dimen name="adapter_estatisticas_graph_padding">26dp</dimen>
 
 
 </resources>

@@ -5,6 +5,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +23,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.adapters.AdapterEstatisticasGraph;
 
 
 public class EstatisticasGraphs extends Fragment {
 
-    private PieChart mChart;
+    private RecyclerView mRecycler;
+    private AdapterEstatisticasGraph mAdapter;
+    private int NUM_GRID;
+
 
     public EstatisticasGraphs() {
     }
@@ -36,59 +42,27 @@ public class EstatisticasGraphs extends Fragment {
     }
 
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        NUM_GRID = getContext().getResources().getInteger(R.integer.nivel_number_grid);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_estatisticas_graphs, container, false);
-
-        mChart = (PieChart) view.findViewById(R.id.jogo_pie);
-
-        mChart.setUsePercentValues(true);
-
-        // enable hole and configure
-        mChart.setDrawHoleEnabled(true);
-        mChart.setHoleRadius(25);
-        mChart.setTransparentCircleRadius(10);
-
-        // enable rotation of the chart by touch
-        mChart.setRotationAngle(0);
-        mChart.setRotationEnabled(true);
-
-
-        setDataForPieChart();
-
-        Legend l = mChart.getLegend();
-        l.setFormSize(15f); // set the size of the legend forms/shapes
-        l.setForm(Legend.LegendForm.CIRCLE); // set what type of form/shape should be used
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        l.setTextSize(18f);
-        l.setTextColor(Color.BLACK);
-        l.setXEntrySpace(5f); // set the space between the legend entries on the x-axis
-        l.setYEntrySpace(5f);
-
-        mChart.animateXY(3000, 3000);
+        mRecycler = (RecyclerView) view.findViewById(R.id.recycler_view);
+        mRecycler.setLayoutManager(new GridLayoutManager(getActivity(), NUM_GRID));
 
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mAdapter = new AdapterEstatisticasGraph(getContext());
+        mRecycler.setAdapter(mAdapter);
 
-    private void setDataForPieChart() {
-        List<PieEntry> entries = new ArrayList<>();
-
-
-        entries.add(new PieEntry(18.5f, "Certas"));
-        entries.add(new PieEntry(26.7f, "Erradas"));
-        //entries.add(new PieEntry(24.0f, "Red"));
-        //entries.add(new PieEntry(30.8f, "Blue"));
-
-        PieDataSet set = new PieDataSet(entries, "");
-        set.setColors(ColorTemplate.MATERIAL_COLORS);
-        PieData data = new PieData(set);
-        mChart.setData(data);
-        mChart.invalidate(); // refresh
     }
-
 }
