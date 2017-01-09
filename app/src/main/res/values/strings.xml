@@ -214,5 +214,7 @@
     <!-- online score fragment -->
     <string name="send_sucess">Pontuação enviada com sucesso</string>
 
+    <string name="widget_update">Atualizar</string>
+
 
 </resources>

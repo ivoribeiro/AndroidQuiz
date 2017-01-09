@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -22,6 +23,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
 
 import pt.ipp.estg.cmu.R;
@@ -51,7 +54,7 @@ import static android.app.Activity.RESULT_OK;
 public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickListener {
 
     private static int RESULT_LOAD_IMAGE = 1;
-    private static int CAPTURE_IMAGE_ACTIVITY = 2;
+    private static int CAPTURE_IMAGE_ACTIVITY = 1337;
 
     private AdminPerguntaAdapterChangeListener mListener;
 
@@ -74,6 +77,9 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     private String mImageName;
     private CoordinatorLayout mRootLayout;
 
+
+    //camera
+    private String mCurrentPhotoPath;
 
     public AdminNovaPerguntaFragment() {
         // Required empty public constructor
@@ -150,6 +156,185 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         mListener = null;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bt_download:
+                try {
+                    dialogPermission(Util.PERMISSIONS_REQUEST_WRITE_DOWNLOAD);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case R.id.bt_galeria:
+                try {
+                    dialogPermission(Util.PERMISSIONS_REQUEST_WRITE_GALERIA);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case R.id.bt_camera:
+                try {
+                    dialogPermission(Util.PERMISSIONS_REQUEST_CAMERA);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case R.id.fab:
+                savePergunta();
+                break;
+        }
+    }
+
+    /**
+     * Verificar se as permissoes necessarias estao garantidas
+     *
+     * @param requestcode - permissao a pedir
+     */
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void dialogPermission(int requestcode) throws IOException {
+
+        String permissaoRequested = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        if (requestcode == Util.PERMISSIONS_REQUEST_CAMERA) {
+            permissaoRequested = Manifest.permission.CAMERA;
+        }
+
+        if (ContextCompat.checkSelfPermission(getContext(), permissaoRequested) != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permissaoRequested)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+            } else {
+
+                if (requestcode == Util.PERMISSIONS_REQUEST_WRITE_DOWNLOAD || requestcode == Util.PERMISSIONS_REQUEST_WRITE_GALERIA) {
+                    requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestcode);
+
+                } else if (requestcode == Util.PERMISSIONS_REQUEST_CAMERA) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, requestcode);
+                }
+            }
+        } else {
+            switch (requestcode) {
+                case Util.PERMISSIONS_REQUEST_WRITE_DOWNLOAD:
+                    showDownloadDialog();
+                    break;
+                case Util.PERMISSIONS_REQUEST_WRITE_GALERIA:
+                    Intent intentGaleria = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(intentGaleria, RESULT_LOAD_IMAGE);
+                    break;
+
+                case Util.PERMISSIONS_REQUEST_CAMERA:
+                    showCameraDialog();
+                    //Intent intentCamera = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    //startActivityForResult(intentCamera, CAPTURE_IMAGE_ACTIVITY);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case Util.PERMISSIONS_REQUEST_WRITE_DOWNLOAD: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    showDownloadDialog();
+                } else {
+                    Snackbar.make(mRootLayout, getContext().getResources().getString(R.string.permission_denied), Snackbar.LENGTH_SHORT).show();
+                }
+                return;
+            }
+            case Util.PERMISSIONS_REQUEST_WRITE_GALERIA: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, RESULT_LOAD_IMAGE);
+                } else {
+                    Snackbar.make(mRootLayout, getContext().getResources().getString(R.string.permission_denied), Snackbar.LENGTH_SHORT).show();
+                }
+                return;
+            }
+            case Util.PERMISSIONS_REQUEST_CAMERA: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    try {
+                        showCameraDialog();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Snackbar.make(mRootLayout, getContext().getResources().getString(R.string.permission_denied), Snackbar.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+        }
+    }
+
+    //PERMISSOES DIALOG
+    private void showDownloadDialog() {
+        final EditText input = new EditText(getContext());
+        input.setHint(R.string.admin_download_dialog_message);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(input);
+        builder.setTitle(R.string.admin_download_dialog_title)
+                .setPositiveButton(R.string.admin_download_dialog_ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        new DownloadImage(getContext(), mImagePreview, mImageName).execute(input.getText().toString());
+                        mImagemPathText = Util.getAppFolderPath() + mImageName;
+                    }
+                })
+                .setNegativeButton(R.string.admin_download_dialog_cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        builder.create();
+        builder.show();
+    }
+
+    private void showCameraDialog() throws IOException {
+
+        //TODO camera
+
+        //File dest = new File(Util.getAppFolderPath() + mImageName);
+        //Uri outputFileUri = Uri.fromFile(dest);
+        //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+        //startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY);
+
+        //File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        //Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        //String imgname = timestamp.getTime() + "";
+
+        //File image = File.createTempFile(imgname, ".jpg", storageDir);
+        //mCurrentPhotoPath = image.getAbsolutePath();
+
+        //Uri photoURI = FileProvider.getUriForFile(getContext(), "pt.ipp.estg.cmu.fileprovider", image);
+        //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+        //startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY);
+
+
+        /*
+        ContentValues values = new ContentValues(1);
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg");
+        Uri mCameraTempUri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        if (mCameraTempUri != null) {
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, mCameraTempUri);
+        }
+        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY);
+        */
+
+    }
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -192,90 +377,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.bt_download:
-                dialogPermission(Util.PERMISSIONS_REQUEST_WRITE_DOWNLOAD);
-                break;
-
-            case R.id.bt_galeria:
-                dialogPermission(Util.PERMISSIONS_REQUEST_WRITE_GALERIA);
-                break;
-
-            case R.id.bt_camera:
-                //TODO permissao camera
-/*                File dest = new File(Util.getAppFolderPath() + mImageName);
-                Uri outputFileUri = Uri.fromFile(dest);
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY);*/
-
-
-                ContentValues values = new ContentValues(1);
-                values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg");
-                Uri mCameraTempUri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                if (mCameraTempUri != null) {
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, mCameraTempUri);
-                }
-                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY);
-
-                break;
-
-            case R.id.fab:
-                savePergunta();
-                break;
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case Util.PERMISSIONS_REQUEST_WRITE_DOWNLOAD: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    showDownloadDialog();
-                } else {
-                    Snackbar.make(mRootLayout, getContext().getResources().getString(R.string.permission_denied), Snackbar.LENGTH_SHORT).show();
-                }
-                return;
-            }
-            case Util.PERMISSIONS_REQUEST_WRITE_GALERIA: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(i, RESULT_LOAD_IMAGE);
-                } else {
-                    Snackbar.make(mRootLayout, getContext().getResources().getString(R.string.permission_denied), Snackbar.LENGTH_SHORT).show();
-                }
-                return;
-            }
-        }
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void dialogPermission(int requestcode) {
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_CONTACTS)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-            } else {
-                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestcode);
-            }
-        } else {
-            switch (requestcode) {
-                case Util.PERMISSIONS_REQUEST_WRITE_DOWNLOAD:
-                    showDownloadDialog();
-                    break;
-                case Util.PERMISSIONS_REQUEST_WRITE_GALERIA:
-                    Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(i, RESULT_LOAD_IMAGE);
-                    break;
-            }
-        }
-    }
-
+    ///////////////////////////////////////////////////////DATA OPETARIONS
     private void setPreviewImage(String imagePath) {
         if (null != imagePath) {
             File imgFile = new File(imagePath);
@@ -285,29 +387,6 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                 mImagePreview.setImageBitmap(bmImg);
             }
         }
-    }
-
-    private void showDownloadDialog() {
-        final EditText input = new EditText(getContext());
-        input.setHint(R.string.admin_download_dialog_message);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        input.setLayoutParams(lp);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(input);
-        builder.setTitle(R.string.admin_download_dialog_title)
-                .setPositiveButton(R.string.admin_download_dialog_ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        new DownloadImage(getContext(), mImagePreview, mImageName).execute(input.getText().toString());
-                        mImagemPathText = Util.getAppFolderPath() + mImageName;
-                    }
-                })
-                .setNegativeButton(R.string.admin_download_dialog_cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-        builder.create();
-        builder.show();
     }
 
     private void savePergunta() {

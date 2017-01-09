@@ -13,6 +13,7 @@ import pt.ipp.estg.cmu.interfaces.SettingsRestartListener;
 public class SettingsFragment extends PreferenceFragment {
 
     private ListPreference mThemeList;
+    private ListPreference mFreqList;
     private SettingsRestartListener mListener;
 
 
@@ -35,6 +36,15 @@ public class SettingsFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 mListener.onThemeRestart();
+                return true;
+            }
+        });
+
+        mFreqList = (ListPreference) findPreference("list_preference_frequencia");
+        mFreqList.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                mListener.onFreqChange();
                 return true;
             }
         });

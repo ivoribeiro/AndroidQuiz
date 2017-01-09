@@ -42,6 +42,9 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
     private static final String RESPOSTACLICK13 = "resposta_click13";
     private static final String RESPOSTACLICK14 = "resposta_click14";
     private static final String RESPOSTACLICK15 = "resposta_click15";
+
+    private static final String RESPOSTACLICKREFRESH = "resposta_click_refresh";
+
     private static final String LETRAINTENT1 = "letra_intent1";
     private static final String LETRAINTENT2 = "letra_intent2";
     private static final String LETRAINTENT3 = "letra_intent3";
@@ -57,6 +60,10 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
     private static final String LETRAINTENT13 = "letra_intent13";
     private static final String LETRAINTENT14 = "letra_intent14";
     private static final String LETRAINTENT15 = "letra_intent15";
+
+    private static final String REFRESHINTENT = "refresh_intent";
+
+
     private static final String PERGUNTAINTENT = "pergunta_intent";
     private static final String INDEXINTENT = "INDEXINTENT";
     private static final String RESPOSTACERTAINTENT = "resposta_certa_intent";
@@ -86,13 +93,10 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
         // return pendingSync;
         return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-
     }
 
     @Override
-
     public void onReceive(Context context, Intent intent) {
-
         PerguntaRepo perguntaRepo = new PerguntaRepo(context);
         ComponentName thisWidget = new ComponentName(context, MyBroadcastReceiverWidget.class);
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -101,6 +105,9 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
         Bundle b = intent.getExtras();
         mPreferencesSetup = new PreferencesSetup(context);
 
+        if (RESPOSTACERTAINTENT.equals(intent.getAction())) {
+            pergunta = perguntaRepo.getRandQuestion4letters();
+        }
 
         if (ActivityMain.WIDGET_ACTION.equals(intent.getAction())) {
             this.pergunta = new Pergunta();
@@ -137,7 +144,7 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
 
             int index = mPreferencesSetup.getIndexRespostaWidget();
             String resposta = mPreferencesSetup.getRespostaActualWidget();
-            resposta=resposta + letra;
+            resposta = resposta + letra;
             mPreferencesSetup.saveRespostaActualWidget(resposta);
             switch (index) {
                 case 0:
@@ -255,6 +262,10 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
         views.setOnClickPendingIntent(R.id.bt_13, getPendingSelfIntent(mcontext, RESPOSTACLICK13, letra12, pergunta, LETRAINTENT13));
         views.setOnClickPendingIntent(R.id.bt_14, getPendingSelfIntent(mcontext, RESPOSTACLICK14, letra13, pergunta, LETRAINTENT14));
         views.setOnClickPendingIntent(R.id.bt_15, getPendingSelfIntent(mcontext, RESPOSTACLICK15, letra14, pergunta, LETRAINTENT15));
+
+        views.setOnClickPendingIntent(R.id.bt_refresh, getPendingSelfIntent(mcontext, RESPOSTACLICKREFRESH, "", pergunta, REFRESHINTENT));
+
+
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 

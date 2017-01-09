@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,7 +25,7 @@ public class RandQuestionService extends Service {
     private int mRandQuestionTime;
     private boolean wantNotifications;
     public static final String QUESTION_TO_WIDGET = "pergunta_a_actualizar";
-    private static Timer timer = new Timer();
+    private Timer timer = new Timer();
 
 
     @SuppressWarnings("unused")
@@ -45,7 +46,19 @@ public class RandQuestionService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        System.out.println("SERVICE ONCREATE");
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
+        System.out.println("DESTROY SERVICE");
+    }
+
+    @Override
+    public IBinder onBind(Intent arg0) {
+        return null;
     }
 
     private class mainTask extends TimerTask {
@@ -55,13 +68,10 @@ public class RandQuestionService extends Service {
         mainTask(Context context) {
             mcontext = context;
             mIntent = new Intent(ActivityMain.WIDGET_ACTION);
-
         }
 
         public void run() {
-            //NivelRepo nivelRepo = new NivelRepo(mcontext);
-            //Nivel randnivel = nivelRepo.getRandNivel();
-            Pergunta pergunta = new PerguntaRepo(mcontext).getRandQuestion();
+            Pergunta pergunta = new PerguntaRepo(mcontext).getRandQuestion4letters();
             Bundle b = new Bundle();
             b.putString("resposta_certa_pergunta", pergunta.getRespostaCerta());
             b.putString("string_aleatoria_pergunta", pergunta.getStringAleatoria());
@@ -81,14 +91,5 @@ public class RandQuestionService extends Service {
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public IBinder onBind(Intent arg0) {
-        return null;
-    }
 
 }

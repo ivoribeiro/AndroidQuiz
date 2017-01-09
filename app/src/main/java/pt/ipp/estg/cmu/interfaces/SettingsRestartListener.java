@@ -8,4 +8,6 @@ public interface SettingsRestartListener {
 
     void onThemeRestart();
 
+    void onFreqChange();
+
 }

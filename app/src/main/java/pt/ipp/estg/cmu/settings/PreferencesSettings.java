@@ -51,9 +51,7 @@ public class PreferencesSettings {
     public int getFrequenciaUpdate() {
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(mContext);
         String[] info = mContext.getResources().getStringArray(R.array.frequencias);
-
         String frequencia = SP.getString("list_preference_frequencia", info[0]);
-
         int index = Arrays.asList(info).indexOf(frequencia);
 
         switch (index) {

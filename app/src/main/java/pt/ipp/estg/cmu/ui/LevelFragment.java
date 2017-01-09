@@ -77,6 +77,7 @@ public class LevelFragment extends Fragment implements View.OnClickListener {
         mFab = (FloatingActionButton) view.findViewById(R.id.fab);
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_GRID));
+
         mRecyclerView.addOnScrollListener(new RecyclerOnScrollListenerHelper(mFab));
 
         if (isAdmin) {
