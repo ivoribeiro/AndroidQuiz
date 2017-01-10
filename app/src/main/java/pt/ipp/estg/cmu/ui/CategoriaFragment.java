@@ -65,7 +65,7 @@ public class CategoriaFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mRepository = new CategoriaRepo(getContext());
-        mCategorias = this.mRepository.getAll();
+        mCategorias = mRepository.getAll();
         mAdapter = new AdapterCategoriaGrid(getContext(), mRecyclerView, mCategorias, isAdmin);
         mRecyclerView.setAdapter(mAdapter);
     }

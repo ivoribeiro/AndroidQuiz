@@ -16,11 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.dblib.repositories.CategoriaRepo;
-import pt.ipp.estg.dblib.models.Categoria;
 import pt.ipp.estg.cmu.ui.LevelActivity;
 import pt.ipp.estg.cmu.util.Util;
 import pt.ipp.estg.cmu.util.UtilUI;
+import pt.ipp.estg.dblib.models.Categoria;
+import pt.ipp.estg.dblib.repositories.CategoriaRepo;
 
 /**
  * Adapter contendo um cardview com uma textview e uma imageview, responsavel por listar as categorias recebidas
@@ -41,7 +41,7 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
         this.isAdmin = isAdmin;
         this.mCategoriaRepo = new CategoriaRepo(this.mContext);
         if (!isAdmin) {
-            removeDisabledCategories();
+            mDataSet = removeDisabledCategories();
         }
     }
 
@@ -145,11 +145,13 @@ public class AdapterCategoriaGrid extends RecyclerView.Adapter<AdapterCategoriaG
         holder.mImageCategoria.setBackground(res);
     }
 
-    private void removeDisabledCategories() {
+    private List<Categoria> removeDisabledCategories() {
+        List<Categoria> result = new ArrayList<>();
         for (int i = 0; i < mDataSet.size(); ++i) {
-            if (!mDataSet.get(i).isAtiva()) {
-                mDataSet.remove(i);
+            if (mDataSet.get(i).isAtiva()) {
+                result.add(mDataSet.get(i));
             }
         }
+        return result;
     }
 }
