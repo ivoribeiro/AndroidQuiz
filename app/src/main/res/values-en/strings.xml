@@ -4,4 +4,17 @@
     <string name="action_settings">Settings</string>
     <string name="admin_bt_galeria">Galerie</string>
     <string name="admin_download_dialog_cancel">Cancel</string>
+    <string name="txt_score">Score</string>
+    <string name="welcome_text">Welcome</string>
+    <string name="widget_update">Update</string>
+    <string name="txt_level">Level</string>
+    <string name="title_topscore"></string>
+    <string name="title_statistics_main"></string>
+    <string name="title_online">Online Scores</string>
+    <string name="title_level">Level</string>
+    <string name="title_activity_setup">Statistics</string>
+    <string name="title_admin">Admin Area</string>
+    <string name="title_activity_settings">Preferences</string>
+    <string name="title_activity_level">Level</string>
+    <string name="title_activity_estatisticas">Statistics</string>
 </resources>
