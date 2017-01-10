@@ -107,10 +107,11 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_level) {
-            return true;
+            startActivity(new Intent(this, SettingsActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -170,7 +171,7 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
             "pt.ipp.estg.cmu.ui.EstatisticasActivity",
             "pt.ipp.estg.cmu.ui.OnlineScoreActivity",
             "pt.ipp.estg.cmu.ui.CategoriaActivity",
-            "pt.ipp.estg.cmu.ui.SettingsActivity"};
+            "pt.ipp.estg.cmu.settings.SettingsActivity"};
 
     @Override
     public void onBackPressed() {
@@ -195,6 +196,9 @@ public class ActivityBase extends AppCompatActivity implements NavigationView.On
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 } else {
+                    if (!drawer.isDrawerOpen(GravityCompat.START)) {
+                        drawer.openDrawer(GravityCompat.START);
+                    }
                     Toast.makeText(this, getResources().getString(R.string.click_exit), Toast.LENGTH_SHORT).show();
                 }
                 back_pressed = System.currentTimeMillis();

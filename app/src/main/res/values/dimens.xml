@@ -27,7 +27,7 @@
 
 
     <!-- ActivityLevel -->
-    <dimen name="first_image_size">120dp</dimen>
+    <dimen name="first_image_size">150dp</dimen>
 
 
     <!-- AdapterLevelList -->
