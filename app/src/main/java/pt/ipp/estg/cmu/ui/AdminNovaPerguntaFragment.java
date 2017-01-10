@@ -12,7 +12,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -21,9 +20,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,22 +36,22 @@ import java.io.IOException;
 import java.sql.Timestamp;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.dblib.repositories.NivelRepo;
-import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.interfaces.AdminPerguntaAdapterChangeListener;
-import pt.ipp.estg.dblib.models.Nivel;
-import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.tasks.DownloadImage;
 import pt.ipp.estg.cmu.util.FileOperations;
 import pt.ipp.estg.cmu.util.StringsOperations;
 import pt.ipp.estg.cmu.util.Util;
+import pt.ipp.estg.dblib.models.Nivel;
+import pt.ipp.estg.dblib.models.Pergunta;
+import pt.ipp.estg.dblib.repositories.NivelRepo;
+import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
 import static android.app.Activity.RESULT_OK;
 
 public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickListener {
 
     private static int RESULT_LOAD_IMAGE = 1;
-    private static int CAPTURE_IMAGE_ACTIVITY = 1337;
+    private static int CAPTURE_IMAGE_ACTIVITY = 2;
 
     private AdminPerguntaAdapterChangeListener mListener;
 
@@ -319,18 +316,17 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         //startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY);
 
 
-        /*
+        File dest = new File(Util.getAppFolderPath() + mImageName);
+        Uri outputFileUri = Uri.fromFile(dest);
         ContentValues values = new ContentValues(1);
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg");
         Uri mCameraTempUri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        if (mCameraTempUri != null) {
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, mCameraTempUri);
-        }
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, mCameraTempUri);
+
         startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY);
-        */
+
 
     }
 
