@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">CMU</string>
     <string name="title_activity_base">ActivityBase</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Abrir menu lateral</string>
+    <string name="navigation_drawer_close">Fechar menu lateral</string>
     <string name="action_settings">Definições</string>
 
     <!-- Activity Tiles Titles-->
@@ -78,8 +78,8 @@
 
     <!--AdminNovaPergunta -->
     <string name="admin_bt_galeria">Galeria</string>
-    <string name="admin_bt_camera">Camera</string>
-    <string name="admin_bt_download">Download</string>
+    <string name="admin_bt_camera" translatable="false">Camera</string>
+    <string name="admin_bt_download" translatable="false">Download</string>
 
     <string name="admin_nova_pergunta_resposta">Resposta</string>
     <string name="admin_nova_pergunta_resposta_correta">Resposta correta</string>
@@ -96,8 +96,8 @@
 
     <string name="admin_download_dialog_title">Download Imagem</string>
     <string name="admin_download_dialog_message">Introduza o url para fazer o download</string>
-    <string name="admin_download_dialog_ok">Download</string>
-    <string name="admin_download_dialog_cancel">Cancel</string>
+    <string name="admin_download_dialog_ok" translatable="false">Download</string>
+    <string name="admin_download_dialog_cancel">Cancelar</string>
 
 
     <!--RecyclerSwipeTouchHelper -->
