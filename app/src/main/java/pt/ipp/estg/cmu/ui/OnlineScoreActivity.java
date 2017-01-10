@@ -17,6 +17,6 @@ public class OnlineScoreActivity extends ActivityBase {
         setTheme(new PreferencesSettings(this).getThemePreference());
         setContentView(R.layout.activity_online_score);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.frame_layout, OnlineScoreFragment.newInstance()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, OnlineScoreFragment.newInstance()).commit();
     }
 }

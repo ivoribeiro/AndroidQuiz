@@ -3,6 +3,7 @@ package pt.ipp.estg.cmu.server;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -12,6 +13,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterOnlineScore;
 import pt.ipp.estg.dblib.models.OnlineScore;
 
@@ -61,7 +63,7 @@ public class GetScoresServerSource extends AsyncTask<JSONObject, Void, ArrayList
     @Override
     protected void onPostExecute(ArrayList<OnlineScore> onlineScores) {
         super.onPostExecute(onlineScores);
-        mRecycler.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecycler.setLayoutManager(new GridLayoutManager(mContext, mContext.getResources().getInteger(R.integer.nivel_number_grid)));
         mRecycler.setAdapter(new AdapterOnlineScore(mContext, onlineScores));
         mSwipe.setRefreshing(false);
     }

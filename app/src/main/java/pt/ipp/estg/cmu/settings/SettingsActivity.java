@@ -20,7 +20,7 @@ public class SettingsActivity extends ActivityBase implements SettingsRestartLis
 
         getFragmentManager()
                 .beginTransaction()
-                .add(R.id.frame_layout, SettingsFragment.newInstance())
+                .replace(R.id.frame_layout, SettingsFragment.newInstance())
                 .commit();
 
     }

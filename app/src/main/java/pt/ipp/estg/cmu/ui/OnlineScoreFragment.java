@@ -94,12 +94,14 @@ public class OnlineScoreFragment extends Fragment implements SwipeRefreshLayout.
     }
 
     private void callGetScores() {
+        final Context context = getContext();
+
         new Request(RequestTypeEnum.GET, getContext(), null) {
             @Override
             public void onPostExecute(JSONObject data) {
                 super.onPostExecute(data);
                 mSwipe.setRefreshing(false);
-                new GetScoresServerSource(getContext(), mSwipe, mRecycler).execute(data);
+                new GetScoresServerSource(context, mSwipe, mRecycler).execute(data);
             }
         }.execute(Util.SERVER_GET_SCORES);
     }
