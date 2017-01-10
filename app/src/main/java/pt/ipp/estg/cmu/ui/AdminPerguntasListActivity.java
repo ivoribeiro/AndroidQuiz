@@ -15,7 +15,7 @@ import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
 
-public class AdminPerguntaActivity extends AppCompatActivity implements
+public class AdminPerguntasListActivity extends AppCompatActivity implements
         AdminPerguntaLayoutListener,
         AdminPerguntaAdapterChangeListener {
 
@@ -64,6 +64,7 @@ public class AdminPerguntaActivity extends AppCompatActivity implements
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.frame_layout, AdminNovaPerguntaFragment.newInstance(nivel, pergunta))
+                    .addToBackStack(Util.STACK_ADMIN)
                     .commit();
         }
     }

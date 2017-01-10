@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="?android:colorBackground"
     android:fitsSystemWindows="true"
-    tools:context="pt.ipp.estg.cmu.ui.AdminPerguntaActivity">
+    tools:context="pt.ipp.estg.cmu.ui.AdminPerguntasListActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

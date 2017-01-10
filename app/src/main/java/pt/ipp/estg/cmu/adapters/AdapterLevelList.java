@@ -21,7 +21,7 @@ import pt.ipp.estg.dblib.estatisticas.EstatisticasNivel;
 import pt.ipp.estg.dblib.models.Categoria;
 import pt.ipp.estg.dblib.models.Nivel;
 import pt.ipp.estg.cmu.ui.AdminNovoNivelFragment;
-import pt.ipp.estg.cmu.ui.AdminPerguntaActivity;
+import pt.ipp.estg.cmu.ui.AdminPerguntasListActivity;
 import pt.ipp.estg.cmu.ui.GameActivity;
 import pt.ipp.estg.cmu.util.Util;
 import pt.ipp.estg.cmu.util.UtilUI;
@@ -77,7 +77,7 @@ public class AdapterLevelList extends RecyclerView.Adapter<AdapterLevelList.View
             @Override
             public void onClick(View view) {
                 if (isAdmin) {//MODO ADMIN
-                    mContext.startActivity(new Intent(mContext, AdminPerguntaActivity.class)
+                    mContext.startActivity(new Intent(mContext, AdminPerguntasListActivity.class)
                             .putExtra(Util.ARG_LEVEL, mDataSet.get(position)));
 
 

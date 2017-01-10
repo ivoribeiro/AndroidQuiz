@@ -57,7 +57,7 @@
             android:parentActivityName=".ui.ActivityMain"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.AdminPerguntaActivity"
+            android:name=".ui.AdminPerguntasListActivity"
             android:label="@string/title_activity_admin_pergunta"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
