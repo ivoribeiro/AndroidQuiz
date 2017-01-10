@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.DialogFragment;
 
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.interfaces.AdminLoginListener;
@@ -34,6 +35,7 @@ public class CategoriaActivity extends ActivityBase implements AdminLoginListene
                 FragmentManager fm = getFragmentManager();
                 CategoriaAdminDialog dialogFragment = new CategoriaAdminDialog();
                 dialogFragment.show(fm, "Dialog Fragment");
+                dialogFragment.setCancelable(false);
 
                 //buildDialog();
             }

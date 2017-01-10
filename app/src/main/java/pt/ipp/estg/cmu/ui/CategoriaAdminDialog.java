@@ -43,6 +43,7 @@ public class CategoriaAdminDialog extends DialogFragment implements View.OnClick
     public static CategoriaAdminDialog newInstance() {
         CategoriaAdminDialog dialog = new CategoriaAdminDialog();
         dialog.setCancelable(false);
+
         return dialog;
     }
 
@@ -99,6 +100,11 @@ public class CategoriaAdminDialog extends DialogFragment implements View.OnClick
             dismiss();
             mListener.onLoginSucess();
         }
+    }
+
+    @Override
+    public void setCancelable(boolean cancelable) {
+        super.setCancelable(cancelable);
     }
 
     @Override

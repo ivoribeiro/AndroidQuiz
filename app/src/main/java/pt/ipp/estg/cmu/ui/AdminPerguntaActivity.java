@@ -15,7 +15,9 @@ import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
 
-public class AdminPerguntaActivity extends AppCompatActivity implements AdminPerguntaLayoutListener, AdminPerguntaAdapterChangeListener {
+public class AdminPerguntaActivity extends AppCompatActivity implements
+        AdminPerguntaLayoutListener,
+        AdminPerguntaAdapterChangeListener {
 
     private Nivel mNivel;
     private Toolbar mToolbar;
