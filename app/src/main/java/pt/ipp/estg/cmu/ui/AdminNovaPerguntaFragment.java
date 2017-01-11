@@ -2,7 +2,6 @@ package pt.ipp.estg.cmu.ui;
 
 import android.Manifest;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -36,7 +35,6 @@ import java.io.IOException;
 import java.sql.Timestamp;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.interfaces.AdminPerguntaAdapterChangeListener;
 import pt.ipp.estg.cmu.tasks.DownloadImage;
 import pt.ipp.estg.cmu.util.FileOperations;
 import pt.ipp.estg.cmu.util.StringsOperations;
@@ -53,7 +51,6 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     private static int RESULT_LOAD_IMAGE = 1;
     private static int CAPTURE_IMAGE_ACTIVITY = 2;
 
-    private AdminPerguntaAdapterChangeListener mListener;
 
     private Nivel mNivel;
     private Pergunta mPergunta;
@@ -139,18 +136,6 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             setPreviewImage(mPergunta.getImagem());
             mRespostaText.setText(mPergunta.getRespostaCerta());
         }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mListener = (AdminPerguntaAdapterChangeListener) context;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -402,6 +387,12 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                     p.setNivel(mNivel.getId());
                     p.setRespostaActual("");
                     mRepositoryPergunta.insertInto(p);
+                    Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_save_pergunta), Toast.LENGTH_SHORT).show();
+
+                    //modo editar depois de ser guardada
+                    //TODO EDITAR BUG
+                    editMode = true;
+                    mPergunta = p;
                 } else {
                     p.setId(mPergunta.getId());
                     mImagemPathText = mImagemPathText == null ? mPergunta.getImagem() : mImagemPathText;
@@ -412,9 +403,8 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                     p.setnAjudasUsadas(mPergunta.getnAjudasUsadas());
                     p.setRespostaActual(mPergunta.getRespostaActual());
                     mRepositoryPergunta.update(p);
+                    Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_edit_pergunta), Toast.LENGTH_SHORT).show();
                 }
-                //getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                mListener.onPerguntaSave();
             } else {
                 Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_campos_erro), Toast.LENGTH_SHORT).show();
             }

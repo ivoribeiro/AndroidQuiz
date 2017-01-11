@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterLevelList;
 import pt.ipp.estg.cmu.util.FileOperations;
+import pt.ipp.estg.dblib.models.Nivel;
 import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.dblib.repositories.NivelRepo;
 import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 import pt.ipp.estg.dblib.repositories.RepositoryInterface;
-import pt.ipp.estg.dblib.models.Nivel;
 
 public class RecyclerSwipeNivelTouchHelper extends ItemTouchHelper.SimpleCallback {
 
@@ -68,11 +68,12 @@ public class RecyclerSwipeNivelTouchHelper extends ItemTouchHelper.SimpleCallbac
                     FileOperations.delete(pergunta.getImagem());
                 }
                 mRepository.deleteById(idNivel);
-
                 mNiveis.remove(position);
                 mRecycler.removeViewAt(position);
-                mAdapter.notifyItemRemoved(position);
-                mAdapter.notifyItemRangeChanged(position, mNiveis.size());
+
+                mAdapter.notifyDataSetChanged();
+                //mAdapter.notifyItemRemoved(position);
+                //mAdapter.notifyItemRangeChanged(position, mNiveis.size());
 
 
             } else {

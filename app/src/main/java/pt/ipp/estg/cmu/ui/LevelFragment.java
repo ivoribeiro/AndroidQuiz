@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
@@ -19,11 +18,11 @@ import java.util.ArrayList;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterLevelList;
 import pt.ipp.estg.cmu.helpers.RecyclerOnScrollListenerHelper;
-import pt.ipp.estg.dblib.repositories.NivelRepo;
 import pt.ipp.estg.cmu.helpers.RecyclerSwipeNivelTouchHelper;
+import pt.ipp.estg.cmu.util.Util;
 import pt.ipp.estg.dblib.models.Categoria;
 import pt.ipp.estg.dblib.models.Nivel;
-import pt.ipp.estg.cmu.util.Util;
+import pt.ipp.estg.dblib.repositories.NivelRepo;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -70,16 +69,11 @@ public class LevelFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_level, container, false);
-
         mEmptyLayout = (LinearLayout) view.findViewById(R.id.inclued_layout);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-
         mFab = (FloatingActionButton) view.findViewById(R.id.fab);
-
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), NUM_GRID));
-
         mRecyclerView.addOnScrollListener(new RecyclerOnScrollListenerHelper(mFab));
-
         if (isAdmin) {
             mFab.setOnClickListener(this);
         } else {
@@ -98,7 +92,6 @@ public class LevelFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.fab) {
-            //mFab.setVisibility(View.INVISIBLE);
             ((AppCompatActivity) getContext()).getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.frame_layout, AdminNovoNivelFragment.newInstance(mCategoria, null))
@@ -107,12 +100,9 @@ public class LevelFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private ArrayList<Nivel> getAllNiveis() {
-        return mRepository.getAllByCategoria(mCategoria.getNome());
-    }
 
     private void populateRecycler() {
-        mNiveis = getAllNiveis();
+        mNiveis = mRepository.getAllByCategoria(mCategoria.getNome());
         if (mNiveis.size() > 0) {
             mEmptyLayout.setVisibility(View.GONE);
 

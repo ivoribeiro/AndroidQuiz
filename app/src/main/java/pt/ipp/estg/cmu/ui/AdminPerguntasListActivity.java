@@ -2,22 +2,18 @@ package pt.ipp.estg.cmu.ui;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.interfaces.AdminPerguntaAdapterChangeListener;
 import pt.ipp.estg.cmu.interfaces.AdminPerguntaLayoutListener;
-import pt.ipp.estg.dblib.models.Nivel;
-import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
+import pt.ipp.estg.dblib.models.Nivel;
+import pt.ipp.estg.dblib.models.Pergunta;
 
-public class AdminPerguntasListActivity extends AppCompatActivity implements
-        AdminPerguntaLayoutListener,
-        AdminPerguntaAdapterChangeListener {
+public class AdminPerguntasListActivity extends AppCompatActivity implements AdminPerguntaLayoutListener {
 
     private Nivel mNivel;
     private Toolbar mToolbar;
@@ -67,11 +63,6 @@ public class AdminPerguntasListActivity extends AppCompatActivity implements
                     .addToBackStack(Util.STACK_ADMIN)
                     .commit();
         }
-    }
-
-    @Override
-    public void onPerguntaSave() {
-        startPerguntasListFragment();
     }
 
     private void startPerguntasListFragment() {

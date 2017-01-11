@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterPerguntasList;
 import pt.ipp.estg.cmu.util.FileOperations;
-import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 import pt.ipp.estg.dblib.models.Pergunta;
+import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
 
 public class RecyclerSwipePerguntaTouchHelper extends ItemTouchHelper.SimpleCallback {
@@ -53,37 +53,18 @@ public class RecyclerSwipePerguntaTouchHelper extends ItemTouchHelper.SimpleCall
                                 mPerguntas.add(pergunta);
                                 mAdapter.notifyItemRangeRemoved(0, mPerguntas.size() - 1);
                                 mAdapter.notifyItemRangeInserted(0, mPerguntas.size());
-                                //mAdapter.notifyDataSetChanged();
-                                //mRecycler.setAdapter(new AdapterCategoriaGrid(mContext, mCategorias, true));
                             }
                         });
 
-/*
-        snackbar.getView().addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
-            @Override
-            public void onViewAttachedToWindow(View v) {
-            }
-mPerguntas
-            @Override
-            public void onViewDetachedFromWindow(View v) {
-
-                Handler h = new Handler();
-                h.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(mContext, "this is my Toast message!!! =)",
-                                Toast.LENGTH_LONG).show();
-                    }
-                }, 1000);
-            }
-        });*/
                 snackbar.show();
                 mRepository.deleteById(pergunta.getId());
                 FileOperations.delete(pergunta.getImagem());
                 mPerguntas.remove(position);
                 mRecycler.removeViewAt(position);
-                mAdapter.notifyItemRemoved(position);
-                mAdapter.notifyItemRangeChanged(position, mPerguntas.size());
+
+                mAdapter.notifyDataSetChanged();
+                //mAdapter.notifyItemRemoved(position);
+                //mAdapter.notifyItemRangeChanged(position, mPerguntas.size());
             } else {
                 mPerguntas.remove(position);
                 mRecycler.removeViewAt(position);
