@@ -88,6 +88,7 @@
     <dimen name="loading_texts_padding">5dp</dimen>
     <dimen name="loading_elements_size">20dp</dimen>
     <dimen name="setup_image">140dp</dimen>
+    <dimen name="setup_admin">100dp</dimen>
     <dimen name="setup_image_avatar">110dp</dimen>
     <dimen name="setup_custom_layout_padding">16dp</dimen>
     <dimen name="setup_fingerprint_size">60dp</dimen>

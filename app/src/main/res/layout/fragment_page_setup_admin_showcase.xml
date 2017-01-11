@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="@dimen/setup_custom_layout_padding">
+
+    <TextView
+        android:id="@+id/section_admin_label"
+        style="@style/PrimaryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/setup_page4_title" />
+
+    <TextView
+        android:id="@+id/section_admin_description"
+        style="@style/SecondaryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/setup_page4_subtitle" />
+
+
+    <android.support.v4.widget.Space
+        android:layout_width="wrap_content"
+        android:layout_height="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/setup_custom_layout_padding">
+
+        <ImageView
+            android:layout_width="@dimen/setup_admin"
+            android:layout_height="@dimen/setup_admin"
+            android:background="@drawable/img_admin_swipe" />
+
+        <TextView
+            style="@style/SecondaryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/setup_page4_swipe" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/setup_custom_layout_padding">
+
+        <ImageView
+            android:layout_width="@dimen/setup_admin"
+            android:layout_height="@dimen/setup_admin"
+            android:background="@drawable/img_admin_click" />
+
+        <TextView
+            style="@style/SecondaryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/setup_page4_press" />
+
+    </LinearLayout>
+
+</LinearLayout>

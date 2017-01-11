@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/setup_page4_title" />
+        android:text="@string/setup_page5_title" />
 
     <TextView
         android:id="@+id/section_admin_description"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/setup_page4_subtitle" />
+        android:text="@string/setup_page5_subtitle" />
 
 
     <android.support.v7.widget.CardView

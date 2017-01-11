@@ -4,7 +4,6 @@ import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -36,19 +35,18 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
     private Button mSkipBtn, mFinishBtn;
 
     //data
-    private int color0, color1, color2, color3, color4;
-    private int[] colorList = new int[5];
+    private int color0, color1, color2, color3, color4, color5;
+    private int[] colorList = new int[6];
 
     private final ArgbEvaluator evaluator = new ArgbEvaluator();
 
-    private ImageView zero, one, two, three, four;
+    private ImageView zero, one, two, three, four, five;
     private ImageView[] indicators;
 
     private int page = 0;//  to track page position
-    private CoordinatorLayout mCoordinator;
-
+    private static int avatarPage = 4;
+    private static int adminConfigPage = 5;
     private PreferencesSetup mPreferencesSetup;
-
 
     //admin layout
     private boolean isEditTextNickNameNull;
@@ -77,7 +75,8 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
         color2 = ContextCompat.getColor(this, R.color.setup_color_2);
         color3 = ContextCompat.getColor(this, R.color.setup_color_3);
         color4 = ContextCompat.getColor(this, R.color.setup_color_4);
-        colorList = new int[]{color0, color1, color2, color3, color4};
+        color5 = ContextCompat.getColor(this, R.color.setup_color_5);
+        colorList = new int[]{color0, color1, color2, color3, color4, color5};
 
         mPreferencesSetup = new PreferencesSetup(this);
 
@@ -90,9 +89,9 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
         two = (ImageView) findViewById(R.id.intro_indicator_2);
         three = (ImageView) findViewById(R.id.intro_indicator_3);
         four = (ImageView) findViewById(R.id.intro_indicator_4);
-        indicators = new ImageView[]{zero, one, two, three, four};
+        five = (ImageView) findViewById(R.id.intro_indicator_5);
+        indicators = new ImageView[]{zero, one, two, three, four, five};
 
-        mCoordinator = (CoordinatorLayout) findViewById(R.id.main_content);
         mViewPager = (ViewPager) findViewById(R.id.container);
 
         mSectionsPagerAdapter = new AdapterViewPager(getSupportFragmentManager());
@@ -101,6 +100,7 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
         mSectionsPagerAdapter.addFragment(PageSetupFragment.newInstance(2));
         mSectionsPagerAdapter.addFragment(PageSetupFragment.newInstance(3));
         mSectionsPagerAdapter.addFragment(PageSetupFragment.newInstance(4));
+        mSectionsPagerAdapter.addFragment(PageSetupFragment.newInstance(5));
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         mViewPager.setCurrentItem(page);
@@ -117,7 +117,7 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.intro_btn_next:
-                if (page == 3 && !avatarPageIsFinished()) {
+                if (page == avatarPage && !avatarPageIsFinished()) {
 
                 } else {
                     page += 1;
@@ -126,7 +126,7 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
                 break;
 
             case R.id.intro_btn_skip:
-                page = 4;
+                page = adminConfigPage;
                 mViewPager.setCurrentItem(page, true);
                 break;
 
@@ -151,7 +151,7 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        int colorUpdate = (Integer) evaluator.evaluate(positionOffset, colorList[position], colorList[position == 4 ? position : position + 1]);
+        int colorUpdate = (Integer) evaluator.evaluate(positionOffset, colorList[position], colorList[position == adminConfigPage ? position : position + 1]);
         mViewPager.setBackgroundColor(colorUpdate);
     }
 
@@ -175,23 +175,26 @@ public class PageSetupActivity extends AppCompatActivity implements AdapterPageS
             case 4:
                 mViewPager.setBackgroundColor(color4);
                 break;
+            case 5:
+                mViewPager.setBackgroundColor(color5);
+                break;
         }
 
 
-        if (page == 4 && avatarPageIsFinished()) {
+        if (page == adminConfigPage && avatarPageIsFinished()) {
             //ultima pagina setup
             //pin e avatar concluido
             //criar player na api
             callCreatePlayer();
         }
 
-        if (page == 4 && !avatarPageIsFinished()) {
+        if (page == adminConfigPage && !avatarPageIsFinished()) {
             //avatar page nao concluida
-            mViewPager.setCurrentItem(3, true);
+            mViewPager.setCurrentItem(avatarPage, true);
 
         } else {
-            mNextBtn.setVisibility(position == 4 ? View.GONE : View.VISIBLE);
-            mFinishBtn.setVisibility(position == 4 ? View.VISIBLE : View.GONE);
+            mNextBtn.setVisibility(position == adminConfigPage ? View.GONE : View.VISIBLE);
+            mFinishBtn.setVisibility(position == adminConfigPage ? View.VISIBLE : View.GONE);
         }
     }
 

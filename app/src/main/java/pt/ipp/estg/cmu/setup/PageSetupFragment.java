@@ -97,6 +97,12 @@ public class PageSetupFragment extends Fragment implements FingerprintController
                 break;
 
             case 3:
+                LinearLayout admin_layout = (LinearLayout) inflater.inflate(R.layout.fragment_page_setup_admin_showcase, null, false);
+                centerLayout.removeAllViews();
+                centerLayout.addView(admin_layout);
+                break;
+
+            case 4:
                 LinearLayout avatar_layout = (LinearLayout) inflater.inflate(R.layout.fragment_page_setup_avatar, null, false);
                 centerLayout.removeAllViews();
                 centerLayout.addView(avatar_layout);
@@ -111,18 +117,18 @@ public class PageSetupFragment extends Fragment implements FingerprintController
 
                 break;
 
-            case 4:
-                LinearLayout admin_layout = (LinearLayout) inflater.inflate(R.layout.fragment_page_setup_admin, null, false);
+            case 5:
+                LinearLayout admin_config_layout = (LinearLayout) inflater.inflate(R.layout.fragment_page_setup_admin_config, null, false);
                 centerLayout.removeAllViews();
-                centerLayout.addView(admin_layout);
+                centerLayout.addView(admin_config_layout);
 
-                EditText mEditTextPin = (EditText) admin_layout.findViewById(R.id.edit_pin);
+                EditText mEditTextPin = (EditText) admin_config_layout.findViewById(R.id.edit_pin);
                 mEditTextPin.addTextChangedListener(new TextWatcherHelper(getContext(), mListener, mEditTextPin));
 
-                mLayoutStatus = (LinearLayout) admin_layout.findViewById(R.id.fingerprint_layout_status);
+                mLayoutStatus = (LinearLayout) admin_config_layout.findViewById(R.id.fingerprint_layout_status);
 
-                ImageView imageView = (ImageView) admin_layout.findViewById(R.id.fingerprint_icon_status);
-                TextView textView = (TextView) admin_layout.findViewById(R.id.fingerprint_text_status);
+                ImageView imageView = (ImageView) admin_config_layout.findViewById(R.id.fingerprint_icon_status);
+                TextView textView = (TextView) admin_config_layout.findViewById(R.id.fingerprint_text_status);
 
                 new FingerprintController(getContext(), imageView, textView, this);
 

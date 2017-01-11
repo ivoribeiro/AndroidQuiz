@@ -125,8 +125,14 @@
     <string name="setup_page3_title">Escolhe o teu avatar e nickname</string>
     <string name="setup_page3_subtitle">Escolhe um destes avatares e um nickname para te identificares online</string>
 
-    <string name="setup_page4_title">Configura a tua conta Admin</string>
-    <string name="setup_page4_subtitle">Escolhe um pin, e se o teu telemovel permitir, configura a impressão digital</string>
+    <string name="setup_page4_title">Área Admin</string>
+    <string name="setup_page4_subtitle">Ativa Categorias, Adiciona e Remove Niveis/Perguntas</string>
+    <string name="setup_page4_swipe">Faz Swipe para remover Niveis/Perguntas</string>
+    <string name="setup_page4_press">Longo Clique para ativar Categorias, e editar Niveis/Perguntas</string>
+
+    <string name="setup_page5_title">Configura a tua conta Admin</string>
+    <string name="setup_page5_subtitle">Escolhe um pin, e se o teu telemovel permitir, configura a impressão digital</string>
+
 
     <string name="setup_skip">Avançar</string>
     <string name="setup_finish">Concluir</string>

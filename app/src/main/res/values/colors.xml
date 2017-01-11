@@ -40,9 +40,10 @@
     <color name="black_trans80">#14000000</color>
     <color name="setup_color_0">#FF5722</color>
     <color name="setup_color_1">#2196F3</color>
-    <color name="setup_color_2">#8BC34A</color>
-    <color name="setup_color_3">#FF9800</color>
+    <color name="setup_color_2">#FF9800</color>
+    <color name="setup_color_3">#8BC34A</color>
     <color name="setup_color_4">#FFEB3B</color>
+    <color name="setup_color_5">#CDDC39</color>
 
 
 </resources>
