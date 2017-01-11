@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/section_admin_description"
-        style="@style/SecondaryTitle"
+        style="@style/PrimarySmallTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -25,7 +25,7 @@
 
     <android.support.v4.widget.Space
         android:layout_width="wrap_content"
-        android:layout_height="20dp" />
+        android:layout_height="40dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
