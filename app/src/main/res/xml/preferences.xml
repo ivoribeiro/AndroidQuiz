@@ -3,7 +3,7 @@
     <PreferenceCategory android:title="@string/prefs_text_notificacao">
 
         <CheckBoxPreference
-            android:key="checkbox_preference"
+            android:key="notification_checkbox_preference"
             android:summary="@string/prefs_text_notificacao_summary"
             android:title="@string/prefs_text_notificacao_title" />
 
@@ -14,6 +14,19 @@
             android:key="list_preference_frequencia"
             android:summary="@string/prefs_text_notificacao_update_summary"
             android:title="@string/prefs_text_notificacao_update_title" />
+
+        <RingtonePreference
+            android:defaultValue="content://settings/system/notification_sound"
+            android:dependency="notification_checkbox_preference"
+            android:key="notifications_ringtone"
+            android:ringtoneType="notification"
+            android:title="@string/prefs_text_notificacao_ringtone" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:dependency="notification_checkbox_preference"
+            android:key="notifications_vibrate"
+            android:title="@string/prefs_text_notificacao_vibrate" />
 
     </PreferenceCategory>
 

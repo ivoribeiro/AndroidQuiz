@@ -2,12 +2,14 @@ package pt.ipp.estg.cmu.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 
 import java.util.Arrays;
 
 import pt.ipp.estg.cmu.R;
-import pt.ipp.estg.cmu.enums.FrequenciaUpdateEnum;
 
 public class PreferencesSettings {
 
@@ -70,7 +72,20 @@ public class PreferencesSettings {
     }
 
     public boolean wantNotifications() {
-        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return SP.getBoolean("checkbox_preference", false);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return preferences.getBoolean("checkbox_preference", false);
+    }
+
+    public boolean wantVibration() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return preferences.getBoolean("notifications_vibrate", false);
+    }
+
+    public Ringtone wantRingTone() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        String alarms = preferences.getString("notifications_ringtone", "default ringtone");
+        Uri uri = Uri.parse(alarms);
+        Ringtone r = RingtoneManager.getRingtone(mContext, uri);
+        return r;
     }
 }

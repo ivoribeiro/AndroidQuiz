@@ -178,6 +178,10 @@
     <string name="prefs_text_notificacao_title">Perguntas</string>
     <string name="prefs_text_notificacao_summary">Ativar notificações para novas perguntas no widget</string>
     <string name="prefs_text_notificacao_update_title">Frequência</string>
+    <string name="prefs_text_notificacao_ringtone">Toque</string>
+    <string name="prefs_text_notificacao_vibrate">Vibrar</string>
+
+
     <string name="prefs_text_notificacao_update_summary">Frequência de atualização da pergunta no widget</string>
     <string name="prefs_text">Widget</string>
 
