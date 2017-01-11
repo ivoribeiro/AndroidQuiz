@@ -225,6 +225,7 @@
     <string name="send_sucess">Pontuação enviada com sucesso</string>
 
     <string name="widget_update">Atualizar</string>
+    <string name="tab_title_estatisticas_graph">Gráficos</string>
 
 
 </resources>

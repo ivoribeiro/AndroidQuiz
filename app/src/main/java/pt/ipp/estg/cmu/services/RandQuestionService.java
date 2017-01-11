@@ -4,8 +4,10 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -24,6 +26,8 @@ import pt.ipp.estg.cmu.ui.ActivityMain;
 public class RandQuestionService extends Service {
     private int mRandQuestionTime;
     private boolean wantNotifications;
+    private boolean wantVibration;
+    PreferencesSettings mPreferenceSettings;
     public static final String QUESTION_TO_WIDGET = "pergunta_a_actualizar";
     private Timer timer = new Timer();
 
@@ -32,12 +36,13 @@ public class RandQuestionService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //preferencias
-        PreferencesSettings mPreferenceSettings = new PreferencesSettings(this);
+         mPreferenceSettings = new PreferencesSettings(this);
+
         int minutos = mPreferenceSettings.getFrequenciaUpdate();
-        boolean notifications = mPreferenceSettings.wantNotifications();
+
 
         mRandQuestionTime = minutos;
-        wantNotifications = notifications;
+
         timer.scheduleAtFixedRate(new mainTask(this), 0, mRandQuestionTime * 1000 * 60);
 
         return START_REDELIVER_INTENT;
@@ -77,8 +82,9 @@ public class RandQuestionService extends Service {
             b.putString("string_aleatoria_pergunta", pergunta.getStringAleatoria());
             b.putString("imagem_pergunta", pergunta.getImagem());
             mIntent.putExtras(b);
-            //mIntent.putExtra(QUESTION_TO_WIDGET, pergunta);
-            if (wantNotifications) {
+            boolean notifications = mPreferenceSettings.wantNotifications();
+            boolean vibration = mPreferenceSettings.wantVibration();
+            if (notifications) {
                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mcontext)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle(getString(R.string.notification_title))
@@ -86,6 +92,13 @@ public class RandQuestionService extends Service {
                 NotificationManager mNotificationManager =
                         (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 mNotificationManager.notify(0, mBuilder.build());
+                Ringtone ringtone = mPreferenceSettings.wantRingTone();
+                ringtone.play();
+                if (vibration){
+                    Vibrator v = (Vibrator) mcontext.getSystemService(Context.VIBRATOR_SERVICE);
+                    // Vibrate for 500 milliseconds
+                    v.vibrate(500);
+                }
             }
             sendBroadcast(mIntent);
         }

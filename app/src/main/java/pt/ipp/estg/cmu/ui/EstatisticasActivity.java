@@ -33,8 +33,7 @@ public class EstatisticasActivity extends ActivityBase implements ViewPager.OnPa
     private void setupViewPager() {
         AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager());
         adapter.addFragment(EstatisticasGraphs.newInstance());
-        adapter.addTitle(getString(R.string.tab_title_estatisticas_jogo));
-
+        adapter.addTitle(getString(R.string.tab_title_estatisticas_graph));
         adapter.addFragment(EstatisticasJogoFragment.newInstance());
         adapter.addTitle(getString(R.string.tab_title_estatisticas_jogo));
         adapter.addFragment(EstatisticasCategoriaFragment.newInstance());

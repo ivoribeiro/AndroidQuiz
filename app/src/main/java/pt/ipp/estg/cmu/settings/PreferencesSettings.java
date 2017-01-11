@@ -73,7 +73,7 @@ public class PreferencesSettings {
 
     public boolean wantNotifications() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return preferences.getBoolean("checkbox_preference", false);
+        return preferences.getBoolean("notification_checkbox_preference", false);
     }
 
     public boolean wantVibration() {

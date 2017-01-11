@@ -5,6 +5,8 @@
     android:orientation="vertical"
     android:padding="@dimen/adapter_estatisticas_graph_padding">
 
+
+
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pie_chart"
         android:layout_width="match_parent"

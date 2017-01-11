@@ -1,5 +1,6 @@
 package pt.ipp.estg.cmu.settings;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -7,12 +8,14 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.interfaces.SettingsRestartListener;
 import pt.ipp.estg.cmu.services.RandQuestionService;
 import pt.ipp.estg.cmu.ui.ActivityBase;
+import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
 public class SettingsActivity extends ActivityBase implements SettingsRestartListener {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setTheme(new PreferencesSettings(this).getThemePreference());
         setContentView(R.layout.activity_settings);
@@ -35,7 +38,10 @@ public class SettingsActivity extends ActivityBase implements SettingsRestartLis
 
     @Override
     public void onFreqChange() {
-        stopService(new Intent(this, RandQuestionService.class));
-        startService(new Intent(this, RandQuestionService.class));
+        PerguntaRepo perguntaRepo = new PerguntaRepo(this);
+        if (perguntaRepo.getPerguntas4letras().size() > 0) {
+            stopService(new Intent(this, RandQuestionService.class));
+            startService(new Intent(this, RandQuestionService.class));
+        }
     }
 }
