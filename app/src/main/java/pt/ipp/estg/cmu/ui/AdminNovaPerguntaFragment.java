@@ -52,8 +52,6 @@ import pt.ipp.estg.dblib.models.Nivel;
 import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
-import static android.app.Activity.RESULT_OK;
-
 public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickListener, AdminNovaPerguntaPreviewImageListener {
 
     private static int RESULT_LOAD_IMAGE = 1;
@@ -239,7 +237,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                 if (requestcode == Util.PERMISSIONS_REQUEST_WRITE_DOWNLOAD || requestcode == Util.PERMISSIONS_REQUEST_WRITE_GALERIA) {
                     requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestcode);
                 } else if (requestcode == Util.PERMISSIONS_REQUEST_CAMERA) {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA}, requestcode);
+                    requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestcode);
                 }
             }
         } else {
@@ -350,49 +348,48 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RESULT_LOAD_IMAGE || requestCode == CAPTURE_IMAGE_ACTIVITY) {
-            if (resultCode == RESULT_OK && null != data) {
-                try {
-                    //imagem da galeria
-                    if (requestCode == RESULT_LOAD_IMAGE) {
-                        Uri selectedImage = data.getData();
-                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            try {
+                //imagem da galeria
+                if (requestCode == RESULT_LOAD_IMAGE && null != data) {
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
-                        Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                        if (cursor != null) {
-                            cursor.moveToFirst();
-                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                            String picturePath = cursor.getString(columnIndex);
-                            cursor.close();
+                    Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    if (cursor != null) {
+                        cursor.moveToFirst();
+                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                        String picturePath = cursor.getString(columnIndex);
+                        cursor.close();
 
-                            File sourceFile = new File(picturePath);
-                            FileOperations.copy(sourceFile, mImageName + ".jpg");
-                            mCurrentImagePath = Util.getAppFolderPath() + mImageName + ".jpg";
-                            setPreviewImageFromGalerie(sourceFile.getPath());
-                        }
+                        File sourceFile = new File(picturePath);
+                        FileOperations.copy(sourceFile, mImageName + ".jpg");
+                        mCurrentImagePath = Util.getAppFolderPath() + mImageName + ".jpg";
+                        setPreviewImageFromGalerie(sourceFile.getPath());
                     }
-                    //imagem da camera
-                    if (requestCode == CAPTURE_IMAGE_ACTIVITY) {
-                        Uri imageUri = Uri.parse(mCurrentImagePath);
-                        File file = new File(imageUri.getPath());
-                        try {
-                            InputStream ims = new FileInputStream(file);
-                            FileOperations.copy(file, mImageName + ".jpg");
-                            mCurrentImagePath = Util.getAppFolderPath() + mImageName + ".jpg";
-                            setPreviewImageFromCamera(BitmapFactory.decodeStream(ims));
-                        } catch (FileNotFoundException e) {
-                            return;
-                        }
-                        // ScanFile so it will be appeared on Gallery
-                        MediaScannerConnection.scanFile(getContext(), new String[]{imageUri.getPath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
-                            public void onScanCompleted(String path, Uri uri) {
-                            }
-                        });
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+                //imagem da camera
+                if (requestCode == CAPTURE_IMAGE_ACTIVITY) {
+                    Uri imageUri = Uri.parse(mCurrentImagePath);
+                    File file = new File(imageUri.getPath());
+                    try {
+                        InputStream ims = new FileInputStream(file);
+                        FileOperations.copy(file, mImageName + ".jpg");
+                        mCurrentImagePath = Util.getAppFolderPath() + mImageName + ".jpg";
+                        setPreviewImageFromCamera(BitmapFactory.decodeStream(ims));
+                    } catch (FileNotFoundException e) {
+                        return;
+                    }
+                    // ScanFile so it will be appeared on Gallery
+                    MediaScannerConnection.scanFile(getContext(), new String[]{imageUri.getPath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                        public void onScanCompleted(String path, Uri uri) {
+                        }
+                    });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
+
     }
 
     @Override
