@@ -84,22 +84,7 @@ public class RandQuestionService extends Service {
             mIntent.putExtras(b);
             boolean notifications = mPreferenceSettings.wantNotifications();
             boolean vibration = mPreferenceSettings.wantVibration();
-            if (notifications) {
-                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mcontext)
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle(getString(R.string.notification_title))
-                        .setContentText(getString(R.string.notification_description));
-                NotificationManager mNotificationManager =
-                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                mNotificationManager.notify(0, mBuilder.build());
-                Ringtone ringtone = mPreferenceSettings.wantRingTone();
-                ringtone.play();
-                if (vibration){
-                    Vibrator v = (Vibrator) mcontext.getSystemService(Context.VIBRATOR_SERVICE);
-                    // Vibrate for 500 milliseconds
-                    v.vibrate(500);
-                }
-            }
+
             sendBroadcast(mIntent);
         }
     }
