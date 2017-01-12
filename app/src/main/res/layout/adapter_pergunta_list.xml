@@ -14,7 +14,7 @@
         android:padding="@dimen/adapter_level_layout_padding">
 
         <ImageView
-            android:id="@+id/user_avatar"
+            android:id="@+id/question_image"
             android:layout_width="@dimen/adapter_level_image_size"
             android:layout_height="@dimen/adapter_level_image_size" />
 

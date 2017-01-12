@@ -40,7 +40,7 @@
     <string name="admin_toast_download_wait">Wait Please</string>
     <string name="admin_toast_edit_pergunta">Question was Edited</string>
     <string name="admin_toast_forbidden_characters">Answer contains forbidden characters</string>
-    <string name="admin_toast_save_pergunta">Question as Saved</string>
+    <string name="admin_toast_save_pergunta">Question was Saved</string>
     <string name="admin_toolbar_subtitle">Administrator Area</string>
     <string name="ajudas_restantes">Hints</string>
     <string name="bt_start_game">Start</string>

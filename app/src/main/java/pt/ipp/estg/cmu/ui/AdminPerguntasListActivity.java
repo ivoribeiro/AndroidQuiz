@@ -52,17 +52,21 @@ public class AdminPerguntasListActivity extends AppCompatActivity implements
 
     @Override
     public void openNovaPerguntaFragment(Nivel nivel, Pergunta pergunta) {
-        if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE && getResources().getBoolean(R.bool.is_landscape)) {
+        boolean isTablet = (getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE;
+        boolean isLandScape = getResources().getBoolean(R.bool.is_landscape);
+
+
+        if (isTablet && isLandScape) {
             //tablet and landscape
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frame_layout_detail, AdminNovaPerguntaFragment.newInstance(nivel, pergunta, true))
+                    .replace(R.id.frame_layout_detail, AdminNovaPerguntaFragment.newInstance(nivel, pergunta, isLandScape, isTablet))
                     .addToBackStack(Util.STACK_ADMIN)
                     .commit();
         } else {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frame_layout, AdminNovaPerguntaFragment.newInstance(nivel, pergunta, false))
+                    .replace(R.id.frame_layout, AdminNovaPerguntaFragment.newInstance(nivel, pergunta, isLandScape, isTablet))
                     .addToBackStack(Util.STACK_ADMIN)
                     .commit();
         }

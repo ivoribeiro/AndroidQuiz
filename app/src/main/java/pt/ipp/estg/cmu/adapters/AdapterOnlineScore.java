@@ -62,7 +62,7 @@ public class AdapterOnlineScore extends RecyclerView.Adapter<AdapterOnlineScore.
         public ViewHolder(View itemView) {
             super(itemView);
             mLayout = (RelativeLayout) itemView.findViewById(R.id.online_score_item_layout);
-            mUserAvatar = (ImageView) itemView.findViewById(R.id.user_avatar);
+            mUserAvatar = (ImageView) itemView.findViewById(R.id.question_image);
             mUserName = (TextView) itemView.findViewById(R.id.user_name);
             mUserScore = (TextView) itemView.findViewById(R.id.user_score);
         }

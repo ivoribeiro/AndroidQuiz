@@ -71,6 +71,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     private boolean editMode;
     private boolean checkedPreviewImage;
     private boolean isLandScape;
+    private boolean isTablet;
 
     //layout
     private EditText mRespostaText;
@@ -85,7 +86,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         // Required empty public constructor
     }
 
-    public static AdminNovaPerguntaFragment newInstance(Nivel nivel, Pergunta pergunta, boolean isLand) {
+    public static AdminNovaPerguntaFragment newInstance(Nivel nivel, Pergunta pergunta, boolean isLandScape, boolean isTablet) {
         AdminNovaPerguntaFragment fragment = new AdminNovaPerguntaFragment();
         Bundle args = new Bundle();
         if (null != pergunta) {
@@ -93,7 +94,8 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         } else if (null != nivel) {
             args.putParcelable(Util.ARG_LEVEL, nivel);
         }
-        args.putBoolean(Util.ARG_ORIENTATION, isLand);
+        args.putBoolean(Util.ARG_ORIENTATION, isLandScape);
+        args.putBoolean(Util.ARG_SCREEEN, isTablet);
         fragment.setArguments(args);
         return fragment;
     }
@@ -112,6 +114,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                 editMode = true;
             }
             isLandScape = getArguments().getBoolean(Util.ARG_ORIENTATION);
+            isTablet = getArguments().getBoolean(Util.ARG_SCREEEN);
             //image com o nome do timestamp
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             mImageName = timestamp.getTime() + "";
@@ -128,7 +131,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         mFab = (FloatingActionButton) view.findViewById(R.id.fab);
         mGaleriaBt = (Button) view.findViewById(R.id.bt_galeria);
         mCameraBt = (Button) view.findViewById(R.id.bt_camera);
-        mImagePreview = (ImageView) view.findViewById(R.id.user_avatar);
+        mImagePreview = (ImageView) view.findViewById(R.id.question_image);
 
         mDownloadBt.setOnClickListener(this);
         mFab.setOnClickListener(this);
@@ -150,6 +153,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             mPergunta = savedInstanceState.getParcelable(Util.ARG_QUESTION);
             editMode = savedInstanceState.getBoolean(Util.ARG_EDIT);
             isLandScape = savedInstanceState.getBoolean(Util.ARG_ORIENTATION);
+            isTablet = savedInstanceState.getBoolean(Util.ARG_SCREEEN);
 
             setPreviewImageFromGalerie(mCurrentImagePath);
         }
@@ -157,6 +161,10 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         if (editMode) {
             setPreviewImageFromGalerie(mPergunta.getImagem());
             mRespostaText.setText(mPergunta.getRespostaCerta());
+        }
+
+        if (isTablet) {
+            mCameraBt.setVisibility(View.GONE);
         }
     }
 
@@ -168,6 +176,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         savedInstanceState.putParcelable(Util.ARG_QUESTION, mPergunta);
         savedInstanceState.putBoolean(Util.ARG_EDIT, editMode);
         savedInstanceState.putBoolean(Util.ARG_ORIENTATION, isLandScape);
+        savedInstanceState.putBoolean(Util.ARG_SCREEEN, isTablet);
     }
 
     @Override
@@ -458,7 +467,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                     Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_edit_pergunta), Toast.LENGTH_SHORT).show();
 
                 }
-                if (isLandScape) {
+                if (isLandScape && isTablet) {
                     mListener.onPerguntaSave();
                 }
                 getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);

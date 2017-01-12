@@ -24,6 +24,7 @@
     <dimen name="text_padding">8dp</dimen>
     <dimen name="button_padding">16dp</dimen>
     <dimen name="layout_padding">24dp</dimen>
+    <dimen name="layout_padding_small">16dp</dimen>
 
 
     <!-- ActivityLevel -->
@@ -78,7 +79,7 @@
 
     <!--AdminNovaPergunta-->
     <dimen name="novo_nivel_layout_button_margin">12dp</dimen>
-    <dimen name="nova_pergunta_not_found_size">100dp</dimen>
+    <dimen name="nova_pergunta_not_found_size">140dp</dimen>
 
 
     <!-- PageSetupActivity-->
