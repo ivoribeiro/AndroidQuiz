@@ -6,7 +6,7 @@
     <string name="action_settings">Definições</string>
 
     <!-- Activity Tiles Titles-->
-    <string name="title_activity_main">CMU Quiz</string>
+    <string name="title_activity_main" translatable="false">CMU Quiz</string>
     <string name="title_statistics_main">Estatisticas</string>
     <string name="title_activity_estatisticas">Estatisticas</string>
     <string name="title_activity_setup">Estatisticas</string>
@@ -14,11 +14,11 @@
     <string name="title_activity_admin_pergunta">Perguntas</string>
 
     <!-- Nav Drawer Titles-->
-    <string name="title_game">CMU Quiz</string>
+    <string name="title_game" translatable="false">CMU Quiz</string>
     <string name="title_statistics">Estatisticas</string>
     <string name="title_online">Pontos Online</string>
     <string name="title_admin">Área Admin</string>
-    <string name="title_topscore">Top Score</string>
+    <string name="title_topscore" translatable="false">Top Score</string>
     <string name="title_activity_level">Nivel</string>
     <string name="title_activity_settings">Definições</string>
 
@@ -40,7 +40,7 @@
     <string name="hello_text">Olá</string>
     <string name="welcome_text">Bem-Vindo</string>
     <string name="bt_start_game">Começar Jogo</string>
-    <string name="title_activity_question">CMU Quiz</string>
+    <string name="title_activity_question" translatable="false">CMU Quiz</string>
     <string name="txt_level">Nível</string>
     <string name="txt_score">Pontos</string>
 
@@ -52,29 +52,29 @@
     <!-- Bottom navigation titles-->
     <string name="title_action_hint">Ajuda</string>
     <string name="title_level">Nivel</string>
-    <string name="title_action_reset">Reset</string>
+    <string name="title_action_reset">Limpar</string>
     <string name="title_activity_categoria">Categoria</string>
 
     <!-- ActivityAdmin-->
     <string name="tab_title_pergunta">Perguntas</string>
     <string name="tab_title_nivel">Niveis</string>
     <string name="tab_title_categoria">Categorias</string>
-    <string name="admin_toolbar_subtitle">Área Administrador</string>
+    <string name="admin_toolbar_subtitle">Área do Administrador</string>
 
 
     <!--AdapterCategoriaGrid -->
-    <string name="snack_bar_categorie_false">Categoria desativada</string>
-    <string name="snack_bar_categorie_true">Categoria ativada</string>
-    <string name="snack_bar_categorie_info">Deve ativar a categoria</string>
+    <string name="snack_bar_categorie_false">Categoria Desativada</string>
+    <string name="snack_bar_categorie_true">Categoria Ativada</string>
+    <string name="snack_bar_categorie_info">Deve ativar a Categoria</string>
 
     <!--AdminNovoNivel-->
     <string name="admin_novo_nivel_novo">Novo Nível</string>
     <string name="admin_novo_nivel_nome">Nome </string>
     <string name="admin_novo_nivel_pontuacoes">Pontuação</string>
     <string name="admin_novo_nivel_base">Pergunta</string>
-    <string name="admin_novo_nivel_errada">Retirada por cada pergunta errada</string>
-    <string name="admin_novo_nivel_ajuda">Retirada por cada ajuda usada</string>
-    <string name="admin_novo_nivel_ajuda_num">Numero máximo de ajudas</string>
+    <string name="admin_novo_nivel_errada">Retirada por cada Pergunta Errada</string>
+    <string name="admin_novo_nivel_ajuda">Retirada por cada Ajuda Usada</string>
+    <string name="admin_novo_nivel_ajuda_num">Numero Máximo de Ajudas</string>
 
     <!--AdminNovaPergunta -->
     <string name="admin_bt_galeria">Galeria</string>
@@ -82,22 +82,22 @@
     <string name="admin_bt_download" translatable="false">Download</string>
 
     <string name="admin_nova_pergunta_resposta">Resposta</string>
-    <string name="admin_nova_pergunta_resposta_correta">Resposta correta</string>
+    <string name="admin_nova_pergunta_resposta_correta">Resposta Correta</string>
     <string name="admin_nova_pergunta_imagem">Imagem</string>
-    <string name="admin_nova_pergunta_imagem_opcao">Escolha uma opção</string>
-    <string name="admin_nova_pergunta_imagem_opcao_url">Cole aqui o url da imagem</string>
+    <string name="admin_nova_pergunta_imagem_opcao">Escolha uma Opção</string>
+    <string name="admin_nova_pergunta_imagem_opcao_url">Cole aqui o URL da Imagem</string>
 
-    <string name="admin_toast_download_wait">Aguarde por favor</string>
-    <string name="admin_toast_download_sucesso">Download com sucesso</string>
-    <string name="admin_toast_download_erro">Erro no download</string>
-    <string name="admin_toast_campos_erro">Deve preencher todos os campos</string>
+    <string name="admin_toast_download_wait">Aguarde Por Favor</string>
+    <string name="admin_toast_download_sucesso">Download com Sucesso</string>
+    <string name="admin_toast_download_erro">Erro no Download</string>
+    <string name="admin_toast_campos_erro">Deve preencher todos os Campos</string>
     <string name="admin_toast_save_pergunta">Pergunta Guardada</string>
     <string name="admin_toast_edit_pergunta">Pergunta Editada</string>
-    <string name="admin_toast_campo_url_erro">Deve introduzir um url correto</string>
-    <string name="admin_toast_forbidden_characters">A resposta contém caracteres proibidos</string>
+    <string name="admin_toast_campo_url_erro">Deve introduzir um URL Correto</string>
+    <string name="admin_toast_forbidden_characters">A resposta contém Caracteres Proibidos</string>
 
     <string name="admin_download_dialog_title">Download Imagem</string>
-    <string name="admin_download_dialog_message">Introduza o url para fazer o download</string>
+    <string name="admin_download_dialog_message">Introduza o URL para fazer o Download</string>
     <string name="admin_download_dialog_ok" translatable="false">Download</string>
     <string name="admin_download_dialog_cancel">Cancelar</string>
 
@@ -106,26 +106,26 @@
     <string name="snack_deleted">Apagar</string>
     <string name="snack_undo">Anular</string>
 
-    <string name="nPerguntas">Número de perguntas do jogo</string>
-    <string name="n_perguntas_categoria_label">Número de perguntas por categoria</string>
-    <string name="n_perguntas_nivel_label">Número de perguntas por nivel</string>
+    <string name="nPerguntas">Número de Perguntas do Jogo</string>
+    <string name="n_perguntas_categoria_label">Número de Perguntas por Categoria</string>
+    <string name="n_perguntas_nivel_label">Número de Perguntas por Nivel</string>
 
 
     <!-- Fingerprint -->
 
 
     <!-- PageSetupActivity-->
-    <string name="setup_page0_title">Bem vindo ao CMUQuiz</string>
-    <string name="setup_page0_subtitle">Onde os teus conhecimentos são postos a prova nas mais diversas categorias</string>
+    <string name="setup_page0_title">Bem Vindo ao CMUQuiz</string>
+    <string name="setup_page0_subtitle">Onde os teus Conhecimentos são postos a Prova nas mais Diversas Categorias</string>
 
-    <string name="setup_page1_title">"Joga Ofline</string>
-    <string name="setup_page1_subtitle">Podes jogar em qualquer lado, mesmo quando não tens internet</string>
+    <string name="setup_page1_title">Joga Offline</string>
+    <string name="setup_page1_subtitle">Podes jogar em qualquer lado, mesmo quando não tens Internet</string>
 
-    <string name="setup_page2_title">Partilha os teus score com outros jogadores</string>
-    <string name="setup_page2_subtitle">Podes comparar as tuas pontuações e ver como é a tua prestção face a outros utilizadores, desafia-te</string>
+    <string name="setup_page2_title">Partilha os teus Score com outros Jogadores</string>
+    <string name="setup_page2_subtitle">Podes comparar as Tuas Pontuações e ver como é a tua Prestação face a outros Utilizadores, Desafia-te</string>
 
-    <string name="setup_page3_title">Escolhe o teu avatar e nickname</string>
-    <string name="setup_page3_subtitle">Escolhe um destes avatares e um nickname para te identificares online</string>
+    <string name="setup_page3_title">Escolhe o teu Avatar e Nickname</string>
+    <string name="setup_page3_subtitle">Escolhe um destes Avatares e um NickName para te Identificares Online</string>
 
     <string name="setup_page4_title">Área Admin</string>
     <string name="setup_page4_subtitle">Ativa Categorias, Adiciona e Remove Niveis/Perguntas</string>
@@ -133,36 +133,36 @@
     <string name="setup_page4_press">Longo Clique para ativar Categorias, e editar Niveis/Perguntas</string>
 
     <string name="setup_page5_title">Configura a tua conta Admin</string>
-    <string name="setup_page5_subtitle">Escolhe um pin, e se o teu telemovel permitir, configura a impressão digital</string>
+    <string name="setup_page5_subtitle">Escolhe um pin, e se o teu Telemovel permitir, configura a Impressão Digital</string>
 
 
     <string name="setup_skip">Avançar</string>
     <string name="setup_finish">Concluir</string>
 
-    <string name="setup_edit_nickname_hint">Nickname</string>
-    <string name="setup_edit_pin_hint">PIN</string>
-    <string name="setup_toast_warning">Tens de preencher o teu nickname e escolher um avatar</string>
+    <string name="setup_edit_nickname_hint" translatable="false">NickName</string>
+    <string name="setup_edit_pin_hint" translatable="false">PIN</string>
+    <string name="setup_toast_warning">Tens de preencher o teu Nickname e escolher um Avatar</string>
     <string name="setup_toast_warning_pin">Tens de escolher um PIN</string>
-    <string name="setup_toast_avatar_sucess">Avatar escolhido com sucesso</string>
+    <string name="setup_toast_avatar_sucess">Avatar escolhido com Sucesso</string>
 
-    <string name="setup_fingerprint_teste">Testa o teu sensor</string>
-    <string name="setup_fingerprint_error_lockscreen">Sensor desativado</string>
-    <string name="setup_fingerprint_error_permission">Sem permissões para usar o sensor</string>
+    <string name="setup_fingerprint_teste">Testa o teu Sensor</string>
+    <string name="setup_fingerprint_error_lockscreen">Sensor Desativado</string>
+    <string name="setup_fingerprint_error_permission">Sem Permissões para usar o Sensor</string>
     <string name="setup_fingerprint_error_register">Sem impressões digitais</string>
 
-    <string name="setup_fingerprint_sucesso">Autenticação com sucesso</string>
-    <string name="setup_fingerprint_error">Autenticação falhada</string>
+    <string name="setup_fingerprint_sucesso">Autenticação com Sucesso</string>
+    <string name="setup_fingerprint_error">Autenticação Falhada</string>
 
-    <string name="loading">A carregar</string>
-    <string name="click_exit">Clique novamente para sair</string>
+    <string name="loading">A Carregar</string>
+    <string name="click_exit">Clique Novamente para Sair</string>
 
     <!-- Estatisticas -->
     <string name="pontuacao_estatisticas_jogo_label">Pontuação do Jogo</string>
-    <string name="n_respostas_certas_estatisticas_jogo_label">Número de respostas certas no jogo</string>
-    <string name="n_respostas_erradas_estatisticas_jogo_label">Número de respostas erradas no jogo</string>
-    <string name="n_ajudas_usadas_estatisticas_jogo_label">Número de ajudas usadas no jogo</string>
-    <string name="pontuacao_perdida_estatisticas_jogo_label">Pontuação perdida no jogo</string>
-    <string name="pontuacao_ganha_estatisticas_jogo_label">Pontuação ganha no jogo</string>
+    <string name="n_respostas_certas_estatisticas_jogo_label">Número de Respostas Certas no Jogo</string>
+    <string name="n_respostas_erradas_estatisticas_jogo_label">Número de Respostas Erradas no Jogo</string>
+    <string name="n_ajudas_usadas_estatisticas_jogo_label">Número de ajudas Usadas no Jogo</string>
+    <string name="pontuacao_perdida_estatisticas_jogo_label">Pontuação Perdida no Jogo</string>
+    <string name="pontuacao_ganha_estatisticas_jogo_label">Pontuação Ganha no Jogo</string>
 
     <!-- Dialog Sign In -->
     <string name="dialog_title">Área </string>
@@ -178,20 +178,20 @@
     <!-- Preferences -->
     <string name="prefs_text_notificacao">Notificações</string>
     <string name="prefs_text_notificacao_title">Perguntas</string>
-    <string name="prefs_text_notificacao_summary">Ativar notificações para novas perguntas no widget</string>
+    <string name="prefs_text_notificacao_summary">Ativar Notificações para Novas Perguntas no Widget</string>
     <string name="prefs_text_notificacao_update_title">Frequência</string>
     <string name="prefs_text_notificacao_ringtone">Toque</string>
     <string name="prefs_text_notificacao_vibrate">Vibrar</string>
 
 
-    <string name="prefs_text_notificacao_update_summary">Frequência de atualização da pergunta no widget</string>
-    <string name="prefs_text">Widget</string>
+    <string name="prefs_text_notificacao_update_summary">Frequência de Atualização da Pergunta no Widget</string>
+    <string name="prefs_text" translatable="false">Widget</string>
 
     <string name="prefs_text_theme_title">Temas</string>
-    <string name="prefs_text_theme_title_summary">Escolhe o tema que mais te agrada</string>
+    <string name="prefs_text_theme_title_summary">Escolhe o Tema que mais te agrada</string>
 
     <string name="prefs_text_sound_title">Sons</string>
-    <string name="prefs_text_sound_summary">Sons durante o jogo.</string>
+    <string name="prefs_text_sound_summary">Sons durante o Jogo.</string>
 
 
     <!-- Color Temas -->
@@ -202,29 +202,29 @@
 
 
     <string name="pontuacao_estatisticas">Pontuação</string>
-    <string name="n_perguntas_estatisticas">Número perguntas</string>
-    <string name="n_respostas_certas_estatisticas">Respostas certas</string>
-    <string name="n_respostas_erradas_estatisticas">Respostas erradas</string>
-    <string name="n_ajudas_usadas_estatisticas">Ajudas usadas</string>
-    <string name="pontuacao_ganha_estatisticas">Pontuação ganha</string>
-    <string name="pontuacao_perdida_estatisticas">Pontuação perdida</string>
-    <string name="admin_novo_nivel_min_num">Número minimo de respostas certas para desbloquear próximo nivel</string>
-    <string name="admin_novo_nivel_bloqueado">Nível bloqueado</string>
-    <string name="snack_bar_level_info">Nivel bloqueado</string>
-    <string name="jogo_sem_ajudas_info">Ficou sem ajudas para este nível</string>
-    <string name="cant_delete">Não é possivel realizar a operação pretendida</string>
+    <string name="n_perguntas_estatisticas">Número Perguntas</string>
+    <string name="n_respostas_certas_estatisticas">Respostas Certas</string>
+    <string name="n_respostas_erradas_estatisticas">Respostas Erradas</string>
+    <string name="n_ajudas_usadas_estatisticas">Ajudas Usadas</string>
+    <string name="pontuacao_ganha_estatisticas">Pontuação Ganha</string>
+    <string name="pontuacao_perdida_estatisticas">Pontuação Perdida</string>
+    <string name="admin_novo_nivel_min_num">Número minimo de respostas certas para Desbloquear Próximo Nivel</string>
+    <string name="admin_novo_nivel_bloqueado">Nível Bloqueado</string>
+    <string name="snack_bar_level_info">Nivel Bloqueado</string>
+    <string name="jogo_sem_ajudas_info">Ficou sem Ajudas para este Nível</string>
+    <string name="cant_delete">Não é possivel realizar a Operação Pretendida</string>
 
 
     <!-- permissions dialog warnings -->
-    <string name="permission_denied">Não é possivel usar a funcionalidade pretendida, sem as permissões necessárias.</string>
+    <string name="permission_denied">Não é Possivel usar a Funcionalidade Pretendida, sem as Permissões Necessárias</string>
 
-    <string name="empty_data">Sem informação para apresentar</string>
+    <string name="empty_data">Sem Informação para Apresentar</string>
 
-    <string name="notification_title">Nova pergunta</string>
-    <string name="notification_description">Uma nova pergunta foi carregada no widget!</string>
+    <string name="notification_title">Nova Pergunta</string>
+    <string name="notification_description">Uma Nova Pergunta foi Carregada no Widget!</string>
 
     <!-- online score fragment -->
-    <string name="send_sucess">Pontuação enviada com sucesso</string>
+    <string name="send_sucess">Pontuação Enviada com Sucesso</string>
 
     <string name="widget_update">Atualizar</string>
     <string name="tab_title_estatisticas_graph">Gráficos</string>
