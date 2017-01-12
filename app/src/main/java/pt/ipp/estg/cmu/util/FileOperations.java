@@ -10,7 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.channels.FileChannel;
 
 /**
  * Created by Navega on 12/10/2016.
@@ -90,4 +89,12 @@ public class FileOperations {
             return null;
         }
     }
+
+
+    public static File createImageFile(String name) throws IOException {
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "Camera");
+        File image = File.createTempFile(name, ".jpg", storageDir);
+        return image;
+    }
+
 }

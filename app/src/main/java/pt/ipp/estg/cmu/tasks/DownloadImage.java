@@ -7,7 +7,6 @@ import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -17,6 +16,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import pt.ipp.estg.cmu.R;
+import pt.ipp.estg.cmu.interfaces.AdminNovaPerguntaPreviewImageListener;
 import pt.ipp.estg.cmu.util.Util;
 
 public class DownloadImage extends AsyncTask<String, String, String> {
@@ -28,12 +28,12 @@ public class DownloadImage extends AsyncTask<String, String, String> {
     //layout
     private Bitmap mBitMapImg = null;
     private ProgressDialog mDialog;
-    private ImageView mPreviewImage;
+    private AdminNovaPerguntaPreviewImageListener mListener;
 
-    public DownloadImage(Context context, ImageView imageView, String name) {
+    public DownloadImage(Context context, AdminNovaPerguntaPreviewImageListener listener, String name) {
         this.mContext = context;
         this.mFileName = name;
-        this.mPreviewImage = imageView;
+        this.mListener = listener;
     }
 
     @Override
@@ -94,10 +94,8 @@ public class DownloadImage extends AsyncTask<String, String, String> {
                     mDialog.dismiss();
                 }
             }
-            mPreviewImage.setBackground(null);
-            mPreviewImage.setImageBitmap(mBitMapImg);
+            mListener.setPreviewImageFromDownload(mBitMapImg);
             Toast.makeText(mContext, mContext.getResources().getString(R.string.admin_toast_download_sucesso), Toast.LENGTH_SHORT).show();
         }
     }
-
 }
