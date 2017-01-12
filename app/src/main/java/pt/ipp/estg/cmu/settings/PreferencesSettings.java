@@ -36,11 +36,12 @@ public class PreferencesSettings {
             return R.style.CustomThemePink;
         }
 
-        if (theme.equals(mContext.getString(R.string.theme_yellow))) {
-            return R.style.CustomThemeYellow;
+        if (theme.equals(mContext.getString(R.string.theme_orange))) {
+            return R.style.CustomThemeOrange;
         }
 
         return R.style.AppTheme;
+
     }
 
 

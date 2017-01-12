@@ -142,7 +142,7 @@
     <string name="theme_base">Base</string>
     <string name="theme_blue">Blue</string>
     <string name="theme_pink">Pink</string>
-    <string name="theme_yellow">Yellow</string>
+    <string name="theme_orange">Orange</string>
     <string name="title_action_hint">Help</string>
     <string name="title_action_reset">Reset</string>
     <string name="title_activity_admin">Admin Area</string>

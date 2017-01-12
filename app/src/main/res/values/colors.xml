@@ -17,21 +17,21 @@
     <color name="primary_0">#2196F3</color>
     <color name="primary_dark_0">#1976D2</color>
     <color name="primary_light_0">#BBDEFB</color>
-    <color name="accent_0">#CDDC39</color>
+    <color name="accent_0">#FFA000</color>
     <color name="primary_text_0">#212121</color>
     <color name="secondary_text_0">#757575</color>
     <!-- pink -->
     <color name="primary_1">#E91E63</color>
     <color name="primary_dark_1">#C2185B</color>
     <color name="primary_light_1">#F8BBD0</color>
-    <color name="accent_1">#CDDC39</color>
+    <color name="accent_1">#4CAF50</color>
     <color name="primary_text_1">#212121</color>
     <color name="secondary_text_1">#757575</color>
-    <!-- yellow-->
-    <color name="primary_2">#FFEB3B</color>
-    <color name="primary_dark_2">#FBC02D</color>
-    <color name="primary_light_2">#FFF9C4</color>
-    <color name="accent_2">#FF9800</color>
+    <!-- orange-->
+    <color name="primary_2">#FF9800</color>
+    <color name="primary_dark_2">#F57C00</color>
+    <color name="primary_light_2">#FFE0B2</color>
+    <color name="accent_2">#FF5722</color>
     <color name="primary_text_2">#212121</color>
     <color name="secondary_text_2">#757575</color>
 
