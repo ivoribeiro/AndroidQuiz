@@ -11,6 +11,7 @@ public class PreferencesSetup {
     private static final String USER_FLAG_NICKNAME = "flag_chosen_nickname";
     private static final String USER_FLAG_PIN = "flag_chosen_pin";
     private static final String WIDGET_INDEX_PREFERENCE = "widget_index_preference";
+    private static final String WIDGET_ATIVO_PREFERENCE = "widget_index_preference";
     private static final String WIDGET_RESPOSTA_PREFERENCE = "widget_resposta_preference";
 
 
@@ -103,6 +104,23 @@ public class PreferencesSetup {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(WIDGET_INDEX_PREFERENCE, index);
         editor.commit();
+    }
+
+    /**
+     * Guarda se o widget esta ativo ou nao
+     *
+     * @param
+     */
+    public void saveWidgetAtivo(boolean ativo) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(WIDGET_ATIVO_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(WIDGET_ATIVO_PREFERENCE, ativo);
+        editor.commit();
+    }
+
+    public boolean isWidgetAtivo(){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(WIDGET_ATIVO_PREFERENCE, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(WIDGET_ATIVO_PREFERENCE, false);
     }
 
     /**
