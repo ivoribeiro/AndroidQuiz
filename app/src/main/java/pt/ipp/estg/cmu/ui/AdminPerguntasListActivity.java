@@ -56,13 +56,13 @@ public class AdminPerguntasListActivity extends AppCompatActivity implements
             //tablet and landscape
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frame_layout_detail, AdminNovaPerguntaFragment.newInstance(nivel, pergunta))
+                    .replace(R.id.frame_layout_detail, AdminNovaPerguntaFragment.newInstance(nivel, pergunta, true))
                     .addToBackStack(Util.STACK_ADMIN)
                     .commit();
         } else {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.frame_layout, AdminNovaPerguntaFragment.newInstance(nivel, pergunta))
+                    .replace(R.id.frame_layout, AdminNovaPerguntaFragment.newInstance(nivel, pergunta, false))
                     .addToBackStack(Util.STACK_ADMIN)
                     .commit();
         }
@@ -79,5 +79,6 @@ public class AdminPerguntasListActivity extends AppCompatActivity implements
                 .replace(R.id.frame_layout, AdminPerguntasListFragment.newInstance(mNivel))
                 .commit();
     }
+
 
 }

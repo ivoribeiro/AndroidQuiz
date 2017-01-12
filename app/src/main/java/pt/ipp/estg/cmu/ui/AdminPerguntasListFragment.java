@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -19,12 +20,12 @@ import java.util.ArrayList;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterPerguntasList;
 import pt.ipp.estg.cmu.helpers.RecyclerOnScrollListenerHelper;
-import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 import pt.ipp.estg.cmu.helpers.RecyclerSwipePerguntaTouchHelper;
 import pt.ipp.estg.cmu.interfaces.AdminPerguntaLayoutListener;
+import pt.ipp.estg.cmu.util.Util;
 import pt.ipp.estg.dblib.models.Nivel;
 import pt.ipp.estg.dblib.models.Pergunta;
-import pt.ipp.estg.cmu.util.Util;
+import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
 
 public class AdminPerguntasListFragment extends Fragment implements View.OnClickListener {

@@ -20,6 +20,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -63,6 +64,8 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
     private boolean editMode;
     private boolean checkedPreviewImage;
 
+    private boolean isLandScape;
+
     private AdminPerguntaAdapterChangeListener mListener;
 
     //layout
@@ -83,7 +86,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         // Required empty public constructor
     }
 
-    public static AdminNovaPerguntaFragment newInstance(Nivel nivel, Pergunta pergunta) {
+    public static AdminNovaPerguntaFragment newInstance(Nivel nivel, Pergunta pergunta, boolean isLand) {
         AdminNovaPerguntaFragment fragment = new AdminNovaPerguntaFragment();
         Bundle args = new Bundle();
         if (null != pergunta) {
@@ -91,6 +94,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         } else if (null != nivel) {
             args.putParcelable(Util.ARG_LEVEL, nivel);
         }
+        args.putBoolean(Util.ARG_ORIENTATION, isLand);
         fragment.setArguments(args);
         return fragment;
     }
@@ -105,6 +109,8 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             mPergunta = getArguments().getParcelable(Util.ARG_QUESTION);
             editMode = true;
         }
+        isLandScape = getArguments().getBoolean(Util.ARG_ORIENTATION);
+
         mRepositoryPergunta = new PerguntaRepo(getContext());
         mRepositoryNivel = new NivelRepo(getContext());
 
@@ -418,8 +424,12 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                     Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_edit_pergunta), Toast.LENGTH_SHORT).show();
 
                 }
-                //getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                mListener.onPerguntaSave();
+                if (isLandScape) {
+                    mListener.onPerguntaSave();
+                }
+                getActivity().getSupportFragmentManager().popBackStack(Util.STACK_ADMIN, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+
             } else {
                 Toast.makeText(getContext(), getContext().getResources().getString(R.string.admin_toast_campos_erro), Toast.LENGTH_SHORT).show();
             }

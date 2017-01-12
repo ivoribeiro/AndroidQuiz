@@ -26,6 +26,7 @@ public class Util {
     public static final String ARG_CATEGORIE = "CATEGORIE";
     public static final String ARG_ADMIN = "ADMIN";
     public static final String ARG_SECTION = "SECTION";
+    public static final String ARG_ORIENTATION = "ORIENTATION";
 
     //request code ints
     public static final int PERMISSIONS_REQUEST_WRITE_GALERIA = 0;

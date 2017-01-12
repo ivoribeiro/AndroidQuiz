@@ -24,7 +24,7 @@
 
     <android.support.v4.widget.Space
         android:layout_width="wrap_content"
-        android:layout_height="40dp" />
+        android:layout_height="25dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,9 +37,10 @@
             android:background="@drawable/img_admin_swipe" />
 
         <TextView
-            style="@style/SecondaryTitle"
+            style="@style/PrimarySmallTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:alpha="0.8"
             android:gravity="center"
             android:text="@string/setup_page4_swipe" />
 
@@ -57,9 +58,10 @@
             android:background="@drawable/img_admin_click" />
 
         <TextView
-            style="@style/SecondaryTitle"
+            style="@style/PrimarySmallTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:alpha="0.8"
             android:gravity="center"
             android:text="@string/setup_page4_press" />
 
