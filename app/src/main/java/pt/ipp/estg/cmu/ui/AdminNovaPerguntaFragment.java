@@ -164,9 +164,6 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             mRespostaText.setText(mPergunta.getRespostaCerta());
         }
 
-        if (isTablet) {
-            //mCameraBt.setVisibility(View.GONE);
-        }
     }
 
     @Override
