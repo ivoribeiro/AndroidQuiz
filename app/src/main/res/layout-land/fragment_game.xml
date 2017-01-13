@@ -11,96 +11,109 @@
     tools:context="pt.ipp.estg.cmu.ui.GameFragment">
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/question_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/arrow_left"
-                android:layout_width="@dimen/arrow_size"
-                android:layout_height="@dimen/arrow_size"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/vt_arrow_left"
-                android:backgroundTint="?colorPrimary" />
-
-            <ImageView
-                android:id="@+id/question_image"
-                android:layout_width="@dimen/question_image_width"
-                android:layout_height="@dimen/question_image_height" />
-
-            <ImageButton
-                android:id="@+id/arrow_right"
-                android:layout_width="@dimen/arrow_size"
-                android:layout_height="@dimen/arrow_size"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/vt_arrow_right"
-                android:backgroundTint="?colorPrimary" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/answer_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/divider_margin"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <View
-        android:id="@+id/view_divider"
-        android:layout_width="3dp"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/view_divider_margin"
-        android:background="?colorPrimary" />
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TableLayout
-            android:id="@+id/game_table_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </TableLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/hint"
-                android:layout_width="@dimen/button_images_size"
-                android:layout_height="@dimen/button_images_size"
-                android:layout_margin="@dimen/button_images_margin"
-                android:background="@drawable/ic_help"
-                android:backgroundTint="?colorPrimary"
-                android:soundEffectsEnabled="false" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/reset"
-                android:layout_width="@dimen/button_images_size"
-                android:layout_height="@dimen/button_images_size"
-                android:layout_margin="@dimen/button_images_margin"
-                android:background="@drawable/ic_reset"
-                android:backgroundTint="?colorPrimary"
-                android:soundEffectsEnabled="false" />
+                <LinearLayout
+                    android:id="@+id/question_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/arrow_left"
+                        android:layout_width="@dimen/arrow_size"
+                        android:layout_height="@dimen/arrow_size"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/vt_arrow_left"
+                        android:backgroundTint="?colorPrimary" />
+
+                    <ImageView
+                        android:id="@+id/question_image"
+                        android:layout_width="@dimen/question_image_width"
+                        android:layout_height="@dimen/question_image_height" />
+
+                    <ImageButton
+                        android:id="@+id/arrow_right"
+                        android:layout_width="@dimen/arrow_size"
+                        android:layout_height="@dimen/arrow_size"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/vt_arrow_right"
+                        android:backgroundTint="?colorPrimary" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/answer_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/divider_margin"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_divider"
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/view_divider_margin"
+                android:background="?colorPrimary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:id="@+id/game_table_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TableLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/hint"
+                        android:layout_width="@dimen/button_images_size"
+                        android:layout_height="@dimen/button_images_size"
+                        android:layout_margin="@dimen/button_images_margin"
+                        android:background="@drawable/ic_help"
+                        android:backgroundTint="?colorPrimary"
+                        android:soundEffectsEnabled="false" />
+
+                    <ImageButton
+                        android:id="@+id/reset"
+                        android:layout_width="@dimen/button_images_size"
+                        android:layout_height="@dimen/button_images_size"
+                        android:layout_margin="@dimen/button_images_margin"
+                        android:background="@drawable/ic_reset"
+                        android:backgroundTint="?colorPrimary"
+                        android:soundEffectsEnabled="false" />
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
