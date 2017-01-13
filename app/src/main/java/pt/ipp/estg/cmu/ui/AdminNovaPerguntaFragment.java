@@ -154,6 +154,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             editMode = savedInstanceState.getBoolean(Util.ARG_EDIT);
             isLandScape = savedInstanceState.getBoolean(Util.ARG_ORIENTATION);
             isTablet = savedInstanceState.getBoolean(Util.ARG_SCREEEN);
+            mImageName = savedInstanceState.getString(Util.ARG_IMAGE_NAME);
 
             setPreviewImageFromGalerie(mCurrentImagePath);
         }
@@ -177,6 +178,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         savedInstanceState.putBoolean(Util.ARG_EDIT, editMode);
         savedInstanceState.putBoolean(Util.ARG_ORIENTATION, isLandScape);
         savedInstanceState.putBoolean(Util.ARG_SCREEEN, isTablet);
+        savedInstanceState.putString(Util.ARG_IMAGE_NAME, mImageName);
     }
 
     @Override

@@ -30,6 +30,7 @@ public class Util {
     public static final String ARG_SCREEEN = "SCREEN";
     public static final String ARG_IMAGE = "IMAGE";
     public static final String ARG_EDIT = "EDIT";
+    public static final String ARG_IMAGE_NAME = "IMAGE";
 
     //request code ints
     public static final int PERMISSIONS_REQUEST_WRITE_GALERIA = 0;
