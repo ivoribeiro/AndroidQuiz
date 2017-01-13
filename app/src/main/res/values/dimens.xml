@@ -8,6 +8,10 @@
     <dimen name="fab_margin">16dp</dimen>
 
 
+    <dimen name="game_horizontal_margin">32dp</dimen>
+
+
+
     <!-- styles dimens -->
     <dimen name="primary_title_size">35dp</dimen>
     <dimen name="primary_title_small_size">25dp</dimen>
