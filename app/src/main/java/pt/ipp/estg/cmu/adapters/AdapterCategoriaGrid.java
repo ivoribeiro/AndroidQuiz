@@ -23,6 +23,10 @@ import pt.ipp.estg.dblib.models.Categoria;
 import pt.ipp.estg.dblib.repositories.CategoriaRepo;
 
 /**
+ *
+ * @author 8130031
+ * @author 8130258
+ *
  * Adapter contendo um cardview com uma textview e uma imageview, responsavel por listar as categorias recebidas
  * Click listener para abrir {@LevelActivity}
  */

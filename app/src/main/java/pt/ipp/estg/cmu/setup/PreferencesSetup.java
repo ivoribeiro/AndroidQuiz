@@ -11,7 +11,7 @@ public class PreferencesSetup {
     private static final String USER_FLAG_NICKNAME = "flag_chosen_nickname";
     private static final String USER_FLAG_PIN = "flag_chosen_pin";
     private static final String WIDGET_INDEX_PREFERENCE = "widget_index_preference";
-    private static final String WIDGET_ATIVO_PREFERENCE = "widget_index_preference";
+    private static final String WIDGET_ATIVO_PREFERENCE = "widget_ativo_preference";
     private static final String WIDGET_RESPOSTA_PREFERENCE = "widget_resposta_preference";
 
 
