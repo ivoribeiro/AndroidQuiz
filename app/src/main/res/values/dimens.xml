@@ -95,7 +95,7 @@
     <dimen name="setup_image">140dp</dimen>
     <dimen name="setup_admin">80dp</dimen>
     <dimen name="setup_image_avatar">110dp</dimen>
-    <dimen name="setup_custom_layout_padding">16dp</dimen>
+    <dimen name="setup_custom_layout_padding">12dp</dimen>
     <dimen name="setup_fingerprint_size">60dp</dimen>
 
     <!-- Dialog Sign In -->

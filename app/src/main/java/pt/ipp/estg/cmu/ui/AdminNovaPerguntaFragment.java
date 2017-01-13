@@ -156,7 +156,8 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
             isTablet = savedInstanceState.getBoolean(Util.ARG_SCREEEN);
             mImageName = savedInstanceState.getString(Util.ARG_IMAGE_NAME);
 
-            setPreviewImageFromGalerie(mCurrentImagePath);
+            showPreview(mCurrentImagePath);
+            mCurrentImagePath = Util.getAppFolderPath() + mImageName + ".jpg";
         }
 
         if (editMode) {
@@ -295,6 +296,19 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
                     Snackbar.make(mRootLayout, getContext().getResources().getString(R.string.permission_denied), Snackbar.LENGTH_SHORT).show();
                 }
                 break;
+            }
+        }
+    }
+
+
+    private void showPreview(String name) {
+        if (null != name) {
+            File imgFile = new File(Util.getAppFolderPath() + name + ".jpg");
+            if (imgFile.exists()) {
+                Bitmap bmImg = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                mImagePreview.setBackground(null);
+                mImagePreview.setImageBitmap(bmImg);
+                checkedPreviewImage = true;
             }
         }
     }
