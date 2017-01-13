@@ -34,6 +34,10 @@ import pt.ipp.estg.dblib.repositories.NivelRepo;
 import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class GameFragment extends Fragment implements View.OnClickListener {
 
     private static final int ROW_1 = 4;

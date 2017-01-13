@@ -11,6 +11,10 @@ import java.util.Arrays;
 
 import pt.ipp.estg.cmu.R;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class PreferencesSettings {
 
     private Context mContext;

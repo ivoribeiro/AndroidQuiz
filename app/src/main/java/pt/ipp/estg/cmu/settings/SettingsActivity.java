@@ -10,6 +10,10 @@ import pt.ipp.estg.cmu.services.RandQuestionService;
 import pt.ipp.estg.cmu.ui.ActivityBase;
 import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class SettingsActivity extends ActivityBase implements SettingsRestartListener {
 
 

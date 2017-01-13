@@ -10,6 +10,10 @@ import android.os.Environment;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class Util {
 
     //server strings

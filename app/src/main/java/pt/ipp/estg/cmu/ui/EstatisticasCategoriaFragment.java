@@ -19,6 +19,10 @@ import pt.ipp.estg.dblib.repositories.CategoriaRepo;
 import pt.ipp.estg.dblib.estatisticas.EstatisticasCategoria;
 import pt.ipp.estg.dblib.models.Categoria;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class EstatisticasCategoriaFragment extends Fragment {
 
     private ArrayList<EstatisticasCategoria> mEstatisticasCategorias;

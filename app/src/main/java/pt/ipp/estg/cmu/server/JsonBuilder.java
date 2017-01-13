@@ -1,5 +1,10 @@
 package pt.ipp.estg.cmu.server;
 
+
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class JsonBuilder {
 
     public static String BUILD_PLAYER(String username, String avatar) {

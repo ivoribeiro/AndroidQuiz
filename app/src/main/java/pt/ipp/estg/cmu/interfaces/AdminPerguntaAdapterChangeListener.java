@@ -1,9 +1,10 @@
 package pt.ipp.estg.cmu.interfaces;
 
-/**
- * Created by Navega on 1/11/2017.
- */
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public interface AdminPerguntaAdapterChangeListener {
 
     void onPerguntaSave();

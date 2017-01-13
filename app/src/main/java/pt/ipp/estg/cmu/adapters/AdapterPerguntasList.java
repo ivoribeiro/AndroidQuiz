@@ -20,6 +20,10 @@ import pt.ipp.estg.cmu.interfaces.AdminPerguntaLayoutListener;
 import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.util.UtilUI;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class AdapterPerguntasList extends RecyclerView.Adapter<AdapterPerguntasList.ViewHolder> {
 
     private Context mContext;

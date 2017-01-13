@@ -13,7 +13,10 @@ import pt.ipp.estg.cmu.util.Util;
 import pt.ipp.estg.dblib.estatisticas.EstatisticasJogo;
 import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
-
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class ActivityMain extends ActivityBase implements View.OnClickListener {
 
     //widget

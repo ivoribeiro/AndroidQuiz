@@ -25,6 +25,10 @@ import pt.ipp.estg.cmu.util.Util;
 import pt.ipp.estg.dblib.estatisticas.EstatisticasJogo;
 
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class OnlineScoreFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     private RecyclerView mRecycler;

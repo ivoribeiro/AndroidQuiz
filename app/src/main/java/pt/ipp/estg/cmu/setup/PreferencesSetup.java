@@ -3,6 +3,11 @@ package pt.ipp.estg.cmu.setup;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ *
+ */
 public class PreferencesSetup {
 
     private static final String USER_FLAGS_PREFERENCE = "user_flags";

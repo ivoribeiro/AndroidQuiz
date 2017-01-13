@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class StringsOperations {
 
     private static int NUMBER_GAME_BUTTONS = 15;

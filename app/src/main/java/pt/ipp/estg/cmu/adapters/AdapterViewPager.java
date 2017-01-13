@@ -8,6 +8,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class AdapterViewPager extends FragmentPagerAdapter {
     private List<Fragment> mFragmentList;
     private List<String> mTitlesList;

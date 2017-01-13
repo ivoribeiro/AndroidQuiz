@@ -10,6 +10,10 @@ import android.preference.PreferenceFragment;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.interfaces.SettingsRestartListener;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class SettingsFragment extends PreferenceFragment {
 
     private ListPreference mThemeList;

@@ -19,6 +19,10 @@ import pt.ipp.estg.dblib.repositories.NivelRepo;
 import pt.ipp.estg.dblib.estatisticas.EstatisticasNivel;
 import pt.ipp.estg.dblib.models.Nivel;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class EstatisticasNivelFragment extends Fragment {
 
     private ArrayList<EstatisticasNivel> mEstatisticasNivel;

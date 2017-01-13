@@ -7,6 +7,10 @@ import android.os.AsyncTask;
 
 import pt.ipp.estg.cmu.R;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class SecurityAsyncTask extends AsyncTask<String, Void, String> {
 
     private boolean isEncrypted;//false = encripta o texto recebido por parametro, true desencripta o texto guardado

@@ -25,7 +25,10 @@ import pt.ipp.estg.cmu.server.Request;
 import pt.ipp.estg.cmu.ui.ActivityMain;
 import pt.ipp.estg.cmu.util.Util;
 
-
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class PageSetupActivity extends AppCompatActivity implements AdapterPageSetupCallback, ViewPager.OnPageChangeListener, View.OnClickListener {
 
     //layout

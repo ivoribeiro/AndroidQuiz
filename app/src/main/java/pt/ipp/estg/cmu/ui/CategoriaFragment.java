@@ -18,6 +18,9 @@ import pt.ipp.estg.dblib.models.Categoria;
 import pt.ipp.estg.cmu.util.Util;
 
 /**
+ * @author 8130031
+ * @author 8130258
+ *
  * Fragment contendo um recyclerview, que apos obter data, instacia o {@AdapterCategoriaGrid}
  * Fragment responsavel por fazer mostrar as categorias em dois contextos diferentes, em modo de jogo e em modo admin
  */

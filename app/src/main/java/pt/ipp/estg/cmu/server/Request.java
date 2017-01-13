@@ -21,7 +21,10 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.enums.RequestTypeEnum;
 import pt.ipp.estg.cmu.util.Util;
 
-
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class Request extends AsyncTask<String, Boolean, JSONObject> {
 
     private static final int HTTP_TIMEOUT = 5000;

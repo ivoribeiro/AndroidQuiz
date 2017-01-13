@@ -25,6 +25,10 @@ import pt.ipp.estg.dblib.models.Nivel;
 import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class GameActivity extends AppCompatActivity implements GameInterfaceListener, ViewPager.OnPageChangeListener {
 
     private static final int WAIT_MSECS = 2000;

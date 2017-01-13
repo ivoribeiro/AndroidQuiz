@@ -28,6 +28,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class MyBroadcastReceiverWidget extends AppWidgetProvider {
 
     private Pergunta pergunta;

@@ -35,6 +35,10 @@ import javax.crypto.SecretKey;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.interfaces.FingerprintControllerCallback;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class FingerprintController {
 
     private static final String KEY_NAME = "cmu_key";

@@ -27,7 +27,10 @@ import pt.ipp.estg.dblib.models.Nivel;
 import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
-
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class AdminPerguntasListFragment extends Fragment implements View.OnClickListener {
 
     private AdminPerguntaLayoutListener mListener;

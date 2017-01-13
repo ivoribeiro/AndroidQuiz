@@ -17,6 +17,10 @@ import pt.ipp.estg.dblib.repositories.NivelRepo;
 import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 import pt.ipp.estg.dblib.repositories.RepositoryInterface;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class RecyclerSwipeNivelTouchHelper extends ItemTouchHelper.SimpleCallback {
 
     private ArrayList<Nivel> mNiveis;

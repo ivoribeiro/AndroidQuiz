@@ -27,6 +27,10 @@ import pt.ipp.estg.cmu.setup.PreferencesSetup;
 import pt.ipp.estg.cmu.util.Util;
 import pt.ipp.estg.cmu.util.UtilUI;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class ActivityBase extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //drawer

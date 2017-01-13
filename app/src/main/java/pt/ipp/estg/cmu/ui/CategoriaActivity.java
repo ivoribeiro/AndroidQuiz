@@ -11,6 +11,10 @@ import pt.ipp.estg.cmu.interfaces.AdminLoginListener;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
 import pt.ipp.estg.cmu.util.Util;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class CategoriaActivity extends ActivityBase implements AdminLoginListener {
 
     //layout

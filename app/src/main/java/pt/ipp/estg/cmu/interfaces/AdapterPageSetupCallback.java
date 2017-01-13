@@ -1,9 +1,9 @@
 package pt.ipp.estg.cmu.interfaces;
 
 /**
- * Created by Navega on 12/21/2016.
+ * @author 8130031
+ * @author 8130258
  */
-
 public interface AdapterPageSetupCallback {
 
     void onAvatarRecyclerItemSelected(int avatar);

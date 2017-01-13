@@ -25,7 +25,8 @@ import pt.ipp.estg.dblib.models.Nivel;
 import pt.ipp.estg.dblib.repositories.NivelRepo;
 
 /**
- * A placeholder fragment containing a simple view.
+ * @author 8130031
+ * @author 8130258
  */
 public class LevelFragment extends Fragment implements View.OnClickListener {
 

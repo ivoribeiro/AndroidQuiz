@@ -16,6 +16,10 @@ import java.util.List;
 import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.dblib.estatisticas.EstatisticasCategoria;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class AdapterEstatisticasCategoria extends RecyclerView.Adapter<AdapterEstatisticasCategoria.ViewHolder> {
 
     private Context mContext;

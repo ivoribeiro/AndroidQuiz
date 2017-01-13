@@ -10,9 +10,9 @@ import pt.ipp.estg.cmu.interfaces.AdapterPageSetupCallback;
 import pt.ipp.estg.cmu.setup.PreferencesSetup;
 
 /**
- * Created by Navega on 12/21/2016.
+ * @author 8130031
+ * @author 8130258
  */
-
 public class TextWatcherHelper implements TextWatcher {
 
     private Context mContext;

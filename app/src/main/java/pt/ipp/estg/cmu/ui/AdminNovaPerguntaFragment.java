@@ -52,6 +52,10 @@ import pt.ipp.estg.dblib.models.Nivel;
 import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickListener, AdminNovaPerguntaPreviewImageListener {
 
     private static int RESULT_LOAD_IMAGE = 1;

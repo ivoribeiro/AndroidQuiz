@@ -11,9 +11,9 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.interfaces.AdapterPageSetupCallback;
 
 /**
- * Created by Navega on 12/21/2016.
+ * @author 8130031
+ * @author 8130258
  */
-
 public class AdapterPageSetupAvatar extends RecyclerView.Adapter<AdapterPageSetupAvatar.ViewHolder> {
 
     private Context mContext;

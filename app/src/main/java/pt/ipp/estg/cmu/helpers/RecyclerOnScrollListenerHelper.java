@@ -4,9 +4,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 
 /**
- * Created by navega on 1/5/17.
+ * @author 8130031
+ * @author 8130258
  */
-
 public class RecyclerOnScrollListenerHelper extends RecyclerView.OnScrollListener {
 
     private FloatingActionButton mFab;

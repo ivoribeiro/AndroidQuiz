@@ -18,9 +18,11 @@ import pt.ipp.estg.cmu.adapters.AdapterOnlineScore;
 import pt.ipp.estg.dblib.models.OnlineScore;
 
 /**
+ * @author 8130031
+ * @author 8130258
+ *
  * Created by Navega on 12/31/2016.
  */
-
 public class GetScoresServerSource extends AsyncTask<JSONObject, Void, ArrayList<OnlineScore>> {
 
     private Context mContext;

@@ -24,10 +24,11 @@ import pt.ipp.estg.cmu.security.FingerprintController;
 import pt.ipp.estg.cmu.security.SecurityAsyncTask;
 import pt.ipp.estg.cmu.util.Util;
 
-/**
- * Created by Navega on 1/8/2017.
- */
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class CategoriaAdminDialog extends DialogFragment implements View.OnClickListener, FingerprintControllerCallback {
 
     private AdminLoginListener mListener;

@@ -26,9 +26,9 @@ import pt.ipp.estg.cmu.security.FingerprintController;
 import pt.ipp.estg.cmu.util.Util;
 
 /**
- * Created by Navega on 12/27/2016.
+ * @author 8130031
+ * @author 8130258
  */
-
 public class PageSetupFragment extends Fragment implements FingerprintControllerCallback {
 
     private int[] bgs = new int[]{R.drawable.img_setup_page_0,

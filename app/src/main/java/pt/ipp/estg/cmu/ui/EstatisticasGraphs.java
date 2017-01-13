@@ -26,6 +26,10 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterEstatisticasGraph;
 
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class EstatisticasGraphs extends Fragment {
 
     private RecyclerView mRecycler;

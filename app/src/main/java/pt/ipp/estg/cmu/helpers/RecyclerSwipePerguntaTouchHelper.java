@@ -15,6 +15,10 @@ import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.dblib.repositories.PerguntaRepo;
 
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class RecyclerSwipePerguntaTouchHelper extends ItemTouchHelper.SimpleCallback {
 
     private ArrayList<Pergunta> mPerguntas;

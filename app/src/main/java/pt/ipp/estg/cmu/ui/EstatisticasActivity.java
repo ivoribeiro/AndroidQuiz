@@ -9,6 +9,10 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.adapters.AdapterViewPager;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class EstatisticasActivity extends ActivityBase implements ViewPager.OnPageChangeListener {
 
     private Toolbar mToolbar;

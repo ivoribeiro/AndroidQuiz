@@ -27,6 +27,9 @@ import pt.ipp.estg.cmu.util.Util;
 import pt.ipp.estg.cmu.util.UtilUI;
 
 /**
+ * @author 8130031
+ * @author 8130258
+ *
  * Adapter contendo um cardview com uma textview e uma imageview, responsavel por listar os niveis, mostrar o score obtido em cada nivel, e se esta bloqueado
  * Click listener para abrir {@GameActivity}
  */

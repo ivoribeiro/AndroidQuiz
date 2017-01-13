@@ -11,10 +11,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/**
- * Created by Navega on 12/10/2016.
- */
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class FileOperations {
 
     public static void copy(File src, String dstString) throws IOException {

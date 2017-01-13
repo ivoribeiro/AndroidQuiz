@@ -7,10 +7,11 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.enums.SoundEnum;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
 
-/**
- * Created by Navega on 12/28/2016.
- */
 
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class MediaSoundsHelper {
 
     private Context mContext;

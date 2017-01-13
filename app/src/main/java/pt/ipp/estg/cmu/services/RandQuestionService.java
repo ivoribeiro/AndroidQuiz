@@ -22,7 +22,10 @@ import pt.ipp.estg.dblib.models.Nivel;
 import pt.ipp.estg.dblib.models.Pergunta;
 import pt.ipp.estg.cmu.ui.ActivityMain;
 
-
+/**
+ * @author 8130031
+ * @author 8130258
+ */
 public class RandQuestionService extends Service {
     private int mRandQuestionTime;
     private boolean wantNotifications;

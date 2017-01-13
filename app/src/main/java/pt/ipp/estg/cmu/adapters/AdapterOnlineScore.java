@@ -16,9 +16,9 @@ import pt.ipp.estg.dblib.models.OnlineScore;
 import pt.ipp.estg.cmu.util.UtilUI;
 
 /**
- * Created by Navega on 12/30/2016.
+ * @author 8130031
+ * @author 8130258
  */
-
 public class AdapterOnlineScore extends RecyclerView.Adapter<AdapterOnlineScore.ViewHolder> {
 
     private Context mContext;

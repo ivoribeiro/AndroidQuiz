@@ -6,9 +6,9 @@ import pt.ipp.estg.cmu.R;
 import pt.ipp.estg.cmu.settings.PreferencesSettings;
 
 /**
- * Created by Navega on 12/30/2016.
+ * @author 8130031
+ * @author 8130258
  */
-
 public class OnlineScoreActivity extends ActivityBase {
 
     @Override

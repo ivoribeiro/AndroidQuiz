@@ -26,6 +26,9 @@ import javax.crypto.CipherOutputStream;
 import javax.security.auth.x500.X500Principal;
 
 /**
+ * @author 8130031
+ * @author 8130258
+ *
  * Class responsavel por gerir as keys guardadas no keystore, cria uma key , encripa e desencripta informcacao associada a essa key
  */
 public class SecurityManager {
