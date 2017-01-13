@@ -19,21 +19,25 @@ public class FileOperations {
 
     public static void copy(File src, String dstString) throws IOException {
         File compressedFile = compressImageFile(src);
-
-        File dest = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + "/CMU/" + dstString);
-        dest.createNewFile();
-
-        InputStream in = new FileInputStream(compressedFile);
-        OutputStream out = new FileOutputStream(dest);
-
-        // Transfer bytes from in to out
-        byte[] buf = new byte[1024];
-        int len;
-        while ((len = in.read(buf)) > 0) {
-            out.write(buf, 0, len);
+        File folder = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + "/CMU/");
+        if (!folder.exists()) {
+            folder.mkdirs();
         }
-        in.close();
-        out.close();
+
+        File dest = new File(folder.getAbsolutePath() + "/" + dstString);
+        if (dest.createNewFile()) {
+            InputStream in = new FileInputStream(compressedFile);
+            OutputStream out = new FileOutputStream(dest);
+
+            // Transfer bytes from in to out
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+        }
     }
 
     /**

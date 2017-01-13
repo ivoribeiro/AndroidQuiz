@@ -164,7 +164,7 @@ public class AdminNovaPerguntaFragment extends Fragment implements View.OnClickL
         }
 
         if (isTablet) {
-            mCameraBt.setVisibility(View.GONE);
+            //mCameraBt.setVisibility(View.GONE);
         }
     }
 
